@@ -1,0 +1,2466 @@
+{
+  "categories": [
+    {
+      "id": "breakfast",
+      "title": "KAHVALTI",
+      "items": [
+        {
+          "id": "r6mb8huti",
+          "name": "BRIOCHE EKMEK ÜZERI AVOKADOLU POŞE YUMURTA",
+          "description": "Brioche Ekmeği Üzerine Avokado, 2 Adet Poşe Yumurta, Haşhaş, Keten Tohumu, Renkli Çeri Domatesli Roka Salatası",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/25112021023708000.jpg",
+          "tags": []
+        },
+        {
+          "id": "y9yvlsui5",
+          "name": "BRIOCHE EKMEK ÜZERI KABURGALI POŞE YUMURTA",
+          "description": "Brioche Ekmeği Üzerine Tütsülenmiş Kaburga Eti, 2 Adet Poşe Yumurta, Rende Mozzarella, Beşamel Sos, Renkli Çeri Domatesli Roka Salatası",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/13122021181849000.jpg",
+          "tags": []
+        },
+        {
+          "id": "9bu16pnyc",
+          "name": "EKŞI MAYA EKMEK ÜZERI PASTRAMI POŞE YUMURTA",
+          "description": "Ekşi Maya Ekmek Üzerine Pastrami, Mozzarella, Renkli Çeri Domatesli Roka Salatası",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/13122021183155000.jpg",
+          "tags": []
+        },
+        {
+          "id": "ugtdq9jc2",
+          "name": "ÇIRPILMIŞ YUMURTA",
+          "description": "Trüflü Mantar Frikase, Kızarmış Ekşi Maya Ekmek, Renkli Çeri Domates",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/13122021183559000.jpg",
+          "tags": []
+        },
+        {
+          "id": "z6hyybqw2",
+          "name": "CROQUE-MADAME",
+          "description": "Brioche Ekmeği Üzerine Göz Yumurta, Beşamel Sos, Dana Bacon, Cheddar Peyniri, Renkli Çeri Domatesli Roka Salatası",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/25112021023636000.jpg",
+          "tags": []
+        },
+        {
+          "id": "13gcp7u61",
+          "name": "MANTARLI OMLET",
+          "description": "Mantar Fricase, Mozzarella, 2 Adet Yumurta, Renkli Çeri Domatesli Roka Salatası, 1 Dilim Kızarmış Ekşi Maya Ekmek.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9xhti94q7",
+          "name": "SADE OMLET",
+          "description": "2 Adet Yumurta, Renkli Çeri Domatesli Roka Salatası, 1 Dilim Kızarmış Ekşi Maya Ekmek.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "33ia9g7ew",
+          "name": "TAZE BAHARATLI PEYNIRLI OMLET",
+          "description": "2 Adet Yumurta, Mozzarella, Frenk Soğan, Maydanoz, Renkli Çeri Domatesli Roka Salatası, 1 Dilim Kızarmış Ekşi Maya Ekmek.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Breakfast/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "starter-sauces",
+      "title": "BAŞLANGIÇ & SOSLAR",
+      "items": [
+        {
+          "id": "20o2p20ko",
+          "name": "3 MANTARLI ARANCINI BALLS",
+          "description": "Mantarlı Risotto Topları, Parmesan, Acılı Domates Sos, Mikro Filiz",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/25112021024111000.jpg",
+          "tags": []
+        },
+        {
+          "id": "lgjfxzws5",
+          "name": "ÇITIR TAVUK",
+          "description": "150 gr. Tavuk Göğüs, Parmesan",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/13122021201059000.jpg",
+          "tags": []
+        },
+        {
+          "id": "51sc2c3dd",
+          "name": "DÖRT PEYNIRLI PIZZETTA",
+          "description": "Mozzarella, Parmesan, Danish Blue Gravyerli Sos",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0nmqaj6dt",
+          "name": "FÜME SUCUKLU PIZZETTA",
+          "description": "Füme Sucuk, Mozzarella, Parmesan, Soğan Turşusu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "20rweqmep",
+          "name": "PASTRAMI & HUMUS",
+          "description": "Pastrami, Frenk Soğan, Kızarmış Ekmek. Humus sıcak servis edilmektedir.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/13122021220618000.jpg",
+          "tags": []
+        },
+        {
+          "id": "nmujfpkj4",
+          "name": "PATATES KIZARTMASI",
+          "description": "Ekstralar: Trüf Yağı & Parmesan.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/25112021024620000.jpg",
+          "tags": []
+        },
+        {
+          "id": "nipggg0r3",
+          "name": "PEYNIR TABAĞI",
+          "description": "Hardallı Gouda, Parmesan, Kars Gravyeri, Danish Blue, 3 Çeşit Turşu Ceviz, Kuru İncir, Zeytinli Kıtır",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "g4v8ywp6o",
+          "name": "POPCORN KARIDES",
+          "description": "Yedikule marul, Frenk soğan, Meksika biber turşusu, Chili-mayo sos",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/25112021023930000.jpg",
+          "tags": []
+        },
+        {
+          "id": "ulpxmiui4",
+          "name": "POPCORN TAVUK",
+          "description": "Yedikule marulu, Frenk soğan, Chili-mayo sos",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/25112021023901000.jpg",
+          "tags": []
+        },
+        {
+          "id": "kn3yo4sd2",
+          "name": "SOSIS TABAĞI",
+          "description": "1 adet sosis, Ev yapımı barbekü sos, Tartar sos, Patates Kızartması.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/25112021024010000.jpg",
+          "tags": []
+        },
+        {
+          "id": "xxxevemp3",
+          "name": "ŞARKÜTERI TABAĞI",
+          "description": "Kuru Et, Füme Sucuk, Füme Antrikot, Hardallı Gouda, Parmesan, Soka, Ajvar, Ceviz, İncir, Kırmızı Lahana Turşusu, Zeytinli Kıtır",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/starter-sauces/25112021024533000.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "salad",
+      "title": "SALATALAR",
+      "items": [
+        {
+          "id": "p7hpgwurd",
+          "name": "ÇITIR TAVUKLU SEZAR SALATA",
+          "description": "Panelenmiş Tavuk Göğüs, Marul, Baby Turp, Parmesan, Sezar Sos",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Salads/25112021030441000.jpg",
+          "tags": []
+        },
+        {
+          "id": "u4wwd5e95",
+          "name": "HUMUSLU KINOA SALATA",
+          "description": "Humus, Kinoa, Avokado, Roka, Semizotu, Renkli Çeri Domates, Salatalık, Tulum Peyniri",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Salads/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "zvwdxd8ek",
+          "name": "SEMIZOTLU IZGARA SOMON SALATA",
+          "description": "140 gr. Somon, Semizotu, Mantar Fricase, Roka, Bezelye, Soğan Turşusu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Salads/25112021030859000.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "burger-sandwich",
+      "title": "BURGER & SANDWİCH",
+      "items": [
+        {
+          "id": "a7bl790fg",
+          "name": "CHEESEBURGER",
+          "description": "140 gr. Burger Köftesi, 2 Adet Cheddar, Kırmızı Soğan, Binada Sos, Patates Kızartması",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/Salads/25112021030859000.jpg",
+          "tags": []
+        },
+        {
+          "id": "hp0bw4q9s",
+          "name": "ÇITIR TAVUK BURGER",
+          "description": "110 gr. Tavuk Göğüs, 2 Adet Cheddar, Tartar Sos, Ev Yapımı Barbekü Sos, Soğan Turşusu, Patates Kızartması",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/burger&sandwich/25112021024655000.jpg",
+          "tags": []
+        },
+        {
+          "id": "wkna97pmc",
+          "name": "KABURGA BURGER",
+          "description": "80 gr. Tütsülenmiş Kaburga Eti, Cheddar, Chili Mayo Sos, Ev Yapımı Barbekü Sos, Patates Kızartması",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/burger&sandwich/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "2tmf20o5h",
+          "name": "PENNYBURGER",
+          "description": "140 gr. Burger Köftesi, Dana Bacon, 2 Adet Cheddar, Karamelize Soğan, Binada Sos, Patates Kızartması",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/burger&sandwich/25112021030239000.jpg",
+          "tags": []
+        },
+        {
+          "id": "fk513eylg",
+          "name": "PASTRAMI BURGER",
+          "description": "70 gr. Patrami, tartar sos, cheddar peyniri, mor lahana turşusu, patates kızartması.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/burger&sandwich/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "bwl7ptg18",
+          "name": "VEJETERYAN BURGER",
+          "description": "130 gr. Vejeteryan Burger Köftesi (nohut, kabak, havuç, taze soğan, maydanoz, dereotu, yumurta) 2 Adet Cheddar, Soğan Turşusu, Tartar Sos, Ev Yapımı Barbekü Sos, Patates Kızartması",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/burger&sandwich/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "main",
+      "title": "ANA YEMEKLER",
+      "items": [
+        {
+          "id": "sxq7ptjve",
+          "name": "BONFILE TABAĞI",
+          "description": "180 gr. Bonfile, Sebze Tian, Soya Tereyağı",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "qqlxwk0g8",
+          "name": "CAFE DE PARIS CHICKEN",
+          "description": "220-250 gr. Tavuk Göğüs, cafe de Paris sos, Patates Kızartması",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "lmxydwrp9",
+          "name": "SMOKED RIBS",
+          "description": "270 gr. Kemikli Kaburga Eti, Patates Kızartması.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "63lstac47",
+          "name": "ERIŞTELI IZGARA SOMON",
+          "description": "140 gr. Somon, Tereyağlı Taze Soğanlı Erişte, Limon Kabuğu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "rwlgc5lz0",
+          "name": "FISH & CHIPS",
+          "description": "140 gr. Mezgit, Mor Lahana Turşusu, Tartar Sos, Patates Kızartması",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/main/25112021030649000.jpg",
+          "tags": []
+        },
+        {
+          "id": "3jogtnjau",
+          "name": "PARMESANLI ET ŞINITSEL",
+          "description": "140 gr. Kontrfile, Parmesan, Şinitsel Tereyağı, Kırmızı Soğanlı Çeri Domates",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/main/25112021030838000.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "desserts",
+      "title": "TATLILAR",
+      "items": [
+        {
+          "id": "sx61ip2md",
+          "name": "ÇOK ÇIKOLATALI PASTA",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/desserts/25112021031314000.jpg",
+          "tags": []
+        },
+        {
+          "id": "lrp37oe4u",
+          "name": "SAN SEBASTIAN CHEESECAKE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/desserts/25112021031223000.jpg",
+          "tags": []
+        },
+        {
+          "id": "4rhiyk3yj",
+          "name": "TIRAMISU",
+          "description": "Üretiminde acı badem likörü kullanılmıştır.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/desserts/25112021031352000.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "beers",
+      "title": "BİRALAR",
+      "items": [
+        {
+          "id": "k67sz0jgi",
+          "name": "CARLSBERG 50 CL. FIÇI",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "cvcf9y10i",
+          "name": "CARLSBERG 33 CL. FIÇI",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0w9ax19a4",
+          "name": "GUINNESS PINT 50 CL.",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "qe629njgy",
+          "name": "GUINNESS HALF PINT 25 CL.",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "6vabz5wtn",
+          "name": "KRONENBOURG 1664 BLANC 50 CL.",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "35hjlz0iv",
+          "name": "KRONENBOURG 1664 BLANC 25 CL.",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "x0mn7ng1m",
+          "name": "TUBORG GOLD 50 CL. FIÇI",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "d2eax2659",
+          "name": "TUBORG GOLD 33 CL. FIÇI",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0apq7aqx9",
+          "name": "WEIHENSTEPHAN 50 CL. FIÇI",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "417qbe03z",
+          "name": "WEIHENSTEPHAN 33 CL. FIÇI",
+          "description": "FIÇI",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xcl34c9b7",
+          "name": "BLANC 33 CL.",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "hzh2jjaur",
+          "name": "CARLSBERG 50 CL. ŞIŞE",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "jdke9v2us",
+          "name": "CARLSBERG LUNA NRB 50 CL.",
+          "description": "Bottled Beers Unfiltered, Dry-Hopped Lager",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "4wdtsigv4",
+          "name": "DESPERADOS 33 CL. ŞIŞE",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dt1wb9yzp",
+          "name": "FREDERIK INDIA PALE ALE 35 CL.",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "2lgna4dnp",
+          "name": "FREDERIK MARZEN LAGER 35 CL.",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "mhmqncy5d",
+          "name": "FREDERIK WHEAT IPA 35 CL.",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "nday6x9bf",
+          "name": "FREDERIK YAKIMA IPA 35 CL.",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "u24wkngpk",
+          "name": "MAISEL FRIENDS PALE ALE 33 CL.",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "zlve9dkka",
+          "name": "SOL CERVEZA",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "t58uhrd14",
+          "name": "TUBORG AMBER 50 CL. ŞIŞE",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ytyyipgeh",
+          "name": "TUBORG FILTRESIZ 50 CL. ŞIŞE",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ekf88l62b",
+          "name": "TUBORG GOLD 50 CL. NBR ŞIŞE",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "5ej7hwy2g",
+          "name": "WEIHENSTEPHANER 33 CL. NBR",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "31y9dve5l",
+          "name": "WEIHENSTEPHANER VITUS 33 CL. NBR",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "v8gtnggde",
+          "name": "WEIHENSTEPHAN 33 CL. FIÇI",
+          "description": "Bottled Beers",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "cocktails",
+      "title": "KOKTEYLLER",
+      "items": [
+        {
+          "id": "ac36e6wfu",
+          "name": "APEROL SPRITZ",
+          "description": "Aperol, Cinzano Prosecco, Soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/aperitives/13072022135553000.jpg",
+          "tags": []
+        },
+        {
+          "id": "sopcr02ry",
+          "name": "CAMPARI SPRITZ",
+          "description": "Campari, Prosecco, Soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/aperitives/13072022145451000.jpg",
+          "tags": []
+        },
+        {
+          "id": "4dmko8tfo",
+          "name": "NEGRONI",
+          "description": "Gordon's, Campari, Martini Rosso",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/aperitives/13072022140659000.jpg",
+          "tags": []
+        },
+        {
+          "id": "ftc4qt4d1",
+          "name": "CAMPARI AMERICANO",
+          "description": "Campari, Martini Rosso, Soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/aperitives/13072022141025000.jpg",
+          "tags": []
+        },
+        {
+          "id": "m0gok1kdr",
+          "name": "CAMPARI TONIC",
+          "description": "Campari, Tonik",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/aperitives/13072022141642000.jpg",
+          "tags": []
+        },
+        {
+          "id": "265sfe9n1",
+          "name": "GIN/VODKA MARTINI",
+          "description": "Gordon's / Absolut, Extra Dry Martini",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/aperitives/13072022144520000.jpg",
+          "tags": []
+        },
+        {
+          "id": "3kv9a14wy",
+          "name": "AMARETTO SOUR",
+          "description": "Disaronno Acıbadem Likörü, Woodford Reserve Bourbon, Taze Lime Suyu, Esmer Şeker, Taze Kekik, Yumurta Akı",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "c0psrlxsd",
+          "name": "APPLE MARTINI",
+          "description": "Smirnoff Green Apple, Yeşil Elma Likörü, Yeşil Elma Suyu, Taze Limon Suyu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "f80ta9ww7",
+          "name": "BASIL SMASH",
+          "description": "Fesleğen İnfüzyon, Gordon's, Taze Lime Suyu, Şeker Şurubu, Soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "rx3zeci9b",
+          "name": "BLOODY MARY",
+          "description": "Smirnoff, Worcestershire, Tabasco, Taze Limon Suyu, Kereviz Tuzu, Karabiber, Domates Suyu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "tikgvs82s",
+          "name": "MARTINI",
+          "description": "Martini",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "hio9k3tzk",
+          "name": "BOULEVARDIER",
+          "description": "Bulleit Bourbon, Campari, Martini Rosso",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "udc0933ie",
+          "name": "BRAMBLE",
+          "description": "Gordon's, Chambord, Taze Lime, Penny Böğürtlen Şurubu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "i6xf5rukj",
+          "name": "CAIPIRINHA",
+          "description": "Weber Haus Cachaca, Esmer Şeker, Taze Lime",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "e0ep5dkv5",
+          "name": "COSMOPOLITAN",
+          "description": "Absolut Citron, Cointreau, Kızılcık Suyu, Taze Limon Suyu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "kg19z2o32",
+          "name": "GIN FIZZ",
+          "description": "Gordon's, Taze Limon Suyu, Pudra Şekeri, Soda, Yumurta Akı",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dk8pzpw4k",
+          "name": "HEMINGWAY DAIQUIRI",
+          "description": "Captain Morgan, Pallini Maraschino Likörü, Taze Lime Suyu, Taze Greyfurt Suyu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ngmzatcts",
+          "name": "MANHATTAN",
+          "description": "Bulleit Bourbon, Martini Rosso, Angostura Bitter",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dc4fj14ql",
+          "name": "OAXACA OLD FASHIONED",
+          "description": "Se Busca Mescal, El Jimador Reposado, Agave, Citrus Parfume",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "8215ara13",
+          "name": "OLD FASIONED",
+          "description": "Bulleit Bourbon / Angostura Bitter, Esmer Şeker",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ognvncpsw",
+          "name": "PALOMA",
+          "description": "El Jimador Repasado, Taze Lime Suyu, Taze Greyfurt Suyu, Agave, Soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "824z8m448",
+          "name": "PENNY'SILLIN",
+          "description": "Monkey Shoulder Blended Scotch, Laphroaig Single Malt, Taze Limon Suyu, Penny Zencefil Şurubu, Maple (Akçaağaç)",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9v408o3hs",
+          "name": "SURFER ON ACID",
+          "description": "Jagermeister, Batıda de Coco, Taze Limon Suyu, Ananas Suyu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "5ntgsmu9e",
+          "name": "TOMMY'S MARGARITA",
+          "description": "El Jimador Repasado, Taze Lime Suyu, Agave",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "k1m1krqfv",
+          "name": "WHISKEY SOUR",
+          "description": "Bulleit Bourbon, Taze Lime Suyu, Şeker Şurubu, Yumurta Akı",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "05hgqymhu",
+          "name": "BUTTERFLY EFFECT",
+          "description": "Yasemin & Lavanta İnfüzyon Gordon's, Pallini Maraschino Likörü, St. Germain, Agave, Taze Limon Suyu, Cinzano Prosecco",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "mu2agwpog",
+          "name": "CHILI BOOM",
+          "description": "Meksika Biberi & Kakule İnfüzyon Sierra Silver, Safari, Cardinal Melon, Taze Limon Suyu, Esmer Şeker, Soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ovpupmoy2",
+          "name": "EL NEGRO",
+          "description": "Patron Silver, Campari, Martini Rosso, Penny Kahve Likörü",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xz52odr55",
+          "name": "EPITAPH",
+          "description": "Kuzukulağı İnfüzyon Gordon's, St. Germain, Taze Lime Suyu, Şeker Şurubu, Yumurta Akı, Tonic",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "j5hut9t90",
+          "name": "MEZAROL",
+          "description": "Se Busca Mezcal, Aperol, Batıda de Coco, Taze Limon Suyu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "nyxbj0p5f",
+          "name": "PINKY PENNY",
+          "description": "Gordon's Pinky, Batıda De Coco, Roze Şarap, Penny Ahududu & Böğürtlen Şurubu, Taze Lime Suyu, Yumurta Akı",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ji27crtt2",
+          "name": "SUPERTRAMP",
+          "description": "Woodford Reserve Rye, Zencefil & Tarçın Cordial, Beyaz Sirke, Yumurta Akı",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "zl6hb6ehb",
+          "name": "LADY BOY",
+          "description": "Hibiskus infüzyon Smirnoff Red, Cointreau, Penny ahududu şurubu, taze limon suyu, kızılcık suyu, soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "a69i88567",
+          "name": "SATSUMA SMASH",
+          "description": "Satsuma İnfüzyon Gordon's, Lilet Blanc, Martini Extra Dry, Penny Greyfurt Bitter, Taze Lime Suyu, Penny Satsuma Şurubu, Absinthe Parfüm.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0vffvphgw",
+          "name": "PURPLE HAZE",
+          "description": "Yasemin & Lavanta İnfüzyon Gordon's, Taze Lime, Penny Greyfurt Bitter, Agave Şurubu, Kızılcık Suyu",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "jv380oswv",
+          "name": "THREESOME VODKA",
+          "description": "Smirnoff Green Apple, Vanilya İnfüzyon Smirnoff, Stolichnaya Salted Caramel, Taze Lime Suyu, Taze Kekik, Yumurta Akı",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ylf7yuf0q",
+          "name": "PENNYWISE",
+          "description": "Captain Morgan White Rum, Taze Lime Suyu, Penny Halloween Şurubu.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "qf05uzkix",
+          "name": "MAMBA OUT",
+          "description": "İncir infüzyon Bulliet Bourbon, Lillet Rose, Amaro, Angostura Bitter, Greyfurt Bitter, Laphroaig Parfüm",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "435f5nv1k",
+          "name": "NEPHENTE",
+          "description": "Dereotu - Kereviz İnfüzyon Fords Gin, Üzüm Kızı, Penny Satsuma Şurubu, Taze limon suyu.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "hnhn32d0o",
+          "name": "SHOW ME THE MONKEY",
+          "description": "Monkey Shoulder, Drambuie, Taze Sıkılmış Elma Suyu, Nane Yaprağı, Portakal Dilimi",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/monkey-shoulder-exclusive/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "itc5nv6ec",
+          "name": "MONKEY JAM SOUR",
+          "description": "Monkey Shoulder, Limon Suyu, Şeker Şurubu, Reçel, Portakal Bitteri, Soda",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/monkey-shoulder-exclusive/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "n78trv58o",
+          "name": "MONKEY ESPRESSO",
+          "description": "Monkey Shoulder, Espresso, Şeker Şurubu, Kahve Çekirdeği",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/monkey-shoulder-exclusive/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9hpacpede",
+          "name": "GREY GOOSE SHOT",
+          "description": "Vodka Shot",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "j3vvkru69",
+          "name": "STOLICHNAYA KARAMEL SHOT",
+          "description": "Vodka Shot",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9xx0vo0q5",
+          "name": "ROYAL BISON SHOT",
+          "description": "Vodka Shot",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "y5d78nn0h",
+          "name": "SMIRNOFF RED SHOT",
+          "description": "Vodka Shot 3 cl",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "g5wscmf9x",
+          "name": "SMIRNOFF GREEN APPLE SHOT",
+          "description": "Vodka Shot 3 cl",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "135zr8o33",
+          "name": "DRAGON BALL",
+          "description": "Meksika Biberi ve Tarçın İnfüzyon, Jack Daniel's Tennessee Fire",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "wg4azlycu",
+          "name": "B-52",
+          "description": "Bailey's, Kahlua, Cointreau",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "uu0kdxl6s",
+          "name": "ABORTION",
+          "description": "Bailey's, Archers, Grenadine",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ydqk6zbua",
+          "name": "MAGGOT BRAIN",
+          "description": "Absolute Blue, Bailey's, Grenadine",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "483g5swye",
+          "name": "ZAPPA",
+          "description": "Meksika Biberi İnfüzyon Sierra Tekila",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "jbqq9i3qd",
+          "name": "RAINBOW",
+          "description": "Gordon's Pink, Mikura, Absinthe",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9dc3uzyli",
+          "name": "BACARDI CARTA BLANCA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ld9zqw0zu",
+          "name": "BACARDI CARTA ORO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "vuonl2qzh",
+          "name": "HAVANA CLUB 3 ANOS SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "5glmubxe0",
+          "name": "CAPTAIN MORGAN WHITE ROM SHOT",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ha1qtbxy9",
+          "name": "MARTELL VS SHOT",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "rw45gpxcs",
+          "name": "ZACAPA 23 ROM SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "gvsuzsx2b",
+          "name": "HENNESSY COGNAC SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "rvbww38bn",
+          "name": "CAPTAIN MORGAN SPICED GOLD SHOT",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dny8o8hyb",
+          "name": "ABERLOUR 12 YO. SHOT",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dx0twwx3r",
+          "name": "BENRIACH THE ORIGINAL TEN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "cx57s8mbb",
+          "name": "BENRIACH THE SMOKY TEN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "c7f87cz6m",
+          "name": "BENRIACH THE TWELVE SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "4x92434di",
+          "name": "BULLEIT BOURBON SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "oj9lozzzy",
+          "name": "CHIVAS 12 YO. SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ntsnw5n5g",
+          "name": "GLENFIDDICH SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "10cibw0e2",
+          "name": "GLENLIVET SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "00g0sbkdc",
+          "name": "JACK DANIEL'S APPLE SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "g200dcoq2",
+          "name": "JACK DANIEL'S FIRE SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "wg5afgq9f",
+          "name": "JACK DANIEL'S HONEY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "8vhpy0lr0",
+          "name": "JACK DANIEL'S NO:7 SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "yn9p08ca2",
+          "name": "JAMESON BLACK BARREL SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "8v3bf2awq",
+          "name": "JAMESON IPA EDITION SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "1ypjwu7gn",
+          "name": "JAMESON SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9vylt5ipo",
+          "name": "JAMESON STOUT EDITION SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ja11u183x",
+          "name": "THE GLADSTONE AXE, THE BLACK AXE SMOKY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "z397s2vbb",
+          "name": "TULLAMORE DEW SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0i5tmy3yc",
+          "name": "MAKER'S MARK ORIGINAL SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "5d48gh1cj",
+          "name": "FAMOUS GROUSE SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "crb2vrome",
+          "name": "THE CHITA SHOT",
+          "description": "Japanese Single Grain / 3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "3teo4t0nq",
+          "name": "ABERFELDY 12 YO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "y98u7iz97",
+          "name": "JW BLACK LABEL SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0kgevw6h9",
+          "name": "LAGAVULIN DISTILLERS EDITION SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ki07fzax7",
+          "name": "LAPHROAIG 10 YO. SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "55v07tpis",
+          "name": "MONKEY SHOULDER SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "maqw15tqm",
+          "name": "OBAN 14 YO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "sszm383ib",
+          "name": "TALISKER 10 YO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xep8rt0cp",
+          "name": "WOODFORD RESERVE BOURBON SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xoo3r6m3m",
+          "name": "WOODFORD RESERVE RYE SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "1a8d6rmd5",
+          "name": "HIBIKI JAPANESE HARMONY SHOT",
+          "description": "Japanese Blended Whiskey / 3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "oar13tq93",
+          "name": "CHIVAS 18 YO. SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "sbju6w9rn",
+          "name": "DIMPLE GOLDEN SELECTION SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "n6qowzip6",
+          "name": "JW DOUBLE BLACK SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "psbpqau65",
+          "name": "FAMOUS GROUSE SHERRY CASK FINISH SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "imkwq4d60",
+          "name": "CAPTAIN",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "sye0hltcg",
+          "name": "HYDE NO:3 GRAIN IRISH WHISKEY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "q1y4tafka",
+          "name": "HYDE NO:5 GRAIN BURGUNDY CASK SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "k2wxatcd2",
+          "name": "HYDE NO:8 STOUT CASK FINISH SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "radkk5xs8",
+          "name": "GENTLEMAN JACK TENESSEE SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "l2wvw8078",
+          "name": "THE SINGLETON 12 YO. SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "8pw8wvcws",
+          "name": "THE SINGLETON 15 YO. SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "5l2vu11tp",
+          "name": "THE SEXTON SHOT",
+          "description": "Single Malt Irish Whiskey 3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "1kiatbekr",
+          "name": "ARDBEG 10 YO SHOT",
+          "description": "Islay Single Malt Scotch Whiskey 3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "3rvjgfhi0",
+          "name": "LAGAVULIN 12 YO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "sk34crhk2",
+          "name": "DEWAR'S 12 YO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "yynw21g81",
+          "name": "JW BLACK SHERRY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "515fltl9c",
+          "name": "MACALLAN 12 YO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "eanhtxrd1",
+          "name": "AMARULA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "sjpcc1j23",
+          "name": "ARCHERS SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "nivzbtqds",
+          "name": "BAILEY'S SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ow0cam8jp",
+          "name": "CAMPARI SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ehl7wrjfi",
+          "name": "CARDINAL MELON SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "yrqxqp12q",
+          "name": "COINTREAU SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "jek6ixmly",
+          "name": "DISERRANO AMERETTO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "r90oj6in4",
+          "name": "JAGERMEISTER SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "el9r1gvts",
+          "name": "KAHLUA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "4adhebhsl",
+          "name": "MALIBU SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0kkts0tsf",
+          "name": "PALLINI MARASCHINO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "2md0jczjh",
+          "name": "SAFARI SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9b0zzhh8b",
+          "name": "ST GERMAIN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "g6rpa0yxm",
+          "name": "MACALLAN",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "fggcggkto",
+          "name": "METAXA SHOT",
+          "description": "Yunan Likörü",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "a23cr29nh",
+          "name": "RODNIK'S ABSINTHE CLASSIC SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ftsykj64x",
+          "name": "SKINOS MASTIHA SHOT",
+          "description": "Damla Sakızı Likörü",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "fz35h64pg",
+          "name": "RAMAZZOTTI AMARO SHOT",
+          "description": "Liquore - Prodotto in Italia",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ckizjhiq7",
+          "name": "DRAMBUIE SHOT",
+          "description": "Whiskey Liqueur 3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "izifg2cjh",
+          "name": "ROSSI DASIAGO LIMONCELLO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ltix00swz",
+          "name": "FERNET BLANCA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ntqg3mmav",
+          "name": "GORDON'S SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "jbpxasxqd",
+          "name": "MALFY GIN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "g4ofgiv4v",
+          "name": "ROKU GIN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "yzb2yv52u",
+          "name": "TANQUERAY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "euxfaqe40",
+          "name": "GREEN BABOON SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "jkjp2rv1j",
+          "name": "GIN MARE MEDITERRANEAN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "lkkn8i91c",
+          "name": "AVIATION AMERICAN GIN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "67fqnip19",
+          "name": "HENDRICK'S NEPTUNA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "8u5lrl3fi",
+          "name": "PUERTO DE INDIAS GIN BLACKBERRY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "1okvyyy0x",
+          "name": "PUERTO DE INDIAS GIN STRAWBERRY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "shihf6sue",
+          "name": "HENDRICK'S SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "0eehel505",
+          "name": "HENDRICK'S LUNAR SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "nq49d4rzw",
+          "name": "HENDRICK'S ORBIUM SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ct6vxavul",
+          "name": "TANQUERAY TEN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "sna2p0kcv",
+          "name": "TANQUERAY FLOR DE SEVILLA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "pmrlgpz8k",
+          "name": "KNUT HANSEN SHOT",
+          "description": "Hand Crafted Gin 3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "amzeuzb98",
+          "name": "DOOLIN DRY GIN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "mgmwoluly",
+          "name": "FORDS GIN SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "cv2azhoyi",
+          "name": "MONKEY 47 SHOT",
+          "description": "Handcrafted Gin 3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "oqpcunoe1",
+          "name": "GORDON'S PINK SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "eke5u2zn1",
+          "name": "OXLEY SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "8iysaj5b2",
+          "name": "AVION SILVER SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "zlk883tas",
+          "name": "DON JULIO BLANCO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ipz1mb944",
+          "name": "EL JIMADOR BLANCO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xnj7unpvy",
+          "name": "EL JIMADOR REPOSADO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "8ssr51fry",
+          "name": "PATRON SILVER SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "n58r9m13v",
+          "name": "SE BUSCA JOVEN MEZCAL SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "4unbtye71",
+          "name": "SIERRA TEQUILA SILVER SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "qybbzbxkn",
+          "name": "SIERRA TEQUILA REPOSADO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "d3vmb3zk6",
+          "name": "SIP & SIP SILVER TEQUILA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "y5vvyzgra",
+          "name": "OLMECA ALTOS REPOSADO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xr6mqsdhr",
+          "name": "HERRADURA PLATA SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "7i9xww9sb",
+          "name": "CENOTE BLANCO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "l6lbrnwf6",
+          "name": "CENOTE REPOSADO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "1nll8zugb",
+          "name": "CENOTE ANEJO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "zotqjiq9l",
+          "name": "SIP & SIP GOLD SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "73dv2213p",
+          "name": "RESERVA DEL SENOR BLANCO SHOT",
+          "description": "3 cl.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dx6qj95wf",
+          "name": "KAHLUA 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "bmhhppu99",
+          "name": "MALIBU 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ac5v3gpzm",
+          "name": "SAFARI 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "uj4i69p37",
+          "name": "AMARETTO IL BACIO DELLE MUSE 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "cgwoqkdfp",
+          "name": "AMARULA 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "rdvrceclx",
+          "name": "ARCHERS 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "r23cxhyup",
+          "name": "BAILEY'S 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dx0m0xj9t",
+          "name": "CARDINAL MELON 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "sdj5334vc",
+          "name": "COINTREAU 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "daagblm9x",
+          "name": "DISERRANO AMARETTO 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "cgzjuy05w",
+          "name": "JAGERMEISTER 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "bh7bnqmcp",
+          "name": "METAXA 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "janahgxml",
+          "name": "ST GERMAIN TEK 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "u2xfral5h",
+          "name": "PALLINI MARASCHINO 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "9klfbns8z",
+          "name": "SKINOS MASTIHA 5 CL.",
+          "description": "Damla Sakızı Likörü 5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "6pkvo866n",
+          "name": "RAMAZZOTTI AMARO 5 CL.",
+          "description": "Liquore - Prodotto in Italia 5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "3m8pv8ovr",
+          "name": "DRAMBUIE 5 CL.",
+          "description": "Whiskey Liqueur 5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "alisdnmcu",
+          "name": "ROSSI DASIAGO LIMONCELLO 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "6d3gdj1qf",
+          "name": "FERNET BLANCA 5 CL.",
+          "description": "5 CL.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "spirits",
+      "title": "SPIRITS",
+      "items": []
+    },
+    {
+      "id": "wine-prosecco",
+      "title": "ŞARAP & PROSECCO",
+      "items": []
+    },
+    {
+      "id": "coffee",
+      "title": "KAHVE",
+      "items": [
+        {
+          "id": "fj9y47653",
+          "name": "AMERICANO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "a3qkhn2fv",
+          "name": "BLACK EYE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "vuilusqq2",
+          "name": "CAPUCCINO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xu8dsiesg",
+          "name": "CHEMEX",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ar5fdsm6w",
+          "name": "CORTADO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "aigr07ehc",
+          "name": "ESPRESSO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ftvri74yp",
+          "name": "ESPRESSO MACCHIATO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "t3fyo0wh6",
+          "name": "FILTRE KAHVE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "01j17l0a4",
+          "name": "FLAT WHITE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "6wgddfmk2",
+          "name": "LATTE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "2a0eaxyd6",
+          "name": "LATTE MACCHIATO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "n28vwbb7a",
+          "name": "LUNGO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "rybg96ppn",
+          "name": "MOCHA",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "wev1c65mi",
+          "name": "RED EYE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "o7o11u0ak",
+          "name": "RISTRETTO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "bnlnk9b8w",
+          "name": "SICAK ÇIKOLATA",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "pbstgo9m0",
+          "name": "TÜRK KAHVESI",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "4uck7cskx",
+          "name": "V60",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "iced-coffees",
+      "title": "SOĞUK KAHVELER",
+      "items": [
+        {
+          "id": "qlzxd77dt",
+          "name": "COLD BREW",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "7mjatv7ot",
+          "name": "ICE MOCHA",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "6360hkcgy",
+          "name": "ICED AMERICANO",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "68hfrulrn",
+          "name": "ICED LATTE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "coffee-beans",
+      "title": "KAHVE ÇEKİRDEKLERİ",
+      "items": [
+        {
+          "id": "gznak7y3b",
+          "name": "COLOMBIA KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "5rh565s6u",
+          "name": "COLOMBIA BELLA VISTA KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "amriiopk5",
+          "name": "COSTA RICA KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "2mujxjvvq",
+          "name": "ETHIOPIA YIRGACHEFFE KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "3cpdwe756",
+          "name": "ETHOPIA SIDAMO KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "xj99v6u6p",
+          "name": "GUATEMALA HUEHUETENANGO KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "iij0dmbtr",
+          "name": "HONDURAS KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "4jhn1e178",
+          "name": "KENYA AA PLUS KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "61r1ee8h3",
+          "name": "TANZANIA KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "2qm9kls40",
+          "name": "MEXICO DECAFF KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "6cfvj9w8s",
+          "name": "NICARAGUA KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "tcbffor4i",
+          "name": "BLEND KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "dubij6yya",
+          "name": "TÜRK KAHVESI KG",
+          "description": "1 KG",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "tea",
+      "title": "ÇAY",
+      "items": [
+        {
+          "id": "0539s5e6h",
+          "name": "BITKI ÇAYI",
+          "description": "Yeşil Çay / Yeşil Yasemin Çayı / Ihlamur / Kış Çayı / Elma / Tıbbi Nane / Roibos / Ada Çayı / Beyaz Çay / Melisa / Papatya / Oolong / Rezene / Tropik Meyve",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/tea/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "zf96713kc",
+          "name": "CHAI TEA LATTE",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/tea/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "soft-drinks",
+      "title": "SOFT İÇECEKLER",
+      "items": [
+        {
+          "id": "9xxx5tabl",
+          "name": "CHURCHILL",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ig9o11huk",
+          "name": "COCA COLA LIGHT",
+          "description": "250 ML.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "cirtfgpf2",
+          "name": "COCA COLA ORIGINAL",
+          "description": "250 ML.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "g63r0d1cz",
+          "name": "COCA COLA ZERO",
+          "description": "250 ML.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "1khy0ecka",
+          "name": "LIMONATA",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "q20qhc4fk",
+          "name": "RED BULL",
+          "description": "250 ML.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "ag0x8on2c",
+          "name": "SODA",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "3evcdy0zk",
+          "name": "SPRITE ŞIŞE",
+          "description": "250 ML.",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        },
+        {
+          "id": "kr18wv7uh",
+          "name": "SU",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    },
+    {
+      "id": "mini-tuzlu",
+      "title": "MİNİ TUZLU",
+      "items": [
+        {
+          "id": "2pp0it5hi",
+          "name": "KURUYEMIŞ",
+          "description": "",
+          "price": "0 TL",
+          "image_url": "/assets/img/menu/mini-tuzlu/14022021155034589.jpg",
+          "tags": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: pennylane-gastropub
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: node server/index.js
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false   # Render dashboard'dan gir
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false

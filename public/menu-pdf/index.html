@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pennylane Full Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Cera Stencil';src:url('font/Cera Stencil PRO Trial Thin.otf') format('opentype');font-weight:100}
+@font-face{font-family:'Cera Stencil';src:url('font/Cera Stencil PRO Trial Light.otf') format('opentype');font-weight:300}
+@font-face{font-family:'Cera Stencil';src:url('font/Cera Stencil PRO Trial Regular.otf') format('opentype');font-weight:400}
+@font-face{font-family:'Cera Stencil';src:url('font/Cera Stencil PRO Trial Medium.otf') format('opentype');font-weight:500}
+@font-face{font-family:'Cera Stencil';src:url('font/Cera Stencil PRO Trial Bold.otf') format('opentype');font-weight:700}
+@font-face{font-family:'Cera Stencil';src:url('font/Cera Stencil PRO Trial Black.otf') format('opentype');font-weight:900}
+:root{--d:#3b434c;--p:#ed6d6b;--bg:#f4f4f4;--l:#b3b3b3} *{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cera Stencil','Montserrat',sans-serif;background:#ccc;display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px 20px;color:var(--d)}
+@page { size: A4; margin: 0; }
+@media print { body { background: transparent; padding: 0; margin: 0; gap: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; } .pg, .page { width: 210mm !important; height: 297mm !important; box-shadow: none !important; page-break-after: always; margin: 0 !important; border: none !important; } }
+.pg, .page{background:var(--bg);width:210mm;height:297mm;padding:12mm 15mm;box-shadow:0 10px 40px rgba(0,0,0,.3);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.cv{justify-content:center;align-items:center} .clogo{width:140mm;height:auto}
+.hdr{display:grid;grid-template-columns:90px 1fr 90px;align-items:center;margin-bottom:8px;flex-shrink:0}
+.hi{width:90px;height:90px;object-fit:contain} .ht3{text-align:center;color:var(--p);font-size:16.5px;letter-spacing:12px;font-weight:500;padding-left:12px}
+.hp1{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px} .hp1l{display:flex;gap:15px;align-items:center}
+.hp1t1{font-size:80px;font-weight:300;margin:0;line-height:.85;letter-spacing:2px} .hp1t2{font-size:12px;font-weight:500;letter-spacing:7px;color:var(--p);margin-top:4px}
+.hinf{text-align:right;font-size:9px;font-weight:500} .hinft{font-size:13px;letter-spacing:1px;margin-bottom:8px;text-align:center;font-weight:700}
+.hgrd{display:flex;gap:12px;text-align:center;line-height:1.4;font-size:9px;font-weight:500}
+.ftr{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;padding-top:10px;border-top:1px solid var(--l);flex-shrink:0;z-index:5;background:var(--bg)}
+.fi{width:45px;height:45px;object-fit:contain} .ft{text-align:right;font-size:8.5px;font-weight:500;line-height:1.4}
+.div{height:1px;background:var(--l);width:100%;border:none;flex-shrink:0} .sch{margin:8px 0;flex-shrink:0;display:flex;justify-content:center} .schw{width:50%}
+.sct{text-align:center;color:var(--p);font-size:17px;font-weight:500;letter-spacing:5px;padding:6px 0;margin:0;text-transform:uppercase}
+.clt{text-align:center;color:var(--p);font-size:15px;font-weight:500;letter-spacing:3px;margin-bottom:8px;text-transform:uppercase}
+.subr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin:8px 0;align-items:center}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;align-items:start;margin-top:12px;flex-shrink:0;flex-grow:1}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:25px;width:100%;margin-top:10px} .c{display:flex;flex-direction:column;gap:14px} .ct{gap:10px} .ls{display:flex;flex-direction:column;gap:3.5px}
+.i{display:flex;flex-direction:column} .ih{display:flex;justify-content:space-between;align-items:flex-start;font-size:10.5px;font-weight:700;line-height:1.2}
+.in{display:flex;align-items:flex-start;gap:4px;flex:1;padding-right:5px;text-transform:uppercase} .b{color:var(--p);font-size:11px;line-height:1.1}
+.ip{font-weight:700;white-space:nowrap} .id{font-size:9px;font-weight:400;line-height:1.35;padding-left:12px;margin-top:2px;opacity:.8} .sp{color:var(--p);font-size:10px;margin-left:3px}
+.r{display:grid;align-items:end;font-size:9.5px;font-weight:700} .rh{font-weight:500;font-size:9px;margin-bottom:2px;align-items:center}
+.f1{grid-template-columns:max-content 1fr 38px 38px 70px} .f2{grid-template-columns:max-content 1fr 38px 38px 75px} .f3{grid-template-columns:max-content 1fr 45px 75px}
+.f4{grid-template-columns:max-content 1fr 30px 90px 130px 50px} .f5{grid-template-columns:180px 1fr 140px 50px} .f6{grid-template-columns:max-content 1fr 50px}
+.rn{display:flex;align-items:center;gap:4px;white-space:nowrap;text-transform:uppercase;font-size:9.5px} .dt{border-bottom:2px dotted rgba(59,67,76,.4);margin:0 6px;position:relative;top:-3px}
+.v1,.v2,.v3{text-align:right} .vu{text-align:left;padding-left:12px;text-transform:uppercase;font-weight:400;font-size:8.5px;opacity:.8}
+.rh .v1,.rh .v2,.rh .v3,.rh .vu{font-weight:700;font-size:9.5px;color:var(--d);opacity:1} .rc{text-align:center!important;padding-left:0!important}
+.im{width:100%;object-fit:cover;border-radius:4px;display:block;box-shadow:0 2px 6px rgba(0,0,0,.1);background:#e0e0e0} .it{height:180px} .imm{height:140px} .is{height:100px}
+.iap{flex-grow:1;height:auto;object-fit:cover;object-position:center;margin:10px 0 25px 0}
+.hhw{position:relative;flex-grow:1;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:10px;z-index:1}
+.hhb{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);font-family:cursive;font-size:210px;color:rgba(237,109,107,.15);white-space:nowrap;z-index:-1;pointer-events:none;line-height:.8}
+.hht{font-size:50px;font-weight:500;font-family:'Cera Stencil';letter-spacing:15px;margin-bottom:5px} .hhc{display:flex;align-items:center;gap:15px;font-size:45px;font-weight:500;font-family:'Cera Stencil';letter-spacing:8px;margin-bottom:25px}
+.hhl{display:flex;flex-direction:column;gap:30px;width:100%;align-items:center} .hhi{display:flex;justify-content:center;align-items:center;gap:30px} .hhin{font-family:'Cera Stencil';font-size:22px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.hhpx{background:var(--p);padding:8px 35px;transform:skew(-15deg);box-shadow:3px 3px 0 #fbbf24}
+.hhpx span{display:inline-block;transform:skew(15deg);font-family:'Cera Stencil';font-size:26px;font-weight:700;color:var(--d)}
+.hill{position:absolute;bottom:-10px;right:-10px;width:250px;opacity:.9;mix-blend-mode:multiply;z-index:-2}
+.w96{width:96%;margin:0 auto} .w90{width:90%;margin:0 auto} .mt15{margin-top:15px} .mt5{margin-top:5px}
+</style>
+</head>
+<body>
+<!-- KAPAK -->
+<div class="pg cv"><img src="image/logo.png" alt="Logo" class="clogo"></div>
+
+<!-- SAYFA 1 -->
+<div class="pg">
+<div class="hp1" style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%;">
+    <div style="display: flex; align-items: center;"><img src="image/logo.png" alt="Logo" class="hi"></div>
+    <div style="text-align:center">
+        <h1 class="hp1t1">MENU</h1>
+        <h2 class="hp1t2">PENNYLANE GASTROPUB</h2>
+    </div>
+    <div class="hinf" style="display: flex; flex-direction: column; align-items: center; min-width: 160px;">
+        <div class="hinft" style="text-align: center; margin-bottom: 10px; line-height: 1.1; font-size: 16px; letter-spacing: 5px;">OPENING<br>HOURS</div>
+        <div style="width: 80%; height: 1.5px; background: var(--d); margin-bottom: 15px; opacity: 0.8;"></div>
+        <div style="display: flex; gap: 12px; font-size: 9.5px; line-height: 1.5; font-weight: 600; text-align: center; color: var(--d);">
+            <div style="flex: 1;">
+                <div style="margin-bottom: 2px; white-space: nowrap;">Pazar-Perşembe</div>
+                <div style="font-weight: 500;">10.00</div>
+                <div style="font-weight: 500;">01.00</div>
+            </div>
+            <div style="width: 1.5px; background: var(--d); height: 40px; margin: 0 5px; opacity: 0.8;"></div>
+            <div style="flex: 1;">
+                <div style="margin-bottom: 2px; white-space: nowrap;">Cuma-Cumartesi</div>
+                <div style="font-weight: 500;">10.00</div>
+                <div style="font-weight: 500;">02.00</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">BREAKFAST</h2><hr class="div"></div></div>
+<div class="g3" style="margin-bottom:15px; flex-grow:0;">
+<div class="c"><img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&q=80" class="im imm" alt="Croque Madame"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> CROQUE-MADAME</div><div class="ip" data-c="BREAKFAST" data-n="CROQUE-MADAME" data-p="520">₺ 520</div></div><div class="id">Brioche Ekmeği Üzerine Göz Yumurta, Beşamel Sos, Pastrami, Cheddar Peyniri, Semizotu, Soğan Turşusu, Yağ-Limon Sos, Meksika Biberi Turşusu, Tereyağ, Paprika</div></div></div>
+<div class="c"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> BRIOCHE EKMEK ÜZERİ AVOKADOLU POŞE YUMURTA</div><div class="ip" data-c="BREAKFAST" data-n="BRIOCHE EKMEK AVOKADOLU" data-p="350">₺ 350</div></div><div class="id">Brioche Ekmeği Üzerine Avokado, 2 Adet Poşe Yumurta, Semizotu, Soğan Turşusu, Yağ-Limon Sos, Meksika Biberi Turşusu, Frenk Soğan</div></div><img src="https://images.unsplash.com/photo-1603046891726-36bfd957e0bf?w=500&q=80" class="im imm" alt="Avokado"></div>
+<div class="c"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> MANTARLI OMLET</div><div class="ip" data-c="BREAKFAST" data-n="MANTARLI OMLET" data-p="300">₺ 300</div></div><div class="id">Mantar Fricase, 2 Adet Yumurta, 1 Dilim Kızarmış Ekşi Maya Ekmek, Tereyağ, Semizotu, Soğan Turşusu, Yağ-Limon Sos, Meksika Biberi Turşusu, Frenk Soğan</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> TAZE BAHARATLI PEYNİRLİ OMLET</div><div class="ip" data-c="BREAKFAST" data-n="PEYNİRLİ OMLET" data-p="300">₺ 300</div></div><div class="id">2 Adet Yumurta, Mozzarella, Frenk Soğan, 1 Dilim Kızarmış Ekşi Maya Ekmek, Semizotu, Soğan Turşusu, Yağ-Limon Sos, Meksika Biberi Turşusu</div></div></div>
+</div>
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">STARTERS & SAUCES</h2><hr class="div"></div></div>
+<div class="g3">
+<div class="c"><img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=500&q=80" class="im is" alt="Burrata"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> BURRATA</div><div class="ip" data-c="STARTERS" data-n="BURRATA" data-p="800">₺ 800</div></div><div class="id">Burrata Peyniri, Gaspacho, File Badem, Fesleğen, Sarı ve Kırmızı Çeri, Zeytin yağı</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> PEYNİR TABAĞI</div><div class="ip" data-c="STARTERS" data-n="PEYNİR TABAĞI" data-p="700">₺ 700</div></div><div class="id">50 gr Balkan Kuru Et, Kars Gravyer, Parmesan, Danish Blue, Keçi Peyniri, Ceviz, Çilek, Biber Reçeli</div></div><img src="https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=500&q=80" class="im it" alt="Peynir Tabagi"></div>
+<div class="c ct"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> PASTRAMI BALL</div><div class="ip" data-c="STARTERS" data-n="PASTRAMI BALL" data-p="400">₺ 400</div></div><div class="id">Patates, Pastrami, Mozarella, Trüflü Mayonez, Frenk Soğanı, Acı Biber Reçeli</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> POPCORN MİDYE</div><div class="ip" data-c="STARTERS" data-n="POPCORN MİDYE" data-p="300">₺ 300</div></div><div class="id">60 gr Midye, Marul, Tarama Sos, Dere Otu</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> POPCORN TAVUK <span class="sp">🌶️</span></div><div class="ip" data-c="STARTERS" data-n="POPCORN TAVUK" data-p="350">₺ 350</div></div><div class="id">110 gr Tavuk, Marul, Frenk soğan, Chili-mayo sos</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> POPCORN KARİDES <span class="sp">🌶️🌶️</span></div><div class="ip" data-c="STARTERS" data-n="POPCORN KARİDES" data-p="380">₺ 380</div></div><div class="id">85 gr Karides, Marul, Frenk soğan, Meksika biber turşusu, Chili-mayo sos</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> IZGARA SEBZE PİZZETTA</div><div class="ip" data-c="STARTERS" data-n="IZGARA SEBZE PİZZETTA" data-p="300">₺ 300</div></div><div class="id">Mozarella, Izgara Patlıcan, Kabak, Kapya Biber, Frenk Soğan, Parmesan, Rosto Domates</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> DÖRT PEYNİRLİ PİZZETTA</div><div class="ip" data-c="STARTERS" data-n="DÖRT PEYNİRLİ PİZZETTA" data-p="330">₺ 330</div></div><div class="id">Mozzarella, Parmesan, Danish Blue, Gravyerli Beşamel Sos, Confi Sarımsak</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> FÜME SUCUKLU PİZZETTA</div><div class="ip" data-c="STARTERS" data-n="FÜME SUCUKLU PİZZETTA" data-p="380">₺ 380</div></div><div class="id">Füme Sucuk, Mozzarella, Parmesan, Soğan Turşusu, El Yapımı Domates Sos, Taze Baharat</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> KOKOREÇ PİZZETTA</div><div class="ip" data-c="STARTERS" data-n="KOKOREÇ PİZZETTA" data-p="610">₺ 610</div></div><div class="id">Kokoreç, Mozarella, Rosto Domates, Biber</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> ÇITIR TAVUK</div><div class="ip" data-c="STARTERS" data-n="ÇITIR TAVUK" data-p="300">₺ 300</div></div><div class="id">300 gr. Tavuk Göğüs, Parmesan, Acı Mayonez, Tartar Sos</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> SOSİS TABAĞI</div><div class="ip" data-c="STARTERS" data-n="SOSİS TABAĞI" data-p="470">₺ 470</div></div><div class="id">2 adet 75 gr Sosis, Tartar sos, Patates Kızartması.</div></div></div>
+<div class="c"><img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=500&q=80" class="im is" alt="Sosis"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> PATATES KIZARTMASI</div><div class="ip" data-c="STARTERS" data-n="PATATES KIZARTMASI" data-p="250">₺ 250</div></div><div class="id" style="display:flex; justify-content:space-between; padding-right:15px;"><span>Ekstralar: Trüf Yağı: <span data-c="EXTRAS" data-n="Trüf Yagi" data-p="30">₺ 30</span></span></div><div class="id" style="display:flex; justify-content:flex-end; padding-right:15px;"><span>Parmesan: <span data-c="EXTRAS" data-n="Parmesan" data-p="30">₺ 30</span></span></div><div class="id" style="display:flex; justify-content:flex-end; padding-right:15px;"><span>Kajun: <span data-c="EXTRAS" data-n="Kajun" data-p="20">₺ 20</span></span></div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> BABY PATATES KIZARTMASI</div><div class="ip" data-c="STARTERS" data-n="BABY PATATES" data-p="250">₺ 250</div></div><div class="id">280 gr Patates, Sarımsaklı Mayonez, Taze Baharat, Paprika</div></div><img src="https://images.unsplash.com/photo-1573010610235-91409395973c?w=500&q=80" class="im imm" alt="Patates"><h3 class="clt" style="margin:5px 0; border-top:1px solid var(--l); border-bottom:1px solid var(--l); padding:5px 0;">SAUCE</h3><div class="i"><div class="ih"><div class="in"><b class="b">●</b> ACI MAYONEZ</div><div class="ip" data-c="SAUCE" data-n="ACI MAYONEZ" data-p="30">₺ 30</div></div></div><div class="i" style="margin-top:4px;"><div class="ih"><div class="in"><b class="b">●</b> TARTAR SOS</div><div class="ip" data-c="SAUCE" data-n="TARTAR SOS" data-p="30">₺ 30</div></div></div></div>
+</div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div>
+</div>
+
+<!-- SAYFA 2 -->
+<div class="pg">
+<div class="hdr"><img src="image/logo.png" class="hi" alt="Logo"><h1 class="ht3">PENNYLANE GASTROPUB</h1><div></div></div><hr class="div">
+<div class="subr"><h2 class="clt" style="margin-bottom:0;">BURGER & SANDWICH</h2><div></div><h2 class="clt" style="margin-bottom:0;">SALADS</h2></div><hr class="div">
+<div class="g3" style="margin-bottom:15px; flex-grow:0;">
+<div class="c ct"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> PENNYBURGER</div><div class="ip" data-c="BURGER" data-n="PENNYBURGER" data-p="480">₺ 480</div></div><div class="id">140 gr. Burger Köftesi, Dana Bacon, 2 Adet Cheddar, Karamelize Soğan, Binada Sos, Patates Kızartması</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> CHEESEBURGER</div><div class="ip" data-c="BURGER" data-n="CHEESEBURGER" data-p="420">₺ 420</div></div><div class="id">140 gr. Burger Köftesi, 2 Adet Cheddar, Binada Sos, Patates Kızartması, Karamelize Soğan</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> ÇITIR TAVUK BURGER</div><div class="ip" data-c="BURGER" data-n="ÇITIR TAVUK BURGER" data-p="380">₺ 380</div></div><div class="id">110 gr. Tavuk Göğüs, 2 Adet Cheddar, Tartar Sos, Soğan Turşusu, Patates Kızartması</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> VEJETERYAN BURGER</div><div class="ip" data-c="BURGER" data-n="VEJETERYAN BURGER" data-p="300">₺ 300</div></div><div class="id">130 gr. Vejeteryan Burger Köftesi, 2 Adet Cheddar, Soğan Turşusu, Tartar Sos, Patates Kızartması</div></div></div>
+<div class="c"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80" class="im it" alt="Salata"></div>
+<div class="c ct"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> SEZAR SALATA</div><div class="ip" data-c="SALADS" data-n="SEZAR SALATA" data-p="380">₺ 380</div></div><div class="id">120 gr Çıtır Tavuk, Marul, Parmesan, Sezar Sos, Karabiber</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> IZGARA TAVUK SALATA</div><div class="ip" data-c="SALADS" data-n="IZGARA TAVUK SALATA" data-p="380">₺ 380</div></div><div class="id">120 gr Tavuk Göğüsü, Kırmızı Soğan Turşusu, Marul, Roka, Karamelize Ananas, File Badem, Parmesan</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> ENGİNAR KALBİ SALATASI</div><div class="ip" data-c="SALADS" data-n="ENGİNAR KALBİ SALATASI" data-p="550">₺ 550</div></div><div class="id">Enginar Kalbi, Marul, Trüflü Sezar Sos, Mexica Biber Turşusu</div></div></div>
+</div>
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">MAIN</h2><hr class="div"></div></div>
+<div class="g3" style="flex-grow:0;">
+<div class="c"><img src="https://images.unsplash.com/photo-1623653387945-2fd25214f8fc?w=500&q=80" class="im imm" alt="Enginar"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> ÇITIR ENGİNAR KALBİ</div><div class="ip" data-c="MAIN" data-n="ÇITIR ENGİNAR KALBİ" data-p="850">₺ 850</div></div><div class="id">Enginar Kalbi, Acı Biber Reçeli, Frenk Soğanı</div></div></div>
+<div class="c ct"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> ISPANAKLI IZGARA TAVUK</div><div class="ip" data-c="MAIN" data-n="ISPANAKLI IZGARA TAVUK" data-p="400">₺ 400</div></div><div class="id">240 gr. Izgara Tavuk, Ispanak, Baby Patates, Köz Kapya Biber, Meksika Biberi, Soğan Turşusu, Semiz Otu, Krema</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> FISH & CHIPS</div><div class="ip" data-c="MAIN" data-n="FISH & CHIPS" data-p="360">₺ 360</div></div><div class="id">140 gr. Mezgit, Mor Lahana Turşusu, Tartar Sos, Patates Kızartması</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> ATOM KOKOREÇ</div><div class="ip" data-c="MAIN" data-n="ATOM KOKOREÇ" data-p="1200">₺ 1200</div></div><div class="id">200 gr Kokoreç, Rosto Biber, Domates, Brioche Ekmeği</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> FALAFEL</div><div class="ip" data-c="MAIN" data-n="FALAFEL" data-p="350">₺ 350</div></div><div class="id">Falafel, Tahinli Yoğurt Sos, Konkase Domates, Frenk Soğan</div></div><div class="i"><div class="ih"><div class="in"><b class="b">●</b> TAVUK SCHINITSEL</div><div class="ip" data-c="MAIN" data-n="TAVUK SCHINITSEL" data-p="450">₺ 450</div></div><div class="id">240 gr. Tavuk, Baby Patates, Meksika Biberi, Sarımsaklı Mayonez, Soğan Turşusu, Semizotu</div></div></div>
+<div class="c"><div class="i"><div class="ih"><div class="in"><b class="b">●</b> MANTARLI PACCHERI</div><div class="ip" data-c="MAIN" data-n="MANTARLI PACCHERI" data-p="400">₺ 400</div></div><div class="id">Frikase Mantar, Trüf Ezmesi, Krema, Parmesan, Frenk Soğanı</div></div><img src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=500&q=80" class="im imm" alt="Pasta"></div>
+</div>
+<div class="g2" style="margin-top:20px; padding:0 15px; flex-grow:1;">
+<div class="c" style="gap:5px;"><h3 class="clt" style="border-top:1px solid var(--l); border-bottom:1px solid var(--l); padding:4px 0; margin-bottom:5px;">SOFT DRINKS</h3>
+<div class="r f6"><div class="rn"><b class="b">●</b> CHURCHILL</div><div class="dt"></div><div class="v1" data-c="SOFT DRINKS" data-n="CHURCHILL" data-p="110">₺ 110</div></div><div class="r f6"><div class="rn"><b class="b">●</b> COCA COLA ORGINAL</div><div class="dt"></div><div class="v1" data-c="SOFT DRINKS" data-n="COCA COLA" data-p="110">₺ 110</div></div><div class="r f6"><div class="rn"><b class="b">●</b> COCA COLA ZERO</div><div class="dt"></div><div class="v1" data-c="SOFT DRINKS" data-n="COCA COLA ZERO" data-p="110">₺ 110</div></div><div class="r f6"><div class="rn"><b class="b">●</b> SPRITE</div><div class="dt"></div><div class="v1" data-c="SOFT DRINKS" data-n="SPRITE" data-p="110">₺ 110</div></div><div class="r f6"><div class="rn"><b class="b">●</b> RED BULL</div><div class="dt"></div><div class="v1" data-c="SOFT DRINKS" data-n="RED BULL" data-p="120">₺ 120</div></div><div class="r f6"><div class="rn"><b class="b">●</b> SODA</div><div class="dt"></div><div class="v1" data-c="SOFT DRINKS" data-n="SODA" data-p="65">₺ 65</div></div><div class="r f6" style="margin-bottom:10px;"><div class="rn"><b class="b">●</b> SU</div><div class="dt"></div><div class="v1" data-c="SOFT DRINKS" data-n="SU" data-p="60">₺ 60</div></div>
+<h3 class="clt" style="border-top:1px solid var(--l); border-bottom:1px solid var(--l); padding:4px 0; margin-bottom:5px;">DESSERT</h3><div class="r f6"><div class="rn"><b class="b">●</b> PENNY BROWNIE</div><div class="dt"></div><div class="v1" data-c="DESSERT" data-n="PENNY BROWNIE" data-p="250">₺ 250</div></div></div>
+<div class="c" style="gap:5px;"><h3 class="clt" style="border-top:1px solid var(--l); border-bottom:1px solid var(--l); padding:4px 0; margin-bottom:5px;">COFFEE</h3>
+<div class="r f6"><div class="rn"><b class="b">●</b> ESPRESSO</div><div class="dt"></div><div class="v1" data-c="COFFEE" data-n="ESPRESSO" data-p="120">₺ 120</div></div><div class="r f6"><div class="rn"><b class="b">●</b> DOUBLE ESPRESSO</div><div class="dt"></div><div class="v1" data-c="COFFEE" data-n="DOUBLE ESPRESSO" data-p="170">₺ 170</div></div><div class="r f6" style="margin-bottom:20px;"><div class="rn"><b class="b">●</b> AMERICANO</div><div class="dt"></div><div class="v1" data-c="COFFEE" data-n="AMERICANO" data-p="150">₺ 150</div></div>
+<h3 class="clt" style="border-top:1px solid var(--l); border-bottom:1px solid var(--l); padding:4px 0; margin-bottom:5px;">MİNİ TUZLULAR</h3><div class="r f6"><div class="rn"><b class="b">●</b> KURUYEMİŞ</div><div class="dt"></div><div class="v1" data-c="TUZLULAR" data-n="KURUYEMİŞ" data-p="60">₺ 60</div></div><div class="r f6"><div class="rn"><b class="b">●</b> TURŞU</div><div class="dt"></div><div class="v1" data-c="TUZLULAR" data-n="TURŞU" data-p="60">₺ 60</div></div></div>
+</div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div>
+</div>
+
+<!-- SAYFA 3 -->
+<div class="pg">
+<div class="hdr"><img src="image/logo.png" class="hi" alt="Logo"><h1 class="ht3">PENNYLANE GASTROPUB</h1><div></div></div>
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">DRAFT BEERS</h2><hr class="div" style="margin-top:5px;"></div></div>
+<div class="w90">
+<div class="r f4 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1 rc">CL</div><div class="vu">ÜLKE</div><div class="vu">TÜR</div><div class="v3">FİYAT (₺)</div></div>
+<div class="ls">
+<div class="r f4"><div class="rn"><b class="b">●</b> BLANC</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">FRANSA</div><div class="vu">WHEAT</div><div class="v3" data-c="DRAFT BEERS" data-n="BLANC" data-u="50 CL" data-p="320">₺ 320</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> BLANC</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">FRANSA</div><div class="vu">WHEAT</div><div class="v3" data-c="DRAFT BEERS" data-n="BLANC" data-u="33 CL" data-p="270">₺ 270</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> CARLSBERG</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="DRAFT BEERS" data-n="CARLSBERG" data-u="50 CL" data-p="250">₺ 250</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> CARLSBERG</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="DRAFT BEERS" data-n="CARLSBERG" data-u="33 CL" data-p="220">₺ 220</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> CARLSBERG LUNA</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">WHEAT</div><div class="v3" data-c="DRAFT BEERS" data-n="CARLSBERG LUNA" data-u="50 CL" data-p="300">₺ 300</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> CARLSBERG LUNA</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">WHEAT</div><div class="v3" data-c="DRAFT BEERS" data-n="CARLSBERG LUNA" data-u="33 CL" data-p="250">₺ 250</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> GUINNESS PINT</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">İRLANDA</div><div class="vu">STOUT</div><div class="v3" data-c="DRAFT BEERS" data-n="GUINNESS PINT" data-u="50 CL" data-p="420">₺ 420</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> GUINNESS HALF PINT</div><div class="dt"></div><div class="v1 rc">25</div><div class="vu">İRLANDA</div><div class="vu">STOUT</div><div class="v3" data-c="DRAFT BEERS" data-n="GUINNESS HALF PINT" data-u="25 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> TUBORG GOLD</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="DRAFT BEERS" data-n="TUBORG GOLD" data-u="50 CL" data-p="240">₺ 240</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> TUBORG GOLD</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="DRAFT BEERS" data-n="TUBORG GOLD" data-u="33 CL" data-p="210">₺ 210</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> WEIHENSTEPHAN</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">ALMANYA</div><div class="vu">WHEAT</div><div class="v3" data-c="DRAFT BEERS" data-n="WEIHENSTEPHAN" data-u="50 CL" data-p="420">₺ 420</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> WEIHENSTEPHAN</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">ALMANYA</div><div class="vu">WHEAT</div><div class="v3" data-c="DRAFT BEERS" data-n="WEIHENSTEPHAN" data-u="33 CL" data-p="350">₺ 350</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">BOTTLED BEERS</h2><hr class="div" style="margin-top:5px;"></div></div>
+<div class="w90" style="flex-grow:1;">
+<div class="r f4 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1 rc">CL</div><div class="vu">ÜLKE</div><div class="vu">TÜR</div><div class="v3">FİYAT (₺)</div></div>
+<div class="ls">
+<div class="r f4"><div class="rn"><b class="b">●</b> 3 KAFADAR AMERICAN</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">PALE ALE</div><div class="v3" data-c="BOTTLED BEERS" data-n="3 KAFADAR AMERICAN" data-u="33 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> 3 KAFADAR AŞNA VİŞNE</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">ALE</div><div class="v3" data-c="BOTTLED BEERS" data-n="3 KAFADAR AŞNA VİŞNE" data-u="33 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> 3 KAFADAR CLOCKWORK</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">İTALYAN PİLSENER</div><div class="v3" data-c="BOTTLED BEERS" data-n="3 KAFADAR CLOCKWORK" data-u="33 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> 3 KAFADAR MOSAIC</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">INDIAN PALE ALE</div><div class="v3" data-c="BOTTLED BEERS" data-n="3 KAFADAR MOSAIC" data-u="33 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> 3 KAFADAR STARDUST</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">NEW ENGLAND IPA</div><div class="v3" data-c="BOTTLED BEERS" data-n="3 KAFADAR STARDUST" data-u="33 CL" data-p="360">₺ 360</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> 3 KAFADAR BÜYÜK BEYAZ</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">FRANSA</div><div class="vu">WHEAT</div><div class="v3" data-c="BOTTLED BEERS" data-n="3 KAFADAR BÜYÜK BEYAZ" data-u="33 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> BLANC</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">FRANSA</div><div class="vu">WHEAT</div><div class="v3" data-c="BOTTLED BEERS" data-n="BLANC" data-u="33 CL" data-p="280">₺ 280</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> BUDWEISER BUDVAR</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">ÇEKYA</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="BUDWEISER BUDVAR" data-u="33 CL" data-p="300">₺ 300</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> CARLSBERG LUNA</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">WHEAT</div><div class="v3" data-c="BOTTLED BEERS" data-n="CARLSBERG LUNA" data-u="50 CL" data-p="310">₺ 310</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> CARLSBERG</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="CARLSBERG" data-u="50 CL" data-p="260">₺ 260</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> BAGAJ DEGAJ BON VOYAJ</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">HOPPY BLONDE ALE</div><div class="v3" data-c="BOTTLED BEERS" data-n="BAGAJ DEGAJ" data-u="33 CL" data-p="380">₺ 380</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> DAS DIES ALE</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">TÜRKİYE</div><div class="vu">ALE</div><div class="v3" data-c="BOTTLED BEERS" data-n="DAS DIES ALE" data-u="33 CL" data-p="390">₺ 390</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> DAURA DAMM GLUTENSİZ</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">İSPANYA</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="DAURA DAMM" data-u="33 CL" data-p="320">₺ 320</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> DESPERADOS</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">HOLLANDA</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="DESPERADOS" data-u="33 CL" data-p="370">₺ 370</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> FREDERIK INDIA PALE ALE</div><div class="dt"></div><div class="v1 rc">35</div><div class="vu">TÜRKİYE</div><div class="vu">INDIAN PALE ALE</div><div class="v3" data-c="BOTTLED BEERS" data-n="FREDERIK IPA" data-u="35 CL" data-p="300">₺ 300</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> FREDERIK MARZEN LAGER</div><div class="dt"></div><div class="v1 rc">35</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="FREDERIK LAGER" data-u="35 CL" data-p="300">₺ 300</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> FREDERIK WHEAT IPA</div><div class="dt"></div><div class="v1 rc">35</div><div class="vu">TÜRKİYE</div><div class="vu">WHEAT IPA</div><div class="v3" data-c="BOTTLED BEERS" data-n="FREDERIK WHEAT" data-u="35 CL" data-p="300">₺ 300</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> FREDERIK YAKIMA IPA</div><div class="dt"></div><div class="v1 rc">35</div><div class="vu">TÜRKİYE</div><div class="vu">INDIAN PALE ALE</div><div class="v3" data-c="BOTTLED BEERS" data-n="FREDERIK YAKIMA" data-u="35 CL" data-p="300">₺ 300</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> HEINEKEN</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">HOLLANDA</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="HEINEKEN" data-u="33 CL" data-p="300">₺ 300</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> MYTHOS</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">YUNANİSTAN</div><div class="vu">PİLSENER</div><div class="v3" data-c="BOTTLED BEERS" data-n="MYTHOS" data-u="33 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> SOL CERVEZA</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">MEKSİKA</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="SOL CERVEZA" data-u="33 CL" data-p="350">₺ 350</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> TUBORG AMBER</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="TUBORG AMBER" data-u="50 CL" data-p="280">₺ 280</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> TUBORG FİLTRESİZ</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="TUBORG FİLTRESİZ" data-u="50 CL" data-p="280">₺ 280</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> TUBORG GOLD</div><div class="dt"></div><div class="v1 rc">50</div><div class="vu">TÜRKİYE</div><div class="vu">LAGER</div><div class="v3" data-c="BOTTLED BEERS" data-n="TUBORG GOLD" data-u="50 CL" data-p="250">₺ 250</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> WEIHENSTEPHANER</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">ALMANYA</div><div class="vu">WHEAT</div><div class="v3" data-c="BOTTLED BEERS" data-n="WEIHENSTEPHANER" data-u="33 CL" data-p="360">₺ 360</div></div>
+<div class="r f4"><div class="rn"><b class="b">●</b> WEIHENSTEPHANER VITUS</div><div class="dt"></div><div class="v1 rc">33</div><div class="vu">ALMANYA</div><div class="vu">WHEAT</div><div class="v3" data-c="BOTTLED BEERS" data-n="WEIHENSTEPHANER VITUS" data-u="33 CL" data-p="390">₺ 390</div></div>
+</div></div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div>
+</div>
+
+<!-- SAYFA 4 -->
+<div class="pg">
+<div class="hdr"><img src="image/logo.png" class="hi" alt="Logo"><h1 class="ht3">PENNYLANE GASTROPUB</h1><div></div></div>
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">GLASS OF WINE</h2><hr class="div"></div></div>
+<div class="w96"><div class="r f5 rh"><div class="rn"></div><div class="vu rc">ÜZÜM</div><div class="vu rc">BÖLGE-ÜLKE</div><div class="v1">FİYAT (₺)</div></div>
+<div class="ls">
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KABATEPE KIRMIZI</div><div class="vu rc">CABERNET SAUVIGNON, MERLOT, ÖKÜZGÖZÜ</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="GLASS OF WINE" data-n="SUVLA KABATEPE KIRMIZI" data-p="350">₺ 350</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KABATEPE BLUSH</div><div class="vu rc">SYRAH, MERLOT, KALECİK KARASI</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="GLASS OF WINE" data-n="SUVLA KABATEPE BLUSH" data-p="350">₺ 350</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KABATEPE BEYAZ</div><div class="vu rc">SAUVIGNON BLANC, CHARDONNAY, NARİNCE</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="GLASS OF WINE" data-n="SUVLA KABATEPE BEYAZ" data-p="350">₺ 350</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">RED WINE</h2><hr class="div"></div></div>
+<div class="w96"><div class="r f5 rh"><div class="rn"></div><div class="vu rc">ÜZÜM</div><div class="vu rc">BÖLGE</div><div class="v1">FİYAT (₺)</div></div>
+<div class="ls">
+<div class="r f5"><div class="rn"><b class="b">●</b> ANCYRA</div><div class="vu rc">MERLOT</div><div class="vu rc">DENİZLİ - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="ANCYRA" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> CHÂTEAU CLAUD - BELLEVUE</div><div class="vu rc">MERLOT-CABERNET FRANC</div><div class="vu rc">FRANSA</div><div class="v1" data-c="RED WINE" data-n="CHÂTEAU CLAUD" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> DOR</div><div class="vu rc">CABERNET SAUVIGNON</div><div class="vu rc">MOLDOVA</div><div class="v1" data-c="RED WINE" data-n="DOR CAB SAU" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> DOR</div><div class="vu rc">FETEASCĂ NEAGRĂ-PINOT NOIR</div><div class="vu rc">MOLDOVA</div><div class="v1" data-c="RED WINE" data-n="DOR PINOT" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> DOR</div><div class="vu rc">RARA NEAGRA-CABERNET SAUVIGNON</div><div class="vu rc">MOLDOVA</div><div class="v1" data-c="RED WINE" data-n="DOR RARA" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> KAVAKLIDERE EGEO</div><div class="vu rc">CABERNET FRANC-MERLOT</div><div class="vu rc">DENİZLİ - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="EGEO FRANC" data-p="2200">₺ 2200</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> KAVAKLIDERE EGEO</div><div class="vu rc">MERLOT-SYRAH-CABERNET SAUVIGNON</div><div class="vu rc">DENİZLİ - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="EGEO MERLOT" data-p="2100">₺ 2100</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA</div><div class="vu rc">BOĞAZKERE-ÖKÜZGÖZÜ</div><div class="vu rc">ELAZIĞ/DİYARBAKIR - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA BOGAZKERE" data-p="1900">₺ 1900</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA</div><div class="vu rc">CABARNET SAUVIGNON-MERLOT</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA CAB MERLOT" data-p="1900">₺ 1900</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA</div><div class="vu rc">CABARNET SAUVIGNON</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA CAB SAU" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KABATEPE</div><div class="vu rc">CABERNET SAUVIGNON, MERLOT, ÖKÜZGÖZÜ</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA KABATEPE" data-p="1400">₺ 1400</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KİRTE</div><div class="vu rc">CABARNET SAUVIGNON-SYRAH-PETIT VERDOT</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA KİRTE" data-p="2200">₺ 2200</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA MERLOT</div><div class="vu rc">MERLOT</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA MERLOT" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA SIR</div><div class="vu rc">SYRAH-MERLOT-GRENACHE-KARASAKIZ</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA SIR" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA SUR</div><div class="vu rc">MERLOT-C. SAUVIGNON-C. FRANC-PETİT VERDOT</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA SUR" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KUMKALE</div><div class="vu rc">MERLOT</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA KUMKALE MERLOT" data-p="1900">₺ 1900</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KUMKALE</div><div class="vu rc">ÖKÜZGÖZÜ</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="RED WINE" data-n="SUVLA KUMKALE OKUZ" data-p="1900">₺ 1900</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">WHITE WINE</h2><hr class="div"></div></div>
+<div class="w96"><div class="r f5 rh"><div class="rn"></div><div class="vu rc">ÜZÜM</div><div class="vu rc">BÖLGE</div><div class="v1">FİYAT (₺)</div></div>
+<div class="ls">
+<div class="r f5"><div class="rn"><b class="b">●</b> DOR</div><div class="vu rc">FETEASCĂ ALBĂ-CHARDONNAY</div><div class="vu rc">MOLDOVA</div><div class="v1" data-c="WHITE WINE" data-n="DOR ALBA" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> DOR</div><div class="vu rc">PINOT GRIGIO</div><div class="vu rc">MOLDOVA</div><div class="v1" data-c="WHITE WINE" data-n="DOR PINOT" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> JORDAN STELLENBOSCH</div><div class="vu rc">CHENİN BLANC</div><div class="vu rc">GÜNEY AFRİKA</div><div class="v1" data-c="WHITE WINE" data-n="JORDAN CHAMELEON" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> KAVAKLIDERE EMİR</div><div class="vu rc">EMİR</div><div class="vu rc">KAPADOKYA - TÜRKİYE</div><div class="v1" data-c="WHITE WINE" data-n="KAVAKLIDERE EMİR" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KABATEPE</div><div class="vu rc">SAUVIGNON BLANC, CHARDONNAY, NARİNCE</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="WHITE WINE" data-n="SUVLA KABATEPE BEYAZ" data-p="1400">₺ 1400</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA</div><div class="vu rc">KINALI YAPINCAK</div><div class="vu rc">TEKİRDAĞ - TÜRKİYE</div><div class="v1" data-c="WHITE WINE" data-n="SUVLA KINALI" data-p="1800">₺ 1800</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA</div><div class="vu rc">SAUVIGNON BLANC</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="WHITE WINE" data-n="SUVLA SAUVIGNON" data-p="2000">₺ 2000</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA</div><div class="vu rc">VİOGNİER</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="WHITE WINE" data-n="SUVLA VİOGNİER" data-p="2100">₺ 2100</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">ROSE & BLUSH WINE</h2><hr class="div"></div></div>
+<div class="w96"><div class="r f5 rh"><div class="rn"></div><div class="vu rc">ÜZÜM</div><div class="vu rc">BÖLGE</div><div class="v1">FİYAT (₺)</div></div>
+<div class="ls">
+<div class="r f5"><div class="rn"><b class="b">●</b> DOR</div><div class="vu rc">MERLOT-SAPERAVI</div><div class="vu rc">MOLDOVA</div><div class="v1" data-c="ROSE BLUSH" data-n="DOR" data-p="200">₺ 200</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA BLUSH</div><div class="vu rc">KARASAKIZ</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="ROSE BLUSH" data-n="SUVLA BLUSH" data-p="1800">₺ 1800</div></div>
+<div class="r f5"><div class="rn"><b class="b">●</b> SUVLA KABATEPE BLUSH</div><div class="vu rc">SYRAH, MERLOT, KALECİK KARASI</div><div class="vu rc">ÇANAKKALE - TÜRKİYE</div><div class="v1" data-c="ROSE BLUSH" data-n="SUVLA KABATEPE BLUSH" data-p="1400">₺ 1400</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">PROSECCO</h2><hr class="div"></div></div>
+<div class="w96" style="flex-grow:1;"><div class="r rh" style="grid-template-columns:200px 1fr 100px 70px;"><div class="rn"></div><div class="vu rc">ÜLKE</div><div class="v1 rc">KADEH</div><div class="v2">ŞİŞE</div></div>
+<div class="ls"><div class="r" style="grid-template-columns:200px 1fr 100px 70px;"><div class="rn"><b class="b">●</b> CİNZANO PROSECCO</div><div class="vu rc">İTALYA</div><div class="v1 rc" data-c="PROSECCO" data-n="CİNZANO PROSECCO" data-u="KADEH" data-p="700">₺ 700</div><div class="v2" data-c="PROSECCO" data-n="CİNZANO PROSECCO" data-u="ŞİŞE" data-p="2800">₺ 2800</div></div></div></div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div>
+</div>
+
+<!-- SAYFA 5 -->
+<div class="pg">
+<div class="hdr"><img src="image/logo.png" class="hi" alt="Logo"><h1 class="ht3">PENNYLANE GASTROPUB</h1><div></div></div>
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">COCKTAILS</h2><hr class="div"></div></div>
+<div class="subr"><h2 class="clt" style="margin-bottom:0;">INTERNATIONAL</h2><h2 class="clt" style="margin-bottom:0;">SIGNATURE</h2><h2 class="clt" style="margin-bottom:0;">APERITIVES</h2></div><hr class="div">
+<div class="g3" style="flex-grow:1;">
+<div class="c ct">
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> BLOODY MARY</div><div class="ip" data-c="COCKTAILS" data-n="BLOODY MARY" data-p="550">₺ 550</div></div><div class="id">Vodka, Worcestershire, Tabasco, Taze Limon Suyu, Kereviz Tuzu, Karabiber, Domates Suyu</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> ESPRESSO MARTINI</div><div class="ip" data-c="COCKTAILS" data-n="ESPRESSO MARTINI" data-p="550">₺ 550</div></div><div class="id">Vodka, Espresso, Kahlua, Beyaz Şeker Şurubu</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> NEGRONI</div><div class="ip" data-c="COCKTAILS" data-n="NEGRONI" data-p="550">₺ 550</div></div><div class="id">Ford's Gin, Campari, Martini Rosso</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> COSMOPOLITAN</div><div class="ip" data-c="COCKTAILS" data-n="COSMOPOLITAN" data-p="550">₺ 550</div></div><div class="id">Kızılcık Suyu, Triple sec, Absolut Citron, Taze Limon Suyu</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> DIRTY/DRY MARTINI</div><div class="ip" data-c="COCKTAILS" data-n="DIRTY/DRY MARTINI" data-p="550">₺ 550</div></div><div class="id">Vodka/Gin, Martini Extra Dry</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> GIN FIZZ</div><div class="ip" data-c="COCKTAILS" data-n="GIN FIZZ" data-p="550">₺ 550</div></div><div class="id">Fords Gin, Taze Limon Suyu, Pudra Şekeri, Soda, Yumurta Akı</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> LYNCHBURG LEMONADE</div><div class="ip" data-c="COCKTAILS" data-n="LYNCHBURG LEMONADE" data-p="550">₺ 550</div></div><div class="id">Jack Daniel's, Triple Sec, Citrus Blend, Sprite</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> MANHATTAN</div><div class="ip" data-c="COCKTAILS" data-n="MANHATTAN" data-p="550">₺ 550</div></div><div class="id">Martini Rosso, Woodford Reserve, Angostura Bitter</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> MOJITO</div><div class="ip" data-c="COCKTAILS" data-n="MOJITO" data-p="550">₺ 550</div></div><div class="id">White Rom, Esmer Şeker Şurubu, Lime, Nane</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> OLD FASIONED</div><div class="ip" data-c="COCKTAILS" data-n="OLD FASIONED" data-p="550">₺ 550</div></div><div class="id">Woodford Reserve, Angostura Bitter, Esmer Şeker</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> WHISKEY SOUR</div><div class="ip" data-c="COCKTAILS" data-n="WHISKEY SOUR" data-p="550">₺ 550</div></div><div class="id">Woodford Reserve, Taze Lime Suyu, Şeker Şurubu, Yumurta Akı, Angostra Bitter</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> PINACOLADA</div><div class="ip" data-c="COCKTAILS" data-n="PINACOLADA" data-p="550">₺ 550</div></div><div class="id">Rom, Batı De Coco, Ananas Suyu</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> MEZCAL MARGARITA</div><div class="ip" data-c="COCKTAILS" data-n="MEZCAL MARGARITA" data-p="600">₺ 600</div></div><div class="id">Mitre Origen, Triple Sec, Lime Suyu</div></div></div>
+<div class="c" style="gap:26px;">
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> CALAMITY JANE</div><div class="ip" data-c="COCKTAILS" data-n="CALAMITY JANE" data-p="550">₺ 550</div></div><div class="id">Gin, St.Germain, Kuzu kulağı, Citrus Blend, Limon Suyu, Varyasyon, Soda</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> PINKY PENNY</div><div class="ip" data-c="COCKTAILS" data-n="PINKY PENNY" data-p="550">₺ 550</div></div><div class="id">Gordon Pink, Batı de coco, Suvla Blush, El Yapımı Ahududu Şurubu, El Yapımı Böğürtlen şurubu, Varyasyon</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> BB</div><div class="ip" data-c="COCKTAILS" data-n="BB" data-p="600">₺ 600</div></div><div class="id">Jameson Black Barrel, Butter Scotch Likörü, Butter Scotch, Yumurta Akı</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> YELLOW SUBMARINE</div><div class="ip" data-c="COCKTAILS" data-n="YELLOW SUBMARINE" data-p="550">₺ 550</div></div><div class="id">Taka Maka Rum, Passion Fruite, Vanilya, Elma Suyu, Citrus, Varyasyon</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> LIGHT MY FIRE <span class="sp">🌶️</span></div><div class="ip" data-c="COCKTAILS" data-n="LIGHT MY FIRE" data-p="550">₺ 550</div></div><div class="id">Tequila Infuce, Vanilya, Passion Fruite, Citrus, Limon Suyu, Varyasyon</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> MY LADY</div><div class="ip" data-c="COCKTAILS" data-n="MY LADY" data-p="550">₺ 550</div></div><div class="id">Taka Maka Rum, Batı De Coco, Greyfurt Suyu, Ananas Suyu, Yumurta Akı</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> FAT BOTTOMED GIRLS</div><div class="ip" data-c="COCKTAILS" data-n="FAT BOTTOMED GIRLS" data-p="550">₺ 550</div></div><div class="id">Bumbu Rum Infuce, Otto Sos, Nar Suyu, Varyasyon</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> REBEL</div><div class="ip" data-c="COCKTAILS" data-n="REBEL" data-p="550">₺ 550</div></div><div class="id">Frangelico, Shankys, Woodford Reserve, Citrus, Redbitter, Yumurta Akı</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> JUGGERNUT <span class="sp">🥜</span></div><div class="ip" data-c="COCKTAILS" data-n="JUGGERNUT" data-p="550">₺ 550</div></div><div class="id">Jack Fire, Jack Daniels No:7, Ananas Suyu, Citrus, Yer Fıstığı Ezmesi, Varyasyon</div></div></div>
+<div class="c" style="gap:26px; height:100%;">
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> APEROL SPRITZ</div><div class="ip" data-c="COCKTAILS" data-n="APEROL SPRITZ" data-p="550">₺ 550</div></div><div class="id">Aperol, Cinzano Prosecco, Soda</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> CAMPARI AMERICANO</div><div class="ip" data-c="COCKTAILS" data-n="CAMPARI AMERICANO" data-p="470">₺ 470</div></div><div class="id">Campari, Martini Rosso, Soda</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> CAMPARI SPRITZ</div><div class="ip" data-c="COCKTAILS" data-n="CAMPARI SPRITZ" data-p="550">₺ 550</div></div><div class="id">Campari, Prosecco, Soda</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> LILLET SPRITZ</div><div class="ip" data-c="COCKTAILS" data-n="LILLET SPRITZ" data-p="450">₺ 450</div></div><div class="id">Lillet Blanc, Soda</div></div>
+<div class="i"><div class="ih"><div class="in"><b class="b">●</b> LILLET ROSE SPRITZ</div><div class="ip" data-c="COCKTAILS" data-n="LILLET ROSE SPRITZ" data-p="450">₺ 450</div></div><div class="id">Lillet Rose, Soda</div></div>
+<img src="https://images.unsplash.com/photo-1560508180-03f285f67ea0?w=500&q=80" class="im iap" alt="Aperol"></div>
+</div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div>
+</div>
+
+<!-- SAYFA 6 -->
+<div class="pg">
+<div class="hdr"><img src="image/logo.png" class="hi" alt="Pennylane Logo"><h1 class="ht3">PENNYLANE GASTROPUB</h1><div></div></div>
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">GIN</h2><hr class="div"></div></div>
+<div class="g2 mt5">
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MOSAIC ANATOLAN GIN</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="MOSAIC ANATOLAN GIN" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="GIN" data-n="MOSAIC ANATOLAN GIN" data-u="TEK" data-p="470">₺ 470</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BEEFEATER</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="BEEFEATER" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="GIN" data-n="BEEFEATER" data-u="TEK" data-p="370">₺ 370</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BOMBAY</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="BOMBAY" data-u="SHOT" data-p="260">₺ 260</div><div class="v2" data-c="GIN" data-n="BOMBAY" data-u="TEK" data-p="420">₺ 420</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BOMBAY PREMIERE</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="BOMBAY PREMIERE" data-u="SHOT" data-p="390">₺ 390</div><div class="v2" data-c="GIN" data-n="BOMBAY PREMIERE" data-u="TEK" data-p="630">₺ 630</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> FORDS</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="FORDS" data-u="SHOT" data-p="250">₺ 250</div><div class="v2" data-c="GIN" data-n="FORDS" data-u="TEK" data-p="410">₺ 410</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> GIN MARE MEDITERRANEA</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="GIN MARE" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="GIN" data-n="GIN MARE" data-u="TEK" data-p="540">₺ 540</div><div class="vu">İSPANYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> GREEN BABOON</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="GREEN BABOON" data-u="SHOT" data-p="270">₺ 270</div><div class="v2" data-c="GIN" data-n="GREEN BABOON" data-u="TEK" data-p="450">₺ 450</div><div class="vu">RUSYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HENDRICK'S</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="HENDRICK'S" data-u="SHOT" data-p="440">₺ 440</div><div class="v2" data-c="GIN" data-n="HENDRICK'S" data-u="TEK" data-p="720">₺ 720</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HENDRICK'S ORBIUM</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="HENDRICK'S ORBIUM" data-u="SHOT" data-p="480">₺ 480</div><div class="v2" data-c="GIN" data-n="HENDRICK'S ORBIUM" data-u="TEK" data-p="780">₺ 780</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HENDRICK'S NEPTUNA</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="HENDRICK'S NEPTUNA" data-u="SHOT" data-p="480">₺ 480</div><div class="v2" data-c="GIN" data-n="HENDRICK'S NEPTUNA" data-u="TEK" data-p="780">₺ 780</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HENDRICK'S LUNAR</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="HENDRICK'S LUNAR" data-u="SHOT" data-p="480">₺ 480</div><div class="v2" data-c="GIN" data-n="HENDRICK'S LUNAR" data-u="TEK" data-p="780">₺ 780</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HENDRICK'S FLORA ADORA</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="HENDRICK'S FLORA" data-u="SHOT" data-p="480">₺ 480</div><div class="v2" data-c="GIN" data-n="HENDRICK'S FLORA" data-u="TEK" data-p="780">₺ 780</div><div class="vu">İSKOÇYA</div></div>
+</div>
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> KNUT HANSEN</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="KNUT HANSEN" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="GIN" data-n="KNUT HANSEN" data-u="TEK" data-p="470">₺ 470</div><div class="vu">ALMANYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MALFY</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="MALFY" data-u="SHOT" data-p="300">₺ 300</div><div class="v2" data-c="GIN" data-n="MALFY" data-u="TEK" data-p="500">₺ 500</div><div class="vu">İTALYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MALFY LIMONE</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="MALFY LIMONE" data-u="SHOT" data-p="300">₺ 300</div><div class="v2" data-c="GIN" data-n="MALFY LIMONE" data-u="TEK" data-p="500">₺ 500</div><div class="vu">İTALYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MALFY ROSA</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="MALFY ROSA" data-u="SHOT" data-p="300">₺ 300</div><div class="v2" data-c="GIN" data-n="MALFY ROSA" data-u="TEK" data-p="500">₺ 500</div><div class="vu">İTALYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MONKEY 47</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="MONKEY 47" data-u="SHOT" data-p="440">₺ 440</div><div class="v2" data-c="GIN" data-n="MONKEY 47" data-u="TEK" data-p="720">₺ 720</div><div class="vu">ALMANYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MONKEY 47 BARREL CUT</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="MONKEY 47 BARREL CUT" data-u="SHOT" data-p="570">₺ 570</div><div class="v2" data-c="GIN" data-n="MONKEY 47 BARREL CUT" data-u="TEK" data-p="920">₺ 920</div><div class="vu">ALMANYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MONKEY 47 SLOE</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="MONKEY 47 SLOE" data-u="SHOT" data-p="340">₺ 340</div><div class="v2" data-c="GIN" data-n="MONKEY 47 SLOE" data-u="TEK" data-p="550">₺ 550</div><div class="vu">ALMANYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> OXLEY</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="OXLEY" data-u="SHOT" data-p="390">₺ 390</div><div class="v2" data-c="GIN" data-n="OXLEY" data-u="TEK" data-p="640">₺ 640</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ROKU</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="ROKU" data-u="SHOT" data-p="310">₺ 310</div><div class="v2" data-c="GIN" data-n="ROKU" data-u="TEK" data-p="510">₺ 510</div><div class="vu">JAPONYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SKAGERRAK</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="SKAGERRAK" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="GIN" data-n="SKAGERRAK" data-u="TEK" data-p="470">₺ 470</div><div class="vu">FİNLANDİYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TANQUERAY</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="TANQUERAY" data-u="SHOT" data-p="260">₺ 260</div><div class="v2" data-c="GIN" data-n="TANQUERAY" data-u="TEK" data-p="420">₺ 420</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TANQUERAY FLOR DE SEVILLA</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="TANQUERAY SEVILLA" data-u="SHOT" data-p="280">₺ 280</div><div class="v2" data-c="GIN" data-n="TANQUERAY SEVILLA" data-u="TEK" data-p="440">₺ 440</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TANQUERAY TEN</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="TANQUERAY TEN" data-u="SHOT" data-p="380">₺ 380</div><div class="v2" data-c="GIN" data-n="TANQUERAY TEN" data-u="TEK" data-p="620">₺ 620</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> VOTANIKON</div><div class="dt"></div><div class="v1" data-c="GIN" data-n="VOTANIKON" data-u="SHOT" data-p="270">₺ 270</div><div class="v2" data-c="GIN" data-n="VOTANIKON" data-u="TEK" data-p="440">₺ 440</div><div class="vu">YUNANİSTAN</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">TEQUILA & MEZCAL</h2><hr class="div"></div></div>
+<div class="g2 mt5">
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CENOTE ANEJO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="CENOTE ANEJO" data-u="SHOT" data-p="540">₺ 540</div><div class="v2" data-c="TEQUILA" data-n="CENOTE ANEJO" data-u="TEK" data-p="820">₺ 820</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CENOTE BLANCO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="CENOTE BLANCO" data-u="SHOT" data-p="430">₺ 430</div><div class="v2" data-c="TEQUILA" data-n="CENOTE BLANCO" data-u="TEK" data-p="630">₺ 630</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CENOTE REPOSADO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="CENOTE REPOSADO" data-u="SHOT" data-p="480">₺ 480</div><div class="v2" data-c="TEQUILA" data-n="CENOTE REPOSADO" data-u="TEK" data-p="720">₺ 720</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> DON JULIO BLANCO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="DON JULIO BLANCO" data-u="SHOT" data-p="340">₺ 340</div><div class="v2" data-c="TEQUILA" data-n="DON JULIO BLANCO" data-u="TEK" data-p="550">₺ 550</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> EL JIMADOR BLANCO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="EL JIMADOR BLANCO" data-u="SHOT" data-p="220">₺ 220</div><div class="v2" data-c="TEQUILA" data-n="EL JIMADOR BLANCO" data-u="TEK" data-p="350">₺ 350</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> EL JIMADOR REPOSADO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="EL JIMADOR REPOSADO" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="TEQUILA" data-n="EL JIMADOR REPOSADO" data-u="TEK" data-p="370">₺ 370</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HERRADURA PLATA</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="HERRADURA PLATA" data-u="SHOT" data-p="250">₺ 250</div><div class="v2" data-c="TEQUILA" data-n="HERRADURA PLATA" data-u="TEK" data-p="400">₺ 400</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CASAMIGOS BLANCO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="CASAMIGOS BLANCO" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="TEQUILA" data-n="CASAMIGOS BLANCO" data-u="TEK" data-p="470">₺ 470</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CASAMIGOS ANEJO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="CASAMIGOS ANEJO" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="TEQUILA" data-n="CASAMIGOS ANEJO" data-u="TEK" data-p="520">₺ 520</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CASAMIGOS REPESADO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="CASAMIGOS REPESADO" data-u="SHOT" data-p="310">₺ 310</div><div class="v2" data-c="TEQUILA" data-n="CASAMIGOS REPESADO" data-u="TEK" data-p="510">₺ 510</div><div class="vu">MEKSİKA</div></div>
+</div>
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> OLMECA ALTOS REPOSADO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="OLMECA ALTOS REPOSADO" data-u="SHOT" data-p="280">₺ 280</div><div class="v2" data-c="TEQUILA" data-n="OLMECA ALTOS REPOSADO" data-u="TEK" data-p="450">₺ 450</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> PATRON REPOSADO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="PATRON REPOSADO" data-u="SHOT" data-p="500">₺ 500</div><div class="v2" data-c="TEQUILA" data-n="PATRON REPOSADO" data-u="TEK" data-p="820">₺ 820</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> PATRON SILVER</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="PATRON SILVER" data-u="SHOT" data-p="440">₺ 440</div><div class="v2" data-c="TEQUILA" data-n="PATRON SILVER" data-u="TEK" data-p="720">₺ 720</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> RESERVA DEL SENOR BLANCO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="RESERVA DEL SENOR" data-u="SHOT" data-p="370">₺ 370</div><div class="v2" data-c="TEQUILA" data-n="RESERVA DEL SENOR" data-u="TEK" data-p="600">₺ 600</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SIERRA REPOSADO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="SIERRA REPOSADO" data-u="SHOT" data-p="210">₺ 210</div><div class="v2" data-c="TEQUILA" data-n="SIERRA REPOSADO" data-u="TEK" data-p="330">₺ 330</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SIERRA SILVER</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="SIERRA SILVER" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="TEQUILA" data-n="SIERRA SILVER" data-u="TEK" data-p="320">₺ 320</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SIP & SIP GOLD</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="SIP & SIP GOLD" data-u="SHOT" data-p="220">₺ 220</div><div class="v2" data-c="TEQUILA" data-n="SIP & SIP GOLD" data-u="TEK" data-p="350">₺ 350</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SIP & SIP SILVER</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="SIP & SIP SILVER" data-u="SHOT" data-p="210">₺ 210</div><div class="v2" data-c="TEQUILA" data-n="SIP & SIP SILVER" data-u="TEK" data-p="330">₺ 330</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> VOLCAN DE MI TIERRA BLANCO</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="VOLCAN DE MI TIERRA" data-u="SHOT" data-p="340">₺ 340</div><div class="v2" data-c="TEQUILA" data-n="VOLCAN DE MI TIERRA" data-u="TEK" data-p="560">₺ 560</div><div class="vu">MEKSİKA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SE BUSCA JOVEN MEZCAL</div><div class="dt"></div><div class="v1" data-c="TEQUILA" data-n="SE BUSCA JOVEN MEZCAL" data-u="SHOT" data-p="480">₺ 480</div><div class="v2" data-c="TEQUILA" data-n="SE BUSCA JOVEN MEZCAL" data-u="TEK" data-p="780">₺ 780</div><div class="vu">MEKSİKA</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">VODKA</h2><hr class="div"></div></div>
+<div class="g2 mt5">
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BELUGA NOBLE</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="BELUGA NOBLE" data-u="SHOT" data-p="460">₺ 460</div><div class="v2" data-c="VODKA" data-n="BELUGA NOBLE" data-u="TEK" data-p="750">₺ 750</div><div class="vu">RUSYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BELVEDERE</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="BELVEDERE" data-u="SHOT" data-p="400">₺ 400</div><div class="v2" data-c="VODKA" data-n="BELVEDERE" data-u="TEK" data-p="650">₺ 650</div><div class="vu">AVUSTURYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ELIT EIGHTEEN</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="ELIT EIGHTEEN" data-u="SHOT" data-p="420">₺ 420</div><div class="v2" data-c="VODKA" data-n="ELIT EIGHTEEN" data-u="TEK" data-p="680">₺ 680</div><div class="vu">RUSYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> GREY GOOSE</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="GREY GOOSE" data-u="SHOT" data-p="435">₺ 435</div><div class="v2" data-c="VODKA" data-n="GREY GOOSE" data-u="TEK" data-p="710">₺ 710</div><div class="vu">FRANSA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HAKU</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="HAKU" data-u="SHOT" data-p="420">₺ 420</div><div class="v2" data-c="VODKA" data-n="HAKU" data-u="TEK" data-p="690">₺ 690</div><div class="vu">JAPONYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ROYAL BISON</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="ROYAL BISON" data-u="SHOT" data-p="350">₺ 350</div><div class="v2" data-c="VODKA" data-n="ROYAL BISON" data-u="TEK" data-p="570">₺ 570</div><div class="vu">BELARUS</div></div>
+</div>
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SMIRNOFF GREEN APPLE</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="SMIRNOFF GREEN APPLE" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="VODKA" data-n="SMIRNOFF GREEN APPLE" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SMIRNOFF NORTH</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="SMIRNOFF NORTH" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="VODKA" data-n="SMIRNOFF NORTH" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> SMIRNOFF RED</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="SMIRNOFF RED" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="VODKA" data-n="SMIRNOFF RED" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> STOLICHNAYA</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="STOLICHNAYA" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="VODKA" data-n="STOLICHNAYA" data-u="TEK" data-p="320">₺ 320</div><div class="vu">RUSYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> STOLICHNAYA SALTED CARAMEL</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="STOLICHNAYA CARAMEL" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="VODKA" data-n="STOLICHNAYA CARAMEL" data-u="TEK" data-p="320">₺ 320</div><div class="vu">RUSYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TITO'S HANDMADE</div><div class="dt"></div><div class="v1" data-c="VODKA" data-n="TITO'S HANDMADE" data-u="SHOT" data-p="300">₺ 300</div><div class="v2" data-c="VODKA" data-n="TITO'S HANDMADE" data-u="TEK" data-p="490">₺ 490</div><div class="vu">AMERİKA</div></div>
+</div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">RUM - CACHACA</h2><hr class="div"></div></div>
+<div class="g2 mt5" style="flex-grow:1;">
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BUMBU</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="BUMBU" data-u="SHOT" data-p="260">₺ 260</div><div class="v2" data-c="RUM" data-n="BUMBU" data-u="TEK" data-p="420">₺ 420</div><div class="vu">KARAYİPLER</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BUMBU XO</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="BUMBU XO" data-u="SHOT" data-p="310">₺ 310</div><div class="v2" data-c="RUM" data-n="BUMBU XO" data-u="TEK" data-p="500">₺ 500</div><div class="vu">KARAYİPLER</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CAPTAIN MORGAN SPICED GOLD</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="CAPTAIN MORGAN SPICED" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="RUM" data-n="CAPTAIN MORGAN SPICED" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CAPTAIN MORGAN WHITE ROM</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="CAPTAIN MORGAN WHITE" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="RUM" data-n="CAPTAIN MORGAN WHITE" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> WEBER HAUS CACHACA</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="WEBER HAUS CACHACA" data-u="SHOT" data-p="300">₺ 300</div><div class="v2" data-c="RUM" data-n="WEBER HAUS CACHACA" data-u="TEK" data-p="490">₺ 490</div><div class="vu">BRAZİLYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ANGOSTURA 3 YO WHITE RUM</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="ANGOSTURA 3 YO WHITE RUM" data-u="SHOT" data-p="260">₺ 260</div><div class="v2" data-c="RUM" data-n="ANGOSTURA 3 YO WHITE RUM" data-u="TEK" data-p="420">₺ 420</div><div class="vu">KARAYİPLER</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BACARDI CARTA BLANCA</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="BACARDI CARTA BLANCA" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="RUM" data-n="BACARDI CARTA BLANCA" data-u="TEK" data-p="320">₺ 320</div><div class="vu">KARAYİPLER</div></div>
+</div>
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TAKAMAKA BLANC</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="TAKAMAKA BLANC" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="RUM" data-n="TAKAMAKA BLANC" data-u="TEK" data-p="320">₺ 320</div><div class="vu">SEYŞELLER</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TAKAMAKA DARK SPICED</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="TAKAMAKA DARK SPICED" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="RUM" data-n="TAKAMAKA DARK SPICED" data-u="TEK" data-p="320">₺ 320</div><div class="vu">SEYŞELLER</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TAKAMAKA KOKO</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="TAKAMAKA KOKO" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="RUM" data-n="TAKAMAKA KOKO" data-u="TEK" data-p="320">₺ 320</div><div class="vu">SEYŞELLER</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ZACAPA 23</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="ZACAPA 23" data-u="SHOT" data-p="420">₺ 420</div><div class="v2" data-c="RUM" data-n="ZACAPA 23" data-u="TEK" data-p="690">₺ 690</div><div class="vu">GUATEMALA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> KRAKEN SPICED</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="KRAKEN SPICED" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="RUM" data-n="KRAKEN SPICED" data-u="TEK" data-p="380">₺ 380</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HAVANA CLUB 3 ANOS</div><div class="dt"></div><div class="v1" data-c="RUM" data-n="HAVANA CLUB 3 ANOS" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="RUM" data-n="HAVANA CLUB 3 ANOS" data-u="TEK" data-p="470">₺ 470</div><div class="vu">KÜBA</div></div>
+</div></div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Pennylane Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div>
+</div>
+
+<!-- SAYFA 7 -->
+<div class="pg">
+<div class="hdr"><img src="image/logo.png" class="hi" alt="Pennylane Logo"><h1 class="ht3">PENNYLANE GASTROPUB</h1><div></div></div>
+<div style="flex-grow:1;">
+<div class="sch"><div class="schw"><hr class="div"><h2 class="sct">WHISKEY</h2><hr class="div"></div></div>
+<div class="g2 mt10">
+<div><h2 class="clt">BLENDED SCOTCH</h2>
+<div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ABERFELDY 12 YO</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="ABERFELDY 12 YO" data-u="SHOT" data-p="400">₺ 400</div><div class="v2" data-c="BLENDED SCOTCH" data-n="ABERFELDY 12 YO" data-u="TEK" data-p="650">₺ 650</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CHIVAS 12 YO</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="CHIVAS 12 YO" data-u="SHOT" data-p="380">₺ 380</div><div class="v2" data-c="BLENDED SCOTCH" data-n="CHIVAS 12 YO" data-u="TEK" data-p="620">₺ 620</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CHIVAS 18 YO</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="CHIVAS 18 YO" data-u="SHOT" data-p="500">₺ 500</div><div class="v2" data-c="BLENDED SCOTCH" data-n="CHIVAS 18 YO" data-u="TEK" data-p="820">₺ 820</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> CHIVAS EXTRA SMOKY</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="CHIVAS EXTRA SMOKY" data-u="SHOT" data-p="260">₺ 260</div><div class="v2" data-c="BLENDED SCOTCH" data-n="CHIVAS EXTRA SMOKY" data-u="TEK" data-p="420">₺ 420</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> DEWAR'S 12 YO</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="DEWAR'S 12 YO" data-u="SHOT" data-p="220">₺ 220</div><div class="v2" data-c="BLENDED SCOTCH" data-n="DEWAR'S 12 YO" data-u="TEK" data-p="350">₺ 350</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> DIMPLE GOLDEN SELECTION</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="DIMPLE GOLDEN" data-u="SHOT" data-p="270">₺ 270</div><div class="v2" data-c="BLENDED SCOTCH" data-n="DIMPLE GOLDEN" data-u="TEK" data-p="440">₺ 440</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JW BLACK LABEL</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="JW BLACK LABEL" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="BLENDED SCOTCH" data-n="JW BLACK LABEL" data-u="TEK" data-p="370">₺ 370</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JW BLACK LABEL SHERRY</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="JW BLACK SHERRY" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="BLENDED SCOTCH" data-n="JW BLACK SHERRY" data-u="TEK" data-p="370">₺ 370</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JW DOUBLE BLACK</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="JW DOUBLE BLACK" data-u="SHOT" data-p="270">₺ 270</div><div class="v2" data-c="BLENDED SCOTCH" data-n="JW DOUBLE BLACK" data-u="TEK" data-p="440">₺ 440</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JW GOLD LABEL RESERVE</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="JW GOLD LABEL" data-u="SHOT" data-p="375">₺ 375</div><div class="v2" data-c="BLENDED SCOTCH" data-n="JW GOLD LABEL" data-u="TEK" data-p="610">₺ 610</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JW BLUE LABEL</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="JW BLUE LABEL" data-u="SHOT" data-p="1440">₺ 1440</div><div class="v2" data-c="BLENDED SCOTCH" data-n="JW BLUE LABEL" data-u="TEK" data-p="2300">₺ 2300</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JW AGED 18 YO</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="JW AGED 18 YO" data-u="SHOT" data-p="490">₺ 490</div><div class="v2" data-c="BLENDED SCOTCH" data-n="JW AGED 18 YO" data-u="TEK" data-p="800">₺ 800</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MONKEY SHOULDER</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="MONKEY SHOULDER" data-u="SHOT" data-p="240">₺ 240</div><div class="v2" data-c="BLENDED SCOTCH" data-n="MONKEY SHOULDER" data-u="TEK" data-p="390">₺ 390</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> NAKED MALT</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="NAKED MALT" data-u="SHOT" data-p="240">₺ 240</div><div class="v2" data-c="BLENDED SCOTCH" data-n="NAKED MALT" data-u="TEK" data-p="390">₺ 390</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> THE GLADSTONE AXE BLACK</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="THE GLADSTONE AXE" data-u="SHOT" data-p="240">₺ 240</div><div class="v2" data-c="BLENDED SCOTCH" data-n="THE GLADSTONE AXE" data-u="TEK" data-p="390">₺ 390</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> THE DEACON</div><div class="dt"></div><div class="v1" data-c="BLENDED SCOTCH" data-n="THE DEACON" data-u="SHOT" data-p="270">₺ 270</div><div class="v2" data-c="BLENDED SCOTCH" data-n="THE DEACON" data-u="TEK" data-p="430">₺ 430</div><div class="vu">İSKOÇYA</div></div>
+</div>
+<h2 class="clt mt15">SINGLE MALT</h2><div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ABERLOUR 12 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="ABERLOUR 12 YO" data-u="SHOT" data-p="420">₺ 420</div><div class="v2" data-c="SINGLE MALT" data-n="ABERLOUR 12 YO" data-u="TEK" data-p="690">₺ 690</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> ARDBEG 10 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="ARDBEG 10 YO" data-u="SHOT" data-p="440">₺ 440</div><div class="v2" data-c="SINGLE MALT" data-n="ARDBEG 10 YO" data-u="TEK" data-p="710">₺ 710</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BENRIACH THE ORIGINAL TEN</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="BENRIACH TEN" data-u="SHOT" data-p="330">₺ 330</div><div class="v2" data-c="SINGLE MALT" data-n="BENRIACH TEN" data-u="TEK" data-p="540">₺ 540</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BENRIACH THE SMOKY TEN</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="BENRIACH SMOKY TEN" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="SINGLE MALT" data-n="BENRIACH SMOKY TEN" data-u="TEK" data-p="470">₺ 470</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BENRIACH THE TWELVE</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="BENRIACH TWELVE" data-u="SHOT" data-p="310">₺ 310</div><div class="v2" data-c="SINGLE MALT" data-n="BENRIACH TWELVE" data-u="TEK" data-p="500">₺ 500</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> GLENFIDDICH 12 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="GLENFIDDICH 12 YO" data-u="SHOT" data-p="340">₺ 340</div><div class="v2" data-c="SINGLE MALT" data-n="GLENFIDDICH 12 YO" data-u="TEK" data-p="550">₺ 550</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> GLENFIDDICH 15 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="GLENFIDDICH 15 YO" data-u="SHOT" data-p="530">₺ 530</div><div class="v2" data-c="SINGLE MALT" data-n="GLENFIDDICH 15 YO" data-u="TEK" data-p="870">₺ 870</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> LAGAVULIN 8 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="LAGAVULIN 8 YO" data-u="SHOT" data-p="370">₺ 370</div><div class="v2" data-c="SINGLE MALT" data-n="LAGAVULIN 8 YO" data-u="TEK" data-p="600">₺ 600</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> LAGAVULIN 12 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="LAGAVULIN 12 YO" data-u="SHOT" data-p="800">₺ 800</div><div class="v2" data-c="SINGLE MALT" data-n="LAGAVULIN 12 YO" data-u="TEK" data-p="1320">₺ 1320</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> LAGAVULIN DISTILLERS</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="LAGAVULIN DISTILLERS" data-u="SHOT" data-p="680">₺ 680</div><div class="v2" data-c="SINGLE MALT" data-n="LAGAVULIN DISTILLERS" data-u="TEK" data-p="1110">₺ 1110</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> LAPHROAIG 10 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="LAPHROAIG 10 YO" data-u="SHOT" data-p="360">₺ 360</div><div class="v2" data-c="SINGLE MALT" data-n="LAPHROAIG 10 YO" data-u="TEK" data-p="590">₺ 590</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MACALLAN 12 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="MACALLAN 12 YO" data-u="SHOT" data-p="570">₺ 570</div><div class="v2" data-c="SINGLE MALT" data-n="MACALLAN 12 YO" data-u="TEK" data-p="940">₺ 940</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> OBAN 14 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="OBAN 14 YO" data-u="SHOT" data-p="580">₺ 580</div><div class="v2" data-c="SINGLE MALT" data-n="OBAN 14 YO" data-u="TEK" data-p="950">₺ 950</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TALISKER SKYE 10 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="TALISKER SKYE 10 YO" data-u="SHOT" data-p="380">₺ 380</div><div class="v2" data-c="SINGLE MALT" data-n="TALISKER SKYE 10 YO" data-u="TEK" data-p="620">₺ 620</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> THE GLENLIVET 12 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="THE GLENLIVET 12 YO" data-u="SHOT" data-p="350">₺ 350</div><div class="v2" data-c="SINGLE MALT" data-n="THE GLENLIVET 12 YO" data-u="TEK" data-p="570">₺ 570</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> THE GLENLIVET 15 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="THE GLENLIVET 15 YO" data-u="SHOT" data-p="560">₺ 560</div><div class="v2" data-c="SINGLE MALT" data-n="THE GLENLIVET 15 YO" data-u="TEK" data-p="920">₺ 920</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> THE SINGLETON 12 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="THE SINGLETON 12 YO" data-u="SHOT" data-p="250">₺ 250</div><div class="v2" data-c="SINGLE MALT" data-n="THE SINGLETON 12 YO" data-u="TEK" data-p="400">₺ 400</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> THE SINGLETON 15 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="THE SINGLETON 15 YO" data-u="SHOT" data-p="340">₺ 340</div><div class="v2" data-c="SINGLE MALT" data-n="THE SINGLETON 15 YO" data-u="TEK" data-p="550">₺ 550</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TULLIBARDINE BURGUNDY</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="TULLIBARDINE BURGUNDY" data-u="SHOT" data-p="360">₺ 360</div><div class="v2" data-c="SINGLE MALT" data-n="TULLIBARDINE BURGUNDY" data-u="TEK" data-p="580">₺ 580</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> GLENDRONACH 12 YO</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="GLENDRONACH 12 YO" data-u="SHOT" data-p="480">₺ 480</div><div class="v2" data-c="SINGLE MALT" data-n="GLENDRONACH 12 YO" data-u="TEK" data-p="790">₺ 790</div><div class="vu">İSKOÇYA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TAMNAVULIN WINE CASK</div><div class="dt"></div><div class="v1" data-c="SINGLE MALT" data-n="TAMNAVULIN WINE CASK" data-u="SHOT" data-p="250">₺ 250</div><div class="v2" data-c="SINGLE MALT" data-n="TAMNAVULIN WINE CASK" data-u="TEK" data-p="400">₺ 400</div><div class="vu">İSKOÇYA</div></div>
+</div></div>
+<div><h2 class="clt">IRISH</h2><div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> DUBLINER BOURBON CASK</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="DUBLINER BOURBON CASK" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="IRISH" data-n="DUBLINER BOURBON CASK" data-u="TEK" data-p="370">₺ 370</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HYDE NO:3</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="HYDE NO:3" data-u="SHOT" data-p="330">₺ 330</div><div class="v2" data-c="IRISH" data-n="HYDE NO:3" data-u="TEK" data-p="540">₺ 540</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HYDE NO:5</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="HYDE NO:5" data-u="SHOT" data-p="330">₺ 330</div><div class="v2" data-c="IRISH" data-n="HYDE NO:5" data-u="TEK" data-p="540">₺ 540</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> HYDE NO:8</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="HYDE NO:8" data-u="SHOT" data-p="330">₺ 330</div><div class="v2" data-c="IRISH" data-n="HYDE NO:8" data-u="TEK" data-p="540">₺ 540</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JAMESON</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="JAMESON" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="IRISH" data-n="JAMESON" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JAMESON BLACK BARREL</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="JAMESON BLACK BARREL" data-u="SHOT" data-p="260">₺ 260</div><div class="v2" data-c="IRISH" data-n="JAMESON BLACK BARREL" data-u="TEK" data-p="420">₺ 420</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JAMESON GARA GUZU</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="JAMESON GARA GUZU" data-u="SHOT" data-p="220">₺ 220</div><div class="v2" data-c="IRISH" data-n="JAMESON GARA GUZU" data-u="TEK" data-p="350">₺ 350</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JAMESON IPA EDITION</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="JAMESON IPA EDITION" data-u="SHOT" data-p="220">₺ 220</div><div class="v2" data-c="IRISH" data-n="JAMESON IPA EDITION" data-u="TEK" data-p="350">₺ 350</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JAMESON STOUT EDITION</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="JAMESON STOUT EDITION" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="IRISH" data-n="JAMESON STOUT EDITION" data-u="TEK" data-p="470">₺ 470</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TEELING SMALL BATCH</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="TEELING SMALL BATCH" data-u="SHOT" data-p="360">₺ 360</div><div class="v2" data-c="IRISH" data-n="TEELING SMALL BATCH" data-u="TEK" data-p="590">₺ 590</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> THE DEAD RABBIT</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="THE DEAD RABBIT" data-u="SHOT" data-p="370">₺ 370</div><div class="v2" data-c="IRISH" data-n="THE DEAD RABBIT" data-u="TEK" data-p="600">₺ 600</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> TULLAMORE DEW</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="TULLAMORE DEW" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="IRISH" data-n="TULLAMORE DEW" data-u="TEK" data-p="370">₺ 370</div><div class="vu">İRLANDA</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BUSHMILLS</div><div class="dt"></div><div class="v1" data-c="IRISH" data-n="BUSHMILLS" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="IRISH" data-n="BUSHMILLS" data-u="TEK" data-p="520">₺ 520</div><div class="vu">İRLANDA</div></div>
+</div><h2 class="clt mt15">BOURBON & TENNESSEE</h2><div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> BULLEIT BOURBON</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="BULLEIT BOURBON" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="BOURBON" data-n="BULLEIT BOURBON" data-u="TEK" data-p="520">₺ 520</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> GENTLEMAN JACK</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="GENTLEMAN JACK" data-u="SHOT" data-p="210">₺ 210</div><div class="v2" data-c="BOURBON" data-n="GENTLEMAN JACK" data-u="TEK" data-p="340">₺ 340</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JACK DANIEL'S NO:7</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="JACK DANIEL'S NO:7" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="BOURBON" data-n="JACK DANIEL'S NO:7" data-u="TEK" data-p="320">₺ 320</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JACK DANIEL'S BONDED</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="JACK DANIEL'S BONDED" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="BOURBON" data-n="JACK DANIEL'S BONDED" data-u="TEK" data-p="520">₺ 520</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JACK DANIEL'S TRIPLE MASH</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="JACK TRIPLE MASH" data-u="SHOT" data-p="360">₺ 360</div><div class="v2" data-c="BOURBON" data-n="JACK TRIPLE MASH" data-u="TEK" data-p="590">₺ 590</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> J.D. SINGLE BARREL</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="J.D. SINGLE BARREL" data-u="SHOT" data-p="350">₺ 350</div><div class="v2" data-c="BOURBON" data-n="J.D. SINGLE BARREL" data-u="TEK" data-p="570">₺ 570</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> J.D. TENNESSEE APPLE</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="J.D. TENNESSEE APPLE" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="BOURBON" data-n="J.D. TENNESSEE APPLE" data-u="TEK" data-p="320">₺ 320</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> J.D. TENNESSEE FIRE</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="J.D. TENNESSEE FIRE" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="BOURBON" data-n="J.D. TENNESSEE FIRE" data-u="TEK" data-p="320">₺ 320</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> J.D. TENNESSEE HONEY</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="J.D. TENNESSEE HONEY" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="BOURBON" data-n="J.D. TENNESSEE HONEY" data-u="TEK" data-p="320">₺ 320</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> MAKER'S MARK ORIGINAL</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="MAKER'S MARK" data-u="SHOT" data-p="230">₺ 230</div><div class="v2" data-c="BOURBON" data-n="MAKER'S MARK" data-u="TEK" data-p="370">₺ 370</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> WOODFORD RESERVE</div><div class="dt"></div><div class="v1" data-c="BOURBON" data-n="WOODFORD RESERVE" data-u="SHOT" data-p="290">₺ 290</div><div class="v2" data-c="BOURBON" data-n="WOODFORD RESERVE" data-u="TEK" data-p="470">₺ 470</div><div class="vu">ABD</div></div>
+</div><h2 class="clt mt15">RYE</h2><div class="ls">
+<div class="r f1 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">ÜLKE</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> WOODFORD RESERVE RYE</div><div class="dt"></div><div class="v1" data-c="RYE" data-n="WOODFORD RESERVE RYE" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="RYE" data-n="WOODFORD RESERVE RYE" data-u="TEK" data-p="520">₺ 520</div><div class="vu">ABD</div></div>
+<div class="r f1"><div class="rn"><b class="b">●</b> JACK DANIEL'S BONDED RYE</div><div class="dt"></div><div class="v1" data-c="RYE" data-n="JACK DANIEL'S BONDED RYE" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="RYE" data-n="JACK DANIEL'S BONDED RYE" data-u="TEK" data-p="520">₺ 520</div><div class="vu">ABD</div></div>
+</div></div></div>
+<div class="sch mt15"><div class="schw"><hr class="div"><h2 class="sct">JAPANESE</h2><hr class="div"></div></div>
+<div class="g2 mt5">
+<div class="ls"><div class="r f2 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">MENŞEİ</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> HIBIKI JAPANESE HARMONY</div><div class="dt"></div><div class="v1" data-c="JAPANESE" data-n="HIBIKI JAPANESE HARMONY" data-u="SHOT" data-p="930">₺ 930</div><div class="v2" data-c="JAPANESE" data-n="HIBIKI JAPANESE HARMONY" data-u="TEK" data-p="1500">₺ 1500</div><div class="vu">JAPONYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> KAMIKI SAKURA WOOD</div><div class="dt"></div><div class="v1" data-c="JAPANESE" data-n="KAMIKI SAKURA WOOD" data-u="SHOT" data-p="900">₺ 900</div><div class="v2" data-c="JAPANESE" data-n="KAMIKI SAKURA WOOD" data-u="TEK" data-p="1400">₺ 1400</div><div class="vu">JAPONYA</div></div></div>
+<div class="ls"><div class="r f2 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">MENŞEİ</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> THE CHITA</div><div class="dt"></div><div class="v1" data-c="JAPANESE" data-n="THE CHITA" data-u="SHOT" data-p="500">₺ 500</div><div class="v2" data-c="JAPANESE" data-n="THE CHITA" data-u="TEK" data-p="820">₺ 820</div><div class="vu">JAPONYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> YAMAZAKI 12 YO</div><div class="dt"></div><div class="v1" data-c="JAPANESE" data-n="YAMAZAKI 12 YO" data-u="SHOT" data-p="1800">₺ 1800</div><div class="v2" data-c="JAPANESE" data-n="YAMAZAKI 12 YO" data-u="TEK" data-p="2900">₺ 2900</div><div class="vu">JAPONYA</div></div></div></div></div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Pennylane Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div>
+</div>
+
+<!-- SAYFA 8 -->
+<div class="pg">
+<div class="hdr"><img src="image/logo.png" class="hi" alt="Pennylane Logo"><h1 class="ht3">PENNYLANE GASTROPUB</h1><div></div></div>
+<div style="flex-grow:1; display:flex; flex-direction:column;">
+<div style="text-align:center; margin:15px 0 5px 0;"><div style="width:45%; margin:0 auto; border-top:1px solid var(--l); margin-bottom:10px;"></div><h2 class="clt" style="margin-bottom:0;">LIQUEUR SHOT</h2></div>
+<div class="g2 mt10">
+<div class="ls"><div class="r f2 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">MENŞEİ</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> AMARULA</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="AMARULA" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="AMARULA" data-u="TEK" data-p="290">₺ 290</div><div class="vu">G. AFRİKA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> AMARULA RASPBERRY</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="AMARULA RASPBERRY" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="AMARULA RASPBERRY" data-u="TEK" data-p="290">₺ 290</div><div class="vu">G. AFRİKA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> AMARULA VANILLA SPICE</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="AMARULA VANILLA SPICE" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="AMARULA VANILLA SPICE" data-u="TEK" data-p="290">₺ 290</div><div class="vu">G. AFRİKA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> BAILEY'S</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="BAILEY'S" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="BAILEY'S" data-u="TEK" data-p="290">₺ 290</div><div class="vu">İRLANDA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> CAMPARI</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="CAMPARI" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="CAMPARI" data-u="TEK" data-p="290">₺ 290</div><div class="vu">İTALYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> CARDINAL MELON</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="CARDINAL MELON" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="CARDINAL MELON" data-u="TEK" data-p="290">₺ 290</div><div class="vu">HOLLANDA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> DISERRANO AMARETTO</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="DISERRANO AMARETTO" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="DISERRANO AMARETTO" data-u="TEK" data-p="290">₺ 290</div><div class="vu">İTALYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> DRAMBUIE</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="DRAMBUIE" data-u="SHOT" data-p="260">₺ 260</div><div class="v2" data-c="LIQUEUR" data-n="DRAMBUIE" data-u="TEK" data-p="420">₺ 420</div><div class="vu">İNGİLTERE</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> FERNET BLANCA</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="FERNET BLANCA" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="FERNET BLANCA" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İTALYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> JAGERMEISTER</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="JAGERMEISTER" data-u="SHOT" data-p="190">₺ 190</div><div class="v2" data-c="LIQUEUR" data-n="JAGERMEISTER" data-u="TEK" data-p="300">₺ 300</div><div class="vu">ALMANYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> JAGERMEISTER COLD BREW</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="JAGERMEISTER COLD BREW" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="LIQUEUR" data-n="JAGERMEISTER COLD BREW" data-u="TEK" data-p="320">₺ 320</div><div class="vu">ALMANYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> JAGERMEISTER MANIFEST</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="JAGERMEISTER MANIFEST" data-u="SHOT" data-p="280">₺ 280</div><div class="v2" data-c="LIQUEUR" data-n="JAGERMEISTER MANIFEST" data-u="TEK" data-p="450">₺ 450</div><div class="vu">ALMANYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> KAHLUA</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="KAHLUA" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="KAHLUA" data-u="TEK" data-p="290">₺ 290</div><div class="vu">MEKSİKA</div></div></div>
+<div class="ls"><div class="r f2 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">MENŞEİ</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> KLEOS</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="KLEOS" data-u="SHOT" data-p="270">₺ 270</div><div class="v2" data-c="LIQUEUR" data-n="KLEOS" data-u="TEK" data-p="440">₺ 440</div><div class="vu">YUNANİSTAN</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> MALIBU</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="MALIBU" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="MALIBU" data-u="TEK" data-p="290">₺ 290</div><div class="vu">BARBADOS</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> METAXA</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="METAXA" data-u="SHOT" data-p="320">₺ 320</div><div class="v2" data-c="LIQUEUR" data-n="METAXA" data-u="TEK" data-p="520">₺ 520</div><div class="vu">YUNANİSTAN</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> PASSOA</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="PASSOA" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="PASSOA" data-u="TEK" data-p="290">₺ 290</div><div class="vu">FRANSA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> RAMAZOTTI SAMBUCA</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="RAMAZOTTI SAMBUCA" data-u="SHOT" data-p="220">₺ 220</div><div class="v2" data-c="LIQUEUR" data-n="RAMAZOTTI SAMBUCA" data-u="TEK" data-p="350">₺ 350</div><div class="vu">İTALYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> RAMAZOTTI AMARO</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="RAMAZOTTI AMARO" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="RAMAZOTTI AMARO" data-u="TEK" data-p="290">₺ 290</div><div class="vu">İTALYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> ROSSI DASIAGO LIMONCELLO</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="ROSSI DASIAGO LIMONCELLO" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="LIQUEUR" data-n="ROSSI DASIAGO LIMONCELLO" data-u="TEK" data-p="320">₺ 320</div><div class="vu">İTALYA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> SAFARI</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="SAFARI" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="SAFARI" data-u="TEK" data-p="290">₺ 290</div><div class="vu">HOLLANDA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> SHANKY'S WHIP</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="SHANKY'S WHIP" data-u="SHOT" data-p="180">₺ 180</div><div class="v2" data-c="LIQUEUR" data-n="SHANKY'S WHIP" data-u="TEK" data-p="290">₺ 290</div><div class="vu">İRLANDA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> SKINOS MASTIHA</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="SKINOS MASTIHA" data-u="SHOT" data-p="200">₺ 200</div><div class="v2" data-c="LIQUEUR" data-n="SKINOS MASTIHA" data-u="TEK" data-p="320">₺ 320</div><div class="vu">YUNANİSTAN</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> SKINOS DARK</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="SKINOS DARK" data-u="SHOT" data-p="240">₺ 240</div><div class="v2" data-c="LIQUEUR" data-n="SKINOS DARK" data-u="TEK" data-p="390">₺ 390</div><div class="vu">YUNANİSTAN</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> SOUTHERN COMFORT</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="SOUTHERN COMFORT" data-u="SHOT" data-p="220">₺ 220</div><div class="v2" data-c="LIQUEUR" data-n="SOUTHERN COMFORT" data-u="TEK" data-p="350">₺ 350</div><div class="vu">ABD</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> ST GERMAIN</div><div class="dt"></div><div class="v1" data-c="LIQUEUR" data-n="ST GERMAIN" data-u="SHOT" data-p="270">₺ 270</div><div class="v2" data-c="LIQUEUR" data-n="ST GERMAIN" data-u="TEK" data-p="440">₺ 440</div><div class="vu">FRANSA</div></div></div></div>
+<div class="g2 mt15">
+<div><div style="border-top:1px solid var(--l); padding-top:8px;"><h2 class="clt" style="margin-bottom:5px;">VERMOUTH</h2></div>
+<div class="ls"><div class="r f3 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">KADEH</div><div class="vu">MENŞEİ</div></div>
+<div class="r f3"><div class="rn"><b class="b">●</b> CINZANO EXTRA DRY</div><div class="dt"></div><div class="v1" data-c="VERMOUTH" data-n="CINZANO EXTRA DRY" data-u="KADEH" data-p="340">₺ 340</div><div class="vu">İTALYA</div></div>
+<div class="r f3"><div class="rn"><b class="b">●</b> CINZANO ROSSO</div><div class="dt"></div><div class="v1" data-c="VERMOUTH" data-n="CINZANO ROSSO" data-u="KADEH" data-p="340">₺ 340</div><div class="vu">İTALYA</div></div>
+<div class="r f3"><div class="rn"><b class="b">●</b> CINZANO BIANCO</div><div class="dt"></div><div class="v1" data-c="VERMOUTH" data-n="CINZANO BIANCO" data-u="KADEH" data-p="340">₺ 340</div><div class="vu">İTALYA</div></div>
+<div class="r f3"><div class="rn"><b class="b">●</b> MARTINI EXTRA DRY</div><div class="dt"></div><div class="v1" data-c="VERMOUTH" data-n="MARTINI EXTRA DRY" data-u="KADEH" data-p="340">₺ 340</div><div class="vu">İTALYA</div></div>
+<div class="r f3"><div class="rn"><b class="b">●</b> MARTINI ROSSO</div><div class="dt"></div><div class="v1" data-c="VERMOUTH" data-n="MARTINI ROSSO" data-u="KADEH" data-p="340">₺ 340</div><div class="vu">İTALYA</div></div>
+<div class="r f3"><div class="rn"><b class="b">●</b> MARTINI BIANCO</div><div class="dt"></div><div class="v1" data-c="VERMOUTH" data-n="MARTINI BIANCO" data-u="KADEH" data-p="340">₺ 340</div><div class="vu">İTALYA</div></div></div></div>
+<div><div style="border-top:1px solid var(--l); padding-top:8px;"><h2 class="clt" style="margin-bottom:5px;">COGNAC</h2></div>
+<div class="ls"><div class="r f2 rh"><div class="rn"></div><div class="dt" style="border:none;"></div><div class="v1">SHOT</div><div class="v2">TEK</div><div class="vu">MENŞEİ</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> COURVOISIER XO</div><div class="dt"></div><div class="v1" data-c="COGNAC" data-n="COURVOISIER XO" data-u="SHOT" data-p="1350">₺ 1350</div><div class="v2" data-c="COGNAC" data-n="COURVOISIER XO" data-u="TEK" data-p="1950">₺ 1950</div><div class="vu">FRANSA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> HENNESSY</div><div class="dt"></div><div class="v1" data-c="COGNAC" data-n="HENNESSY" data-u="SHOT" data-p="380">₺ 380</div><div class="v2" data-c="COGNAC" data-n="HENNESSY" data-u="TEK" data-p="620">₺ 620</div><div class="vu">FRANSA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> MARTELL VS</div><div class="dt"></div><div class="v1" data-c="COGNAC" data-n="MARTELL VS" data-u="SHOT" data-p="390">₺ 390</div><div class="v2" data-c="COGNAC" data-n="MARTELL VS" data-u="TEK" data-p="640">₺ 640</div><div class="vu">FRANSA</div></div>
+<div class="r f2"><div class="rn"><b class="b">●</b> REMY MARTIN</div><div class="dt"></div><div class="v1" data-c="COGNAC" data-n="REMY MARTIN" data-u="SHOT" data-p="540">₺ 540</div><div class="v2" data-c="COGNAC" data-n="REMY MARTIN" data-u="TEK" data-p="880">₺ 880</div><div class="vu">FRANSA</div></div></div></div></div>
+<div class="hhw"><div class="hhb">Happy<br>Hour</div><div class="hht" id="hh_title">HAFTAİÇİ</div><div class="hhc">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span id="hh_time">14:00 - 17:00</span></div>
+<div class="hhl">
+<div class="hhi"><div class="hhin" id="hh_n1">CARLSBERG 50 CL FIÇI</div><div class="hhpx"><span id="hh_p1">₺ 210</span></div></div>
+<div class="hhi"><div class="hhin" id="hh_n2">TUBORG 50 CL FIÇI</div><div class="hhpx"><span id="hh_p2">₺ 200</span></div></div>
+<div class="hhi"><div class="hhin" id="hh_n3">PATATES KIZARTMASI</div><div class="hhpx"><span id="hh_p3">₺ 210</span></div></div>
+<div class="hhi"><div class="hhin" id="hh_n4">ÇITIR TAVUK BURGER</div><div class="hhpx"><span id="hh_p4">₺ 320</span></div></div></div>
+</div></div>
+<div class="ftr"><img src="image/logo.png" class="fi" alt="Pennylane Logo"><div class="ft">FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR</div></div></div>
+
+<!-- SAYFA 9 (ARKA KAPAK) -->
+<div class="pg cv"><img src="image/logo.png" alt="Pennylane Logo" class="clogo"></div>
+
+<!-- ADMIN PANEL BAĞLANTI SCRIPTI -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Admin paneldeki verileri çek
+            const savedData = JSON.parse(localStorage.getItem('pennylane_data'));
+            if(!savedData) return;
+
+            // 1. FİYATLARI GÜNCELLE
+            if(savedData.prices) {
+                savedData.prices.forEach(item => {
+                    let selector = `[data-n="${item.UrunAdi}"]`;
+                    // Eger Birim (Orn: SHOT, TEK, 50 CL vs.) varsa sadece spesifik elemani degistir
+                    if(item.Birim) {
+                        selector += `[data-u="${item.Birim}"]`;
+                    }
+                    const elements = document.querySelectorAll(selector);
+                    if(elements.length > 0) {
+                        elements.forEach(element => {
+                            element.innerHTML = `₺ ${item.Fiyat}`;
+                        });
+                    }
+                });
+            }
+
+            
+            
+            // 4. HAPPY HOUR GÜNCELLEMESİ
+            if(savedData.happyHour) {
+                const hh = savedData.happyHour;
+                if(document.getElementById('hh_title')) document.getElementById('hh_title').innerHTML = hh.title;
+                if(document.getElementById('hh_time')) document.getElementById('hh_time').innerHTML = hh.time;
+                
+                if(document.getElementById('hh_n1')) document.getElementById('hh_n1').innerHTML = hh.item1Name;
+                if(document.getElementById('hh_p1')) document.getElementById('hh_p1').innerHTML = "₺ " + hh.item1Price;
+                
+                if(document.getElementById('hh_n2')) document.getElementById('hh_n2').innerHTML = hh.item2Name;
+                if(document.getElementById('hh_p2')) document.getElementById('hh_p2').innerHTML = "₺ " + hh.item2Price;
+                
+                if(document.getElementById('hh_n3')) document.getElementById('hh_n3').innerHTML = hh.item3Name;
+                if(document.getElementById('hh_p3')) document.getElementById('hh_p3').innerHTML = "₺ " + hh.item3Price;
+                
+                if(document.getElementById('hh_n4')) document.getElementById('hh_n4').innerHTML = hh.item4Name;
+                if(document.getElementById('hh_p4')) document.getElementById('hh_p4').innerHTML = "₺ " + hh.item4Price;
+            }
+
+            // 3. ALT BİLGİ YAZISI GÜNCELLEMESİ
+            if(savedData.footerText) {
+                document.querySelectorAll('.ft').forEach(ft => {
+                    ft.innerHTML = savedData.footerText;
+                });
+            }
+
+            // 2. GÖRSELLERİ GÜNCELLE (Akıllı Eşleştirme)
+            if(savedData.images) {
+                for (const [altText, url] of Object.entries(savedData.images)) {
+                    // Logo için özel varyasyon yakalama
+                    if(altText === 'Logo' && url !== 'gray circle solid.svg' && url !== 'image/logo.png') {
+                        document.querySelectorAll(`img[alt="Logo"]`).forEach(img => img.src = url);
+                        document.querySelectorAll(`img[alt="Pennylane Logo"]`).forEach(img => img.src = url);
+                        document.querySelectorAll(`img[alt=""]`).forEach(img => img.src = url);
+                    } else if (altText !== 'Logo') {
+                       document.querySelectorAll(`img[alt="${altText}"]`).forEach(img => img.src = url);
+                    }
+                }
+            }
+        });
+    </script>
+    
+</body>
+</html>

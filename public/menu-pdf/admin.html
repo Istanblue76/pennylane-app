@@ -1,0 +1,3262 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pennylane - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Excel işlemleri için SheetJS Kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- Header -->
+    <div class="bg-[#3b434c] text-white p-6 shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-4 justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-widest text-[#ed6d6b]">PENNYLANE ADMIN</h1>
+            <button onclick="saveAll()" class="bg-[#ed6d6b] hover:bg-red-500 text-white px-8 py-3 rounded-md font-bold shadow-lg transform transition hover:scale-105 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                Tüm Değişiklikleri Kaydet
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 pb-12">
+        
+        <!-- EXCEL BÖLÜMÜ -->
+        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#3b434c] h-fit">
+            <h2 class="text-xl font-bold mb-4 border-b pb-2 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3b434c]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                1. Toplu Fiyat Güncelleme (Excel)
+            </h2>
+            <p class="text-sm text-gray-600 mb-6">Mevcut fiyat listesini indirin, Excel'de sadece değiştirmek istediğiniz hücreleri düzenleyin ve geri yükleyin. Boş bıraktığınız fiyatlar orijinal haliyle korunacaktır.</p>
+            
+            <div class="flex flex-col gap-4">
+                <button onclick="downloadExcel()" class="w-full bg-[#3b434c] hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg flex justify-center items-center gap-2 transition shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                    Mevcut Listeyi İndir (Excel)
+                </button>
+
+                <div class="relative w-full border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-[#ed6d6b] hover:bg-red-50 transition bg-gray-50 mt-2">
+                    <input type="file" id="excelUpload" accept=".xlsx, .xls" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="handleExcelUpload(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                    <span class="text-gray-700 font-medium block text-lg">Yeni Excel Dosyasını Seçin</span>
+                    <span class="text-gray-400 text-sm">veya buraya sürükleyip bırakın</span>
+                </div>
+                <div id="uploadStatus" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative hidden" role="alert">
+                    <strong class="font-bold">Excel başarıyla yüklendi!</strong>
+                    <span class="block sm:inline"> Lütfen işlemi tamamlamak için yukarıdaki "Kaydet" butonuna basın.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- GÖRSEL YÖNETİMİ BÖLÜMÜ -->
+        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#ed6d6b]">
+            <h2 class="text-xl font-bold mb-4 border-b pb-2 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#ed6d6b]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                2. Görsel Yönetimi
+            </h2>
+            <p class="text-sm text-gray-600 mb-6">Menüdeki görselleri değiştirmek için bilgisayarınızdan yeni bir fotoğraf seçin. Fotoğraflar otomatik olarak menüye uyumlu hale getirilecektir.</p>
+            
+            <div class="flex flex-col gap-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar" id="imageInputsContainer">
+                <!-- Inputs JavaScript ile buraya eklenecek -->
+            </div>
+        </div>
+
+    </div>
+
+
+        <!-- ALT BİLGİ (FOOTER) YÖNETİMİ BÖLÜMÜ -->
+        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#3b434c] lg:col-span-2">
+            <h2 class="text-xl font-bold mb-4 border-b pb-2 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3b434c]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                3. Sayfa Alt Bilgi (Footer) Metni
+            </h2>
+            <p class="text-sm text-gray-600 mb-4">Her sayfanın en altında yer alan vergi uyarısı ve tarih gibi bilgileri buradan güncelleyebilirsiniz. Yeni bir satıra geçmek için kutuya yazarken 'Enter' tuşunu kullanabilirsiniz.</p>
+            <textarea id="footerTextInput" rows="3" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500 resize-none font-medium" oninput="updateFooterData(event)"></textarea>
+        </div>
+
+    
+
+
+        <!-- HAPPY HOUR YÖNETİMİ BÖLÜMÜ -->
+        <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#ed6d6b] lg:col-span-2">
+            <h2 class="text-xl font-bold mb-4 border-b pb-2 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#ed6d6b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                4. Happy Hour Yönetimi
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 pt-2">
+                <div>
+                    <label class="block text-sm font-bold text-gray-800 mb-1">Başlık (Örn: HAFTAİÇİ)</label>
+                    <input type="text" id="hhTitle" class="w-full p-3 border border-gray-300 rounded font-bold text-gray-700 bg-gray-50 focus:outline-none focus:border-[#ed6d6b]" oninput="updateHappyHour('title', event.target.value)">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-800 mb-1">Saat Dilimi (Örn: 14:00 - 17:00)</label>
+                    <input type="text" id="hhTime" class="w-full p-3 border border-gray-300 rounded font-bold text-gray-700 bg-gray-50 focus:outline-none focus:border-[#ed6d6b]" oninput="updateHappyHour('time', event.target.value)">
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- ITEM 1 -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <label class="block text-xs font-bold text-[#ed6d6b] uppercase tracking-wider mb-2">Ürün 1</label>
+                    <input type="text" id="hhItem1Name" class="w-full p-2 border border-gray-300 rounded mb-3 text-sm focus:border-[#ed6d6b] font-semibold text-gray-700" placeholder="İsim" oninput="updateHappyHour('item1Name', event.target.value)">
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Fiyat (₺)</label>
+                    <input type="number" id="hhItem1Price" class="w-full p-2 border border-gray-300 rounded text-sm focus:border-[#ed6d6b]" oninput="updateHappyHour('item1Price', event.target.value)">
+                </div>
+                <!-- ITEM 2 -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <label class="block text-xs font-bold text-[#ed6d6b] uppercase tracking-wider mb-2">Ürün 2</label>
+                    <input type="text" id="hhItem2Name" class="w-full p-2 border border-gray-300 rounded mb-3 text-sm focus:border-[#ed6d6b] font-semibold text-gray-700" placeholder="İsim" oninput="updateHappyHour('item2Name', event.target.value)">
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Fiyat (₺)</label>
+                    <input type="number" id="hhItem2Price" class="w-full p-2 border border-gray-300 rounded text-sm focus:border-[#ed6d6b]" oninput="updateHappyHour('item2Price', event.target.value)">
+                </div>
+                <!-- ITEM 3 -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <label class="block text-xs font-bold text-[#ed6d6b] uppercase tracking-wider mb-2">Ürün 3</label>
+                    <input type="text" id="hhItem3Name" class="w-full p-2 border border-gray-300 rounded mb-3 text-sm focus:border-[#ed6d6b] font-semibold text-gray-700" placeholder="İsim" oninput="updateHappyHour('item3Name', event.target.value)">
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Fiyat (₺)</label>
+                    <input type="number" id="hhItem3Price" class="w-full p-2 border border-gray-300 rounded text-sm focus:border-[#ed6d6b]" oninput="updateHappyHour('item3Price', event.target.value)">
+                </div>
+                <!-- ITEM 4 -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <label class="block text-xs font-bold text-[#ed6d6b] uppercase tracking-wider mb-2">Ürün 4</label>
+                    <input type="text" id="hhItem4Name" class="w-full p-2 border border-gray-300 rounded mb-3 text-sm focus:border-[#ed6d6b] font-semibold text-gray-700" placeholder="İsim" oninput="updateHappyHour('item4Name', event.target.value)">
+                    <label class="block text-xs font-bold text-gray-600 mb-1">Fiyat (₺)</label>
+                    <input type="number" id="hhItem4Price" class="w-full p-2 border border-gray-300 rounded text-sm focus:border-[#ed6d6b]" oninput="updateHappyHour('item4Price', event.target.value)">
+                </div>
+            </div>
+        </div>
+\n    </div>\n    <!-- SCRIPT KISMI -->
+    <script>
+        // Varsayılan veriler (Eğer daha önce kaydedilmemişse bunlar kullanılır)
+        
+        let defaultAppPrices = [
+        {
+                "Kategori": "BREAKFAST",
+                "UrunAdi": "CROQUE-MADAME",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "BREAKFAST",
+                "UrunAdi": "BRIOCHE EKMEK AVOKADOLU",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BREAKFAST",
+                "UrunAdi": "MANTARLI OMLET",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "BREAKFAST",
+                "UrunAdi": "PEYNİRLİ OMLET",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "BURRATA",
+                "Fiyat": 800
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "PEYNİR TABAĞI",
+                "Fiyat": 700
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "PASTRAMI BALL",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "POPCORN MİDYE",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "POPCORN TAVUK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "POPCORN KARİDES",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "IZGARA SEBZE PİZZETTA",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "DÖRT PEYNİRLİ PİZZETTA",
+                "Fiyat": 330
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "FÜME SUCUKLU PİZZETTA",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "KOKOREÇ PİZZETTA",
+                "Fiyat": 610
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "ÇITIR TAVUK",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "SOSİS TABAĞI",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "PATATES KIZARTMASI",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "EXTRAS",
+                "UrunAdi": "Trüf Yagi",
+                "Fiyat": 30
+        },
+        {
+                "Kategori": "EXTRAS",
+                "UrunAdi": "Parmesan",
+                "Fiyat": 30
+        },
+        {
+                "Kategori": "EXTRAS",
+                "UrunAdi": "Kajun",
+                "Fiyat": 20
+        },
+        {
+                "Kategori": "STARTERS",
+                "UrunAdi": "BABY PATATES",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "SAUCE",
+                "UrunAdi": "ACI MAYONEZ",
+                "Fiyat": 30
+        },
+        {
+                "Kategori": "SAUCE",
+                "UrunAdi": "TARTAR SOS",
+                "Fiyat": 30
+        },
+        {
+                "Kategori": "BURGER",
+                "UrunAdi": "PENNYBURGER",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "BURGER",
+                "UrunAdi": "CHEESEBURGER",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "BURGER",
+                "UrunAdi": "ÇITIR TAVUK BURGER",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "BURGER",
+                "UrunAdi": "VEJETERYAN BURGER",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "SALADS",
+                "UrunAdi": "SEZAR SALATA",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "SALADS",
+                "UrunAdi": "IZGARA TAVUK SALATA",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "SALADS",
+                "UrunAdi": "ENGİNAR KALBİ SALATASI",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "MAIN",
+                "UrunAdi": "ÇITIR ENGİNAR KALBİ",
+                "Fiyat": 850
+        },
+        {
+                "Kategori": "MAIN",
+                "UrunAdi": "ISPANAKLI IZGARA TAVUK",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "MAIN",
+                "UrunAdi": "FISH & CHIPS",
+                "Fiyat": 360
+        },
+        {
+                "Kategori": "MAIN",
+                "UrunAdi": "ATOM KOKOREÇ",
+                "Fiyat": 1200
+        },
+        {
+                "Kategori": "MAIN",
+                "UrunAdi": "FALAFEL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "MAIN",
+                "UrunAdi": "TAVUK SCHINITSEL",
+                "Fiyat": 450
+        },
+        {
+                "Kategori": "MAIN",
+                "UrunAdi": "MANTARLI PACCHERI",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "SOFT DRINKS",
+                "UrunAdi": "CHURCHILL",
+                "Fiyat": 110
+        },
+        {
+                "Kategori": "SOFT DRINKS",
+                "UrunAdi": "COCA COLA",
+                "Fiyat": 110
+        },
+        {
+                "Kategori": "SOFT DRINKS",
+                "UrunAdi": "COCA COLA ZERO",
+                "Fiyat": 110
+        },
+        {
+                "Kategori": "SOFT DRINKS",
+                "UrunAdi": "SPRITE",
+                "Fiyat": 110
+        },
+        {
+                "Kategori": "SOFT DRINKS",
+                "UrunAdi": "RED BULL",
+                "Fiyat": 120
+        },
+        {
+                "Kategori": "SOFT DRINKS",
+                "UrunAdi": "SODA",
+                "Fiyat": 65
+        },
+        {
+                "Kategori": "SOFT DRINKS",
+                "UrunAdi": "SU",
+                "Fiyat": 60
+        },
+        {
+                "Kategori": "DESSERT",
+                "UrunAdi": "PENNY BROWNIE",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "COFFEE",
+                "UrunAdi": "ESPRESSO",
+                "Fiyat": 120
+        },
+        {
+                "Kategori": "COFFEE",
+                "UrunAdi": "DOUBLE ESPRESSO",
+                "Fiyat": 170
+        },
+        {
+                "Kategori": "COFFEE",
+                "UrunAdi": "AMERICANO",
+                "Fiyat": 150
+        },
+        {
+                "Kategori": "TUZLULAR",
+                "UrunAdi": "KURUYEMİŞ",
+                "Fiyat": 60
+        },
+        {
+                "Kategori": "TUZLULAR",
+                "UrunAdi": "TURŞU",
+                "Fiyat": 60
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "BLANC",
+                "Birim": "50 CL",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "BLANC",
+                "Birim": "33 CL",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "CARLSBERG",
+                "Birim": "50 CL",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "CARLSBERG",
+                "Birim": "33 CL",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "CARLSBERG LUNA",
+                "Birim": "50 CL",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "CARLSBERG LUNA",
+                "Birim": "33 CL",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "GUINNESS PINT",
+                "Birim": "50 CL",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "GUINNESS HALF PINT",
+                "Birim": "25 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "TUBORG GOLD",
+                "Birim": "50 CL",
+                "Fiyat": 240
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "TUBORG GOLD",
+                "Birim": "33 CL",
+                "Fiyat": 210
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "WEIHENSTEPHAN",
+                "Birim": "50 CL",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "DRAFT BEERS",
+                "UrunAdi": "WEIHENSTEPHAN",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "3 KAFADAR AMERICAN",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "3 KAFADAR AŞNA VİŞNE",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "3 KAFADAR CLOCKWORK",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "3 KAFADAR MOSAIC",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "3 KAFADAR STARDUST",
+                "Birim": "33 CL",
+                "Fiyat": 360
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "3 KAFADAR BÜYÜK BEYAZ",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "BLANC",
+                "Birim": "33 CL",
+                "Fiyat": 280
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "BUDWEISER BUDVAR",
+                "Birim": "33 CL",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "CARLSBERG LUNA",
+                "Birim": "50 CL",
+                "Fiyat": 310
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "CARLSBERG",
+                "Birim": "50 CL",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "BAGAJ DEGAJ",
+                "Birim": "33 CL",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "DAS DIES ALE",
+                "Birim": "33 CL",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "DAURA DAMM",
+                "Birim": "33 CL",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "DESPERADOS",
+                "Birim": "33 CL",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "FREDERIK IPA",
+                "Birim": "35 CL",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "FREDERIK LAGER",
+                "Birim": "35 CL",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "FREDERIK WHEAT",
+                "Birim": "35 CL",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "FREDERIK YAKIMA",
+                "Birim": "35 CL",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "HEINEKEN",
+                "Birim": "33 CL",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "MYTHOS",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "SOL CERVEZA",
+                "Birim": "33 CL",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "TUBORG AMBER",
+                "Birim": "50 CL",
+                "Fiyat": 280
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "TUBORG FİLTRESİZ",
+                "Birim": "50 CL",
+                "Fiyat": 280
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "TUBORG GOLD",
+                "Birim": "50 CL",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "WEIHENSTEPHANER",
+                "Birim": "33 CL",
+                "Fiyat": 360
+        },
+        {
+                "Kategori": "BOTTLED BEERS",
+                "UrunAdi": "WEIHENSTEPHANER VITUS",
+                "Birim": "33 CL",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "GLASS OF WINE",
+                "UrunAdi": "SUVLA KABATEPE KIRMIZI",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "GLASS OF WINE",
+                "UrunAdi": "SUVLA KABATEPE BLUSH",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "GLASS OF WINE",
+                "UrunAdi": "SUVLA KABATEPE BEYAZ",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "ANCYRA",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "CHÂTEAU CLAUD",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "DOR CAB SAU",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "DOR PINOT",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "DOR RARA",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "EGEO FRANC",
+                "Fiyat": 2200
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "EGEO MERLOT",
+                "Fiyat": 2100
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA BOGAZKERE",
+                "Fiyat": 1900
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA CAB MERLOT",
+                "Fiyat": 1900
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA CAB SAU",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA KABATEPE",
+                "Fiyat": 1400
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA KİRTE",
+                "Fiyat": 2200
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA MERLOT",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA SIR",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA SUR",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA KUMKALE MERLOT",
+                "Fiyat": 1900
+        },
+        {
+                "Kategori": "RED WINE",
+                "UrunAdi": "SUVLA KUMKALE OKUZ",
+                "Fiyat": 1900
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "DOR ALBA",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "DOR PINOT",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "JORDAN CHAMELEON",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "KAVAKLIDERE EMİR",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "SUVLA KABATEPE BEYAZ",
+                "Fiyat": 1400
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "SUVLA KINALI",
+                "Fiyat": 1800
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "SUVLA SAUVIGNON",
+                "Fiyat": 2000
+        },
+        {
+                "Kategori": "WHITE WINE",
+                "UrunAdi": "SUVLA VİOGNİER",
+                "Fiyat": 2100
+        },
+        {
+                "Kategori": "ROSE BLUSH",
+                "UrunAdi": "DOR",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "ROSE BLUSH",
+                "UrunAdi": "SUVLA BLUSH",
+                "Fiyat": 1800
+        },
+        {
+                "Kategori": "ROSE BLUSH",
+                "UrunAdi": "SUVLA KABATEPE BLUSH",
+                "Fiyat": 1400
+        },
+        {
+                "Kategori": "PROSECCO",
+                "UrunAdi": "CİNZANO PROSECCO",
+                "Birim": "KADEH",
+                "Fiyat": 700
+        },
+        {
+                "Kategori": "PROSECCO",
+                "UrunAdi": "CİNZANO PROSECCO",
+                "Birim": "ŞİŞE",
+                "Fiyat": 2800
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "BLOODY MARY",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "ESPRESSO MARTINI",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "NEGRONI",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "COSMOPOLITAN",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "DIRTY/DRY MARTINI",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "GIN FIZZ",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "LYNCHBURG LEMONADE",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "MANHATTAN",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "MOJITO",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "OLD FASIONED",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "WHISKEY SOUR",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "PINACOLADA",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "MEZCAL MARGARITA",
+                "Fiyat": 600
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "CALAMITY JANE",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "PINKY PENNY",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "BB",
+                "Fiyat": 600
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "YELLOW SUBMARINE",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "LIGHT MY FIRE",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "MY LADY",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "FAT BOTTOMED GIRLS",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "REBEL",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "JUGGERNUT",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "APEROL SPRITZ",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "CAMPARI AMERICANO",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "CAMPARI SPRITZ",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "LILLET SPRITZ",
+                "Fiyat": 450
+        },
+        {
+                "Kategori": "COCKTAILS",
+                "UrunAdi": "LILLET ROSE SPRITZ",
+                "Fiyat": 450
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MOSAIC ANATOLAN GIN",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MOSAIC ANATOLAN GIN",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "BEEFEATER",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "BEEFEATER",
+                "Birim": "TEK",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "BOMBAY",
+                "Birim": "SHOT",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "BOMBAY",
+                "Birim": "TEK",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "BOMBAY PREMIERE",
+                "Birim": "SHOT",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "BOMBAY PREMIERE",
+                "Birim": "TEK",
+                "Fiyat": 630
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "FORDS",
+                "Birim": "SHOT",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "FORDS",
+                "Birim": "TEK",
+                "Fiyat": 410
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "GIN MARE",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "GIN MARE",
+                "Birim": "TEK",
+                "Fiyat": 540
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "GREEN BABOON",
+                "Birim": "SHOT",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "GREEN BABOON",
+                "Birim": "TEK",
+                "Fiyat": 450
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S",
+                "Birim": "SHOT",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S",
+                "Birim": "TEK",
+                "Fiyat": 720
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S ORBIUM",
+                "Birim": "SHOT",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S ORBIUM",
+                "Birim": "TEK",
+                "Fiyat": 780
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S NEPTUNA",
+                "Birim": "SHOT",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S NEPTUNA",
+                "Birim": "TEK",
+                "Fiyat": 780
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S LUNAR",
+                "Birim": "SHOT",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S LUNAR",
+                "Birim": "TEK",
+                "Fiyat": 780
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S FLORA",
+                "Birim": "SHOT",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "HENDRICK'S FLORA",
+                "Birim": "TEK",
+                "Fiyat": 780
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "KNUT HANSEN",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "KNUT HANSEN",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MALFY",
+                "Birim": "SHOT",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MALFY",
+                "Birim": "TEK",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MALFY LIMONE",
+                "Birim": "SHOT",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MALFY LIMONE",
+                "Birim": "TEK",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MALFY ROSA",
+                "Birim": "SHOT",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MALFY ROSA",
+                "Birim": "TEK",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MONKEY 47",
+                "Birim": "SHOT",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MONKEY 47",
+                "Birim": "TEK",
+                "Fiyat": 720
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MONKEY 47 BARREL CUT",
+                "Birim": "SHOT",
+                "Fiyat": 570
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MONKEY 47 BARREL CUT",
+                "Birim": "TEK",
+                "Fiyat": 920
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MONKEY 47 SLOE",
+                "Birim": "SHOT",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "MONKEY 47 SLOE",
+                "Birim": "TEK",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "OXLEY",
+                "Birim": "SHOT",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "OXLEY",
+                "Birim": "TEK",
+                "Fiyat": 640
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "ROKU",
+                "Birim": "SHOT",
+                "Fiyat": 310
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "ROKU",
+                "Birim": "TEK",
+                "Fiyat": 510
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "SKAGERRAK",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "SKAGERRAK",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "TANQUERAY",
+                "Birim": "SHOT",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "TANQUERAY",
+                "Birim": "TEK",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "TANQUERAY SEVILLA",
+                "Birim": "SHOT",
+                "Fiyat": 280
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "TANQUERAY SEVILLA",
+                "Birim": "TEK",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "TANQUERAY TEN",
+                "Birim": "SHOT",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "TANQUERAY TEN",
+                "Birim": "TEK",
+                "Fiyat": 620
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "VOTANIKON",
+                "Birim": "SHOT",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "GIN",
+                "UrunAdi": "VOTANIKON",
+                "Birim": "TEK",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CENOTE ANEJO",
+                "Birim": "SHOT",
+                "Fiyat": 540
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CENOTE ANEJO",
+                "Birim": "TEK",
+                "Fiyat": 820
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CENOTE BLANCO",
+                "Birim": "SHOT",
+                "Fiyat": 430
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CENOTE BLANCO",
+                "Birim": "TEK",
+                "Fiyat": 630
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CENOTE REPOSADO",
+                "Birim": "SHOT",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CENOTE REPOSADO",
+                "Birim": "TEK",
+                "Fiyat": 720
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "DON JULIO BLANCO",
+                "Birim": "SHOT",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "DON JULIO BLANCO",
+                "Birim": "TEK",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "EL JIMADOR BLANCO",
+                "Birim": "SHOT",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "EL JIMADOR BLANCO",
+                "Birim": "TEK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "EL JIMADOR REPOSADO",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "EL JIMADOR REPOSADO",
+                "Birim": "TEK",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "HERRADURA PLATA",
+                "Birim": "SHOT",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "HERRADURA PLATA",
+                "Birim": "TEK",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CASAMIGOS BLANCO",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CASAMIGOS BLANCO",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CASAMIGOS ANEJO",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CASAMIGOS ANEJO",
+                "Birim": "TEK",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CASAMIGOS REPESADO",
+                "Birim": "SHOT",
+                "Fiyat": 310
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "CASAMIGOS REPESADO",
+                "Birim": "TEK",
+                "Fiyat": 510
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "OLMECA ALTOS REPOSADO",
+                "Birim": "SHOT",
+                "Fiyat": 280
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "OLMECA ALTOS REPOSADO",
+                "Birim": "TEK",
+                "Fiyat": 450
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "PATRON REPOSADO",
+                "Birim": "SHOT",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "PATRON REPOSADO",
+                "Birim": "TEK",
+                "Fiyat": 820
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "PATRON SILVER",
+                "Birim": "SHOT",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "PATRON SILVER",
+                "Birim": "TEK",
+                "Fiyat": 720
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "RESERVA DEL SENOR",
+                "Birim": "SHOT",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "RESERVA DEL SENOR",
+                "Birim": "TEK",
+                "Fiyat": 600
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIERRA REPOSADO",
+                "Birim": "SHOT",
+                "Fiyat": 210
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIERRA REPOSADO",
+                "Birim": "TEK",
+                "Fiyat": 330
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIERRA SILVER",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIERRA SILVER",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIP & SIP GOLD",
+                "Birim": "SHOT",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIP & SIP GOLD",
+                "Birim": "TEK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIP & SIP SILVER",
+                "Birim": "SHOT",
+                "Fiyat": 210
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SIP & SIP SILVER",
+                "Birim": "TEK",
+                "Fiyat": 330
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "VOLCAN DE MI TIERRA",
+                "Birim": "SHOT",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "VOLCAN DE MI TIERRA",
+                "Birim": "TEK",
+                "Fiyat": 560
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SE BUSCA JOVEN MEZCAL",
+                "Birim": "SHOT",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "TEQUILA",
+                "UrunAdi": "SE BUSCA JOVEN MEZCAL",
+                "Birim": "TEK",
+                "Fiyat": 780
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "BELUGA NOBLE",
+                "Birim": "SHOT",
+                "Fiyat": 460
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "BELUGA NOBLE",
+                "Birim": "TEK",
+                "Fiyat": 750
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "BELVEDERE",
+                "Birim": "SHOT",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "BELVEDERE",
+                "Birim": "TEK",
+                "Fiyat": 650
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "ELIT EIGHTEEN",
+                "Birim": "SHOT",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "ELIT EIGHTEEN",
+                "Birim": "TEK",
+                "Fiyat": 680
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "GREY GOOSE",
+                "Birim": "SHOT",
+                "Fiyat": 435
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "GREY GOOSE",
+                "Birim": "TEK",
+                "Fiyat": 710
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "HAKU",
+                "Birim": "SHOT",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "HAKU",
+                "Birim": "TEK",
+                "Fiyat": 690
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "ROYAL BISON",
+                "Birim": "SHOT",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "ROYAL BISON",
+                "Birim": "TEK",
+                "Fiyat": 570
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "SMIRNOFF GREEN APPLE",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "SMIRNOFF GREEN APPLE",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "SMIRNOFF NORTH",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "SMIRNOFF NORTH",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "SMIRNOFF RED",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "SMIRNOFF RED",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "STOLICHNAYA",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "STOLICHNAYA",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "STOLICHNAYA CARAMEL",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "STOLICHNAYA CARAMEL",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "TITO'S HANDMADE",
+                "Birim": "SHOT",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "VODKA",
+                "UrunAdi": "TITO'S HANDMADE",
+                "Birim": "TEK",
+                "Fiyat": 490
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "BUMBU",
+                "Birim": "SHOT",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "BUMBU",
+                "Birim": "TEK",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "BUMBU XO",
+                "Birim": "SHOT",
+                "Fiyat": 310
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "BUMBU XO",
+                "Birim": "TEK",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "CAPTAIN MORGAN SPICED",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "CAPTAIN MORGAN SPICED",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "CAPTAIN MORGAN WHITE",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "CAPTAIN MORGAN WHITE",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "WEBER HAUS CACHACA",
+                "Birim": "SHOT",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "WEBER HAUS CACHACA",
+                "Birim": "TEK",
+                "Fiyat": 490
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "ANGOSTURA 3 YO WHITE RUM",
+                "Birim": "SHOT",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "ANGOSTURA 3 YO WHITE RUM",
+                "Birim": "TEK",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "BACARDI CARTA BLANCA",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "BACARDI CARTA BLANCA",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "TAKAMAKA BLANC",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "TAKAMAKA BLANC",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "TAKAMAKA DARK SPICED",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "TAKAMAKA DARK SPICED",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "TAKAMAKA KOKO",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "TAKAMAKA KOKO",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "ZACAPA 23",
+                "Birim": "SHOT",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "ZACAPA 23",
+                "Birim": "TEK",
+                "Fiyat": 690
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "KRAKEN SPICED",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "KRAKEN SPICED",
+                "Birim": "TEK",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "HAVANA CLUB 3 ANOS",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "RUM",
+                "UrunAdi": "HAVANA CLUB 3 ANOS",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "ABERFELDY 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "ABERFELDY 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 650
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "CHIVAS 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "CHIVAS 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 620
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "CHIVAS 18 YO",
+                "Birim": "SHOT",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "CHIVAS 18 YO",
+                "Birim": "TEK",
+                "Fiyat": 820
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "CHIVAS EXTRA SMOKY",
+                "Birim": "SHOT",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "CHIVAS EXTRA SMOKY",
+                "Birim": "TEK",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "DEWAR'S 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "DEWAR'S 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "DIMPLE GOLDEN",
+                "Birim": "SHOT",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "DIMPLE GOLDEN",
+                "Birim": "TEK",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW BLACK LABEL",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW BLACK LABEL",
+                "Birim": "TEK",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW BLACK SHERRY",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW BLACK SHERRY",
+                "Birim": "TEK",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW DOUBLE BLACK",
+                "Birim": "SHOT",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW DOUBLE BLACK",
+                "Birim": "TEK",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW GOLD LABEL",
+                "Birim": "SHOT",
+                "Fiyat": 375
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW GOLD LABEL",
+                "Birim": "TEK",
+                "Fiyat": 610
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW BLUE LABEL",
+                "Birim": "SHOT",
+                "Fiyat": 1440
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW BLUE LABEL",
+                "Birim": "TEK",
+                "Fiyat": 2300
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW AGED 18 YO",
+                "Birim": "SHOT",
+                "Fiyat": 490
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "JW AGED 18 YO",
+                "Birim": "TEK",
+                "Fiyat": 800
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "MONKEY SHOULDER",
+                "Birim": "SHOT",
+                "Fiyat": 240
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "MONKEY SHOULDER",
+                "Birim": "TEK",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "NAKED MALT",
+                "Birim": "SHOT",
+                "Fiyat": 240
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "NAKED MALT",
+                "Birim": "TEK",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "THE GLADSTONE AXE",
+                "Birim": "SHOT",
+                "Fiyat": 240
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "THE GLADSTONE AXE",
+                "Birim": "TEK",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "THE DEACON",
+                "Birim": "SHOT",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "BLENDED SCOTCH",
+                "UrunAdi": "THE DEACON",
+                "Birim": "TEK",
+                "Fiyat": 430
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "ABERLOUR 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "ABERLOUR 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 690
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "ARDBEG 10 YO",
+                "Birim": "SHOT",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "ARDBEG 10 YO",
+                "Birim": "TEK",
+                "Fiyat": 710
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "BENRIACH TEN",
+                "Birim": "SHOT",
+                "Fiyat": 330
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "BENRIACH TEN",
+                "Birim": "TEK",
+                "Fiyat": 540
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "BENRIACH SMOKY TEN",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "BENRIACH SMOKY TEN",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "BENRIACH TWELVE",
+                "Birim": "SHOT",
+                "Fiyat": 310
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "BENRIACH TWELVE",
+                "Birim": "TEK",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "GLENFIDDICH 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "GLENFIDDICH 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "GLENFIDDICH 15 YO",
+                "Birim": "SHOT",
+                "Fiyat": 530
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "GLENFIDDICH 15 YO",
+                "Birim": "TEK",
+                "Fiyat": 870
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAGAVULIN 8 YO",
+                "Birim": "SHOT",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAGAVULIN 8 YO",
+                "Birim": "TEK",
+                "Fiyat": 600
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAGAVULIN 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 800
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAGAVULIN 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 1320
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAGAVULIN DISTILLERS",
+                "Birim": "SHOT",
+                "Fiyat": 680
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAGAVULIN DISTILLERS",
+                "Birim": "TEK",
+                "Fiyat": 1110
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAPHROAIG 10 YO",
+                "Birim": "SHOT",
+                "Fiyat": 360
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "LAPHROAIG 10 YO",
+                "Birim": "TEK",
+                "Fiyat": 590
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "MACALLAN 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 570
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "MACALLAN 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 940
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "OBAN 14 YO",
+                "Birim": "SHOT",
+                "Fiyat": 580
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "OBAN 14 YO",
+                "Birim": "TEK",
+                "Fiyat": 950
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "TALISKER SKYE 10 YO",
+                "Birim": "SHOT",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "TALISKER SKYE 10 YO",
+                "Birim": "TEK",
+                "Fiyat": 620
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE GLENLIVET 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE GLENLIVET 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 570
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE GLENLIVET 15 YO",
+                "Birim": "SHOT",
+                "Fiyat": 560
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE GLENLIVET 15 YO",
+                "Birim": "TEK",
+                "Fiyat": 920
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE SINGLETON 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE SINGLETON 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE SINGLETON 15 YO",
+                "Birim": "SHOT",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "THE SINGLETON 15 YO",
+                "Birim": "TEK",
+                "Fiyat": 550
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "TULLIBARDINE BURGUNDY",
+                "Birim": "SHOT",
+                "Fiyat": 360
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "TULLIBARDINE BURGUNDY",
+                "Birim": "TEK",
+                "Fiyat": 580
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "GLENDRONACH 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 480
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "GLENDRONACH 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 790
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "TAMNAVULIN WINE CASK",
+                "Birim": "SHOT",
+                "Fiyat": 250
+        },
+        {
+                "Kategori": "SINGLE MALT",
+                "UrunAdi": "TAMNAVULIN WINE CASK",
+                "Birim": "TEK",
+                "Fiyat": 400
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "DUBLINER BOURBON CASK",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "DUBLINER BOURBON CASK",
+                "Birim": "TEK",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "HYDE NO:3",
+                "Birim": "SHOT",
+                "Fiyat": 330
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "HYDE NO:3",
+                "Birim": "TEK",
+                "Fiyat": 540
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "HYDE NO:5",
+                "Birim": "SHOT",
+                "Fiyat": 330
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "HYDE NO:5",
+                "Birim": "TEK",
+                "Fiyat": 540
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "HYDE NO:8",
+                "Birim": "SHOT",
+                "Fiyat": 330
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "HYDE NO:8",
+                "Birim": "TEK",
+                "Fiyat": 540
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON BLACK BARREL",
+                "Birim": "SHOT",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON BLACK BARREL",
+                "Birim": "TEK",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON GARA GUZU",
+                "Birim": "SHOT",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON GARA GUZU",
+                "Birim": "TEK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON IPA EDITION",
+                "Birim": "SHOT",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON IPA EDITION",
+                "Birim": "TEK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON STOUT EDITION",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "JAMESON STOUT EDITION",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "TEELING SMALL BATCH",
+                "Birim": "SHOT",
+                "Fiyat": 360
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "TEELING SMALL BATCH",
+                "Birim": "TEK",
+                "Fiyat": 590
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "THE DEAD RABBIT",
+                "Birim": "SHOT",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "THE DEAD RABBIT",
+                "Birim": "TEK",
+                "Fiyat": 600
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "TULLAMORE DEW",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "TULLAMORE DEW",
+                "Birim": "TEK",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "BUSHMILLS",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "IRISH",
+                "UrunAdi": "BUSHMILLS",
+                "Birim": "TEK",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "BULLEIT BOURBON",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "BULLEIT BOURBON",
+                "Birim": "TEK",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "GENTLEMAN JACK",
+                "Birim": "SHOT",
+                "Fiyat": 210
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "GENTLEMAN JACK",
+                "Birim": "TEK",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "JACK DANIEL'S NO:7",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "JACK DANIEL'S NO:7",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "JACK DANIEL'S BONDED",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "JACK DANIEL'S BONDED",
+                "Birim": "TEK",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "JACK TRIPLE MASH",
+                "Birim": "SHOT",
+                "Fiyat": 360
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "JACK TRIPLE MASH",
+                "Birim": "TEK",
+                "Fiyat": 590
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. SINGLE BARREL",
+                "Birim": "SHOT",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. SINGLE BARREL",
+                "Birim": "TEK",
+                "Fiyat": 570
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. TENNESSEE APPLE",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. TENNESSEE APPLE",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. TENNESSEE FIRE",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. TENNESSEE FIRE",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. TENNESSEE HONEY",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "J.D. TENNESSEE HONEY",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "MAKER'S MARK",
+                "Birim": "SHOT",
+                "Fiyat": 230
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "MAKER'S MARK",
+                "Birim": "TEK",
+                "Fiyat": 370
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "WOODFORD RESERVE",
+                "Birim": "SHOT",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "BOURBON",
+                "UrunAdi": "WOODFORD RESERVE",
+                "Birim": "TEK",
+                "Fiyat": 470
+        },
+        {
+                "Kategori": "RYE",
+                "UrunAdi": "WOODFORD RESERVE RYE",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RYE",
+                "UrunAdi": "WOODFORD RESERVE RYE",
+                "Birim": "TEK",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "RYE",
+                "UrunAdi": "JACK DANIEL'S BONDED RYE",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "RYE",
+                "UrunAdi": "JACK DANIEL'S BONDED RYE",
+                "Birim": "TEK",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "HIBIKI JAPANESE HARMONY",
+                "Birim": "SHOT",
+                "Fiyat": 930
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "HIBIKI JAPANESE HARMONY",
+                "Birim": "TEK",
+                "Fiyat": 1500
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "KAMIKI SAKURA WOOD",
+                "Birim": "SHOT",
+                "Fiyat": 900
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "KAMIKI SAKURA WOOD",
+                "Birim": "TEK",
+                "Fiyat": 1400
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "THE CHITA",
+                "Birim": "SHOT",
+                "Fiyat": 500
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "THE CHITA",
+                "Birim": "TEK",
+                "Fiyat": 820
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "YAMAZAKI 12 YO",
+                "Birim": "SHOT",
+                "Fiyat": 1800
+        },
+        {
+                "Kategori": "JAPANESE",
+                "UrunAdi": "YAMAZAKI 12 YO",
+                "Birim": "TEK",
+                "Fiyat": 2900
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "AMARULA",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "AMARULA",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "AMARULA RASPBERRY",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "AMARULA RASPBERRY",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "AMARULA VANILLA SPICE",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "AMARULA VANILLA SPICE",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "BAILEY'S",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "BAILEY'S",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "CAMPARI",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "CAMPARI",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "CARDINAL MELON",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "CARDINAL MELON",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "DISERRANO AMARETTO",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "DISERRANO AMARETTO",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "DRAMBUIE",
+                "Birim": "SHOT",
+                "Fiyat": 260
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "DRAMBUIE",
+                "Birim": "TEK",
+                "Fiyat": 420
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "FERNET BLANCA",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "FERNET BLANCA",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "JAGERMEISTER",
+                "Birim": "SHOT",
+                "Fiyat": 190
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "JAGERMEISTER",
+                "Birim": "TEK",
+                "Fiyat": 300
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "JAGERMEISTER COLD BREW",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "JAGERMEISTER COLD BREW",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "JAGERMEISTER MANIFEST",
+                "Birim": "SHOT",
+                "Fiyat": 280
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "JAGERMEISTER MANIFEST",
+                "Birim": "TEK",
+                "Fiyat": 450
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "KAHLUA",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "KAHLUA",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "KLEOS",
+                "Birim": "SHOT",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "KLEOS",
+                "Birim": "TEK",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "MALIBU",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "MALIBU",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "METAXA",
+                "Birim": "SHOT",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "METAXA",
+                "Birim": "TEK",
+                "Fiyat": 520
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "PASSOA",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "PASSOA",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "RAMAZOTTI SAMBUCA",
+                "Birim": "SHOT",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "RAMAZOTTI SAMBUCA",
+                "Birim": "TEK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "RAMAZOTTI AMARO",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "RAMAZOTTI AMARO",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "ROSSI DASIAGO LIMONCELLO",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "ROSSI DASIAGO LIMONCELLO",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SAFARI",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SAFARI",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SHANKY'S WHIP",
+                "Birim": "SHOT",
+                "Fiyat": 180
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SHANKY'S WHIP",
+                "Birim": "TEK",
+                "Fiyat": 290
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SKINOS MASTIHA",
+                "Birim": "SHOT",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SKINOS MASTIHA",
+                "Birim": "TEK",
+                "Fiyat": 320
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SKINOS DARK",
+                "Birim": "SHOT",
+                "Fiyat": 240
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SKINOS DARK",
+                "Birim": "TEK",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SOUTHERN COMFORT",
+                "Birim": "SHOT",
+                "Fiyat": 220
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "SOUTHERN COMFORT",
+                "Birim": "TEK",
+                "Fiyat": 350
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "ST GERMAIN",
+                "Birim": "SHOT",
+                "Fiyat": 270
+        },
+        {
+                "Kategori": "LIQUEUR",
+                "UrunAdi": "ST GERMAIN",
+                "Birim": "TEK",
+                "Fiyat": 440
+        },
+        {
+                "Kategori": "VERMOUTH",
+                "UrunAdi": "CINZANO EXTRA DRY",
+                "Birim": "KADEH",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "VERMOUTH",
+                "UrunAdi": "CINZANO ROSSO",
+                "Birim": "KADEH",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "VERMOUTH",
+                "UrunAdi": "CINZANO BIANCO",
+                "Birim": "KADEH",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "VERMOUTH",
+                "UrunAdi": "MARTINI EXTRA DRY",
+                "Birim": "KADEH",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "VERMOUTH",
+                "UrunAdi": "MARTINI ROSSO",
+                "Birim": "KADEH",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "VERMOUTH",
+                "UrunAdi": "MARTINI BIANCO",
+                "Birim": "KADEH",
+                "Fiyat": 340
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "COURVOISIER XO",
+                "Birim": "SHOT",
+                "Fiyat": 1350
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "COURVOISIER XO",
+                "Birim": "TEK",
+                "Fiyat": 1950
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "HENNESSY",
+                "Birim": "SHOT",
+                "Fiyat": 380
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "HENNESSY",
+                "Birim": "TEK",
+                "Fiyat": 620
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "MARTELL VS",
+                "Birim": "SHOT",
+                "Fiyat": 390
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "MARTELL VS",
+                "Birim": "TEK",
+                "Fiyat": 640
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "REMY MARTIN",
+                "Birim": "SHOT",
+                "Fiyat": 540
+        },
+        {
+                "Kategori": "COGNAC",
+                "UrunAdi": "REMY MARTIN",
+                "Birim": "TEK",
+                "Fiyat": 880
+        },
+        {
+                "Kategori": "HAPPY HOUR",
+                "UrunAdi": "CARLSBERG 50 CL",
+                "Fiyat": 210
+        },
+        {
+                "Kategori": "HAPPY HOUR",
+                "UrunAdi": "TUBORG 50 CL",
+                "Fiyat": 200
+        },
+        {
+                "Kategori": "HAPPY HOUR",
+                "UrunAdi": "PATATES KIZARTMASI",
+                "Fiyat": 210
+        },
+        {
+                "Kategori": "HAPPY HOUR",
+                "UrunAdi": "ÇITIR TAVUK BURGER",
+                "Fiyat": 320
+        }
+];
+        
+        // Lokal verileri al ama her zaman GÜNCEL LİSTEYİ BAZ AL:
+        let savedData = JSON.parse(localStorage.getItem('pennylane_data'));
+        let appData = {
+            prices: [],
+            images: {
+                "Logo": "image/logo.png",
+                "Croque Madame": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&q=80",
+                "Avokado": "https://images.unsplash.com/photo-1603046891726-36bfd957e0bf?w=500&q=80",
+                "Burrata": "https://images.unsplash.com/photo-1512152272829-e3139592d56f?w=500&q=80",
+                "Peynir Tabagi": "https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=500&q=80",
+                "Sosis": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=500&q=80",
+                "Patates": "https://images.unsplash.com/photo-1573010610235-91409395973c?w=500&q=80",
+                "Salata": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80",
+                "Enginar": "https://images.unsplash.com/photo-1623653387945-2fd25214f8fc?w=500&q=80",
+                "Pasta": "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=500&q=80",
+                "Aperol": "https://images.unsplash.com/photo-1560508180-03f285f67ea0?w=500&q=80"
+            }
+        };
+
+        
+        appData.footerText = "FİYATLARA TÜM VERGİLER DAHİLDİR<br>20 OCAK 2025 TARİHİNDEN İTİBAREN GEÇERLİDİR";
+        
+        const defaultHH = {
+            title: "HAFTAİÇİ",
+            time: "14:00 - 17:00",
+            item1Name: "CARLSBERG 50 CL FIÇI", item1Price: 210,
+            item2Name: "TUBORG 50 CL FIÇI", item2Price: 200,
+            item3Name: "PATATES KIZARTMASI", item3Price: 210,
+            item4Name: "ÇITIR TAVUK BURGER", item4Price: 320
+        };
+        appData.happyHour = defaultHH;
+        if (savedData) {
+            if (savedData.happyHour) {
+                appData.happyHour = savedData.happyHour;
+            }
+
+            if (savedData.footerText) {
+                appData.footerText = savedData.footerText;
+            }
+
+            // Kullanıcı daha önceden fiyat kaydettiyse, sadece o fiyatları yeni 494'lü listedekilerle ez:
+            appData.prices = defaultAppPrices.map(defaultItem => {
+                const found = (savedData.prices || []).find(p => p.UrunAdi === defaultItem.UrunAdi && (p.Birim || "") === (defaultItem.Birim || ""));
+                if (found) {
+                    return { ...defaultItem, Fiyat: found.Fiyat };
+                }
+                return defaultItem;
+            });
+            if (savedData.images) {
+                appData.images = { ...appData.images, ...savedData.images };
+                if (appData.images["Logo"] === "gray circle solid.svg") {
+                    appData.images["Logo"] = "image/logo.png";
+                }
+            }
+        } else {
+            appData.prices = defaultAppPrices;
+        }
+
+        // Değişiklikleri hemen localstorage'a yansıt ki excel butonuna basınca 494'ü görebilsin
+        localStorage.setItem('pennylane_data', JSON.stringify(appData));
+
+        // Görsel isimleri (Panelde anlaşılır görünmesi için)
+        const imageLabels = {
+            "Logo": "Kapak ve Sayfa Ana Logoları",
+            "Croque Madame": "Kahvaltı - Croque Madame",
+            "Avokado": "Kahvaltı - Avokadolu Ekmek",
+            "Burrata": "Başlangıçlar - Burrata",
+            "Peynir Tabagi": "Başlangıçlar - Peynir Tabağı",
+            "Sosis": "Başlangıçlar - Sosis Tabağı",
+            "Patates": "Başlangıçlar - Patates Kızartması",
+            "Salata": "Salatalar Görseli",
+            "Enginar": "Ana Yemekler - Çıtır Enginar",
+            "Pasta": "Ana Yemekler - Mantarlı Paccheri",
+            "Aperol": "Kokteyller - Aperol Spritz"
+        };
+
+        // Resim Seçici ve Önizlemeleri Oluştur
+        function renderImageInputs() {
+            const container = document.getElementById('imageInputsContainer');
+            container.innerHTML = '';
+            
+            for (const [key, url] of Object.entries(appData.images)) {
+                const label = imageLabels[key] || key;
+                container.innerHTML += `
+                    <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-[#ed6d6b] transition">
+                        <div class="w-24 h-24 flex-shrink-0 bg-white border rounded-md overflow-hidden shadow-sm flex items-center justify-center">
+                            <img id="preview_${key}" src="${url}" class="w-full h-full object-cover" alt="Önizleme">
+                        </div>
+                        <div class="flex-grow">
+                            <label class="block text-sm font-bold text-gray-800 mb-2">${label}</label>
+                            <input type="file" accept="image/*" onchange="handleImageSelect(event, '${key}')" 
+                                class="block w-full text-sm text-gray-500 
+                                file:mr-4 file:py-2 file:px-4 
+                                file:rounded-md file:border-0 
+                                file:text-sm file:font-semibold 
+                                file:bg-[#ed6d6b] file:text-white 
+                                hover:file:bg-red-500 cursor-pointer transition">
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Resmi Küçültme (Sıkıştırma) Fonksiyonu
+        function compressImage(file, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800; // Maksimum genişlik (Menü için yeterli)
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > MAX_WIDTH) {
+                        height = Math.round((height * MAX_WIDTH) / width);
+                        width = MAX_WIDTH;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // JPEG formatında %70 kalite ile sıkıştır
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    callback(compressedBase64);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Resim Seçildiğinde Çalışacak Fonksiyon
+        function handleImageSelect(event, key) {
+            const file = event.target.files[0];
+            if (file) {
+                compressImage(file, function(base64Str) {
+                    // 1. Önizlemeyi hemen güncelle
+                    document.getElementById(`preview_${key}`).src = base64Str;
+                    // 2. Hafızadaki veriyi güncelle
+                    appData.images[key] = base64Str;
+                });
+            }
+        }
+
+        // Excel İndirme İşlemi
+        function downloadExcel() {
+            const worksheet = XLSX.utils.json_to_sheet(appData.prices);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Fiyatlar");
+            XLSX.writeFile(workbook, "Pennylane_Fiyat_Listesi.xlsx");
+        }
+
+        // Excel Yükleme İşlemi (Akıllı Birleştirme Sistemi)
+        function handleExcelUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, {type: 'array'});
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const json = XLSX.utils.sheet_to_json(worksheet, { defval: "" }); // Boş yerler string kalsın
+                
+                // Gelen excel verisindeki dolu hücreleri mevcut listemize işle
+                json.forEach(importedItem => {
+                    // Sayi degilse (bos birakilmissa vs.) isleme alma
+                    let newPrice = importedItem.Fiyat;
+                    
+                    if (newPrice !== undefined && newPrice !== null && newPrice !== "") {
+                        newPrice = parseInt(newPrice);
+                        if(isNaN(newPrice)) return; // Fiyat sayi degilse yine atla
+
+                        // 1. UrunAdi ve Birim'e göre mevcut listede arama yap (Tam Eşleşme)
+                        let existingItem = appData.prices.find(p => 
+                            p.UrunAdi === importedItem.UrunAdi && 
+                            (p.Birim || "") === (importedItem.Birim || "")
+                        );
+                        
+                        if (existingItem) {
+                            existingItem.Fiyat = newPrice;
+                        } else {
+                            // 2. Eğer ilk eşleşme başarısızsa sadece UrunAdi'ne göre arayarak düzelt (Kısmi Eşleşme)
+                            // Özellikle birimsiz ürünler için faydalıdır.
+                            let fallbackItem = appData.prices.find(p => p.UrunAdi === importedItem.UrunAdi);
+                            if (fallbackItem) {
+                                fallbackItem.Fiyat = newPrice;
+                            } else {
+                                // Listede hiç yoksa yeni bir ürün demektir. 
+                                importedItem.Fiyat = newPrice;
+                                appData.prices.push(importedItem);
+                            }
+                        }
+                    }
+                });
+
+                document.getElementById('uploadStatus').classList.remove('hidden');
+                
+                // Input dosyasını sıfırla ki aynı dosyayı bir daha seçebilsin
+                event.target.value = '';
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Tüm verileri kaydet (LocalStorage'a yazar)
+        function saveAll() {
+            try {
+                localStorage.setItem('pennylane_data', JSON.stringify(appData));
+                alert("✅ Tüm fiyatlar ve görseller başarıyla kaydedildi!\n\nŞimdi Menü (index.html) sayfanızı yenileyerek değişiklikleri görebilirsiniz.");
+            } catch (e) {
+                alert("Hata: Resim boyutları çok büyük olduğu için kaydedilemedi. Lütfen sayfayı yenileyip tekrar deneyin.");
+                console.error(e);
+            }
+        }
+
+        
+        function updateFooterData(event) {
+            appData.footerText = event.target.value.replace(/\n/g, '<br>');
+        }
+
+
+        function updateHappyHour(key, value) {
+            if(!appData.happyHour) appData.happyHour = {};
+            appData.happyHour[key] = value;
+        }
+
+        // Sayfa açıldığında textarea ve happy hour bilgilerine aktar
+        document.addEventListener('DOMContentLoaded', () => {
+            const footerInput = document.getElementById('footerTextInput');
+            if (footerInput) {
+                footerInput.value = (appData.footerText || "").replace(/<br\s*\/?>/gi, '\n');
+            }
+
+            if(document.getElementById('hhTitle') && appData.happyHour) {
+                document.getElementById('hhTitle').value = appData.happyHour.title;
+                document.getElementById('hhTime').value = appData.happyHour.time;
+                document.getElementById('hhItem1Name').value = appData.happyHour.item1Name;
+                document.getElementById('hhItem1Price').value = appData.happyHour.item1Price;
+                document.getElementById('hhItem2Name').value = appData.happyHour.item2Name;
+                document.getElementById('hhItem2Price').value = appData.happyHour.item2Price;
+                document.getElementById('hhItem3Name').value = appData.happyHour.item3Name;
+                document.getElementById('hhItem3Price').value = appData.happyHour.item3Price;
+                document.getElementById('hhItem4Name').value = appData.happyHour.item4Name;
+                document.getElementById('hhItem4Price').value = appData.happyHour.item4Price;
+            }
+        });
+
+
+        // Sayfa açıldığında arayüzü oluştur
+        renderImageInputs();
+    </script>
+
+    <style>
+        /* Scrollbar özelleştirmesi */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #b3b3b3; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #ed6d6b; 
+        }
+    </style>
+</body>
+</html>

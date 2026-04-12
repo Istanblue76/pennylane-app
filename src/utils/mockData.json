@@ -1,0 +1,5169 @@
+{
+  "settings": {
+    "menu_display_mode": "all",
+    "theme": "dark"
+  },
+  "allergens": [
+    {
+      "id": "gluten",
+      "name": "Gluten",
+      "icon_url": "https://api.iconify.design/lucide:wheat.svg?color=%23f4e4c1"
+    },
+    {
+      "id": "lactose",
+      "name": "Süt Ürünleri",
+      "icon_url": "https://api.iconify.design/lucide:milk.svg?color=%23f4e4c1"
+    },
+    {
+      "id": "nuts",
+      "name": "Kuruyemiş",
+      "icon_url": "https://api.iconify.design/lucide:nut.svg?color=%23f4e4c1"
+    },
+    {
+      "id": "soy",
+      "name": "Soya",
+      "icon_url": "https://api.iconify.design/lucide:leaf.svg?color=%23f4e4c1"
+    },
+    {
+      "id": "seafood",
+      "name": "Deniz Ürünleri",
+      "icon_url": "https://api.iconify.design/lucide:fish.svg?color=%23f4e4c1"
+    }
+  ],
+  "header": {
+    "logo": {
+      "text": "PENNYLANE",
+      "image": "/assets/img/pennylane_logo_white.png",
+      "icon": "Infinity",
+      "link": "/"
+    },
+    "navigation": [
+      {
+        "label": {
+          "tr": "Hakkımızda",
+          "en": "About Us"
+        },
+        "href": "#about"
+      },
+      {
+        "label": {
+          "tr": "Menü",
+          "en": "Menu"
+        },
+        "href": "#menu"
+      },
+      {
+        "label": {
+          "tr": "Galeri",
+          "en": "Gallery"
+        },
+        "href": "#gallery"
+      },
+      {
+        "label": {
+          "tr": "Etkinlikler",
+          "en": "Events"
+        },
+        "href": "#events"
+      },
+      {
+        "label": {
+          "tr": "Ekip",
+          "en": "Team"
+        },
+        "href": "#team"
+      }
+    ],
+    "cta_button": {
+      "text": {
+        "tr": "QR Menü",
+        "en": "QR Menu"
+      },
+      "href": "#menu"
+    }
+  },
+  "hero": {
+    "background_image_url": "/assets/img/1775415903325-2022-06-14.jpg",
+    "background_video_url": null,
+    "overlay_opacity": 0.5,
+    "main_heading": {
+      "tr": "Pennylane'e Hoş Geldiniz",
+      "en": "Welcome to Pennylane"
+    },
+    "sub_heading": {
+      "tr": "Premium Gastropub Deneyimi",
+      "en": "Premium Gastropub Experience"
+    },
+    "cta_primary": {
+      "text": {
+        "tr": "Menüyü Keşfet",
+        "en": "Explore Menu"
+      },
+      "href": "#menu"
+    },
+    "cta_secondary": {
+      "text": {
+        "tr": "Etkinlikler",
+        "en": "Events"
+      },
+      "href": "#events"
+    },
+    "main_heading_size": "kucuk",
+    "sub_heading_size": "buyuk"
+  },
+  "menu_showcase": {
+    "section_title": "Spesiyal Ürünlerimiz",
+    "section_subtitle": "Ustalıkla Hazırlanmış Seçkiler",
+    "categories": [
+      {
+        "id": "1",
+        "title": "Pancar ve yumurtanın ilginç birleşimi",
+        "description": "Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka\n\nEt nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero",
+        "image_url": "/assets/img/1775439259921-307701675_2295717013918426_6917774463855130815_n.jpeg",
+        "link": "/menu/cocktails"
+      },
+      {
+        "id": "2",
+        "title": "Premium Şaraplar",
+        "description": "Dünyanın en iyi bağlarından seçilmiş özel bir mahzen.",
+        "image_url": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "link": "/menu/wines"
+      },
+      {
+        "id": "3",
+        "title": "Gastronomi",
+        "description": "İçeceklerinize eşlik edecek gurme atıştırmalıklar.",
+        "image_url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "link": "/menu/food"
+      },
+      {
+        "id": "4",
+        "title": "Craft Biralar",
+        "description": "Yerel ve uluslararası el yapımı biralardan oluşan özel seçkimiz.",
+        "image_url": "https://images.unsplash.com/photo-1535958636474-b021ee887b13?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "link": "/menu/beers"
+      },
+      {
+        "id": "5",
+        "title": "Tatlı Seçkisi",
+        "description": "Pastane ustalarımızın günlük taze hazırladığı butik tatlılar.",
+        "image_url": "https://images.unsplash.com/photo-1551024601-bec78aea704b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "link": "/menu/desserts"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "Pennylane Deneyimi",
+    "main_image_url": "/assets/img/1775424031831-about.jpg",
+    "main_heading": {
+      "tr": "Pennylane Sizi Bekliyor",
+      "en": "Pennylane Sizi Bekliyor"
+    },
+    "paragraphs": [
+      {
+        "id": 1,
+        "text": "Caddebostan’ın nezih atmosferinde konumlanan Pennylane, sofistike ve rahat bir buluşma noktası olarak öne çıkıyor. Hem sabah kahvaltılarında hem de akşamüstü buluşmalarında tercih edilebilecek bu mekan, şık ve modern tasarımıyla dikkat çekiyor. Mekanın iç dekorasyonu, zarif dokunuşlar ve sıcak renk tonlarıyla, ziyaretçilere ev rahatlığında bir deneyim sunuyor.\n\nMenü, dünya mutfağından esinlenmiş yaratıcı lezzetlerden oluşuyor. Özellikle kahve çeşitliliği, özenle hazırlanan pastane ürünleri ve brunch seçenekleri oldukça ilgi çekici. Pennylane, zengin kahve seçeneklerinin yanı sıra gurme çaylar ve el yapımı tatlılarla da damak tadınıza hitap ediyor. Günlük taze malzemelerle hazırlanan tabaklar, lezzet yolculuğunuza farklı tatlar katıyor.\n\nAyrıca, açık hava oturma alanı ile sıcak günlerde dışarıda vakit geçirmek isteyenler için keyifli bir ortam sunan Pennylane, Caddebostan sahiline sadece yürüme mesafesinde bulunuyor. Geniş oturma düzeni, huzurlu ortamı ve güler yüzlü personeli ile Pennylane, İstanbul’un hareketli yaşamına sakin bir mola vermek isteyenler için ideal bir seçenek haline gelmiş durumda."
+      },
+      {
+        "id": 2,
+        "text": "Caddebostan'da, rahat ve sofistike atmosferimizle sosyalleşmenin ve lezzetin en taze halini sunuyoruz."
+      }
+    ],
+    "highlight_box": {
+      "title": "Biz Kimiz?",
+      "content": "Bar kültürünü bir sanat formu olarak gören profesyonellerden oluşan bir ekibiz."
+    },
+    "stats": [
+      {
+        "number": "15+",
+        "label": "İmza Kokteyl"
+      },
+      {
+        "number": "400+",
+        "label": "Şarap Çeşidi"
+      },
+      {
+        "number": "10+",
+        "label": "Ödüllü Miksoloğ"
+      }
+    ],
+    "secondary_image_url": "/assets/img/1775429226599-1775425323271-gallery-1.jpg",
+    "image_effect": "blur-[2px] transition hover:blur-none"
+  },
+  "gallery": {
+    "section_title": "Galeri",
+    "section_subtitle": "Atmosferimizi Keşfedin",
+    "images": [
+      {
+        "id": "1",
+        "image_url": "/assets/img/1775425323271-gallery-1.jpg",
+        "category": "interior",
+        "caption": "Coffee"
+      },
+      {
+        "id": "2",
+        "image_url": "/assets/img/1775425347631-gallery-4.jpg",
+        "category": "drinks",
+        "caption": "Vesper Martini"
+      },
+      {
+        "id": "3",
+        "image_url": "/assets/bar_interior_about.png",
+        "category": "interior",
+        "caption": "VIP Lounge"
+      },
+      {
+        "id": "4",
+        "image_url": "/assets/img/1775425440130-299936792_1556216828128497_862930662218407232_n.jpeg",
+        "category": "drinks",
+        "caption": "Old Fashioned"
+      },
+      {
+        "id": "5",
+        "image_url": "/assets/img/1775439710936-223265576_353230083118071_7902947016720134240_n.jpg",
+        "category": "events",
+        "caption": "Caz Gecesi"
+      },
+      {
+        "id": "1775425234568",
+        "image_url": "/assets/img/1775425260376-13072022140659000.jpg",
+        "category": "drinks",
+        "caption": "Yeni Görsel"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "Misafirlerimizin Sözü",
+    "reviews": [
+      {
+        "id": "1",
+        "author_name": "Caner Yıldırım",
+        "author_role": "Mimar",
+        "rating": 5,
+        "text": "Tasarımıyla büyüleyen, kokteylleriyle damakta iz bırakan bir mekan. Uzun zamandır İstanbul'da aradığımız o premium hissiyatı tam anlamıyla veriyor.",
+        "date": "2025-03-20"
+      },
+      {
+        "id": "2",
+        "author_name": "Melis Erten",
+        "author_role": "Sanat Yönetmeni",
+        "rating": 5,
+        "text": "Işıklandırma ve müzik seçimi kusursuz. Akustiği sayesinde kalabalık olsa bile arkadaşlarınızla rahatça sohbet edebiliyorsunuz.",
+        "date": "2025-03-15"
+      },
+      {
+        "id": "3",
+        "author_name": "Arda Kozan",
+        "author_role": "Gurme Blogger",
+        "rating": 5,
+        "text": "Menüdeki çeşitlilik ve sunumlar gerçekten etkileyici. Özellikle imza kokteylleri mutlaka denenmeli.",
+        "date": "2025-03-10"
+      }
+    ]
+  },
+  "events": {
+    "section_title": "Yaklaşan Etkinlikler",
+    "events": [
+      {
+        "id": "1",
+        "title": "Live Vinyl Night",
+        "date": "12 Nisan 2025",
+        "time": "21:00",
+        "location": "Caddebostan Pennylane",
+        "image_url": "/assets/img/1775427068114-465623457_18056895082877775_6876064433066677506_n.jpg",
+        "description": "Nostaljik plakların sıcak tınısı eşliğinde unutulmaz bir akşam.",
+        "cta_text": "Rezervasyon",
+        "cta_link": "#reservation",
+        "is_popup": true,
+        "popup_duration": 10,
+        "popup_start_date": "2026-04-05",
+        "popup_end_date": "2026-04-06"
+      },
+      {
+        "id": "2",
+        "title": "Mixology Workshop",
+        "date": "15 Nisan 2025",
+        "time": "19:00",
+        "location": "Caddebostan Pennylane",
+        "image_url": "/assets/img/1775427073735-472494279_18063183952877775_5659363497249731449_n.jpg",
+        "description": "Kendi imza kokteylinizi hazırlamayı ödüllü miksoloğumuzdan öğrenin.",
+        "cta_text": "Kayıt Ol",
+        "cta_link": "#reservation",
+        "is_popup": false
+      },
+      {
+        "id": "1775427074549",
+        "title": "Yeni Etkinlik",
+        "date": "15 Nisan 2025",
+        "time": "",
+        "location": "Caddebostan Pennylane",
+        "image_url": "/assets/img/1775427078399-522844473_18081339910877775_9195781806254044217_n.jpg",
+        "description": "",
+        "cta_text": "Rezervasyon",
+        "cta_link": "#reservation"
+      },
+      {
+        "id": "1775427079247",
+        "title": "Yeni Etkinlik",
+        "date": "",
+        "time": "",
+        "location": "Caddebostan Pennylane",
+        "image_url": "/assets/img/1775427083259-612053176_18098499118877775_3781325493752329661_n.jpg",
+        "description": "",
+        "cta_text": "Rezervasyon",
+        "cta_link": "#reservation"
+      },
+      {
+        "id": "1775427084123",
+        "title": "Yeni Etkinlik",
+        "date": "",
+        "time": "",
+        "location": "Caddebostan Pennylane",
+        "image_url": "/assets/img/1775427087744-613699238_18099034660877775_8877493558789391010_n.jpg",
+        "description": "",
+        "cta_text": "Rezervasyon",
+        "cta_link": "#reservation"
+      },
+      {
+        "id": "1775427088403",
+        "title": "Yeni Etkinlik",
+        "date": "",
+        "time": "",
+        "location": "Caddebostan Pennylane",
+        "image_url": "/assets/img/1775427093242-623937987_18100454302877775_2079301448800326818_n.jpg",
+        "description": "",
+        "cta_text": "Rezervasyon",
+        "cta_link": "#reservation"
+      }
+    ],
+    "popup_enabled": true
+  },
+  "team": {
+    "section_title": "Ekibimiz",
+    "members": [
+      {
+        "id": "1",
+        "name": "Eren Demir",
+        "role": "Bar Manager",
+        "image_url": "/assets/bartender_profile.png",
+        "bio": "Cocktail World Cup 2023 finalisti."
+      },
+      {
+        "id": "1775439964399",
+        "name": "DortParmak",
+        "role": "DJ",
+        "image_url": "/assets/img/1775439980033-319757626_921635645489431_990647595486295064_n.jpg",
+        "bio": "“Kırklareli Piknik Festivali ‘Bass Drop’u En Erken Yapan DJ’ ödülü sahibi.”",
+        "instagram": "",
+        "linkedin": ""
+      }
+    ]
+  },
+  "newsletter": {
+    "section_title": "Pennylane Society",
+    "section_subtitle": "Özel etkinliklerden ve yeni menülerden ilk siz haberdar olun.",
+    "placeholder": "E-posta adresiniz",
+    "cta_text": "Abone Ol"
+  },
+  "footer": {
+    "company_info": {
+      "name": "PENNYLANE",
+      "description": "Caddebostan'ın premium gastropub deneyimi.",
+      "logo_url": "/assets/img/pennylane_logo_white.png"
+    },
+    "contact_info": {
+      "phone": "+90 216 414 74 74",
+      "email": "info@pennylanegastropub.com",
+      "address": "Caddebostan İskele Sk. No: 15, Kadıköy, İstanbul"
+    },
+    "opening_hours": "Her gün: 12:00 - 02:00",
+    "copyright": "© 2025 Pennylane Gastropub. All rights reserved.",
+    "design_credit": "Tasarım: İstanBlue",
+    "legal_links": [
+      {
+        "label": "Çerez Politikası",
+        "href": "#cerez"
+      },
+      {
+        "label": "Gizlilik Politikası",
+        "href": "#gizlilik"
+      }
+    ]
+  },
+  "menu": {
+    "categories": [
+      {
+        "id": "breakfast",
+        "title": {
+          "tr": "KAHVALTI",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "r6mb8huti",
+            "name": {
+              "tr": "BRIOCHE EKMEK ÜZERI AVOKADOLU POŞE YUMURTA",
+              "en": ""
+            },
+            "price": "280",
+            "description": {
+              "tr": "Brioche Ekmeği Üzerine Avokado, 2 Adet Poşe Yumurta, Haşhaş, Keten Tohumu, Renkli Çeri Domatesli Roka Salatası",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/25112021023708000.jpg",
+            "allergens": [
+              "gluten",
+              "lactose",
+              "nuts"
+            ],
+            "passive": false
+          },
+          {
+            "id": "y9yvlsui5",
+            "name": {
+              "tr": "BRIOCHE EKMEK ÜZERI KABURGALI POŞE YUMURTA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Brioche Ekmeği Üzerine Tütsülenmiş Kaburga Eti, 2 Adet Poşe Yumurta, Rende Mozzarella, Beşamel Sos, Renkli Çeri Domatesli Roka Salatası",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/13122021181849000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9bu16pnyc",
+            "name": {
+              "tr": "EKŞI MAYA EKMEK ÜZERI PASTRAMI POŞE YUMURTA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Ekşi Maya Ekmek Üzerine Pastrami, Mozzarella, Renkli Çeri Domatesli Roka Salatası",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/13122021183155000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ugtdq9jc2",
+            "name": {
+              "tr": "ÇIRPILMIŞ YUMURTA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Trüflü Mantar Frikase, Kızarmış Ekşi Maya Ekmek, Renkli Çeri Domates",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/13122021183559000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "z6hyybqw2",
+            "name": {
+              "tr": "CROQUE-MADAME",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Brioche Ekmeği Üzerine Göz Yumurta, Beşamel Sos, Dana Bacon, Cheddar Peyniri, Renkli Çeri Domatesli Roka Salatası",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/25112021023636000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "13gcp7u61",
+            "name": {
+              "tr": "MANTARLI OMLET",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Mantar Fricase, Mozzarella, 2 Adet Yumurta, Renkli Çeri Domatesli Roka Salatası, 1 Dilim Kızarmış Ekşi Maya Ekmek.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9xhti94q7",
+            "name": {
+              "tr": "SADE OMLET",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "2 Adet Yumurta, Renkli Çeri Domatesli Roka Salatası, 1 Dilim Kızarmış Ekşi Maya Ekmek.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "33ia9g7ew",
+            "name": {
+              "tr": "TAZE BAHARATLI PEYNIRLI OMLET",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "2 Adet Yumurta, Mozzarella, Frenk Soğan, Maydanoz, Renkli Çeri Domatesli Roka Salatası, 1 Dilim Kızarmış Ekşi Maya Ekmek.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Breakfast/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "starter-sauces",
+        "title": {
+          "tr": "BAŞLANGIÇ & SOSLAR",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "20o2p20ko",
+            "name": {
+              "tr": "3 MANTARLI ARANCINI BALLS",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Mantarlı Risotto Topları, Parmesan, Acılı Domates Sos, Mikro Filiz",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/25112021024111000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "lgjfxzws5",
+            "name": {
+              "tr": "ÇITIR TAVUK",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "150 gr. Tavuk Göğüs, Parmesan",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/13122021201059000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "51sc2c3dd",
+            "name": {
+              "tr": "DÖRT PEYNIRLI PIZZETTA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Mozzarella, Parmesan, Danish Blue Gravyerli Sos",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "0nmqaj6dt",
+            "name": {
+              "tr": "FÜME SUCUKLU PIZZETTA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Füme Sucuk, Mozzarella, Parmesan, Soğan Turşusu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "20rweqmep",
+            "name": {
+              "tr": "PASTRAMI & HUMUS",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Pastrami, Frenk Soğan, Kızarmış Ekmek. Humus sıcak servis edilmektedir.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/13122021220618000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "nmujfpkj4",
+            "name": {
+              "tr": "PATATES KIZARTMASI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Ekstralar: Trüf Yağı & Parmesan.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/25112021024620000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "nipggg0r3",
+            "name": {
+              "tr": "PEYNIR TABAĞI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Hardallı Gouda, Parmesan, Kars Gravyeri, Danish Blue, 3 Çeşit Turşu Ceviz, Kuru İncir, Zeytinli Kıtır",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "g4v8ywp6o",
+            "name": {
+              "tr": "POPCORN KARIDES",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Yedikule marul, Frenk soğan, Meksika biber turşusu, Chili-mayo sos",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/25112021023930000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ulpxmiui4",
+            "name": {
+              "tr": "POPCORN TAVUK",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Yedikule marulu, Frenk soğan, Chili-mayo sos",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/25112021023901000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "kn3yo4sd2",
+            "name": {
+              "tr": "SOSIS TABAĞI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 adet sosis, Ev yapımı barbekü sos, Tartar sos, Patates Kızartması.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/25112021024010000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xxxevemp3",
+            "name": {
+              "tr": "ŞARKÜTERI TABAĞI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Kuru Et, Füme Sucuk, Füme Antrikot, Hardallı Gouda, Parmesan, Soka, Ajvar, Ceviz, İncir, Kırmızı Lahana Turşusu, Zeytinli Kıtır",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/starter-sauces/25112021024533000.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "salad",
+        "title": {
+          "tr": "SALATALAR",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "p7hpgwurd",
+            "name": {
+              "tr": "ÇITIR TAVUKLU SEZAR SALATA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Panelenmiş Tavuk Göğüs, Marul, Baby Turp, Parmesan, Sezar Sos",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Salads/25112021030441000.jpg",
+            "allergens": [],
+            "passive": true
+          },
+          {
+            "id": "u4wwd5e95",
+            "name": {
+              "tr": "HUMUSLU KINOA SALATA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Humus, Kinoa, Avokado, Roka, Semizotu, Renkli Çeri Domates, Salatalık, Tulum Peyniri",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Salads/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "zvwdxd8ek",
+            "name": {
+              "tr": "SEMIZOTLU IZGARA SOMON SALATA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "140 gr. Somon, Semizotu, Mantar Fricase, Roka, Bezelye, Soğan Turşusu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Salads/25112021030859000.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "burger-sandwich",
+        "title": {
+          "tr": "BURGER & SANDWİCH",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "a7bl790fg",
+            "name": {
+              "tr": "CHEESEBURGER",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "140 gr. Burger Köftesi, 2 Adet Cheddar, Kırmızı Soğan, Binada Sos, Patates Kızartması",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/Salads/25112021030859000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "hp0bw4q9s",
+            "name": {
+              "tr": "ÇITIR TAVUK BURGER",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "110 gr. Tavuk Göğüs, 2 Adet Cheddar, Tartar Sos, Ev Yapımı Barbekü Sos, Soğan Turşusu, Patates Kızartması",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/burger&sandwich/25112021024655000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "wkna97pmc",
+            "name": {
+              "tr": "KABURGA BURGER",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "80 gr. Tütsülenmiş Kaburga Eti, Cheddar, Chili Mayo Sos, Ev Yapımı Barbekü Sos, Patates Kızartması",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/burger&sandwich/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "2tmf20o5h",
+            "name": {
+              "tr": "PENNYBURGER",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "140 gr. Burger Köftesi, Dana Bacon, 2 Adet Cheddar, Karamelize Soğan, Binada Sos, Patates Kızartması",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/burger&sandwich/25112021030239000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "fk513eylg",
+            "name": {
+              "tr": "PASTRAMI BURGER",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "70 gr. Patrami, tartar sos, cheddar peyniri, mor lahana turşusu, patates kızartması.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/burger&sandwich/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "bwl7ptg18",
+            "name": {
+              "tr": "VEJETERYAN BURGER",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "130 gr. Vejeteryan Burger Köftesi (nohut, kabak, havuç, taze soğan, maydanoz, dereotu, yumurta) 2 Adet Cheddar, Soğan Turşusu, Tartar Sos, Ev Yapımı Barbekü Sos, Patates Kızartması",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/burger&sandwich/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "main",
+        "title": {
+          "tr": "ANA YEMEKLER",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "sxq7ptjve",
+            "name": {
+              "tr": "BONFILE TABAĞI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "180 gr. Bonfile, Sebze Tian, Soya Tereyağı",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "qqlxwk0g8",
+            "name": {
+              "tr": "CAFE DE PARIS CHICKEN",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "220-250 gr. Tavuk Göğüs, cafe de Paris sos, Patates Kızartması",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "lmxydwrp9",
+            "name": {
+              "tr": "SMOKED RIBS",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "270 gr. Kemikli Kaburga Eti, Patates Kızartması.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "63lstac47",
+            "name": {
+              "tr": "ERIŞTELI IZGARA SOMON",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "140 gr. Somon, Tereyağlı Taze Soğanlı Erişte, Limon Kabuğu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/main/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "rwlgc5lz0",
+            "name": {
+              "tr": "FISH & CHIPS",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "140 gr. Mezgit, Mor Lahana Turşusu, Tartar Sos, Patates Kızartması",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/main/25112021030649000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "3jogtnjau",
+            "name": {
+              "tr": "PARMESANLI ET ŞINITSEL",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "140 gr. Kontrfile, Parmesan, Şinitsel Tereyağı, Kırmızı Soğanlı Çeri Domates",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/main/25112021030838000.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "desserts",
+        "title": {
+          "tr": "TATLILAR",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "sx61ip2md",
+            "name": {
+              "tr": "ÇOK ÇIKOLATALI PASTA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/desserts/25112021031314000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "lrp37oe4u",
+            "name": {
+              "tr": "SAN SEBASTIAN CHEESECAKE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/desserts/25112021031223000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "4rhiyk3yj",
+            "name": {
+              "tr": "TIRAMISU",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Üretiminde acı badem likörü kullanılmıştır.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/desserts/25112021031352000.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "beers",
+        "title": {
+          "tr": "BİRALAR",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "k67sz0jgi",
+            "name": {
+              "tr": "CARLSBERG 50 CL. FIÇI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Draft",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "craft"
+          },
+          {
+            "id": "cvcf9y10i",
+            "name": {
+              "tr": "CARLSBERG 33 CL. FIÇI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "craft"
+          },
+          {
+            "id": "0w9ax19a4",
+            "name": {
+              "tr": "GUINNESS PINT 50 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "qe629njgy",
+            "name": {
+              "tr": "GUINNESS HALF PINT 25 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "6vabz5wtn",
+            "name": {
+              "tr": "KRONENBOURG 1664 BLANC 50 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "35hjlz0iv",
+            "name": {
+              "tr": "KRONENBOURG 1664 BLANC 25 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "x0mn7ng1m",
+            "name": {
+              "tr": "TUBORG GOLD 50 CL. FIÇI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "craft"
+          },
+          {
+            "id": "d2eax2659",
+            "name": {
+              "tr": "TUBORG GOLD 33 CL. FIÇI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "craft"
+          },
+          {
+            "id": "0apq7aqx9",
+            "name": {
+              "tr": "WEIHENSTEPHAN 50 CL. FIÇI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "craft"
+          },
+          {
+            "id": "417qbe03z",
+            "name": {
+              "tr": "WEIHENSTEPHAN 33 CL. FIÇI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "craft"
+          },
+          {
+            "id": "xcl34c9b7",
+            "name": {
+              "tr": "BLANC 33 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "hzh2jjaur",
+            "name": {
+              "tr": "CARLSBERG 50 CL. ŞIŞE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "jdke9v2us",
+            "name": {
+              "tr": "CARLSBERG LUNA NRB 50 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "4wdtsigv4",
+            "name": {
+              "tr": "DESPERADOS 33 CL. ŞIŞE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "dt1wb9yzp",
+            "name": {
+              "tr": "FREDERIK INDIA PALE ALE 35 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "2lgna4dnp",
+            "name": {
+              "tr": "FREDERIK MARZEN LAGER 35 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "mhmqncy5d",
+            "name": {
+              "tr": "FREDERIK WHEAT IPA 35 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "nday6x9bf",
+            "name": {
+              "tr": "FREDERIK YAKIMA IPA 35 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "u24wkngpk",
+            "name": {
+              "tr": "MAISEL FRIENDS PALE ALE 33 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "zlve9dkka",
+            "name": {
+              "tr": "SOL CERVEZA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "t58uhrd14",
+            "name": {
+              "tr": "TUBORG AMBER 50 CL. ŞIŞE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "ytyyipgeh",
+            "name": {
+              "tr": "TUBORG FILTRESIZ 50 CL. ŞIŞE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "ekf88l62b",
+            "name": {
+              "tr": "TUBORG GOLD 50 CL. NBR ŞIŞE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "5ej7hwy2g",
+            "name": {
+              "tr": "WEIHENSTEPHANER 33 CL. NBR",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "31y9dve5l",
+            "name": {
+              "tr": "WEIHENSTEPHANER VITUS 33 CL. NBR",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "v8gtnggde",
+            "name": {
+              "tr": "WEIHENSTEPHAN 33 CL. FIÇI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "bottle"
+          },
+          {
+            "id": "1776015662630",
+            "name": "YENİ ÜRÜN",
+            "description": "",
+            "price": "0 TL",
+            "image_url": "/assets/img/placeholder.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": null
+          }
+        ],
+        "subcategories": [
+          {
+            "id": "bottle",
+            "title": {
+              "tr": "Şişe",
+              "en": "Bottle"
+            }
+          },
+          {
+            "id": "craft",
+            "title": {
+              "tr": "DRAFT",
+              "en": "Craft"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cocktails",
+        "title": {
+          "tr": "KOKTEYLLER",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "ac36e6wfu",
+            "name": {
+              "tr": "APEROL SPRITZ",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Aperol, Cinzano Prosecco, Soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/aperitives/13072022135553000.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "sub_1775694246029"
+          },
+          {
+            "id": "sopcr02ry",
+            "name": {
+              "tr": "CAMPARI SPRITZ",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Campari, Prosecco, Soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/aperitives/13072022145451000.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "sub_1775694246029"
+          },
+          {
+            "id": "4dmko8tfo",
+            "name": {
+              "tr": "NEGRONI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Gordon's, Campari, Martini Rosso",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/aperitives/13072022140659000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ftc4qt4d1",
+            "name": {
+              "tr": "CAMPARI AMERICANO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Campari, Martini Rosso, Soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/aperitives/13072022141025000.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "sub_1775694246029"
+          },
+          {
+            "id": "m0gok1kdr",
+            "name": {
+              "tr": "CAMPARI TONIC",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Campari, Tonik",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/aperitives/13072022141642000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "265sfe9n1",
+            "name": {
+              "tr": "GIN/VODKA MARTINI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Gordon's / Absolut, Extra Dry Martini",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/aperitives/13072022144520000.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "3kv9a14wy",
+            "name": {
+              "tr": "AMARETTO SOUR",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Disaronno Acıbadem Likörü, Woodford Reserve Bourbon, Taze Lime Suyu, Esmer Şeker, Taze Kekik, Yumurta Akı",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "c0psrlxsd",
+            "name": {
+              "tr": "APPLE MARTINI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Smirnoff Green Apple, Yeşil Elma Likörü, Yeşil Elma Suyu, Taze Limon Suyu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "f80ta9ww7",
+            "name": {
+              "tr": "BASIL SMASH",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Fesleğen İnfüzyon, Gordon's, Taze Lime Suyu, Şeker Şurubu, Soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "rx3zeci9b",
+            "name": {
+              "tr": "BLOODY MARY",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Smirnoff, Worcestershire, Tabasco, Taze Limon Suyu, Kereviz Tuzu, Karabiber, Domates Suyu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false,
+            "subcategory": "sub_1775694225832"
+          },
+          {
+            "id": "tikgvs82s",
+            "name": {
+              "tr": "MARTINI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Martini",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "hio9k3tzk",
+            "name": {
+              "tr": "BOULEVARDIER",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Bulleit Bourbon, Campari, Martini Rosso",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "udc0933ie",
+            "name": {
+              "tr": "BRAMBLE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Gordon's, Chambord, Taze Lime, Penny Böğürtlen Şurubu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "i6xf5rukj",
+            "name": {
+              "tr": "CAIPIRINHA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Weber Haus Cachaca, Esmer Şeker, Taze Lime",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "e0ep5dkv5",
+            "name": {
+              "tr": "COSMOPOLITAN",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Absolut Citron, Cointreau, Kızılcık Suyu, Taze Limon Suyu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "kg19z2o32",
+            "name": {
+              "tr": "GIN FIZZ",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Gordon's, Taze Limon Suyu, Pudra Şekeri, Soda, Yumurta Akı",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "dk8pzpw4k",
+            "name": {
+              "tr": "HEMINGWAY DAIQUIRI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Captain Morgan, Pallini Maraschino Likörü, Taze Lime Suyu, Taze Greyfurt Suyu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ngmzatcts",
+            "name": {
+              "tr": "MANHATTAN",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Bulleit Bourbon, Martini Rosso, Angostura Bitter",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "dc4fj14ql",
+            "name": {
+              "tr": "OAXACA OLD FASHIONED",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Se Busca Mescal, El Jimador Reposado, Agave, Citrus Parfume",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "8215ara13",
+            "name": {
+              "tr": "OLD FASIONED",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Bulleit Bourbon / Angostura Bitter, Esmer Şeker",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ognvncpsw",
+            "name": {
+              "tr": "PALOMA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "El Jimador Repasado, Taze Lime Suyu, Taze Greyfurt Suyu, Agave, Soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "824z8m448",
+            "name": {
+              "tr": "PENNY'SILLIN",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Monkey Shoulder Blended Scotch, Laphroaig Single Malt, Taze Limon Suyu, Penny Zencefil Şurubu, Maple (Akçaağaç)",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9v408o3hs",
+            "name": {
+              "tr": "SURFER ON ACID",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Jagermeister, Batıda de Coco, Taze Limon Suyu, Ananas Suyu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "5ntgsmu9e",
+            "name": {
+              "tr": "TOMMY'S MARGARITA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "El Jimador Repasado, Taze Lime Suyu, Agave",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "k1m1krqfv",
+            "name": {
+              "tr": "WHISKEY SOUR",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Bulleit Bourbon, Taze Lime Suyu, Şeker Şurubu, Yumurta Akı",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/international/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "05hgqymhu",
+            "name": {
+              "tr": "BUTTERFLY EFFECT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Yasemin & Lavanta İnfüzyon Gordon's, Pallini Maraschino Likörü, St. Germain, Agave, Taze Limon Suyu, Cinzano Prosecco",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "mu2agwpog",
+            "name": {
+              "tr": "CHILI BOOM",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Meksika Biberi & Kakule İnfüzyon Sierra Silver, Safari, Cardinal Melon, Taze Limon Suyu, Esmer Şeker, Soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ovpupmoy2",
+            "name": {
+              "tr": "EL NEGRO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Patron Silver, Campari, Martini Rosso, Penny Kahve Likörü",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xz52odr55",
+            "name": {
+              "tr": "EPITAPH",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Kuzukulağı İnfüzyon Gordon's, St. Germain, Taze Lime Suyu, Şeker Şurubu, Yumurta Akı, Tonic",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "j5hut9t90",
+            "name": {
+              "tr": "MEZAROL",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Se Busca Mezcal, Aperol, Batıda de Coco, Taze Limon Suyu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "nyxbj0p5f",
+            "name": {
+              "tr": "PINKY PENNY",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Gordon's Pinky, Batıda De Coco, Roze Şarap, Penny Ahududu & Böğürtlen Şurubu, Taze Lime Suyu, Yumurta Akı",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ji27crtt2",
+            "name": {
+              "tr": "SUPERTRAMP",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Woodford Reserve Rye, Zencefil & Tarçın Cordial, Beyaz Sirke, Yumurta Akı",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "zl6hb6ehb",
+            "name": {
+              "tr": "LADY BOY",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Hibiskus infüzyon Smirnoff Red, Cointreau, Penny ahududu şurubu, taze limon suyu, kızılcık suyu, soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "a69i88567",
+            "name": {
+              "tr": "SATSUMA SMASH",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Satsuma İnfüzyon Gordon's, Lilet Blanc, Martini Extra Dry, Penny Greyfurt Bitter, Taze Lime Suyu, Penny Satsuma Şurubu, Absinthe Parfüm.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "0vffvphgw",
+            "name": {
+              "tr": "PURPLE HAZE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Yasemin & Lavanta İnfüzyon Gordon's, Taze Lime, Penny Greyfurt Bitter, Agave Şurubu, Kızılcık Suyu",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "jv380oswv",
+            "name": {
+              "tr": "THREESOME VODKA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Smirnoff Green Apple, Vanilya İnfüzyon Smirnoff, Stolichnaya Salted Caramel, Taze Lime Suyu, Taze Kekik, Yumurta Akı",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ylf7yuf0q",
+            "name": {
+              "tr": "PENNYWISE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Captain Morgan White Rum, Taze Lime Suyu, Penny Halloween Şurubu.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "qf05uzkix",
+            "name": {
+              "tr": "MAMBA OUT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "İncir infüzyon Bulliet Bourbon, Lillet Rose, Amaro, Angostura Bitter, Greyfurt Bitter, Laphroaig Parfüm",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "435f5nv1k",
+            "name": {
+              "tr": "NEPHENTE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Dereotu - Kereviz İnfüzyon Fords Gin, Üzüm Kızı, Penny Satsuma Şurubu, Taze limon suyu.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/signature/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "hnhn32d0o",
+            "name": {
+              "tr": "SHOW ME THE MONKEY",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Monkey Shoulder, Drambuie, Taze Sıkılmış Elma Suyu, Nane Yaprağı, Portakal Dilimi",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/monkey-shoulder-exclusive/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "itc5nv6ec",
+            "name": {
+              "tr": "MONKEY JAM SOUR",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Monkey Shoulder, Limon Suyu, Şeker Şurubu, Reçel, Portakal Bitteri, Soda",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/monkey-shoulder-exclusive/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "n78trv58o",
+            "name": {
+              "tr": "MONKEY ESPRESSO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Monkey Shoulder, Espresso, Şeker Şurubu, Kahve Çekirdeği",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/monkey-shoulder-exclusive/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9hpacpede",
+            "name": {
+              "tr": "GREY GOOSE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Vodka Shot",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "j3vvkru69",
+            "name": {
+              "tr": "STOLICHNAYA KARAMEL SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Vodka Shot",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9xx0vo0q5",
+            "name": {
+              "tr": "ROYAL BISON SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Vodka Shot",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "y5d78nn0h",
+            "name": {
+              "tr": "SMIRNOFF RED SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Vodka Shot 3 cl",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "g5wscmf9x",
+            "name": {
+              "tr": "SMIRNOFF GREEN APPLE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Vodka Shot 3 cl",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "135zr8o33",
+            "name": {
+              "tr": "DRAGON BALL",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Meksika Biberi ve Tarçın İnfüzyon, Jack Daniel's Tennessee Fire",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "wg4azlycu",
+            "name": {
+              "tr": "B-52",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Bailey's, Kahlua, Cointreau",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "uu0kdxl6s",
+            "name": {
+              "tr": "ABORTION",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Bailey's, Archers, Grenadine",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ydqk6zbua",
+            "name": {
+              "tr": "MAGGOT BRAIN",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Absolute Blue, Bailey's, Grenadine",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "483g5swye",
+            "name": {
+              "tr": "ZAPPA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Meksika Biberi İnfüzyon Sierra Tekila",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "jbqq9i3qd",
+            "name": {
+              "tr": "RAINBOW",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Gordon's Pink, Mikura, Absinthe",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/mixed-shots/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9dc3uzyli",
+            "name": {
+              "tr": "BACARDI CARTA BLANCA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ld9zqw0zu",
+            "name": {
+              "tr": "BACARDI CARTA ORO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "vuonl2qzh",
+            "name": {
+              "tr": "HAVANA CLUB 3 ANOS SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "5glmubxe0",
+            "name": {
+              "tr": "CAPTAIN MORGAN WHITE ROM SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ha1qtbxy9",
+            "name": {
+              "tr": "MARTELL VS SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "rw45gpxcs",
+            "name": {
+              "tr": "ZACAPA 23 ROM SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "gvsuzsx2b",
+            "name": {
+              "tr": "HENNESSY COGNAC SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "rvbww38bn",
+            "name": {
+              "tr": "CAPTAIN MORGAN SPICED GOLD SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/rum-cognac-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "dny8o8hyb",
+            "name": {
+              "tr": "ABERLOUR 12 YO. SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "dx0twwx3r",
+            "name": {
+              "tr": "BENRIACH THE ORIGINAL TEN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "cx57s8mbb",
+            "name": {
+              "tr": "BENRIACH THE SMOKY TEN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "c7f87cz6m",
+            "name": {
+              "tr": "BENRIACH THE TWELVE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "4x92434di",
+            "name": {
+              "tr": "BULLEIT BOURBON SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "oj9lozzzy",
+            "name": {
+              "tr": "CHIVAS 12 YO. SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ntsnw5n5g",
+            "name": {
+              "tr": "GLENFIDDICH SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "10cibw0e2",
+            "name": {
+              "tr": "GLENLIVET SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "00g0sbkdc",
+            "name": {
+              "tr": "JACK DANIEL'S APPLE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "g200dcoq2",
+            "name": {
+              "tr": "JACK DANIEL'S FIRE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "wg5afgq9f",
+            "name": {
+              "tr": "JACK DANIEL'S HONEY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "8vhpy0lr0",
+            "name": {
+              "tr": "JACK DANIEL'S NO:7 SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "yn9p08ca2",
+            "name": {
+              "tr": "JAMESON BLACK BARREL SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "8v3bf2awq",
+            "name": {
+              "tr": "JAMESON IPA EDITION SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1ypjwu7gn",
+            "name": {
+              "tr": "JAMESON SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9vylt5ipo",
+            "name": {
+              "tr": "JAMESON STOUT EDITION SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ja11u183x",
+            "name": {
+              "tr": "THE GLADSTONE AXE, THE BLACK AXE SMOKY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "z397s2vbb",
+            "name": {
+              "tr": "TULLAMORE DEW SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "0i5tmy3yc",
+            "name": {
+              "tr": "MAKER'S MARK ORIGINAL SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "5d48gh1cj",
+            "name": {
+              "tr": "FAMOUS GROUSE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "crb2vrome",
+            "name": {
+              "tr": "THE CHITA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Japanese Single Grain / 3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "3teo4t0nq",
+            "name": {
+              "tr": "ABERFELDY 12 YO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "y98u7iz97",
+            "name": {
+              "tr": "JW BLACK LABEL SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "0kgevw6h9",
+            "name": {
+              "tr": "LAGAVULIN DISTILLERS EDITION SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ki07fzax7",
+            "name": {
+              "tr": "LAPHROAIG 10 YO. SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "55v07tpis",
+            "name": {
+              "tr": "MONKEY SHOULDER SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "maqw15tqm",
+            "name": {
+              "tr": "OBAN 14 YO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "sszm383ib",
+            "name": {
+              "tr": "TALISKER 10 YO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xep8rt0cp",
+            "name": {
+              "tr": "WOODFORD RESERVE BOURBON SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xoo3r6m3m",
+            "name": {
+              "tr": "WOODFORD RESERVE RYE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1a8d6rmd5",
+            "name": {
+              "tr": "HIBIKI JAPANESE HARMONY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Japanese Blended Whiskey / 3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "oar13tq93",
+            "name": {
+              "tr": "CHIVAS 18 YO. SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "sbju6w9rn",
+            "name": {
+              "tr": "DIMPLE GOLDEN SELECTION SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "n6qowzip6",
+            "name": {
+              "tr": "JW DOUBLE BLACK SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "psbpqau65",
+            "name": {
+              "tr": "FAMOUS GROUSE SHERRY CASK FINISH SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "imkwq4d60",
+            "name": {
+              "tr": "CAPTAIN",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "sye0hltcg",
+            "name": {
+              "tr": "HYDE NO:3 GRAIN IRISH WHISKEY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "q1y4tafka",
+            "name": {
+              "tr": "HYDE NO:5 GRAIN BURGUNDY CASK SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "k2wxatcd2",
+            "name": {
+              "tr": "HYDE NO:8 STOUT CASK FINISH SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "radkk5xs8",
+            "name": {
+              "tr": "GENTLEMAN JACK TENESSEE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "l2wvw8078",
+            "name": {
+              "tr": "THE SINGLETON 12 YO. SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "8pw8wvcws",
+            "name": {
+              "tr": "THE SINGLETON 15 YO. SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "5l2vu11tp",
+            "name": {
+              "tr": "THE SEXTON SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Single Malt Irish Whiskey 3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1kiatbekr",
+            "name": {
+              "tr": "ARDBEG 10 YO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Islay Single Malt Scotch Whiskey 3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "3rvjgfhi0",
+            "name": {
+              "tr": "LAGAVULIN 12 YO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "sk34crhk2",
+            "name": {
+              "tr": "DEWAR'S 12 YO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "yynw21g81",
+            "name": {
+              "tr": "JW BLACK SHERRY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "515fltl9c",
+            "name": {
+              "tr": "MACALLAN 12 YO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/whiskey-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "eanhtxrd1",
+            "name": {
+              "tr": "AMARULA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "sjpcc1j23",
+            "name": {
+              "tr": "ARCHERS SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "nivzbtqds",
+            "name": {
+              "tr": "BAILEY'S SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ow0cam8jp",
+            "name": {
+              "tr": "CAMPARI SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ehl7wrjfi",
+            "name": {
+              "tr": "CARDINAL MELON SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "yrqxqp12q",
+            "name": {
+              "tr": "COINTREAU SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "jek6ixmly",
+            "name": {
+              "tr": "DISERRANO AMERETTO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "r90oj6in4",
+            "name": {
+              "tr": "JAGERMEISTER SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "el9r1gvts",
+            "name": {
+              "tr": "KAHLUA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "4adhebhsl",
+            "name": {
+              "tr": "MALIBU SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "0kkts0tsf",
+            "name": {
+              "tr": "PALLINI MARASCHINO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "2md0jczjh",
+            "name": {
+              "tr": "SAFARI SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9b0zzhh8b",
+            "name": {
+              "tr": "ST GERMAIN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "g6rpa0yxm",
+            "name": {
+              "tr": "MACALLAN",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "fggcggkto",
+            "name": {
+              "tr": "METAXA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Yunan Likörü",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "a23cr29nh",
+            "name": {
+              "tr": "RODNIK'S ABSINTHE CLASSIC SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ftsykj64x",
+            "name": {
+              "tr": "SKINOS MASTIHA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Damla Sakızı Likörü",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "fz35h64pg",
+            "name": {
+              "tr": "RAMAZZOTTI AMARO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Liquore - Prodotto in Italia",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ckizjhiq7",
+            "name": {
+              "tr": "DRAMBUIE SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Whiskey Liqueur 3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "izifg2cjh",
+            "name": {
+              "tr": "ROSSI DASIAGO LIMONCELLO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ltix00swz",
+            "name": {
+              "tr": "FERNET BLANCA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ntqg3mmav",
+            "name": {
+              "tr": "GORDON'S SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "jbpxasxqd",
+            "name": {
+              "tr": "MALFY GIN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "g4ofgiv4v",
+            "name": {
+              "tr": "ROKU GIN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "yzb2yv52u",
+            "name": {
+              "tr": "TANQUERAY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "euxfaqe40",
+            "name": {
+              "tr": "GREEN BABOON SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "jkjp2rv1j",
+            "name": {
+              "tr": "GIN MARE MEDITERRANEAN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "lkkn8i91c",
+            "name": {
+              "tr": "AVIATION AMERICAN GIN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "67fqnip19",
+            "name": {
+              "tr": "HENDRICK'S NEPTUNA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "8u5lrl3fi",
+            "name": {
+              "tr": "PUERTO DE INDIAS GIN BLACKBERRY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1okvyyy0x",
+            "name": {
+              "tr": "PUERTO DE INDIAS GIN STRAWBERRY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "shihf6sue",
+            "name": {
+              "tr": "HENDRICK'S SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "0eehel505",
+            "name": {
+              "tr": "HENDRICK'S LUNAR SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "nq49d4rzw",
+            "name": {
+              "tr": "HENDRICK'S ORBIUM SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ct6vxavul",
+            "name": {
+              "tr": "TANQUERAY TEN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "sna2p0kcv",
+            "name": {
+              "tr": "TANQUERAY FLOR DE SEVILLA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "pmrlgpz8k",
+            "name": {
+              "tr": "KNUT HANSEN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Hand Crafted Gin 3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "amzeuzb98",
+            "name": {
+              "tr": "DOOLIN DRY GIN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "mgmwoluly",
+            "name": {
+              "tr": "FORDS GIN SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "cv2azhoyi",
+            "name": {
+              "tr": "MONKEY 47 SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Handcrafted Gin 3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "oqpcunoe1",
+            "name": {
+              "tr": "GORDON'S PINK SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "eke5u2zn1",
+            "name": {
+              "tr": "OXLEY SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/gin-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "8iysaj5b2",
+            "name": {
+              "tr": "AVION SILVER SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "zlk883tas",
+            "name": {
+              "tr": "DON JULIO BLANCO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ipz1mb944",
+            "name": {
+              "tr": "EL JIMADOR BLANCO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xnj7unpvy",
+            "name": {
+              "tr": "EL JIMADOR REPOSADO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "8ssr51fry",
+            "name": {
+              "tr": "PATRON SILVER SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "n58r9m13v",
+            "name": {
+              "tr": "SE BUSCA JOVEN MEZCAL SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "4unbtye71",
+            "name": {
+              "tr": "SIERRA TEQUILA SILVER SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "qybbzbxkn",
+            "name": {
+              "tr": "SIERRA TEQUILA REPOSADO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "d3vmb3zk6",
+            "name": {
+              "tr": "SIP & SIP SILVER TEQUILA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "y5vvyzgra",
+            "name": {
+              "tr": "OLMECA ALTOS REPOSADO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xr6mqsdhr",
+            "name": {
+              "tr": "HERRADURA PLATA SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "7i9xww9sb",
+            "name": {
+              "tr": "CENOTE BLANCO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "l6lbrnwf6",
+            "name": {
+              "tr": "CENOTE REPOSADO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1nll8zugb",
+            "name": {
+              "tr": "CENOTE ANEJO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "zotqjiq9l",
+            "name": {
+              "tr": "SIP & SIP GOLD SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "73dv2213p",
+            "name": {
+              "tr": "RESERVA DEL SENOR BLANCO SHOT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "3 cl.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/tequila-mezcal-shot/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "dx6qj95wf",
+            "name": {
+              "tr": "KAHLUA 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "bmhhppu99",
+            "name": {
+              "tr": "MALIBU 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ac5v3gpzm",
+            "name": {
+              "tr": "SAFARI 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "uj4i69p37",
+            "name": {
+              "tr": "AMARETTO IL BACIO DELLE MUSE 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "cgwoqkdfp",
+            "name": {
+              "tr": "AMARULA 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "rdvrceclx",
+            "name": {
+              "tr": "ARCHERS 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "r23cxhyup",
+            "name": {
+              "tr": "BAILEY'S 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "dx0m0xj9t",
+            "name": {
+              "tr": "CARDINAL MELON 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "sdj5334vc",
+            "name": {
+              "tr": "COINTREAU 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "daagblm9x",
+            "name": {
+              "tr": "DISERRANO AMARETTO 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "cgzjuy05w",
+            "name": {
+              "tr": "JAGERMEISTER 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "bh7bnqmcp",
+            "name": {
+              "tr": "METAXA 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "janahgxml",
+            "name": {
+              "tr": "ST GERMAIN TEK 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "u2xfral5h",
+            "name": {
+              "tr": "PALLINI MARASCHINO 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "9klfbns8z",
+            "name": {
+              "tr": "SKINOS MASTIHA 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Damla Sakızı Likörü 5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "6pkvo866n",
+            "name": {
+              "tr": "RAMAZZOTTI AMARO 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Liquore - Prodotto in Italia 5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "3m8pv8ovr",
+            "name": {
+              "tr": "DRAMBUIE 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Whiskey Liqueur 5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "alisdnmcu",
+            "name": {
+              "tr": "ROSSI DASIAGO LIMONCELLO 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "6d3gdj1qf",
+            "name": {
+              "tr": "FERNET BLANCA 5 CL.",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "5 CL.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/cocktails/liqueur/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1776017173605",
+            "name": "YENİ ÜRÜN",
+            "description": "",
+            "price": "0 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1775694225832"
+          }
+        ],
+        "subcategories": [
+          {
+            "id": "sub_1775694225832",
+            "title": {
+              "tr": "INTERNATIONAL",
+              "en": "NEW SUB"
+            }
+          },
+          {
+            "id": "sub_1775694235712",
+            "title": {
+              "tr": "SIGNATURE",
+              "en": "NEW SUB"
+            }
+          },
+          {
+            "id": "sub_1775694246029",
+            "title": {
+              "tr": "APERITIVES",
+              "en": "NEW SUB"
+            }
+          }
+        ]
+      },
+      {
+        "id": "spirits",
+        "title": {
+          "tr": "SPIRITS",
+          "en": ""
+        },
+        "items": []
+      },
+      {
+        "id": "wine-prosecco",
+        "title": {
+          "tr": "ŞARAP & PROSECCO",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "1776015713220",
+            "name": "YENİ ÜRÜN",
+            "description": "",
+            "price": "0 TL",
+            "image_url": "/assets/img/placeholder.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": null
+          }
+        ]
+      },
+      {
+        "id": "1775694951915",
+        "title": {
+          "tr": "WHISKEY",
+          "en": "WHISKEY"
+        },
+        "items": [
+          {
+            "id": "1776014314081",
+            "name": {
+              "tr": "DENEME URUN",
+              "en": ""
+            },
+            "description": "",
+            "price": "0 TL",
+            "image_url": "/assets/img/1776014364627-Arka-Kapak.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1775694977572"
+          }
+        ],
+        "subcategories": [
+          {
+            "id": "sub_1775694977572",
+            "title": {
+              "tr": "BLENDED SCOTCH",
+              "en": "BLENDED SCOTCH"
+            }
+          },
+          {
+            "id": "sub_1775694979654",
+            "title": {
+              "tr": "IRISH",
+              "en": "IRISH"
+            }
+          },
+          {
+            "id": "sub_1775694986288",
+            "title": {
+              "tr": "SINGLE MALT",
+              "en": "SINGLE MALT"
+            }
+          },
+          {
+            "id": "sub_1775694993008",
+            "title": {
+              "tr": "BOURBON & TENNESSEE",
+              "en": "BOURBON & TENNESSEE"
+            }
+          },
+          {
+            "id": "sub_1775695005019",
+            "title": {
+              "tr": "RYE",
+              "en": "RYE"
+            }
+          },
+          {
+            "id": "sub_1775695015037",
+            "title": {
+              "tr": "JAPANESE",
+              "en": "JAPANESE"
+            }
+          }
+        ]
+      },
+      {
+        "id": "coffee",
+        "title": {
+          "tr": "KAHVE",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "fj9y47653",
+            "name": {
+              "tr": "AMERICANO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "a3qkhn2fv",
+            "name": {
+              "tr": "BLACK EYE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "vuilusqq2",
+            "name": {
+              "tr": "CAPUCCINO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xu8dsiesg",
+            "name": {
+              "tr": "CHEMEX",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ar5fdsm6w",
+            "name": {
+              "tr": "CORTADO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "aigr07ehc",
+            "name": {
+              "tr": "ESPRESSO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ftvri74yp",
+            "name": {
+              "tr": "ESPRESSO MACCHIATO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "t3fyo0wh6",
+            "name": {
+              "tr": "FILTRE KAHVE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "01j17l0a4",
+            "name": {
+              "tr": "FLAT WHITE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "6wgddfmk2",
+            "name": {
+              "tr": "LATTE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "2a0eaxyd6",
+            "name": {
+              "tr": "LATTE MACCHIATO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "n28vwbb7a",
+            "name": {
+              "tr": "LUNGO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "rybg96ppn",
+            "name": {
+              "tr": "MOCHA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "wev1c65mi",
+            "name": {
+              "tr": "RED EYE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "o7o11u0ak",
+            "name": {
+              "tr": "RISTRETTO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "bnlnk9b8w",
+            "name": {
+              "tr": "SICAK ÇIKOLATA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "pbstgo9m0",
+            "name": {
+              "tr": "TÜRK KAHVESI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "4uck7cskx",
+            "name": {
+              "tr": "V60",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "iced-coffees",
+        "title": {
+          "tr": "SOĞUK KAHVELER",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "qlzxd77dt",
+            "name": {
+              "tr": "COLD BREW",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "7mjatv7ot",
+            "name": {
+              "tr": "ICE MOCHA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "6360hkcgy",
+            "name": {
+              "tr": "ICED AMERICANO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "68hfrulrn",
+            "name": {
+              "tr": "ICED LATTE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/iced-coffees/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "coffee-beans",
+        "title": {
+          "tr": "KAHVE ÇEKİRDEKLERİ",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "gznak7y3b",
+            "name": {
+              "tr": "COLOMBIA KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "5rh565s6u",
+            "name": {
+              "tr": "COLOMBIA BELLA VISTA KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "amriiopk5",
+            "name": {
+              "tr": "COSTA RICA KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "2mujxjvvq",
+            "name": {
+              "tr": "ETHIOPIA YIRGACHEFFE KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "3cpdwe756",
+            "name": {
+              "tr": "ETHOPIA SIDAMO KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "xj99v6u6p",
+            "name": {
+              "tr": "GUATEMALA HUEHUETENANGO KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "iij0dmbtr",
+            "name": {
+              "tr": "HONDURAS KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "4jhn1e178",
+            "name": {
+              "tr": "KENYA AA PLUS KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "61r1ee8h3",
+            "name": {
+              "tr": "TANZANIA KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "2qm9kls40",
+            "name": {
+              "tr": "MEXICO DECAFF KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "6cfvj9w8s",
+            "name": {
+              "tr": "NICARAGUA KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "tcbffor4i",
+            "name": {
+              "tr": "BLEND KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "dubij6yya",
+            "name": {
+              "tr": "TÜRK KAHVESI KG",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "1 KG",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/coffee-beans/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "tea",
+        "title": {
+          "tr": "ÇAY",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "0539s5e6h",
+            "name": {
+              "tr": "BITKI ÇAYI",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "Yeşil Çay / Yeşil Yasemin Çayı / Ihlamur / Kış Çayı / Elma / Tıbbi Nane / Roibos / Ada Çayı / Beyaz Çay / Melisa / Papatya / Oolong / Rezene / Tropik Meyve",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/tea/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "zf96713kc",
+            "name": {
+              "tr": "CHAI TEA LATTE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/tea/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          }
+        ]
+      },
+      {
+        "id": "soft-drinks",
+        "title": {
+          "tr": "SOFT İÇECEKLER",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "9xxx5tabl",
+            "name": {
+              "tr": "CHURCHILL",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ig9o11huk",
+            "name": {
+              "tr": "COCA COLA LIGHT",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "250 ML.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "cirtfgpf2",
+            "name": {
+              "tr": "COCA COLA ORIGINAL",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "250 ML.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "g63r0d1cz",
+            "name": {
+              "tr": "COCA COLA ZERO",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "250 ML.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1khy0ecka",
+            "name": {
+              "tr": "LIMONATA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "q20qhc4fk",
+            "name": {
+              "tr": "RED BULL",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "250 ML.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "ag0x8on2c",
+            "name": {
+              "tr": "SODA",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "3evcdy0zk",
+            "name": {
+              "tr": "SPRITE ŞIŞE",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "250 ML.",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "kr18wv7uh",
+            "name": {
+              "tr": "SU",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/soft-drinks/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1776015717870",
+            "name": "YENİ ÜRÜN",
+            "description": "",
+            "price": "0 TL",
+            "image_url": "/assets/img/placeholder.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": null
+          }
+        ]
+      },
+      {
+        "id": "mini-tuzlu",
+        "title": {
+          "tr": "MİNİ TUZLU",
+          "en": ""
+        },
+        "items": [
+          {
+            "id": "2pp0it5hi",
+            "name": {
+              "tr": "KURUYEMIŞ",
+              "en": ""
+            },
+            "price": "0",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "image_url": "/assets/img/menu/mini-tuzlu/14022021155034589.jpg",
+            "allergens": [],
+            "passive": false
+          },
+          {
+            "id": "1776015720762",
+            "name": "YENİ ÜRÜN",
+            "description": "",
+            "price": "0 TL",
+            "image_url": "/assets/img/placeholder.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": null
+          }
+        ]
+      }
+    ]
+  }
+}
