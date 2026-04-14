@@ -21,9 +21,17 @@ const DATA_PATH = path.join(__dirname, '../src/utils/mockData.json');
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 
-// ─── Serve static assets ───────────────────────────────────────────────────────
+// ─── Production: Serve built React app ───────────────────────────────────────
+const distPath = path.join(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+  console.log('✅ Production build (dist) bulundu. Statik dosyalar sunuluyor.');
+  app.use(express.static(distPath));
+} else {
+  console.warn('⚠️  Production build (dist) bulunamadı! Lokal modda çalışıyor olabilirsiniz.');
+}
+
+// ─── Serve static assets (Fallback for public assets not in dist) ─────────────
 app.use('/assets', express.static(path.join(__dirname, '../public/assets')));
-// Serve the menu-pdf tool
 app.use('/menu-pdf', express.static(path.join(__dirname, '../public/menu-pdf')));
 
 // ─── Local upload directory (fallback when Cloudinary not configured) ──────────
@@ -170,11 +178,9 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
   res.json({ status: 'success', url: imageUrl });
 });
 
-// ─── Production: Serve built React app ───────────────────────────────────────
-const distPath = path.join(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
   app.get('*', (req, res) => {
+    // API, Assets ve menu-pdf dışındaki her şeyi index.html'e yönlendir (SPA)
     if (!req.path.startsWith('/api') && !req.path.startsWith('/assets') && !req.path.startsWith('/menu-pdf')) {
       res.sendFile(path.join(distPath, 'index.html'));
     }
