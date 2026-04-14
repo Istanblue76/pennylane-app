@@ -7,7 +7,7 @@ import SectionHeading from '../Common/SectionHeading';
 const GallerySection = ({ data }) => {
   const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(null);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('interior');
 
   if (!data) return null;
 
