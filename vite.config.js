@@ -8,6 +8,9 @@ export default defineConfig({
     tailwindcss(),
     react()
   ],
+  build: {
+    target: 'es2015'
+  },
   server: {
     proxy: {
       '/api': {

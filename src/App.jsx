@@ -13,9 +13,9 @@ import EventsSection from './components/Sections/EventsSection';
 import TeamSection from './components/Sections/TeamSection';
 import NewsletterSection from './components/Sections/NewsletterSection';
 import Footer from './components/Layout/Footer';
-const AdminPanel = React.lazy(() => import('./pages/Admin/AdminPanel'));
-const Login = React.lazy(() => import('./pages/Admin/Login'));
-const QRMenuPage = React.lazy(() => import('./pages/QRMenuPage'));
+import AdminPanel from './pages/Admin/AdminPanel';
+import Login from './pages/Admin/Login';
+import QRMenuPage from './pages/QRMenuPage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, MapPin, X, AlertTriangle } from 'lucide-react';
 import { useLanguage } from './context/LanguageContext';
@@ -140,17 +140,15 @@ const Home = ({ cmsData }) => {
         )}
       </AnimatePresence>
 
-      <AnimatePresence mode="wait">
-        <HeroSection data={cmsData?.hero} />
-        <EventsSection data={cmsData?.events} />
-        <AboutSection data={cmsData?.about} />
-        <MenuShowcase data={cmsData?.menu_showcase} />
-        <QRMenu data={cmsData?.menu} allergens={cmsData?.allergens} settings={cmsData?.settings} />
-        <GallerySection data={cmsData?.gallery} />
-        <TestimonialsSection data={cmsData?.testimonials} />
-        <TeamSection data={cmsData?.team} />
-        <NewsletterSection data={cmsData?.newsletter} />
-      </AnimatePresence>
+      <HeroSection data={cmsData?.hero} />
+      <EventsSection data={cmsData?.events} />
+      <AboutSection data={cmsData?.about} />
+      <MenuShowcase data={cmsData?.menu_showcase} />
+      <QRMenu data={cmsData?.menu} allergens={cmsData?.allergens} settings={cmsData?.settings} />
+      <GallerySection data={cmsData?.gallery} />
+      <TestimonialsSection data={cmsData?.testimonials} />
+      <TeamSection data={cmsData?.team} />
+      <NewsletterSection data={cmsData?.newsletter} />
     </main>
   );
 };
@@ -196,11 +194,6 @@ export default function App() {
       <ErrorBoundary>
         <Router>
           <div className="bg-dark text-white min-h-screen selection:bg-secondary selection:text-primary">
-            <React.Suspense fallback={
-              <div className="flex items-center justify-center min-h-screen bg-dark">
-                <div className="w-10 h-10 border-2 border-secondary/20 border-t-secondary rounded-full animate-spin" />
-              </div>
-            }>
               <Routes>
                 <Route path="/" element={
                   <>
@@ -214,7 +207,6 @@ export default function App() {
                 <Route path="/menu" element={<QRMenuPage cmsData={cmsData} />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
-            </React.Suspense>
           </div>
         </Router>
       </ErrorBoundary>
