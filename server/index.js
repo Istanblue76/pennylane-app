@@ -182,6 +182,10 @@ if (fs.existsSync(distPath)) {
   app.get('*', (req, res) => {
     // API, Assets ve menu-pdf dışındaki her şeyi index.html'e yönlendir (SPA)
     if (!req.path.startsWith('/api') && !req.path.startsWith('/assets') && !req.path.startsWith('/menu-pdf')) {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      res.setHeader('Surrogate-Control', 'no-store');
       res.sendFile(path.join(distPath, 'index.html'));
     }
   });
