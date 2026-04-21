@@ -7,20 +7,20 @@ import SectionHeading from '../Common/SectionHeading';
 const GallerySection = ({ data }) => {
   const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(null);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('interior');
 
   if (!data) return null;
 
-  const categories = ['all', ...new Set(data.images?.map(img => img.category) || [])];
-  const filteredImages = filter === 'all' ? (data.images || []) : (data.images?.filter(img => img.category === filter) || []);
+  const categories = [...new Set(data.images?.map(img => img.category) || [])];
+  const filteredImages = data.images?.filter(img => img.category === filter) || [];
 
   return (
     <section id="gallery" className="py-24 md:py-36 bg-dark">
       <div className="section-container">
         <SectionHeading title={data.section_title} subtitle={data.section_subtitle} />
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        {/* Filter Buttons - Optimized for both Mobile & Web */}
+        <div className="flex flex-wrap md:justify-center gap-3 md:gap-4 mb-12 px-4 overflow-x-auto pb-4 no-scrollbar">
           {categories.map(cat => (
             <button
               key={cat}
@@ -29,7 +29,7 @@ const GallerySection = ({ data }) => {
                 filter === cat ? 'bg-secondary text-primary border-secondary shadow-lg shadow-secondary/20' : 'text-textSecondary border-textSecondary/20 hover:border-secondary hover:text-secondary'
               }`}
             >
-              {cat === 'all' ? t({ tr: 'HEPSİ', en: 'ALL' }) : t(cat).toUpperCase()}
+              {t(cat).toUpperCase()}
             </button>
           ))}
         </div>

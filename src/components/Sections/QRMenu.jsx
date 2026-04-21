@@ -1,11 +1,11 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Star, X, Info, LayoutGrid, List, ArrowLeft, ChevronRight, ZoomIn } from 'lucide-react';
+import { Search, Star, X, Info, LayoutGrid, List, ArrowLeft, ChevronRight, ZoomIn, ShoppingBasket, Plus, Minus, Trash2 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 /* ─────────────────────────────────────────
    THEME TOKENS
-───────────────────────────────────────── */
+   ───────────────────────────────────────── */
 const darkTheme = {
   pageBg:       'bg-[#0c0c0c]',
   headerBg:     'bg-[#0c0c0c]/90',
@@ -50,7 +50,7 @@ const lightTheme = {
 
 /* ─────────────────────────────────────────
    CATEGORY DECORATIVE SVG ICONS
-───────────────────────────────────────── */
+   ───────────────────────────────────────── */
 const categorySVGs = {
   breakfast: (color) => (
     <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',opacity:0.32,pointerEvents:'none'}}>
@@ -237,7 +237,7 @@ const categorySVGs = {
 
 /* ─────────────────────────────────────────
    CATEGORY CARD — Premium split layout
-───────────────────────────────────────── */
+   ───────────────────────────────────────── */
 const CategoryCard = ({ cat, onClick, t, tk, index }) => {
   const itemCount = cat.items?.filter(i => !i.passive)?.length || 0;
 
@@ -289,13 +289,10 @@ const CategoryCard = ({ cat, onClick, t, tk, index }) => {
 
         {/* Bottom content — category name centered, count bottom-left */}
         <div className="absolute inset-0 flex flex-col items-center justify-end pb-7 pointer-events-none">
-          {/* Centered thin rule */}
           <div
             className="mb-4 transition-all duration-700 group-hover:w-16"
             style={{ height: '1.5px', width: '36px', backgroundColor: tk.accent, opacity: 0.75 }}
           />
-
-          {/* Category name — centered */}
           <h3
             className="font-serif font-black uppercase tracking-[0.14em] text-white leading-tight text-center px-6 transition-all duration-500"
             style={{
@@ -328,13 +325,13 @@ const CategoryCard = ({ cat, onClick, t, tk, index }) => {
 
 /* ─────────────────────────────────────────
    PRODUCT CARD
-───────────────────────────────────────── */
-const ProductCard = ({ item, onClick, t, tk }) => (
+   ───────────────────────────────────────── */
+const ProductCard = ({ item, onClick, t, tk, onAddToCart }) => (
   <div
-    className={`group relative ${tk.cardBg} border ${tk.cardBorder} ${tk.cardHover} rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl cursor-pointer p-4`}
+    className={`group relative ${tk.cardBg} border ${tk.cardBorder} ${tk.cardHover} rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl cursor-pointer p-3 md:p-4 flex flex-col`}
     onClick={onClick}
   >
-    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-5">
+    <div className="relative aspect-square md:aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden mb-3 md:mb-5">
       <img
         src={item.image_url || ''}
         alt=""
@@ -342,21 +339,31 @@ const ProductCard = ({ item, onClick, t, tk }) => (
         loading="eager"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 pointer-events-none" />
+      
+      {/* Quick Add Button */}
+      <button 
+        onClick={(e) => { e.stopPropagation(); onAddToCart(item); }}
+        className="absolute bottom-2 right-2 w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center shadow-lg transition-all active:scale-90 z-20"
+        style={{ backgroundColor: tk.accent, color: '#fff' }}
+      >
+        <Plus className="w-4 h-4 md:w-5 md:h-5" />
+      </button>
     </div>
-    <div className="px-2 pb-2">
-      <div className="flex justify-between items-start gap-3 mb-2">
-        <h3 className={`${tk.text} font-serif font-black text-base uppercase leading-snug tracking-tight transition-all duration-300`}
+    
+    <div className="px-1 pb-1 flex-grow flex flex-col">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-1 md:gap-3 mb-2">
+        <h3 className={`${tk.text} font-serif font-black text-xs md:text-base uppercase leading-tight tracking-tight flex-grow`}
           style={{ '--tw-text-opacity': 1 }}
         >
-          <span className="group-hover:opacity-80 transition-opacity">{t(item.name)}</span>
+          <span className="group-hover:opacity-80 transition-opacity line-clamp-2 md:line-clamp-1">{t(item.name)}</span>
         </h3>
-        <span className="font-black text-lg flex-shrink-0" style={{ color: tk.accent }}>
+        <span className="font-black text-sm md:text-lg flex-shrink-0" style={{ color: tk.accent }}>
           {item.price && item.price !== '0' && item.price !== '0 TL'
             ? `${item.price.toString().replace(/ TL/g, '').replace(/ ₺/g, '')}₺`
             : ''}
         </span>
       </div>
-      <p className={`${tk.textMuted} text-[11px] font-light leading-relaxed line-clamp-2 italic`}>
+      <p className={`${tk.textMuted} text-[9px] md:text-[11px] font-light leading-snug line-clamp-2 italic`}>
         {t(item.description)}
       </p>
     </div>
@@ -365,8 +372,8 @@ const ProductCard = ({ item, onClick, t, tk }) => (
 
 /* ─────────────────────────────────────────
    PRODUCT MODAL
-───────────────────────────────────────── */
-const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
+   ───────────────────────────────────────── */
+const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const tk = isDark ? darkTheme : lightTheme;
 
@@ -384,7 +391,6 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
         transition={{ duration: 0.3 }}
         className={`relative w-full max-w-4xl ${tk.cardBg} border ${tk.cardBorder} rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row md:h-[600px] max-h-[95vh] pointer-events-auto shadow-[0_32px_100px_rgba(0,0,0,0.6)]`}
       >
-        {/* Close */}
         <button
           onClick={onClose}
           className="absolute top-5 right-5 z-40 w-11 h-11 rounded-full flex items-center justify-center backdrop-blur-xl transition-all group"
@@ -393,7 +399,6 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
           <X className="w-4 h-4 text-white group-hover:rotate-90 transition-transform" />
         </button>
 
-        {/* Image */}
         <div 
           className="w-full md:w-[45%] h-[280px] md:h-full relative flex-shrink-0 group cursor-pointer overflow-hidden" 
           onClick={() => setIsFullscreen(true)}
@@ -407,15 +412,12 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
           <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
             <ZoomIn className="w-12 h-12 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/30 via-transparent to-transparent pointer-events-none" />
         </div>
 
-        {/* Content */}
         <div
           className={`w-full md:w-[55%] p-8 md:p-12 flex flex-col overflow-y-auto no-scrollbar ${isDark ? 'bg-[#0e0e0e]' : 'bg-white'}`}
         >
           <div className="flex-grow">
-            {/* Category label */}
             <div className="flex items-center space-x-3 mb-5">
               <div className="h-[1.5px] w-8 flex-shrink-0" style={{ backgroundColor: tk.accent }} />
               <span className="text-[9px] font-black tracking-[0.5em] uppercase" style={{ color: tk.accent, opacity: 0.7 }}>
@@ -423,13 +425,11 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
               </span>
             </div>
 
-            {/* Name */}
             <h3 className={`font-serif font-black uppercase leading-tight tracking-tight mb-5 ${tk.text}`}
               style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)' }}>
               {t(product.name)}
             </h3>
 
-            {/* Price */}
             {product.price && product.price !== '0' && product.price !== '0 TL' && (
               <div
                 className="inline-flex items-center px-5 py-2 rounded-2xl mb-6"
@@ -441,14 +441,12 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
               </div>
             )}
 
-            {/* Description */}
             <div className="border-l-2 pl-5 mb-8" style={{ borderColor: `${tk.accent}50` }}>
               <p className={`${tk.textMuted} text-sm font-light italic leading-relaxed`}>
                 {t(product.description)}
               </p>
             </div>
 
-            {/* Allergens */}
             {product.allergens?.length > 0 && (
               <div>
                 <span className={`text-[9px] ${tk.textSubtle} uppercase font-bold tracking-[0.25em] block mb-3`}>
@@ -461,9 +459,8 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
                     return (
                       <div
                         key={id}
-                        className={`w-10 h-10 rounded-xl border flex items-center justify-center p-2 transition-all`}
+                        className={`w-10 h-10 rounded-xl border flex items-center justify-center p-2 transition-all shadow-sm`}
                         style={{ backgroundColor: `${tk.accent}10`, borderColor: `${tk.accent}25` }}
-                        title={a.name}
                       >
                         {a.icon_url
                           ? <img src={a.icon_url} alt="" className="w-full h-full object-contain" />
@@ -476,18 +473,25 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
             )}
           </div>
 
-          {/* Close button */}
-          <button
-            onClick={onClose}
-            className="mt-8 font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 w-full"
-            style={{ backgroundColor: tk.accent, color: '#fff' }}
-          >
-            {t({ tr: 'KAPAT', en: 'CLOSE' })}
-          </button>
+          <div className="grid grid-cols-1 gap-3 mt-8">
+            <button
+              onClick={() => { onAddToCart(product); onClose(); }}
+              className="font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 flex items-center justify-center space-x-3 shadow-lg"
+              style={{ backgroundColor: tk.accent, color: '#fff' }}
+            >
+              <Plus className="w-4 h-4" />
+              <span>{t({ tr: 'SEPETE EKLE', en: 'ADD TO BASKET' })}</span>
+            </button>
+            <button
+                onClick={onClose}
+                className={`font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] opacity-40 hover:opacity-100 ${tk.text}`}
+            >
+                {t({ tr: 'Geri Dön', en: 'Go Back' })}
+            </button>
+          </div>
         </div>
       </motion.div>
 
-      {/* Fullscreen Lightbox Overlay */}
       <AnimatePresence>
         {isFullscreen && (
           <motion.div
@@ -497,16 +501,15 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
           >
             <button
                onClick={(e) => { e.stopPropagation(); setIsFullscreen(false); }}
-               className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-black/50 text-white hover:rotate-90 transition-all z-50"
+               className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-black/50 text-white z-50"
             >
                <X className="w-6 h-6" />
             </button>
             <motion.img
-               initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: 'spring', damping: 25 }}
+               initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
                src={product.image_url}
                alt=""
-               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-               onClick={(e) => { e.stopPropagation(); setIsFullscreen(false); }}
+               className="max-w-full max-h-full object-contain rounded-lg"
             />
           </motion.div>
         )}
@@ -516,8 +519,111 @@ const ProductModal = ({ product, onClose, t, allergens, isDark }) => {
 };
 
 /* ─────────────────────────────────────────
+   BASKET DRAWER
+   ───────────────────────────────────────── */
+const BasketDrawer = ({ isOpen, onClose, cart, updateQuantity, removeFromCart, t, tk }) => {
+    const total = cart.reduce((sum, item) => {
+        const price = parseFloat(item.price?.toString().replace(/[^\d.]/g, '') || 0);
+        return sum + (price * item.quantity);
+    }, 0);
+
+    return (
+        <AnimatePresence>
+            {isOpen && (
+                <>
+                    <motion.div
+                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[250]"
+                        onClick={onClose}
+                    />
+                    <motion.div
+                        initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
+                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        className={`fixed top-0 right-0 bottom-0 w-full max-w-md ${tk.pageBg} z-[260] shadow-2xl flex flex-col border-l ${tk.cardBorder}`}
+                    >
+                        {/* Header */}
+                        <div className={`p-6 flex items-center justify-between border-b ${tk.cardBorder}`}>
+                            <div className="flex items-center space-x-3">
+                                <ShoppingBasket className="w-6 h-6" style={{ color: tk.accent }} />
+                                <h2 className={`font-serif font-black uppercase tracking-widest text-xl ${tk.text}`}>
+                                    {t({ tr: 'SEPETİM', en: 'YOUR BASKET' })}
+                                </h2>
+                            </div>
+                            <button onClick={onClose} className={`p-2 rounded-full hover:bg-white/5 ${tk.text}`}>
+                                <X className="w-6 h-6" />
+                            </button>
+                        </div>
+
+                        {/* Items List */}
+                        <div className="flex-grow overflow-y-auto p-6 space-y-4 no-scrollbar">
+                            {cart.length === 0 ? (
+                                <div className="h-full flex flex-col items-center justify-center opacity-30">
+                                    <ShoppingBasket className="w-20 h-20 mb-4" />
+                                    <p className={`font-medium ${tk.text}`}>{t({ tr: 'Sepetiniz henüz boş.', en: 'Your basket is empty.' })}</p>
+                                </div>
+                            ) : (
+                                cart.map(item => (
+                                    <div key={item.id} className={`flex items-center space-x-4 p-4 rounded-2xl ${tk.cardBg} border ${tk.cardBorder}`}>
+                                        <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                                            <img src={item.image_url} alt="" className="w-full h-full object-cover" />
+                                        </div>
+                                        <div className="flex-grow">
+                                            <h4 className={`font-serif font-black text-xs uppercase tracking-wider ${tk.text} line-clamp-1`}>{t(item.name)}</h4>
+                                            <p className="text-sm font-black mt-1" style={{ color: tk.accent }}>
+                                                {parseFloat(item.price?.toString().replace(/[^\d.]/g, '') || 0)}₺
+                                            </p>
+                                        </div>
+                                        <div className="flex items-center space-x-2">
+                                            <div className="flex items-center bg-white/5 rounded-lg border border-white/10 p-1">
+                                                <button 
+                                                    onClick={() => item.quantity > 1 ? updateQuantity(item.id, item.quantity - 1) : removeFromCart(item.id)}
+                                                    className={`p-1 rounded hover:bg-white/10 ${tk.text}`}
+                                                >
+                                                    <Minus className="w-3 h-3" />
+                                                </button>
+                                                <span className={`px-2 text-xs font-black min-w-[20px] text-center ${tk.text}`}>{item.quantity}</span>
+                                                <button 
+                                                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                                    className={`p-1 rounded hover:bg-white/10 ${tk.text}`}
+                                                >
+                                                    <Plus className="w-3 h-3" />
+                                                </button>
+                                            </div>
+                                            <button onClick={() => removeFromCart(item.id)} className="text-red-500/50 hover:text-red-500 transition-colors p-1">
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+
+                        {/* Footer */}
+                        {cart.length > 0 && (
+                            <div className={`p-6 border-t ${tk.cardBorder} space-y-4`}>
+                                <div className="flex items-center justify-between">
+                                    <span className={`${tk.textMuted} font-bold uppercase tracking-widest text-[10px]`}>{t({ tr: 'TOPLAM TUTAR', en: 'TOTAL AMOUNT' })}</span>
+                                    <span className={`text-2xl font-black ${tk.text}`}>{total}₺</span>
+                                </div>
+                                <button 
+                                    onClick={onClose}
+                                    className="w-full py-4 rounded-2xl font-black uppercase tracking-[0.4em] text-xs shadow-xl active:scale-95 transition-all outline-none"
+                                    style={{ backgroundColor: tk.accent, color: '#fff' }}
+                                >
+                                    {t({ tr: 'KAPAT', en: 'CLOSE' })}
+                                </button>
+                            </div>
+                        )}
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
+    );
+};
+
+/* ─────────────────────────────────────────
    MAIN COMPONENT
-───────────────────────────────────────── */
+   ───────────────────────────────────────── */
 const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   const { t, lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(null);
@@ -526,9 +632,39 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [viewMode, setViewMode] = useState(settings?.menu_display_mode === 'all' ? 'categories' : (settings?.menu_display_mode || 'categories'));
   const [drilledCategory, setDrilledCategory] = useState(null);
+  
+  // Basket State
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('pennylane_cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('pennylane_cart', JSON.stringify(cart));
+  }, [cart]);
 
   const isDark = (settings?.theme || 'dark') === 'dark';
   const tk = isDark ? darkTheme : lightTheme;
+
+  const addToCart = (item) => {
+    setCart(prev => {
+        const existing = prev.find(i => i.id === item.id);
+        if (existing) {
+            return prev.map(i => i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i);
+        }
+        return [...prev, { ...item, quantity: 1 }];
+    });
+    // Visual feedback could be added here
+  };
+
+  const removeFromCart = (itemId) => {
+    setCart(prev => prev.filter(item => item.id !== itemId));
+  };
+
+  const updateQuantity = (itemId, quantity) => {
+    setCart(prev => prev.map(item => item.id === itemId ? { ...item, quantity } : item));
+  };
 
   useEffect(() => {
     const mode = settings?.menu_display_mode || 'all';
@@ -536,9 +672,9 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   }, [settings]);
 
   useEffect(() => {
-    document.body.style.overflow = selectedProduct ? 'hidden' : 'unset';
+    document.body.style.overflow = (selectedProduct || isCartOpen) ? 'hidden' : 'unset';
     return () => { document.body.style.overflow = 'unset'; };
-  }, [selectedProduct]);
+  }, [selectedProduct, isCartOpen]);
 
   useEffect(() => {
     if (data?.categories && !activeCategory) {
@@ -580,11 +716,8 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
         id="menu"
         className={`relative transition-colors duration-700 ${tk.pageBg} min-h-screen px-4 sm:px-6 md:px-10 max-w-7xl mx-auto pb-24`}
       >
-        {/* ── Top Controls ── */}
         <div className="pt-6 mb-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-5 mb-8">
-
-            {/* Search */}
             <div className="relative w-full max-w-sm">
               <input
                 type="text"
@@ -597,11 +730,8 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 opacity-30" style={{ color: isDark ? '#fff' : '#1c1410' }} />
             </div>
 
-            {/* View toggle */}
             {(settings?.menu_display_mode === 'all' || !settings?.menu_display_mode) && (
-              <div
-                className={`flex p-1 rounded-2xl border ${tk.pillBg}`}
-              >
+              <div className={`flex p-1 rounded-2xl border ${tk.pillBg}`}>
                 {[
                   { key: 'grid',       label: t({ tr: 'Liste', en: 'List' }),      icon: LayoutGrid },
                   { key: 'categories', label: t({ tr: 'Büyük', en: 'Large' }),     icon: List       },
@@ -623,7 +753,6 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             )}
           </div>
 
-          {/* Back button (drilled) */}
           {isDrilled && (
             <button
               onClick={() => setDrilledCategory(null)}
@@ -642,7 +771,6 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             </button>
           )}
 
-          {/* Category pills (grid mode only) */}
           {viewMode === 'grid' && !isDrilled && (
             <>
             <div className="flex flex-wrap gap-2 mb-3">
@@ -668,7 +796,6 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
               })}
             </div>
             
-            {/* Subcategory pills */}
             {activeCategory !== 'all' && data.categories.find(c => c.id === activeCategory)?.subcategories && (
                <div className="flex flex-wrap gap-2 mb-6">
                  {[{ id: 'all', title: { tr: 'Tümü', en: 'All' } }, ...data.categories.find(c => c.id === activeCategory).subcategories].map(sub => {
@@ -697,7 +824,6 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
           )}
         </div>
 
-        {/* ── Content ── */}
         <AnimatePresence mode="wait">
           {viewMode === 'categories' && !isDrilled ? (
             <motion.div
@@ -721,7 +847,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             <motion.div
               key="grid"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+              className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
             >
               {filteredItems.map(item => (
                 <ProductCard
@@ -729,6 +855,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
                   item={item}
                   t={t}
                   tk={tk}
+                  onAddToCart={addToCart}
                   onClick={() => setSelectedProduct(item)}
                 />
               ))}
@@ -736,6 +863,28 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
           )}
         </AnimatePresence>
 
+        {/* Floating Basket Button */}
+        <AnimatePresence>
+            {cart.length > 0 && (
+                <motion.button
+                    initial={{ scale: 0, opacity: 0, y: 20 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    exit={{ scale: 0, opacity: 0, y: 20 }}
+                    onClick={() => setIsCartOpen(true)}
+                    className="fixed bottom-8 right-8 z-[150] w-16 h-16 rounded-full shadow-2xl flex items-center justify-center group"
+                    style={{ backgroundColor: tk.accent }}
+                >
+                    <ShoppingBasket className="w-7 h-7 text-white" />
+                    <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-red-500 text-white text-[10px] font-black flex items-center justify-center border-2 border-[#0c0c0c]">
+                        {cart.reduce((sum, i) => sum + i.quantity, 0)}
+                    </span>
+                    {/* Ring animation */}
+                    <div className="absolute inset-0 rounded-full bg-inherit animate-ping opacity-25 -z-10" />
+                </motion.button>
+            )}
+        </AnimatePresence>
+
+        {/* Modals & Basket */}
         <AnimatePresence>
           {selectedProduct && (
             <ProductModal
@@ -744,8 +893,18 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
               t={t}
               allergens={allergens}
               isDark={isDark}
+              onAddToCart={addToCart}
             />
           )}
+          <BasketDrawer 
+              isOpen={isCartOpen}
+              onClose={() => setIsCartOpen(false)}
+              cart={cart}
+              updateQuantity={updateQuantity}
+              removeFromCart={removeFromCart}
+              t={t}
+              tk={tk}
+          />
         </AnimatePresence>
       </section>
     );
@@ -789,58 +948,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             </button>
           ))}
         </div>
-
-        {/* Subcategory Pills */}
-        <div className="h-10 mb-8 flex justify-center">
-        {activeCategory !== 'all' && data.categories.find(c => c.id === activeCategory)?.subcategories && (
-           <div className="flex flex-wrap justify-center gap-2">
-             {[{ id: 'all', title: { tr: 'Tümü', en: 'All' } }, ...data.categories.find(c => c.id === activeCategory).subcategories].map(sub => {
-                const isActive = activeSubcategory === sub.id;
-                return (
-                    <button
-                      key={sub.id}
-                      onClick={() => setActiveSubcategory(sub.id)}
-                      className="px-5 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest transition-all border"
-                      style={isActive
-                        ? { backgroundColor: '#c9a96e', color: '#fff', borderColor: '#c9a96e' }
-                        : {
-                            backgroundColor: 'transparent',
-                            color: 'rgba(255,255,255,0.3)',
-                            borderColor: 'rgba(201,169,110,0.2)'
-                          }
-                      }
-                    >
-                      {t(sub.title)}
-                    </button>
-                )
-             })}
-           </div>
-        )}
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-left">
-          {filteredItems.map(item => (
-            <div key={item.id} className="flex items-center space-x-5 group cursor-pointer" onClick={() => setSelectedProduct(item)}>
-              <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 flex-shrink-0 transition-all" style={{ borderColor: 'rgba(201,169,110,0.2)' }}>
-                <img src={item.image_url} alt="" className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-grow min-w-0">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="font-bold uppercase tracking-wider text-sm transition-colors group-hover:text-[#c9a96e] truncate">{t(item.name)}</h3>
-                  <span className="font-bold text-[#c9a96e] flex-shrink-0">{item.price}₺</span>
-                </div>
-                <p className="text-white/40 text-[11px] line-clamp-1 italic mt-0.5">{t(item.description)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
       </div>
-      <AnimatePresence>
-        {selectedProduct && (
-          <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} t={t} allergens={allergens} isDark={true} />
-        )}
-      </AnimatePresence>
     </section>
   );
 };

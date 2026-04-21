@@ -188,7 +188,7 @@
       }
     ],
     "secondary_image_url": "/assets/img/1775429226599-1775425323271-gallery-1.jpg",
-    "image_effect": "blur-[2px] transition hover:blur-none"
+    "image_effect": ""
   },
   "gallery": {
     "section_title": "Galeri",
@@ -1426,17 +1426,7 @@
             "image_url": "/assets/img/menu/bottled-Beers/14022021155034589.jpg",
             "allergens": [],
             "passive": false,
-            "subcategory": "bottle"
-          },
-          {
-            "id": "1776015662630",
-            "name": "YENİ ÜRÜN",
-            "description": "",
-            "price": "0 TL",
-            "image_url": "/assets/img/placeholder.png",
-            "tags": [],
-            "passive": false,
-            "subcategory": null
+            "subcategory": "craft"
           }
         ],
         "subcategories": [
@@ -4308,14 +4298,153 @@
         },
         "items": [
           {
-            "id": "1776015713220",
-            "name": "YENİ ÜRÜN",
-            "description": "",
+            "id": "1776045886285",
+            "name": {
+              "tr": "SUVLA KABATEPE KIRMIZI",
+              "en": ""
+            },
+            "description": {
+              "tr": "CABERNET SAUVIGNON, MERLOT, ÖKÜZGÖZÜ",
+              "en": ""
+            },
             "price": "0 TL",
-            "image_url": "/assets/img/placeholder.png",
+            "image_url": "/assets/img/pennylane-default.png",
             "tags": [],
             "passive": false,
-            "subcategory": null
+            "subcategory": "sub_1776045920771"
+          },
+          {
+            "id": "1776045967812",
+            "name": {
+              "tr": "SUVLA KABATEPE BLUSH",
+              "en": ""
+            },
+            "description": {
+              "tr": "SYRAH, MERLOT, KALECİK KARASI",
+              "en": ""
+            },
+            "price": "0 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1776045920771"
+          },
+          {
+            "id": "1776045988022",
+            "name": {
+              "tr": "SUVLA KABATEPE BEYAZ",
+              "en": ""
+            },
+            "description": {
+              "tr": "SAUVIGNON BLANC, CHARDONNAY, NARİNCE",
+              "en": ""
+            },
+            "price": "0 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1776045920771"
+          },
+          {
+            "id": "1776046020559",
+            "name": {
+              "tr": "ANCYRA",
+              "en": ""
+            },
+            "description": {
+              "tr": "MERLOT",
+              "en": ""
+            },
+            "price": "0 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1776045931285"
+          },
+          {
+            "id": "1776046031196",
+            "name": {
+              "tr": "CHÂTEAU CLAUD - BELLEVUE",
+              "en": ""
+            },
+            "description": {
+              "tr": "MERLOT-CABERNET FRANC",
+              "en": ""
+            },
+            "price": "0 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1776045931285"
+          },
+          {
+            "id": "1776046049949",
+            "name": {
+              "tr": "DOR",
+              "en": ""
+            },
+            "description": {
+              "tr": "CABERNET SAUVIGNON",
+              "en": ""
+            },
+            "price": "0 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1776045931285"
+          },
+          {
+            "id": "1776046069757",
+            "name": {
+              "tr": "DOR",
+              "en": ""
+            },
+            "description": {
+              "tr": "RARA NEAGRA-CABERNET SAUVIGNON",
+              "en": ""
+            },
+            "price": "0 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "tags": [],
+            "passive": false,
+            "subcategory": "sub_1776045931285"
+          }
+        ],
+        "subcategories": [
+          {
+            "id": "sub_1776045920771",
+            "title": {
+              "tr": "GLASS OF WINE",
+              "en": "NEW SUB"
+            }
+          },
+          {
+            "id": "sub_1776045931285",
+            "title": {
+              "tr": "RED WINE",
+              "en": "NEW SUB"
+            }
+          },
+          {
+            "id": "sub_1776045937783",
+            "title": {
+              "tr": "WHITE WINE",
+              "en": "NEW SUB"
+            }
+          },
+          {
+            "id": "sub_1776045945035",
+            "title": {
+              "tr": "ROSE & BLUSH WINE",
+              "en": "NEW SUB"
+            }
+          },
+          {
+            "id": "sub_1776045952041",
+            "title": {
+              "tr": "PROSECCO",
+              "en": "NEW SUB"
+            }
           }
         ]
       },
@@ -4325,21 +4454,7 @@
           "tr": "WHISKEY",
           "en": "WHISKEY"
         },
-        "items": [
-          {
-            "id": "1776014314081",
-            "name": {
-              "tr": "DENEME URUN",
-              "en": ""
-            },
-            "description": "",
-            "price": "0 TL",
-            "image_url": "/assets/img/1776014364627-Arka-Kapak.png",
-            "tags": [],
-            "passive": false,
-            "subcategory": "sub_1775694977572"
-          }
-        ],
+        "items": [],
         "subcategories": [
           {
             "id": "sub_1775694977572",

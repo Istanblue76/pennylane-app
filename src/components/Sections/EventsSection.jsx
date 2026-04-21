@@ -7,7 +7,7 @@ import SectionHeading from '../Common/SectionHeading';
 const EventsSection = ({ data }) => {
   const { t } = useLanguage();
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [activeAccIdx, setActiveAccIdx] = useState(0);
+  const [activeAccIdx, setActiveAccIdx] = useState(-1);
 
   if (!data || !data.events) return null;
 
@@ -16,85 +16,92 @@ const EventsSection = ({ data }) => {
       <div className="section-container">
         <SectionHeading title={data.section_title} subtitle="Unutulmaz Anlar İçin Takipte Kalın" />
 
-        {/* All Events - Horizontal Accordion Layout */}
-        <div className="mt-16 flex flex-col md:flex-row gap-4 h-[500px] md:h-[600px]">
+        {/* All Events - High Depth Vertical Accordion */}
+        <div className="mt-16 flex flex-col gap-4 max-w-4xl mx-auto">
           {data.events?.map((event, idx) => {
             const isActive = activeAccIdx === idx;
             const dateStr = t(event.date) || 'YAKINDA';
-            const dateParts = dateStr.split(' ');
             
             return (
               <motion.div
                 key={event.id}
+                layout
+                className={`relative overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] cursor-pointer border transition-all duration-700 flex-shrink-0 group ${
+                  isActive 
+                    ? 'border-secondary/40 shadow-[0_30px_60px_-15px_rgba(244,228,193,0.15)] ring-1 ring-secondary/20 bg-dark/20' 
+                    : 'border-secondary/10 hover:border-secondary/30 bg-dark/40'
+                }`}
                 onClick={() => {
                     if (isActive) setSelectedEvent(event);
                     else setActiveAccIdx(idx);
                 }}
-                layout
-                className={`relative overflow-hidden rounded-[2rem] cursor-pointer border transition-all duration-700 flex-shrink-0 group ${
-                  isActive 
-                    ? 'flex-[4] border-secondary/40 shadow-[0_30px_60px_-15px_rgba(244,228,193,0.15)] ring-1 ring-secondary/20' 
-                    : 'flex-[1] border-secondary/10 hover:border-secondary/30'
-                }`}
               >
-                {/* Background Image */}
+                {/* Background Image with Depth Effect */}
                 <div
                   className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${
-                    isActive ? 'scale-110 brightness-75' : 'scale-100 brightness-[0.25] grayscale'
+                    isActive ? 'scale-110 opacity-60' : 'scale-100 opacity-20 grayscale group-hover:opacity-100 group-hover:grayscale-0'
                   }`}
                   style={{ backgroundImage: `url(${event.image_url})` }}
                 />
                 
-                {/* Gradient Overlays */}
+                {/* Gradient Overlays for readability */}
                 <div className={`absolute inset-0 transition-opacity duration-700 ${
-                  isActive ? 'bg-gradient-to-t from-dark via-dark/20 to-transparent opacity-90' : 'bg-dark/40 opacity-100'
+                  isActive ? 'bg-gradient-to-t from-dark via-dark/40 to-transparent opacity-95' : 'bg-dark/60 opacity-100 md:bg-dark/40'
                 }`} />
 
-                {/* Vertical Title (when collapsed) */}
-                {!isActive && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span className="text-secondary/20 text-3xl md:text-4xl font-serif font-black uppercase tracking-[0.35em] -rotate-90 origin-center whitespace-nowrap opacity-40 group-hover:opacity-100 transition-all duration-500">
-                      {t(event.title)}
-                    </span>
-                  </div>
-                )}
-
-                {/* Expanded Content */}
-                <div className="absolute inset-0 z-10 p-8 md:p-12 flex flex-col justify-end">
-                    <div className={`transition-all duration-700 ease-out ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-                        <div className="flex items-center space-x-3 mb-4">
-                            <span className="text-secondary text-xs font-bold tracking-[0.5em] uppercase">{dateStr}</span>
-                            <div className="w-1 h-1 rounded-full bg-secondary/30" />
-                            <span className="text-secondary/60 text-[10px] font-bold uppercase tracking-[0.3em]">{t(event.location) || 'PENNYLANE'}</span>
+                {/* Header Area (Always Visible) */}
+                <div className="p-6 md:p-8 flex items-center justify-between relative z-20">
+                    <div className="flex items-center space-x-6 md:space-x-10">
+                        {/* Date info */}
+                        <div className="flex flex-col items-center min-w-[50px] md:min-w-[70px]">
+                            <span className="text-secondary font-black text-xl md:text-2xl leading-none">{dateStr.split(' ')[0]}</span>
+                            <span className="text-secondary/60 font-bold text-[9px] md:text-xs uppercase tracking-widest mt-1">{dateStr.split(' ')[1]?.slice(0,3)}</span>
                         </div>
-                        
-                        <h3 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6 uppercase tracking-widest leading-tight">
-                          {t(event.title)}
-                        </h3>
-                        
-                        <p className="text-textSecondary/80 text-sm md:text-base font-light leading-relaxed max-w-md line-clamp-1 italic border-l-2 border-secondary/30 pl-6 mb-8 group-hover:translate-x-2 transition-transform duration-500">
-                          {t(event.description) || t({ tr: 'Detaylı bilgi ve rezervasyon için tıklayın.', en: 'Click for details and reservation.' })}
-                        </p>
-                        
-                        <div className="flex items-center space-x-4 group/btn">
-                            <div className="h-[2px] w-12 bg-secondary group-hover/btn:w-20 transition-all duration-500" />
-                            <span className="text-white text-[10px] font-black uppercase tracking-[0.4em] group-hover/btn:text-secondary transition-colors">
-                              {t({ tr: 'ETKİNLİK DETAYI', en: 'EVENT DETAILS' })}
+
+                        {/* Divider */}
+                        <div className="w-[1px] h-10 bg-secondary/20" />
+
+                        {/* Title & Category */}
+                        <div>
+                            <span className="text-secondary/50 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-1 block">
+                                {t(event.location) || 'PENNYLANE CADDE'}
                             </span>
+                            <h3 className={`font-serif font-bold uppercase tracking-wider transition-all duration-500 ${
+                                isActive ? 'text-secondary text-xl md:text-3xl' : 'text-white text-lg md:text-2xl'
+                            }`}>
+                                {t(event.title)}
+                            </h3>
                         </div>
                     </div>
-                </div>
 
-                {/* Date Badge (Always visible top) */}
-                <div className={`absolute top-8 left-8 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-50 -translate-y-2'}`}>
-                    <div className="bg-secondary text-primary font-black px-4 py-2 rounded-xl text-xs tracking-widest uppercase shadow-xl flex flex-col items-center">
-                        <span className="leading-none">{dateParts[0] || '??'}</span>
-                        <span className="text-[9px] opacity-80 mt-1">{dateParts[1]?.slice(0,3) || '??'}</span>
+                    {/* Interaction Icon */}
+                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${
+                      isActive ? 'border-secondary text-secondary bg-secondary/10' : 'border-white/20 text-white/20'
+                    }`}>
+                      <ArrowRight className={`w-5 h-5 transition-transform duration-500 ${isActive ? 'rotate-90' : 'rotate-0'}`} />
                     </div>
                 </div>
 
-                {/* Hover glow */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 dark:group-hover:opacity-20 bg-secondary transition-opacity pointer-events-none" />
+                {/* Expanded Content (Description only) */}
+                <AnimatePresence>
+                    {isActive && (
+                        <motion.div 
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="relative overflow-hidden z-20"
+                        >
+                            <div className="px-6 pb-8 md:px-24 md:pb-12 pt-0">
+                                <div className="max-w-3xl">
+                                    <p className="text-textSecondary text-sm md:text-lg font-light leading-relaxed italic border-l-2 border-secondary/30 pl-6 mb-6">
+                                        {t(event.description) || t({ tr: 'Detaylı bilgi ve rezervasyon için tıklayın.', en: 'Click for details and reservation.' })}
+                                    </p>
+                                    <span className="text-white text-[8px] font-black uppercase tracking-[0.4em] opacity-60">ETKİNLİK DETAYI İÇİN TIKLAYIN</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
               </motion.div>
             );
           })}
@@ -112,9 +119,9 @@ const EventsSection = ({ data }) => {
             onClick={() => setSelectedEvent(null)}
           >
             <motion.div 
-              initial={{ scale: 0.9, opacity: 0, y: 30 }}
+              initial={{ scale: 0.95, opacity: 0, y: 30 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 30 }}
+              exit={{ scale: 0.95, opacity: 0, y: 30 }}
               className="relative max-w-5xl w-full bg-primary/40 rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-secondary/15 flex flex-col md:flex-row cursor-default max-h-[90vh] md:max-h-[750px]"
               onClick={e => e.stopPropagation()}
             >
@@ -125,20 +132,19 @@ const EventsSection = ({ data }) => {
                 <X className="w-5 h-5" />
               </button>
               
-              <div className="w-full md:w-5/12 h-64 md:h-auto relative overflow-hidden">
+              <div className="w-full md:w-3/5 h-[350px] md:h-full relative overflow-hidden bg-black/10 flex items-center justify-center">
                 <motion.img 
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1 }}
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.6 }}
                     src={selectedEvent.image_url} 
                     alt="" 
-                    className="w-full h-full object-cover" 
+                    className="w-full h-full object-contain" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/60" />
               </div>
 
-              <div className="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center bg-dark/40 backdrop-blur-md relative">
-                <div className="space-y-8 relative z-10">
+              <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-dark/40 backdrop-blur-md relative">
+                <div className="space-y-6 relative z-10">
                     <div className="flex items-center space-x-4 text-secondary text-[11px] font-bold uppercase tracking-[0.5em]">
                         <Calendar className="w-5 h-5" />
                         <span>{t(selectedEvent.date) || 'TARİH YAKINDA'}</span>
@@ -160,23 +166,7 @@ const EventsSection = ({ data }) => {
                     <p className="text-textSecondary text-lg md:text-xl font-light italic leading-relaxed opacity-90 border-l-2 border-secondary/20 pl-8">
                       {t(selectedEvent.description) || t({ tr: 'Bu özel etkinlik için yerinizi şimdiden ayırtmayı unutmayın. Detaylı bilgi Pennylane ekibi tarafından paylaşılacaktır.', en: 'Don\'t forget to reserve your place for this special event. Detailed information will be shared by the Pennylane team.' })}
                     </p>
-                    
-                    <div className="flex flex-col sm:flex-row gap-6 pt-6">
-                        <div className="flex items-center space-x-4 text-white font-bold text-[9px] tracking-[0.4em] uppercase bg-secondary/5 px-6 py-4 rounded-2xl border border-secondary/15">
-                            <MapPin className="w-5 h-5 text-secondary" />
-                            <span>{t(selectedEvent.location) || 'PENNYLANE CADDEBOSTAN'}</span>
-                        </div>
-                        
-                        <a href="#reservation" onClick={() => setSelectedEvent(null)} className="flex items-center justify-center space-x-4 bg-secondary text-dark font-black text-[9px] tracking-[0.4em] uppercase px-8 py-4 rounded-2xl hover:bg-white transition-all transform hover:-translate-y-1 shadow-lg shadow-secondary/10">
-                            <span>{t({ tr: 'REZERVASYON YAP', en: 'MAKE RESERVATION' })}</span>
-                        </a>
-                    </div>
                 </div>
-
-                {/* Artistic decorative text */}
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20rem] font-serif font-black text-white/[0.02] select-none pointer-events-none">
-                    EVENT
-                </span>
               </div>
             </motion.div>
           </motion.div>

@@ -159,26 +159,11 @@ const QRMenuPage = ({ cmsData }) => {
           style={{ height: '1.5px', backgroundColor: `${accent}45` }}
         />
         <p
-          className="text-[10px] uppercase tracking-[0.3em] mb-4"
+          className="text-[10px] uppercase tracking-[0.3em]"
           style={{ color: textColor, opacity: 0.3 }}
         >
           {cmsData.footer?.copyright || '© 2025 Pennylane Gastropub'}
         </p>
-        <div className="flex space-x-6">
-          {[
-            { label: 'Call',     href: `tel:${cmsData.footer?.contact_info?.phone}` },
-            { label: 'Location', href: '#location' },
-          ].map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              className="text-[10px] font-black uppercase tracking-widest transition-opacity hover:opacity-55"
-              style={{ color: accent }}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
       </motion.footer>
     </div>
   );

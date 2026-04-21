@@ -13,6 +13,7 @@
     "start": "node server/index.js"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.104.0",
     "@tailwindcss/postcss": "^4.2.2",
     "@tailwindcss/vite": "^4.2.2",
     "autoprefixer": "^10.4.27",

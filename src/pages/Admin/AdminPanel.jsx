@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 import { 
   Save, LogOut, Layout, Image as ImageIcon, Menu as MenuIcon, Info, 
   Settings, Users, Calendar, Mail, CheckCircle, Smartphone, Monitor, Upload, Download, X,
-  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight
+  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight, Edit2, Eye, Printer
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { getVal, updateVal } from '../../utils/i18n';
@@ -294,7 +294,7 @@ const AdminPanel = ({ initialData }) => {
     { id: 'newsletter', label: 'BÜLTEN', icon: Mail },
     { id: 'allergens', label: 'ALERJENLER', icon: Info },
     { id: 'footer', label: 'FOOTER', icon: Settings },
-    { id: 'settings', label: 'MENÜ AYARLARI', icon: Settings },
+    { id: 'settings', label: 'AYARLAR', icon: Settings },
     { id: 'print_menu', label: 'BASKI MENÜSÜ', icon: Download },
   ];
 
@@ -617,46 +617,59 @@ const AdminPanel = ({ initialData }) => {
               </motion.div>
             )}
 
-            {activeTab === 'gallery' && (
-              <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <label className="text-xs uppercase font-bold text-secondary tracking-widest">BÖLÜM BAŞLIĞI</label>
-                    <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                  </div>
-                  <input type="text" className="w-full bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white" value={getVal(data.gallery.section_title, lang)} onChange={e => {
-                    setData({...data, gallery: {...data.gallery, section_title: updateVal(data.gallery.section_title, lang, e.target.value)}});
-                    setHasChanges(true);
-                  }} />
+            {activeTab === 'print_menu' && (
+              <motion.div key="print_menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-10">
+                <div className="bg-secondary/10 border-2 border-dashed border-secondary/30 rounded-3xl p-10 text-center space-y-6">
+                   <div className="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto text-secondary shadow-lg shadow-secondary/10 border border-secondary/20 scale-110">
+                      <Download className="w-10 h-10" />
+                   </div>
+                   <div className="max-w-md mx-auto space-y-4">
+                      <h3 className="text-3xl font-serif font-black text-white uppercase tracking-tighter">BASKI MENÜSÜ TASARIMCISI</h3>
+                      <p className="text-textSecondary text-sm leading-relaxed font-light">Pennylane için özel olarak tasarlanmış <strong>SVG bazlı PDF Menü</strong> düzenleme aracını başlatın. Fiyatları güncelleyebilir ve profesyonel baskı alabilirsiniz.</p>
+                   </div>
+                   
+                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+                      <a 
+                        href="/menu-pdf/admin.html" 
+                        target="_blank"
+                        className="bg-secondary text-primary px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-xl shadow-secondary/20 flex items-center space-x-3"
+                      >
+                         <Edit2 className="w-4 h-4" />
+                         <span>TASARIMCIYI BAŞLAT</span>
+                      </a>
+                      <a 
+                        href="/menu-pdf/index.html" 
+                        target="_blank"
+                        className="bg-dark/60 border border-secondary/20 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-secondary/10 hover:border-secondary transition-all flex items-center space-x-3"
+                      >
+                         <Eye className="w-4 h-4 text-secondary" />
+                         <span>ÖNİZLEME</span>
+                      </a>
+                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {data.gallery.images.map((img, idx) => (
-                    <div key={idx} className="bg-dark/40 p-6 rounded-2xl border border-secondary/10 space-y-4 relative group">
-                       <button onClick={() => handleRemoveItem('gallery', 'images', idx)} className="absolute top-4 right-4 text-red-500 hover:text-red-400 text-[10px] font-bold uppercase z-10 bg-dark px-2 py-1 rounded border border-red-500/20">SİL</button>
-                       <ImageUploader label={`GÖRSEL ${idx+1}`} value={img.image_url} onChange={(e) => handleImageUpload(e, 'gallery', 'image_url', 'images', idx)} />
-                       
-                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <div className="space-y-1">
-                             <div className="flex items-center space-x-2">
-                               <label className="text-[10px] uppercase font-bold text-secondary tracking-widest">Başlık</label>
-                               <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                             </div>
-                             <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-2 text-white text-xs outline-none focus:border-secondary transition-colors" value={getVal(img.caption, lang)} onChange={e => {
-                                const arr = [...data.gallery.images]; arr[idx].caption = updateVal(img.caption, lang, e.target.value); setData({...data, gallery: {...data.gallery, images: arr}});
-                                setHasChanges(true);
-                             }} placeholder="Başlık / Açıklama" />
-                          </div>
-                          <div className="space-y-1">
-                             <label className="text-[10px] uppercase font-bold text-secondary tracking-widest">Kategori</label>
-                             <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-2 text-white text-xs outline-none focus:border-secondary transition-colors" value={img.category || ''} onChange={e => {
-                                const arr = [...data.gallery.images]; arr[idx].category = e.target.value; setData({...data, gallery: {...data.gallery, images: arr}});
-                                setHasChanges(true);
-                             }} placeholder="ör: events, drinks" />
-                          </div>
-                       </div>
-                    </div>
-                  ))}
-                  <button onClick={() => handleAddItem('gallery', 'images', { id: Date.now().toString(), image_url: '', category: 'all', caption: 'Yeni Görsel' })} className="border-2 border-dashed border-secondary/30 rounded-xl flex items-center justify-center p-8 text-secondary font-bold hover:bg-secondary/10 transition-all uppercase tracking-widest">+ YENİ GÖRSEL EKLE</button>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                   <div className="bg-dark/40 border border-secondary/10 p-6 rounded-2xl space-y-3">
+                      <h5 className="text-secondary font-bold text-xs uppercase tracking-widest flex items-center space-x-2">
+                         <Info className="w-4 h-4" />
+                         <span>NASIL KULLANILIR?</span>
+                      </h5>
+                      <ul className="text-textSecondary text-[11px] space-y-2 list-disc pl-4 leading-relaxed font-light">
+                         <li><strong>TASARIMCIYI BAŞLAT</strong> butonuna basın.</li>
+                         <li>Açılan pencerede Excel dosyanızı yükleyin veya manuel fiyatları girin.</li>
+                         <li>Değişiklikleri SVG üzerine uygulayın ve kaydedin.</li>
+                         <li><strong>ÖNİZLEME</strong> kısmından tasarımı kontrol edin.</li>
+                      </ul>
+                   </div>
+                   <div className="bg-dark/40 border border-secondary/10 p-6 rounded-2xl space-y-3">
+                      <h5 className="text-secondary font-bold text-xs uppercase tracking-widest flex items-center space-x-2">
+                         <Printer className="w-4 h-4" />
+                         <span>PDF KAYDETME (CRITICAL)</span>
+                      </h5>
+                      <p className="text-textSecondary text-[11px] leading-relaxed font-light italic">
+                         Menü açıldıktan sonra tarayıcınızda <strong>CTRL + P</strong> (Yazdır) tuşuna basın. Hedef olarak <strong>"PDF Olarak Kaydet"</strong> seçeneğini belirleyin ve <strong>"Arka Plan Grafikleri"</strong> ayarının açık olduğundan emin olun.
+                      </p>
+                   </div>
                 </div>
               </motion.div>
             )}
@@ -1519,52 +1532,107 @@ const AdminPanel = ({ initialData }) => {
             )}
 
             {activeTab === 'print_menu' && (
-              <motion.div key="print_menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
-                <div className="flex items-center justify-between">
+              <motion.div key="print_menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
+
+                {/* Header */}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-secondary/20 border border-secondary/30 flex items-center justify-center flex-shrink-0">
+                    <Download className="w-6 h-6 text-secondary" />
+                  </div>
                   <div>
-                    <h3 className="text-white font-bold uppercase tracking-widest text-sm">Baskı Menüsü Yönetimi</h3>
-                    <p className="text-textSecondary text-xs font-light mt-1">
-                      Fiyatları, görselleri ve Happy Hour bilgilerini aşağıdan düzenleyin. Değiştir butonuna basın, ardından önizleyerek PDF olarak kaydedin.
+                    <h3 className="text-white font-serif font-bold text-xl uppercase tracking-tight">Baskı Menüsü</h3>
+                    <p className="text-textSecondary text-sm font-light mt-1">
+                      3 adımda menü fiyatlarını düzenleyin, önizleyin ve PDF olarak indirin.
                     </p>
                   </div>
-                  <div className="flex gap-3">
-                    <a
-                      href="/menu-pdf/index.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-secondary text-primary px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg shadow-secondary/20"
-                    >
-                      <Download className="w-3.5 h-3.5" />
-                      Önizle / PDF İndir
-                    </a>
+                </div>
+
+                {/* 3-Step Workflow Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                  {/* Step 1 - Edit */}
+                  <div className="bg-dark/50 border border-secondary/15 rounded-2xl p-6 flex flex-col gap-4 hover:border-secondary/40 transition-all group">
+                    <div className="flex items-center gap-3">
+                      <span className="w-9 h-9 rounded-full bg-secondary/20 border border-secondary/30 text-secondary text-sm font-black flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:text-primary transition-all">1</span>
+                      <span className="text-white font-bold text-sm uppercase tracking-widest">Düzenle</span>
+                    </div>
+                    <p className="text-textSecondary text-xs leading-relaxed flex-1">
+                      Fiyatları, Happy Hour saatlerini ve görselleri değiştirin. Panelde düzenleme yapın ve <strong className="text-secondary">Kaydet</strong> butonuna basın.
+                    </p>
                     <a
                       href="/menu-pdf/admin.html"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-dark/60 border border-secondary/30 text-secondary px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-secondary/10 transition-all"
+                      className="w-full flex items-center justify-center gap-2 bg-secondary/10 border border-secondary/30 text-secondary px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
                     >
-                      <Monitor className="w-3.5 h-3.5" />
-                      Tam Ekran Aç
+                      <Settings className="w-4 h-4" />
+                      Düzenleme Panelini Aç
                     </a>
                   </div>
+
+                  {/* Step 2 - Preview */}
+                  <div className="bg-dark/50 border border-secondary/15 rounded-2xl p-6 flex flex-col gap-4 hover:border-secondary/40 transition-all group">
+                    <div className="flex items-center gap-3">
+                      <span className="w-9 h-9 rounded-full bg-secondary/20 border border-secondary/30 text-secondary text-sm font-black flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:text-primary transition-all">2</span>
+                      <span className="text-white font-bold text-sm uppercase tracking-widest">Önizle</span>
+                    </div>
+                    <p className="text-textSecondary text-xs leading-relaxed flex-1">
+                      Değişikliklerinizi kaydettikten sonra menünün A4 baskı görünümünü kontrol edin. Her sayfa doğru mu?
+                    </p>
+                    <a
+                      href="/menu-pdf/index.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 bg-secondary/10 border border-secondary/30 text-secondary px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
+                    >
+                      <Monitor className="w-4 h-4" />
+                      Menüyü Önizle
+                    </a>
+                  </div>
+
+                  {/* Step 3 - PDF */}
+                  <div className="bg-secondary/10 border-2 border-secondary/40 rounded-2xl p-6 flex flex-col gap-4 hover:border-secondary/70 transition-all group">
+                    <div className="flex items-center gap-3">
+                      <span className="w-9 h-9 rounded-full bg-secondary text-primary text-sm font-black flex items-center justify-center flex-shrink-0">3</span>
+                      <span className="text-white font-bold text-sm uppercase tracking-widest">PDF İndir</span>
+                    </div>
+                    <p className="text-textSecondary text-xs leading-relaxed flex-1">
+                      Menü açıkken <kbd className="bg-dark/60 border border-secondary/20 rounded px-1.5 py-0.5 text-secondary font-mono text-[10px]">Ctrl+P</kbd> basın → <strong className="text-white">PDF olarak kaydet</strong> seçin → İndir.
+                    </p>
+                    <a
+                      href="/menu-pdf/index.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 bg-secondary text-primary px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg shadow-secondary/20"
+                    >
+                      <Download className="w-4 h-4" />
+                      Aç ve PDF Al
+                    </a>
+                  </div>
+
                 </div>
 
-                <div className="bg-dark/40 rounded-2xl border border-secondary/10 overflow-hidden" style={{ height: '75vh' }}>
-                  <iframe
-                    src="/menu-pdf/admin.html"
-                    className="w-full h-full border-0"
-                    title="Baskı Menüsü Yönetim Paneli"
-                    style={{ minHeight: '600px' }}
-                  />
-                </div>
-
-                <div className="bg-secondary/5 border border-secondary/10 rounded-xl p-4 flex items-start gap-3">
-                  <Info className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
-                  <div className="text-xs text-textSecondary space-y-1">
-                    <p><strong className="text-secondary">Nasıl çalışır?</strong> Yukarıdaki panelde değişikliklerinizi yapıp "Kaydet" butonuna tıklayın.</p>
-                    <p>Ardından <strong className="text-white">Önizle / PDF İndir</strong> butonuyla menüyü açın → tarayıcının yazdır menüsünden <strong className="text-white">PDF olarak kaydet</strong> seçeneğini kullanın.</p>
+                {/* Info Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-dark/40 border border-secondary/10 rounded-xl p-5 flex items-start gap-3">
+                    <Info className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
+                    <div className="text-xs text-textSecondary">
+                      <p className="text-white font-bold text-xs uppercase tracking-widest mb-2">PDF Baskı Ayarları</p>
+                      <p className="mb-1">Chrome/Edge baskı penceresinde şunlara dikkat edin:</p>
+                      <p>• <strong className="text-secondary">Kenar boşlukları:</strong> Yok</p>
+                      <p>• <strong className="text-secondary">Ölçeklendirme:</strong> %100</p>
+                      <p>• <strong className="text-secondary">Arka plan grafikleri:</strong> Açık ✓</p>
+                    </div>
+                  </div>
+                  <div className="bg-dark/40 border border-secondary/10 rounded-xl p-5 flex items-start gap-3">
+                    <Info className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
+                    <div className="text-xs text-textSecondary">
+                      <p className="text-white font-bold text-xs uppercase tracking-widest mb-2">Önemli Not</p>
+                      <p>Düzenleme panelindeki değişiklikler <strong className="text-secondary">bu tarayıcıda</strong> saklanır. Başka bir cihaz veya tarayıcıda değişiklikler görünmez — her cihazda yeniden kaydetmeniz gerekir.</p>
+                    </div>
                   </div>
                 </div>
+
               </motion.div>
             )}
 
