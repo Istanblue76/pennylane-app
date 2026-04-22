@@ -174,19 +174,15 @@ export default function App() {
     );
   }
 
-  if (error) {
+  // Error durumunda bile siteyi kapatmıyoruz (Hook artık fallback veriyor)
+  if (error && !cmsData) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-dark px-10 text-center">
-        <h2 className="text-5xl font-serif font-bold text-secondary mb-10 uppercase tracking-tighter">API BAĞLANTI HATASI</h2>
-        <p className="text-textSecondary text-xl italic max-w-2xl font-light italic mb-10 opacity-70 leading-relaxed">
-          İçerik sunucusu şu an aktif değil veya bir ağ sorunu yaşanıyor. Lütfen backend sunucusunun (PORT 5000) açık olduğunu kontrol edin.
+        <h2 className="text-5xl font-serif font-bold text-secondary mb-10 uppercase tracking-tighter">SİSTEM YÜKLENİYOR</h2>
+        <p className="text-textSecondary text-xl italic max-w-2xl font-light mb-10 opacity-70 leading-relaxed">
+          Verilere şu an ulaşılamıyor, lütfen sayfayı yenileyin.
         </p>
-        <button 
-          onClick={() => window.location.reload()}
-          className="btn-outline"
-        >
-          YENİDEN DENE
-        </button>
+        <button onClick={() => window.location.reload()} className="btn-outline">YENİDEN DENE</button>
       </div>
     );
   }

@@ -360,10 +360,22 @@
     ]
   },
   "newsletter": {
-    "section_title": "Pennylane Society",
-    "section_subtitle": "Özel etkinliklerden ve yeni menülerden ilk siz haberdar olun.",
-    "placeholder": "E-posta adresiniz",
-    "cta_text": "Abone Ol"
+    "section_title": {
+      "tr": "Pennylane Society",
+      "en": "Pennylane Society"
+    },
+    "section_subtitle": {
+      "tr": "Özel etkinliklerden ve yeni menülerden ilk siz haberdar olun.",
+      "en": "Be the first to know about special events and new menus."
+    },
+    "placeholder": {
+      "tr": "E-posta adresiniz",
+      "en": "Your email address"
+    },
+    "cta_text": {
+      "tr": "Abone Ol",
+      "en": "Subscribe"
+    }
   },
   "footer": {
     "company_info": {

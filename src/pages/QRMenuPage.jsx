@@ -162,7 +162,7 @@ const QRMenuPage = ({ cmsData }) => {
           className="text-[10px] uppercase tracking-[0.3em]"
           style={{ color: textColor, opacity: 0.3 }}
         >
-          {cmsData.footer?.copyright || '© 2025 Pennylane Gastropub'}
+          {cmsData?.footer?.copyright || '© 2025 Pennylane Gastropub'}
         </p>
       </motion.footer>
     </div>

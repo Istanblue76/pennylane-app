@@ -212,8 +212,8 @@ const AdminPanel = ({ initialData }) => {
   const handleSave = async () => {
     setSaveStatus('saving');
     try {
-      const resp = await axios.post('/api/cms/update', data);
-      if (resp.data.status === 'success') {
+      const response = await axios.post(`${getApiBase()}/api/cms/update`, data);
+      if (response.data.status === 'success') {
         setSaveStatus('success');
         setHasChanges(false);
         window.dispatchEvent(new Event('cms-update'));
@@ -1515,20 +1515,8 @@ const AdminPanel = ({ initialData }) => {
               </motion.div>
             )}
 
-            {['newsletter'].includes(activeTab) && (
-              <motion.div key="fallback" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
-                <p className="text-textSecondary italic text-sm">Bu bölüm ({activeTab}) için gelişmiş görsel editör yapım aşamasındadır. Şimdilik metinleri JSON üzerinden düzenleyebilirsiniz:</p>
-                <textarea 
-                  className="w-full bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white font-mono text-xs h-96 focus:border-secondary outline-none transition-all resize-none overflow-y-auto"
-                  value={JSON.stringify(data[activeTab], null, 2)}
-                  onChange={e => {
-                    try {
-                      const parsed = JSON.parse(e.target.value);
-                      setData({ ...data, [activeTab]: parsed });
-                    } catch(err) { /* invalid json */ }
-                  }}
-                />
-              </motion.div>
+            {activeTab === 'newsletter' && (
+              <NewsletterManager t={t} lang={lang} data={data} setData={setData} setHasChanges={setHasChanges} />
             )}
 
             {activeTab === 'print_menu' && (
@@ -1658,6 +1646,149 @@ const AdminPanel = ({ initialData }) => {
         </AnimatePresence>
       </main>
     </div>
+  );
+};
+
+
+const NewsletterManager = ({ t, lang, data, setData, setHasChanges }) => {
+  const [subscribers, setSubscribers] = useState([]);
+  const [mailSubject, setMailSubject] = useState('');
+  const [mailContent, setMailContent] = useState('');
+  const [mailImage, setMailImage] = useState('');
+  const [sendingStatus, setSendingStatus] = useState('idle');
+
+  const getApiBase = () => {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    return isLocal ? 'http://localhost:5000' : '';
+  };
+
+  useEffect(() => {
+    fetchSubscribers();
+  }, []);
+
+  const fetchSubscribers = async () => {
+    try {
+      const res = await axios.get(`${getApiBase()}/api/newsletter/subscribers`);
+      if (res.data.status === 'success') setSubscribers(res.data.data);
+    } catch (err) { console.error(err); }
+  };
+
+  const handleApplyEvent = (ev) => {
+    setMailSubject(getVal(ev.title, lang));
+    setMailContent(getVal(ev.description, lang));
+    setMailImage(ev.image_url);
+  };
+
+  const handleSendBroadcast = async () => {
+    if (!mailSubject || !mailContent) return alert('Başlık ve içerik gerekli!');
+    setSendingStatus('sending');
+    try {
+      await axios.post(`${getApiBase()}/api/newsletter/send-bulk`, { 
+        subject: mailSubject, 
+        content: mailContent, 
+        image: mailImage 
+      });
+      setSendingStatus('success');
+      setTimeout(() => {
+        setSendingStatus('idle');
+        setMailSubject(''); setMailContent(''); setMailImage('');
+      }, 3000);
+    } catch (err) { 
+      alert('Hata oluştu!'); 
+      setSendingStatus('idle'); 
+    }
+  };
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-12">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-secondary/5 rounded-3xl p-8 border border-secondary/20 flex flex-col items-center text-center">
+            <Users className="w-8 h-8 text-secondary mb-3" />
+            <h4 className="text-3xl font-serif font-black text-white">{subscribers.length}</h4>
+            <p className="text-textSecondary text-[9px] uppercase tracking-widest font-bold">ABONE SAYISI</p>
+        </div>
+        {/* Quick select from current events */}
+        <div className="md:col-span-3 bg-dark/20 rounded-3xl p-6 border border-white/5 flex flex-col space-y-4">
+            <h5 className="text-[10px] font-black text-secondary uppercase tracking-widest">Etkinliklerden Otomatik Doldur</h5>
+            <div className="flex space-x-4 overflow-x-auto pb-2 custom-scrollbar">
+               {data.events.events.map((ev, i) => (
+                 <button 
+                  key={i} 
+                  onClick={() => handleApplyEvent(ev)}
+                  className="flex-shrink-0 w-40 bg-white/5 border border-white/10 rounded-xl p-3 hover:border-secondary transition-all text-left group"
+                 >
+                    <img src={ev.image_url} className="w-full h-20 object-cover rounded-lg mb-2 grayscale group-hover:grayscale-0 transition-all" />
+                    <p className="text-[10px] font-bold text-white truncate uppercase">{getVal(ev.title, lang)}</p>
+                    <p className="text-[8px] text-textSecondary">{ev.date}</p>
+                 </button>
+               ))}
+            </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        {/* Left: Composer */}
+        <div className="lg:col-span-2 space-y-8">
+           <div className="space-y-6 bg-primary/20 p-8 rounded-3xl border border-secondary/10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                   <div className="space-y-2">
+                      <label className="text-[10px] font-black text-secondary uppercase tracking-widest">Kampanya Başlığı</label>
+                      <input 
+                        type="text" value={mailSubject} onChange={e => setMailSubject(e.target.value)} 
+                        className="w-full bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white focus:border-secondary outline-none" 
+                        placeholder="Maıl konusu..."
+                      />
+                   </div>
+                   <div className="space-y-2">
+                      <label className="text-[10px] font-black text-secondary uppercase tracking-widest">Görsel URL (Etkinlik Afişi)</label>
+                      <div className="flex space-x-3">
+                        <input 
+                          type="text" value={mailImage} onChange={e => setMailImage(e.target.value)} 
+                          className="flex-1 bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white text-xs focus:border-secondary outline-none" 
+                          placeholder="https://..."
+                        />
+                      </div>
+                   </div>
+                </div>
+                <div className="space-y-2">
+                    <label className="text-[10px] font-black text-secondary uppercase tracking-widest">Duyuru Metni</label>
+                    <textarea 
+                      value={mailContent} onChange={e => setMailContent(e.target.value)} 
+                      className="w-full bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white h-full min-h-[160px] focus:border-secondary outline-none resize-none leading-relaxed" 
+                      placeholder="Meşaj içeriği..."
+                    />
+                </div>
+              </div>
+
+              <button 
+                onClick={handleSendBroadcast} disabled={sendingStatus !== 'idle'}
+                className={`w-full py-5 rounded-2xl font-black uppercase tracking-[0.4em] text-xs transition-all shadow-xl ${
+                  sendingStatus === 'success' ? 'bg-green-600 text-white' : 'bg-secondary text-primary'
+                }`}
+              >
+                {sendingStatus === 'sending' ? 'GÖNDERİLİYOR...' : (sendingStatus === 'success' ? 'TAMAMLANDI!' : 'BÜLTENİ GÖNDER')}
+              </button>
+           </div>
+        </div>
+
+        {/* Right: Live Preview */}
+        <div className="space-y-4">
+           <h5 className="text-[10px] font-black text-secondary uppercase tracking-widest text-center">Önizleme (Mail Görünümü)</h5>
+           <div className="bg-white rounded-3xl p-6 shadow-2xl overflow-hidden min-h-[400px]">
+              <div className="flex justify-center mb-6 border-b pb-4">
+                 <img src="/assets/img/pennylane_logo_white.png" className="h-6 invert opacity-80" />
+              </div>
+              {mailImage && <img src={mailImage} className="w-full h-48 object-cover rounded-xl mb-6 shadow-lg" />}
+              <h1 className="text-xl font-serif font-black text-black mb-4 uppercase">{mailSubject || 'BAŞLIK'}</h1>
+              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">{mailContent || 'İçerik burada görünecek...'}</p>
+              <div className="mt-10 pt-6 border-t text-[8px] text-gray-400 text-center uppercase tracking-[0.3em]">
+                 © 2025 Pennylane Gastropub <br/> Caddebostan, İstanbul
+              </div>
+           </div>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
