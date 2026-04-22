@@ -7,7 +7,7 @@
     "dev": "vite",
     "cms-server": "node server/index.js",
     "start-full": "npx concurrently \"npm run dev\" \"npm run cms-server\"",
-    "build": "vite build",
+    "build": "vite build && cp -r public/* dist/ && cp vercel.json dist/ 2>/dev/null || true",
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node server/index.js"
