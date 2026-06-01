@@ -1,110 +1,113 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, MapPin, X, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, MapPin, X, ArrowRight, Grab } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import SectionHeading from '../Common/SectionHeading';
 
 const EventsSection = ({ data }) => {
   const { t } = useLanguage();
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [activeAccIdx, setActiveAccIdx] = useState(-1);
+  const carouselRef = useRef(null);
+  const [width, setWidth] = useState(0);
 
-  if (!data || !data.events) return null;
+  useEffect(() => {
+    const updateWidth = () => {
+      if (carouselRef.current) {
+        const scrollWidth = carouselRef.current.scrollWidth;
+        const offsetWidth = carouselRef.current.offsetWidth;
+        setWidth(scrollWidth > offsetWidth ? scrollWidth - offsetWidth : 0);
+      }
+    };
+    
+    // Give it a tiny timeout to ensure elements are rendered
+    const timer = setTimeout(updateWidth, 100);
+    window.addEventListener('resize', updateWidth);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateWidth);
+    };
+  }, [data.events]);
+
+  if (!data || !data.events || data.events.length === 0) return null;
 
   return (
     <section id="events" className="py-24 md:py-36 bg-dark/70 relative overflow-hidden">
       <div className="section-container">
         <SectionHeading title={data.section_title} subtitle="Unutulmaz Anlar İçin Takipte Kalın" />
 
-        {/* All Events - High Depth Vertical Accordion */}
-        <div className="mt-16 flex flex-col gap-4 max-w-4xl mx-auto">
-          {data.events?.map((event, idx) => {
-            const isActive = activeAccIdx === idx;
-            const dateStr = t(event.date) || 'YAKINDA';
-            
-            return (
-              <motion.div
-                key={event.id}
-                layout
-                className={`relative overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] cursor-pointer border transition-all duration-700 flex-shrink-0 group ${
-                  isActive 
-                    ? 'border-secondary/40 shadow-[0_30px_60px_-15px_rgba(244,228,193,0.15)] ring-1 ring-secondary/20 bg-dark/20' 
-                    : 'border-secondary/10 hover:border-secondary/30 bg-dark/40'
-                }`}
-                onClick={() => {
-                    if (isActive) setSelectedEvent(event);
-                    else setActiveAccIdx(idx);
-                }}
-              >
-                {/* Background Image with Depth Effect */}
-                <div
-                  className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ${
-                    isActive ? 'scale-110 opacity-60' : 'scale-100 opacity-20 grayscale group-hover:opacity-100 group-hover:grayscale-0'
-                  }`}
-                  style={{ backgroundImage: `url(${event.image_url})` }}
-                />
-                
-                {/* Gradient Overlays for readability */}
-                <div className={`absolute inset-0 transition-opacity duration-700 ${
-                  isActive ? 'bg-gradient-to-t from-dark via-dark/40 to-transparent opacity-95' : 'bg-dark/60 opacity-100 md:bg-dark/40'
-                }`} />
+        {/* Horizontal Drag Instruction */}
+        <div className="flex items-center justify-center space-x-2 text-textSecondary/60 text-xs uppercase tracking-[0.2em] mt-8 mb-4">
+          <Grab className="w-4 h-4 animate-pulse text-secondary" />
+          <span>Kaydırmak için sürükleyin</span>
+        </div>
 
-                {/* Header Area (Always Visible) */}
-                <div className="p-6 md:p-8 flex items-center justify-between relative z-20">
-                    <div className="flex items-center space-x-6 md:space-x-10">
-                        {/* Date info */}
-                        <div className="flex flex-col items-center min-w-[50px] md:min-w-[70px]">
-                            <span className="text-secondary font-black text-xl md:text-2xl leading-none">{dateStr.split(' ')[0]}</span>
-                            <span className="text-secondary/60 font-bold text-[9px] md:text-xs uppercase tracking-widest mt-1">{dateStr.split(' ')[1]?.slice(0,3)}</span>
-                        </div>
+        {/* Carousel Viewport Container */}
+        <div 
+          ref={carouselRef} 
+          className="w-full overflow-hidden cursor-grab active:cursor-grabbing px-4"
+        >
+          <motion.div
+            drag="x"
+            dragConstraints={{ right: 0, left: -width }}
+            dragElastic={0.1}
+            whileTap={{ cursor: 'grabbing' }}
+            className="flex gap-6 py-6"
+            style={{ width: 'max-content' }}
+          >
+            {data.events.map((event) => {
+              const dateStr = t(event.date) || 'YAKINDA';
+              const day = dateStr.split(' ')[0];
+              const month = dateStr.split(' ')[1]?.slice(0, 3) || '';
+              
+              return (
+                <motion.div
+                  key={event.id}
+                  whileHover={{ y: -8, scale: 1.01 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="w-[280px] sm:w-[320px] md:w-[350px] h-[420px] md:h-[480px] flex-shrink-0 relative rounded-[2rem] overflow-hidden border border-secondary/15 group shadow-2xl bg-primary/20 backdrop-blur-sm"
+                  onClick={() => setSelectedEvent(event)}
+                >
+                  {/* Event Poster Image */}
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-[1.5s] ease-out group-hover:scale-110 filter brightness-95 group-hover:brightness-100"
+                    style={{ backgroundImage: `url(${event.image_url})` }}
+                  />
 
-                        {/* Divider */}
-                        <div className="w-[1px] h-10 bg-secondary/20" />
+                  {/* Dark Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-transparent opacity-95 transition-opacity duration-500 group-hover:opacity-90" />
 
-                        {/* Title & Category */}
-                        <div>
-                            <span className="text-secondary/50 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-1 block">
-                                {t(event.location) || 'PENNYLANE CADDE'}
-                            </span>
-                            <h3 className={`font-serif font-bold uppercase tracking-wider transition-all duration-500 ${
-                                isActive ? 'text-secondary text-xl md:text-3xl' : 'text-white text-lg md:text-2xl'
-                            }`}>
-                                {t(event.title)}
-                            </h3>
-                        </div>
+                  {/* Date Badge (Top Right) */}
+                  {day && (
+                    <div className="absolute top-5 right-5 z-20 bg-dark/70 backdrop-blur-md border border-secondary/20 px-3.5 py-2 rounded-2xl flex flex-col items-center min-w-[50px] shadow-lg">
+                      <span className="text-secondary font-black text-lg md:text-xl leading-none">{day}</span>
+                      <span className="text-secondary/60 font-bold text-[9px] md:text-[10px] uppercase tracking-widest mt-0.5">{month}</span>
                     </div>
+                  )}
 
-                    {/* Interaction Icon */}
-                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full border flex items-center justify-center transition-all duration-500 ${
-                      isActive ? 'border-secondary text-secondary bg-secondary/10' : 'border-white/20 text-white/20'
-                    }`}>
-                      <ArrowRight className={`w-5 h-5 transition-transform duration-500 ${isActive ? 'rotate-90' : 'rotate-0'}`} />
+                  {/* Card Content (Bottom) */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 flex flex-col justify-end z-10">
+                    <span className="text-secondary/60 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-2 flex items-center gap-1.5">
+                      <MapPin className="w-3.5 h-3.5 text-secondary" />
+                      {t(event.location) || 'PENNYLANE CADDE'}
+                    </span>
+
+                    <h3 className="font-serif font-bold uppercase text-xl md:text-2xl text-white tracking-wide group-hover:text-secondary transition-colors duration-300 mb-3 line-clamp-2">
+                      {t(event.title)}
+                    </h3>
+
+                    <p className="text-textSecondary/80 text-xs md:text-sm font-light leading-relaxed mb-5 line-clamp-2 italic opacity-85 group-hover:opacity-100 transition-opacity">
+                      {t(event.description) || t({ tr: 'Detaylı bilgi için tıklayın.', en: 'Click for details.' })}
+                    </p>
+
+                    <div className="flex items-center space-x-3 text-secondary text-xs font-black uppercase tracking-widest border-t border-secondary/15 pt-4 group-hover:border-secondary/40 transition-colors">
+                      <span>DETAYLARI GÖR</span>
+                      <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" />
                     </div>
-                </div>
-
-                {/* Expanded Content (Description only) */}
-                <AnimatePresence>
-                    {isActive && (
-                        <motion.div 
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="relative overflow-hidden z-20"
-                        >
-                            <div className="px-6 pb-8 md:px-24 md:pb-12 pt-0">
-                                <div className="max-w-3xl">
-                                    <p className="text-textSecondary text-sm md:text-lg font-light leading-relaxed italic border-l-2 border-secondary/30 pl-6 mb-6">
-                                        {t(event.description) || t({ tr: 'Detaylı bilgi ve rezervasyon için tıklayın.', en: 'Click for details and reservation.' })}
-                                    </p>
-                                    <span className="text-white text-[8px] font-black uppercase tracking-[0.4em] opacity-60">ETKİNLİK DETAYI İÇİN TIKLAYIN</span>
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
 

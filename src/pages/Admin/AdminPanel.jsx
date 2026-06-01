@@ -35,12 +35,21 @@ const AdminPanel = ({ initialData }) => {
   }, [activeTab]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+
+  useEffect(() => {
     if (!localStorage.getItem('adminToken')) {
       navigate('/login');
     }
   }, [navigate]);
 
   if (!data) return null;
+
+  const getApiBase = () => {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    return isLocal ? 'http://localhost:5000' : '';
+  };
 
   const exportToExcel = () => {
     const fileName = `pennylane_menu_${new Date().toISOString().split('T')[0]}.xlsx`;
@@ -320,12 +329,12 @@ const AdminPanel = ({ initialData }) => {
           <span className="font-serif font-bold text-lg uppercase tracking-widest text-secondary">PENNYLANE CMS</span>
         </div>
 
-        <nav className="flex flex-col space-y-2 pr-2 mb-6 overflow-y-auto custom-scrollbar flex-grow">
+        <nav className="flex flex-col space-y-1.5 pr-2 mb-6 overflow-y-auto custom-scrollbar flex-grow">
           {navItems.map(item => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
-              className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 text-xs font-semibold tracking-widest uppercase ${
+              className={`flex items-center space-x-3 py-2.5 px-3 rounded-xl transition-all duration-300 text-xs font-semibold tracking-widest uppercase ${
                 activeTab === item.id ? 'bg-secondary text-primary shadow-lg shadow-secondary/20 scale-[1.02]' : 'text-textSecondary hover:bg-secondary/10 hover:text-white'
               }`}
             >
@@ -674,6 +683,78 @@ const AdminPanel = ({ initialData }) => {
               </motion.div>
             )}
 
+            {activeTab === 'gallery' && (
+              <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
+                <div className="bg-secondary/5 p-6 rounded-xl border border-secondary/10 space-y-4">
+                  <h4 className="text-secondary font-bold uppercase tracking-widest text-xs">GALERİ BAŞLIK AYARLARI</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-2">
+                        <label className="text-[10px] uppercase font-bold text-secondary tracking-widest">Bölüm Başlığı</label>
+                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                      </div>
+                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-2.5 text-white text-sm font-bold" value={getVal(data.gallery.section_title, lang)} onChange={e => {
+                        const newTitle = updateVal(data.gallery.section_title, lang, e.target.value);
+                        setData({...data, gallery: {...data.gallery, section_title: newTitle}});
+                        setHasChanges(true);
+                      }} placeholder="Galeri Başlığı" />
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-2">
+                        <label className="text-[10px] uppercase font-bold text-secondary tracking-widest">Bölüm Alt Başlığı</label>
+                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                      </div>
+                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-2.5 text-white text-sm" value={getVal(data.gallery.section_subtitle, lang)} onChange={e => {
+                        const newSubtitle = updateVal(data.gallery.section_subtitle, lang, e.target.value);
+                        setData({...data, gallery: {...data.gallery, section_subtitle: newSubtitle}});
+                        setHasChanges(true);
+                      }} placeholder="Galeri Alt Başlığı" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  {(data.gallery.images || []).map((img, idx) => (
+                    <div key={idx} className="bg-dark/40 p-6 rounded-xl border border-secondary/10 relative group/gallery">
+                      <button onClick={() => handleRemoveItem('gallery', 'images', idx)} className="absolute top-4 right-4 text-red-500 hover:text-red-400 text-[10px] font-bold uppercase tracking-widest z-10 bg-dark px-3 py-1 rounded">SİL</button>
+                      
+                      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 pt-2">
+                         <div className="xl:col-span-1 self-start">
+                            <ImageUploader label="GÖRSEL" value={img.image_url} onChange={(e) => handleImageUpload(e, 'gallery', 'image_url', 'images', idx)} />
+                         </div>
+
+                         <div className="xl:col-span-2 space-y-4">
+                            <div className="space-y-1">
+                              <div className="flex items-center space-x-2">
+                                <label className="text-[10px] uppercase font-bold text-secondary tracking-widest">Görsel Açıklaması</label>
+                                <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                              </div>
+                              <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-2.5 text-white text-sm" value={getVal(img.caption, lang)} onChange={e => {
+                                   const arr = [...data.gallery.images]; arr[idx].caption = updateVal(img.caption, lang, e.target.value); setData({...data, gallery: {...data.gallery, images: arr}});
+                                   setHasChanges(true);
+                                }} placeholder="Açıklama" />
+                            </div>
+                            
+                            <div className="space-y-1">
+                              <label className="text-[10px] uppercase font-bold text-secondary tracking-widest">Kategori</label>
+                              <select className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-2.5 text-white text-sm outline-none cursor-pointer" value={img.category || 'interior'} onChange={e => {
+                                   const arr = [...data.gallery.images]; arr[idx].category = e.target.value; setData({...data, gallery: {...data.gallery, images: arr}});
+                                   setHasChanges(true);
+                                }}>
+                                 <option value="interior">İç Mekan (interior)</option>
+                                 <option value="drinks">İçecekler (drinks)</option>
+                                 <option value="events">Etkinlikler (events)</option>
+                              </select>
+                            </div>
+                         </div>
+                      </div>
+                    </div>
+                  ))}
+                  <button onClick={() => handleAddItem('gallery', 'images', { id: Date.now().toString(), image_url: '', category: 'interior', caption: { tr: 'Yeni Görsel', en: 'New Image' } })} className="w-full border-2 border-dashed border-secondary/30 rounded-xl flex items-center justify-center p-6 text-secondary font-bold hover:bg-secondary/10 transition-all uppercase tracking-widest">+ YENİ GÖRSEL EKLE</button>
+                </div>
+              </motion.div>
+            )}
+
             {activeTab === 'events' && (
               <motion.div key="events" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
                 {data.events.events.map((ev, idx) => (
@@ -682,7 +763,7 @@ const AdminPanel = ({ initialData }) => {
                       
                       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 pt-2">
                          {/* Left: Image */}
-                         <div className="xl:col-span-1 h-full">
+                         <div className="xl:col-span-1 self-start">
                             <ImageUploader label="AFİŞ" value={ev.image_url} onChange={(e) => handleImageUpload(e, 'events', 'image_url', 'events', idx)} />
                          </div>
 
@@ -1656,6 +1737,7 @@ const NewsletterManager = ({ t, lang, data, setData, setHasChanges }) => {
   const [mailContent, setMailContent] = useState('');
   const [mailImage, setMailImage] = useState('');
   const [sendingStatus, setSendingStatus] = useState('idle');
+  const [showSubscribers, setShowSubscribers] = useState(false);
 
   const getApiBase = () => {
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -1683,18 +1765,31 @@ const NewsletterManager = ({ t, lang, data, setData, setHasChanges }) => {
     if (!mailSubject || !mailContent) return alert('Başlık ve içerik gerekli!');
     setSendingStatus('sending');
     try {
-      await axios.post(`${getApiBase()}/api/newsletter/send-bulk`, { 
+      const res = await axios.post(`${getApiBase()}/api/newsletter/send-bulk`, { 
         subject: mailSubject, 
         content: mailContent, 
         image: mailImage 
       });
-      setSendingStatus('success');
-      setTimeout(() => {
+      const { status, message } = res.data;
+      if (status === 'success') {
+        alert(`✅ ${message}`);
+        setSendingStatus('success');
+        setTimeout(() => {
+          setSendingStatus('idle');
+          setMailSubject(''); setMailContent(''); setMailImage('');
+        }, 3000);
+      } else if (status === 'partial') {
+        const errors = res.data.errors || [];
+        const errorDetails = errors.map(e => `${e.email}: ${e.error?.message || 'bilinmeyen'}`).join('\n');
+        alert(`⚠️ Kısmi başarı: ${message}\n\nHatalar:\n${errorDetails}`);
         setSendingStatus('idle');
-        setMailSubject(''); setMailContent(''); setMailImage('');
-      }, 3000);
+      } else {
+        alert(`❌ ${message || 'Bilinmeyen hata'}`);
+        setSendingStatus('idle');
+      }
     } catch (err) { 
-      alert('Hata oluştu!'); 
+      const msg = err.response?.data?.message || err.message || 'Bilinmeyen hata';
+      alert(`❌ Hata: ${msg}`); 
       setSendingStatus('idle'); 
     }
   };
@@ -1707,8 +1802,10 @@ const NewsletterManager = ({ t, lang, data, setData, setHasChanges }) => {
             <h4 className="text-3xl font-serif font-black text-white">{subscribers.length}</h4>
             <p className="text-textSecondary text-[9px] uppercase tracking-widest font-bold">ABONE SAYISI</p>
         </div>
-        {/* Quick select from current events */}
-        <div className="md:col-span-3 bg-dark/20 rounded-3xl p-6 border border-white/5 flex flex-col space-y-4">
+      </div>
+
+      {/* Quick select from current events */}
+      <div className="bg-dark/20 rounded-3xl p-6 border border-white/5 flex flex-col space-y-4">
             <h5 className="text-[10px] font-black text-secondary uppercase tracking-widest">Etkinliklerden Otomatik Doldur</h5>
             <div className="flex space-x-4 overflow-x-auto pb-2 custom-scrollbar">
                {data.events.events.map((ev, i) => (
@@ -1723,7 +1820,6 @@ const NewsletterManager = ({ t, lang, data, setData, setHasChanges }) => {
                  </button>
                ))}
             </div>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -1787,6 +1883,49 @@ const NewsletterManager = ({ t, lang, data, setData, setHasChanges }) => {
               </div>
            </div>
         </div>
+      </div>
+
+      {/* Collapsible Subscriber List — Bottom */}
+      <div className="bg-dark/20 rounded-3xl border border-white/5 overflow-hidden">
+        <button
+          onClick={() => setShowSubscribers(prev => !prev)}
+          className="w-full flex items-center justify-between p-6 hover:bg-white/[0.02] transition-colors"
+        >
+          <div className="flex items-center space-x-3">
+            <Users className="w-5 h-5 text-secondary" />
+            <span className="text-[10px] font-black text-secondary uppercase tracking-widest">Kayıtlı Aboneler ({subscribers.length})</span>
+          </div>
+          <span className={`text-secondary transition-transform duration-300 ${showSubscribers ? 'rotate-180' : ''}`}>▼</span>
+        </button>
+        {showSubscribers && (
+          <div className="px-6 pb-6 border-t border-white/5 pt-4">
+            {subscribers.length === 0 ? (
+              <p className="text-textSecondary text-sm italic">Henüz abone yok.</p>
+            ) : (
+              <>
+                <div className="flex justify-end mb-3">
+                  <button
+                    onClick={() => { navigator.clipboard.writeText(subscribers.join(', ')); alert('E-postalar panoya kopyalandı!'); }}
+                    className="text-[9px] font-bold text-secondary/60 hover:text-secondary uppercase tracking-widest transition-colors"
+                  >
+                    Tümünü Kopyala
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2 max-h-[200px] overflow-y-auto custom-scrollbar">
+                  {subscribers.map((email, i) => (
+                    <span
+                      key={i}
+                      className="inline-flex items-center px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs font-medium"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-green-500 mr-2 flex-shrink-0" />
+                      {email}
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </motion.div>
   );

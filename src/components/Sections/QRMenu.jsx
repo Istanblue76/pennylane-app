@@ -373,7 +373,7 @@ const ProductCard = ({ item, onClick, t, tk, onAddToCart }) => (
 /* ─────────────────────────────────────────
    PRODUCT MODAL
    ───────────────────────────────────────── */
-const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart }) => {
+const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart, isMinimal = false }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const tk = isDark ? darkTheme : lightTheme;
 
@@ -474,19 +474,22 @@ const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart }) =
           </div>
 
           <div className="grid grid-cols-1 gap-3 mt-8">
-            <button
-              onClick={() => { onAddToCart(product); onClose(); }}
-              className="font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 flex items-center justify-center space-x-3 shadow-lg"
-              style={{ backgroundColor: tk.accent, color: '#fff' }}
-            >
-              <Plus className="w-4 h-4" />
-              <span>{t({ tr: 'SEPETE EKLE', en: 'ADD TO BASKET' })}</span>
-            </button>
+            {!isMinimal && (
+              <button
+                onClick={() => { onAddToCart(product); onClose(); }}
+                className="font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 flex items-center justify-center space-x-3 shadow-lg"
+                style={{ backgroundColor: tk.accent, color: '#fff' }}
+              >
+                <Plus className="w-4 h-4" />
+                <span>{t({ tr: 'SEPETE EKLE', en: 'ADD TO BASKET' })}</span>
+              </button>
+            )}
             <button
                 onClick={onClose}
-                className={`font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] opacity-40 hover:opacity-100 ${tk.text}`}
+                className={`font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] ${isMinimal ? 'bg-secondary text-primary' : 'opacity-40 hover:opacity-100 ' + tk.text}`}
+                style={isMinimal ? { backgroundColor: tk.accent, color: '#fff' } : {}}
             >
-                {t({ tr: 'Geri Dön', en: 'Go Back' })}
+                {t({ tr: 'KAPAT', en: 'CLOSE' })}
             </button>
           </div>
         </div>
@@ -929,7 +932,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             : <><span>Discover Our </span><span className="text-[#c9a96e]">Delicious Menu</span></>}
         </motion.h2>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-4">
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
           {[{ id: 'all', title: { tr: 'Hepsi', en: 'All' } }, ...data.categories].map(cat => (
             <button
               key={cat.id}
@@ -948,7 +951,60 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             </button>
           ))}
         </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 px-4 sm:px-0">
+          <AnimatePresence mode="popLayout">
+            {filteredItems.map(item => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                layout
+              >
+                <div 
+                  className="group cursor-pointer text-left"
+                  onClick={() => setSelectedProduct(item)}
+                >
+                  <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-[#1a1a1a] border border-white/5 group-hover:border-secondary/30 transition-all duration-500">
+                    <img 
+                      src={item.image_url || '/assets/img/pennylane-default.png'} 
+                      alt="" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                  <h3 className="font-serif font-bold text-white uppercase tracking-wider mb-1 group-hover:text-secondary transition-colors">
+                    {t(item.name)}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <span className="text-secondary/60 text-[10px] font-bold uppercase tracking-widest italic line-clamp-1">
+                      {t(item.description)}
+                    </span>
+                    <span className="text-secondary font-black text-sm ml-2">
+                      {item.price && item.price !== '0' ? `${item.price}₺` : ''}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
+
+      <AnimatePresence>
+          {selectedProduct && (
+            <ProductModal
+              product={selectedProduct}
+              onClose={() => setSelectedProduct(null)}
+              t={t}
+              allergens={allergens}
+              isDark={isDark}
+              onAddToCart={() => {}} // Ana sayfada sepete ekleme yok
+              isMinimal={true} // Yeni prop
+            />
+          )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -111,7 +111,7 @@ async function writeCMSData(newData) {
 // ─── API ROUTES ───────────────────────────────────────────────────────────────
 
 // GET CMS data
-app.get('/api/cms/home', async (req, res) => {
+app.get(['/api/cms', '/api/cms/home'], async (req, res) => {
   try {
     const data = await readCMSData();
     res.json({ status: 'success', data });
@@ -174,9 +174,11 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 const distPath = path.join(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
-  app.get('*', (req, res) => {
+  app.use((req, res, next) => {
     if (!req.path.startsWith('/api') && !req.path.startsWith('/assets') && !req.path.startsWith('/menu-pdf')) {
       res.sendFile(path.join(distPath, 'index.html'));
+    } else {
+      next();
     }
   });
 }
