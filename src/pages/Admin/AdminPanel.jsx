@@ -288,7 +288,7 @@ const AdminPanel = ({ initialData }) => {
         }
       }
     } catch (err) {
-      alert('Görsel yüklenemedi.');
+      alert('Dosya yüklenemedi.');
     }
   };
 
@@ -316,6 +316,24 @@ const AdminPanel = ({ initialData }) => {
           <Upload className="w-4 h-4 text-secondary" />
           <span className="text-sm text-textSecondary uppercase font-bold tracking-widest">Görsel Seç</span>
           <input type="file" className="hidden" accept="image/*" onChange={onChange} />
+        </label>
+      </div>
+    </div>
+  );
+
+  const VideoUploader = ({ label, value, onChange }) => (
+    <div className="space-y-4">
+      <label className="text-xs uppercase font-bold text-secondary tracking-widest">{label}</label>
+      <div className="flex items-center space-x-6">
+        {value && (
+          <div className="w-24 h-24 rounded-xl border border-secondary/20 overflow-hidden bg-black/40 flex items-center justify-center relative">
+            <video src={value} className="w-full h-full object-cover" muted loop autoPlay playsInline />
+          </div>
+        )}
+        <label className="cursor-pointer bg-dark/60 border border-secondary/20 rounded-xl px-4 py-3 flex items-center space-x-2 hover:border-secondary transition-all">
+          <Upload className="w-4 h-4 text-secondary" />
+          <span className="text-sm text-textSecondary uppercase font-bold tracking-widest">Video Seç</span>
+          <input type="file" className="hidden" accept="video/*" onChange={onChange} />
         </label>
       </div>
     </div>
@@ -511,7 +529,62 @@ const AdminPanel = ({ initialData }) => {
                     </div>
                   </div>
                 </div>
-                <ImageUploader label="ARKA PLAN GÖRSELİ" value={data.hero.background_image_url} onChange={(e) => handleImageUpload(e, 'hero', 'background_image_url')} />
+
+                <div className="bg-secondary/5 p-6 rounded-2xl border border-secondary/15 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <h4 className="text-secondary font-bold text-sm tracking-wide uppercase">Arka Plan Tipi</h4>
+                      <p className="text-textSecondary text-[10px] md:text-xs">Giriş ekranında görsel mi yoksa video mu oynatılacağını seçin.</p>
+                    </div>
+                    <div className="flex bg-dark/60 p-1 rounded-xl border border-secondary/20">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setData({ ...data, hero: { ...data.hero, background_type: 'image' } });
+                          setHasChanges(true);
+                        }}
+                        className={`px-4 py-2 rounded-lg text-xs font-bold transition-all uppercase tracking-wider ${
+                          (data.hero.background_type || 'image') === 'image'
+                            ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
+                            : 'text-textSecondary hover:text-white'
+                        }`}
+                      >
+                        Görsel
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setData({ ...data, hero: { ...data.hero, background_type: 'video' } });
+                          setHasChanges(true);
+                        }}
+                        className={`px-4 py-2 rounded-lg text-xs font-bold transition-all uppercase tracking-wider ${
+                          data.hero.background_type === 'video'
+                            ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
+                            : 'text-textSecondary hover:text-white'
+                        }`}
+                      >
+                        Video
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-secondary/10">
+                    <div className={data.hero.background_type === 'video' ? 'opacity-40 transition-opacity' : 'transition-opacity'}>
+                      <ImageUploader 
+                        label="ARKA PLAN GÖRSELİ" 
+                        value={data.hero.background_image_url} 
+                        onChange={(e) => handleImageUpload(e, 'hero', 'background_image_url')} 
+                      />
+                    </div>
+                    <div className={(data.hero.background_type || 'image') === 'image' ? 'opacity-40 transition-opacity' : 'transition-opacity'}>
+                      <VideoUploader 
+                        label="ARKA PLAN VİDEOSU" 
+                        value={data.hero.background_video_url} 
+                        onChange={(e) => handleImageUpload(e, 'hero', 'background_video_url')} 
+                      />
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             )}
 

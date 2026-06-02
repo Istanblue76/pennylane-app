@@ -193,7 +193,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     try {
       const result = await new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
-          { folder: 'pennylane', resource_type: 'image', use_filename: true, unique_filename: true },
+          { folder: 'pennylane', resource_type: 'auto', use_filename: true, unique_filename: true },
           (error, result) => (error ? reject(error) : resolve(result))
         );
         stream.end(req.file.buffer);

@@ -28,11 +28,22 @@ const HeroSection = ({ data }) => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] hover:scale-110"
-        style={{ backgroundImage: `url(${data.background_image_url})` }}
-      />
+      {/* Background Media */}
+      {data.background_type === 'video' && data.background_video_url ? (
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src={data.background_video_url}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      ) : (
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] hover:scale-110"
+          style={{ backgroundImage: `url(${data.background_image_url})` }}
+        />
+      )}
       {/* Strong dark overlay for text legibility */}
       <div className="absolute inset-0 bg-gradient-to-b from-dark/70 via-dark/60 to-dark" />
       <div className="absolute inset-0 bg-dark/30" />
