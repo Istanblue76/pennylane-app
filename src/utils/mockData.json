@@ -84,7 +84,8 @@
   },
   "hero": {
     "background_image_url": "/assets/img/1775415903325-2022-06-14.jpg",
-    "background_video_url": null,
+    "background_video_url": "https://vfqwjxwmguojbavcgaqx.supabase.co/storage/v1/object/public/pennylane/1780392285793-Restaurant_timelapse_fast_motion_cropped.mp4",
+    "background_type": "video",
     "overlay_opacity": 0.5,
     "main_heading": {
       "tr": "Pennylane'e Hoş Geldiniz",

@@ -31,12 +31,14 @@ const HeroSection = ({ data }) => {
       {/* Background Media */}
       {data.background_type === 'video' && data.background_video_url ? (
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           src={data.background_video_url}
           autoPlay
           loop
           muted
           playsInline
+          disablePictureInPicture
+          controlsList="nodownload nofullscreen noremoteplayback"
         />
       ) : (
         <div 
