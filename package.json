@@ -10,7 +10,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "pull-cms": "node scripts/pull-cms.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.0",
