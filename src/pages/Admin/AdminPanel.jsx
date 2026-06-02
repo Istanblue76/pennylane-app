@@ -394,7 +394,6 @@ const AdminPanel = ({ initialData }) => {
         </header>
 
         <section className="bg-primary/20 backdrop-blur-md p-8 md:p-12 border border-secondary/10 rounded-3xl shadow-2xl">
-          <AnimatePresence mode="wait">
             
             {activeTab === 'settings' && (
               <motion.div key="settings" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-12">
@@ -1705,7 +1704,6 @@ const AdminPanel = ({ initialData }) => {
               </motion.div>
             )}
 
-          </AnimatePresence>
         </section>
         <footer className="text-center text-textSecondary text-[10px] uppercase font-bold tracking-[0.5em] opacity-30 pt-10">
            PENNYLANE ADMIN v1.2
