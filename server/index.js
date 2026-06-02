@@ -142,6 +142,15 @@ app.post('/api/login', (req, res) => {
   }
 });
 
+// Supabase Credentials (for direct browser uploads)
+app.get('/api/supabase-credentials', (req, res) => {
+  res.json({
+    status: 'success',
+    url: process.env.SUPABASE_URL || null,
+    anonKey: process.env.SUPABASE_ANON_KEY || null
+  });
+});
+
 // Upload Image
 app.post('/api/upload', upload.single('image'), async (req, res) => {
   if (!req.file) {

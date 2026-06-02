@@ -173,6 +173,15 @@ app.post('/api/login', (req, res) => {
   }
 });
 
+// Supabase Credentials (for direct browser uploads)
+app.get('/api/supabase-credentials', (req, res) => {
+  res.json({
+    status: 'success',
+    url: process.env.SUPABASE_URL || null,
+    anonKey: process.env.SUPABASE_ANON_KEY || null
+  });
+});
+
 // Upload Image
 const useCloudinary = !!(process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET);
 if (useCloudinary) {

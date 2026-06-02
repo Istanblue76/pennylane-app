@@ -270,6 +270,46 @@ const AdminPanel = ({ initialData }) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    // Check if file is large (e.g. > 4MB) to bypass Vercel serverless function body size limit of 4.5MB
+    if (file.size > 4 * 1024 * 1024) {
+      try {
+        // Attempt client-side direct upload to Supabase Storage if configured
+        const credsResp = await axios.get('/api/supabase-credentials');
+        if (credsResp.data && credsResp.data.url && credsResp.data.anonKey) {
+          const { url: supabaseUrl, anonKey: supabaseAnonKey } = credsResp.data;
+          const fileName = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+          const uploadUrl = `${supabaseUrl}/storage/v1/object/pennylane/${fileName}`;
+
+          const uploadResp = await fetch(uploadUrl, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${supabaseAnonKey}`,
+              'apikey': supabaseAnonKey,
+              'Content-Type': file.type
+            },
+            body: file
+          });
+
+          if (uploadResp.ok) {
+            const publicUrl = `${supabaseUrl}/storage/v1/object/public/pennylane/${fileName}`;
+            if (nestedPath && index !== null) {
+              const newArray = [...data[section][nestedPath]];
+              newArray[index][field] = publicUrl;
+              setData({ ...data, [section]: { ...data[section], [nestedPath]: newArray }});
+            } else {
+              updateField(section, field, publicUrl);
+            }
+            return; // Successful direct upload, exit early
+          } else {
+            console.error('Supabase direct upload failed:', await uploadResp.text());
+          }
+        }
+      } catch (directErr) {
+        console.error('Direct upload attempt failed, falling back to server upload:', directErr);
+      }
+    }
+
+    // Default serverless function upload path for standard sized files (< 4MB)
     const formData = new FormData();
     formData.append('image', file);
 
@@ -288,7 +328,11 @@ const AdminPanel = ({ initialData }) => {
         }
       }
     } catch (err) {
-      alert('Dosya yüklenemedi.');
+      if (file.size > 4 * 1024 * 1024) {
+        alert('Dosya boyutu çok büyük (Maksimum 4.5MB). Lütfen videonuzu sıkıştırıp tekrar deneyin.');
+      } else {
+        alert('Dosya yüklenemedi.');
+      }
     }
   };
 
