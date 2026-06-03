@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Instagram, Facebook, Twitter, Phone, Mail, MapPin, Infinity } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
-const Footer = ({ data }) => {
+const Footer = ({ data, onOpenPolicy }) => {
   const { t } = useLanguage();
   if (!data) return null;
 
@@ -61,9 +61,26 @@ const Footer = ({ data }) => {
       <div className="section-container border-t border-secondary/10 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase font-bold tracking-[0.5em] text-textSecondary opacity-40 text-center gap-4">
         <span>{t(data.copyright)}</span>
         <div className="flex space-x-8">
-          {data.legal_links?.map((link, idx) => (
-            <a key={idx} href={link.href} className="hover:text-white transition-colors">{t(link.label)}</a>
-          ))}
+          {data.legal_links?.map((link, idx) => {
+            const isCookie = link.href.includes('cerez');
+            const isPrivacy = link.href.includes('gizlilik');
+            const handleClick = (e) => {
+              if (onOpenPolicy && (isCookie || isPrivacy)) {
+                e.preventDefault();
+                onOpenPolicy(isCookie ? 'cookie' : 'privacy');
+              }
+            };
+            return (
+              <a
+                key={idx}
+                href={link.href}
+                onClick={handleClick}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                {t(link.label)}
+              </a>
+            );
+          })}
           <span>{t(data.design_credit)}</span>
         </div>
       </div>

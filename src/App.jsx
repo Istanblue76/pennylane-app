@@ -13,6 +13,7 @@ import EventsSection from './components/Sections/EventsSection';
 import TeamSection from './components/Sections/TeamSection';
 import NewsletterSection from './components/Sections/NewsletterSection';
 import Footer from './components/Layout/Footer';
+import PolicyModal from './components/Common/PolicyModal';
 import AdminPanel from './pages/Admin/AdminPanel';
 import Login from './pages/Admin/Login';
 import QRMenuPage from './pages/QRMenuPage';
@@ -157,6 +158,7 @@ const Home = ({ cmsData }) => {
 
 export default function App() {
   const { cmsData, loading, error } = useFetchCMS();
+  const [activePolicy, setActivePolicy] = React.useState(null);
 
   if (loading) {
     return (
@@ -197,7 +199,7 @@ export default function App() {
                 <>
                   <Header data={cmsData?.header} />
                   <Home cmsData={cmsData} />
-                  <Footer data={cmsData?.footer} />
+                  <Footer data={cmsData?.footer} onOpenPolicy={setActivePolicy} />
                 </>
               } />
               <Route path="/admin" element={<AdminPanel initialData={cmsData} />} />
@@ -205,6 +207,15 @@ export default function App() {
               <Route path="/menu" element={<QRMenuPage cmsData={cmsData} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
+            <AnimatePresence>
+              {activePolicy && (
+                <PolicyModal
+                  isOpen={!!activePolicy}
+                  onClose={() => setActivePolicy(null)}
+                  policyType={activePolicy}
+                />
+              )}
+            </AnimatePresence>
           </div>
         </Router>
       </ErrorBoundary>
