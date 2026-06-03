@@ -130,6 +130,95 @@ app.post('/api/cms/update', async (req, res) => {
   }
 });
 
+// Helper to normalize product names for cross-menu mapping
+function normalizeName(str) {
+  if (!str) return '';
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/ğ/g, 'g')
+    .replace(/ü/g, 'u')
+    .replace(/ş/g, 's')
+    .replace(/ı/g, 'i')
+    .replace(/ö/g, 'o')
+    .replace(/ç/g, 'c')
+    .replace(/[^a-z0-9]/g, '');
+}
+
+// Akıllı ürün fiyat eşleştirme ve güncelleme API'si
+app.post('/api/cms/update-prices', async (req, res) => {
+  try {
+    const newPrices = req.body; // Array of { UrunAdi: "...", Fiyat: 300, Birim: "..." }
+    if (!Array.isArray(newPrices)) {
+      return res.status(400).json({ status: 'error', message: 'Geçersiz veri formatı. Array bekleniyor.' });
+    }
+
+    const cmsData = await readCMSData();
+    if (!cmsData || !cmsData.menu || !cmsData.menu.categories) {
+      return res.status(500).json({ status: 'error', message: 'CMS menü verisi bulunamadı.' });
+    }
+
+    // Fiyatları normalize edilmiş isimleriyle haritala
+    const priceMap = new Map();
+    newPrices.forEach(item => {
+      const norm = normalizeName(item.UrunAdi);
+      if (norm) {
+        priceMap.set(norm, item.Fiyat);
+      }
+    });
+
+    let updatedCount = 0;
+    
+    // Özel isim eşleştirme sözlüğü (iki menüdeki farklı yazımlar için)
+    const customMappings = {
+      'briocheekmekuzeriavokadoluposeyumurta': 'briocheekmekavokadolu',
+      'tazebaharatlipeynirliomlet': 'peynirliomlet',
+      'eksimeyaekmekuzeripastramiposeyumurta': 'pastramiposeyumurta'
+    };
+
+    cmsData.menu.categories.forEach(cat => {
+      cat.items.forEach(item => {
+        const dName = item.name?.tr || item.name;
+        const normDigital = normalizeName(dName);
+        let matchedPrice = null;
+
+        // 1. Doğrudan eşleşme
+        if (priceMap.has(normDigital)) {
+          matchedPrice = priceMap.get(normDigital);
+        }
+        // 2. Özel sözlük eşleşmesi
+        else if (customMappings[normDigital] && priceMap.has(customMappings[normDigital])) {
+          matchedPrice = priceMap.get(customMappings[normDigital]);
+        }
+        // 3. Kısmi/Fuzzy eşleşme
+        else {
+          for (const [key, val] of priceMap.entries()) {
+            if (key.length > 3 && (normDigital.includes(key) || key.includes(normDigital))) {
+              matchedPrice = val;
+              break;
+            }
+          }
+        }
+
+        if (matchedPrice !== null && matchedPrice !== undefined) {
+          item.price = matchedPrice.toString();
+          updatedCount++;
+        }
+      });
+    });
+
+    await writeCMSData(cmsData);
+    res.json({ 
+      status: 'success', 
+      message: `${updatedCount} ürünün fiyatı veritabanında güncellendi.`, 
+      updatedCount 
+    });
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: 'Fiyatlar güncellenemedi', detail: err.message });
+  }
+});
+
+
 // Login
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;

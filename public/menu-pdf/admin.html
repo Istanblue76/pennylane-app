@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -3246,10 +3246,31 @@
             reader.readAsArrayBuffer(file);
         }
 
-        // Tüm verileri kaydet (LocalStorage'a yazar)
+        // Tüm verileri kaydet (LocalStorage'a yazar ve veritabanına gönderir)
         function saveAll() {
             try {
                 localStorage.setItem('pennylane_data', JSON.stringify(appData));
+                
+                // Veritabanına fiyatları gönder
+                fetch('/api/cms/update-prices', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(appData.prices)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        console.log("Fiyatlar veritabanına başarıyla senkronize edildi:", result.message);
+                    } else {
+                        console.error("Fiyat senkronizasyon hatası:", result.message);
+                    }
+                })
+                .catch(err => {
+                    console.error("Veritabanı bağlantı hatası:", err);
+                });
+
                 alert("✅ Tüm fiyatlar ve görseller başarıyla kaydedildi!\n\nŞimdi Menü (index.html) sayfanızı yenileyerek değişiklikleri görebilirsiniz.");
             } catch (e) {
                 alert("Hata: Resim boyutları çok büyük olduğu için kaydedilemedi. Lütfen sayfayı yenileyip tekrar deneyin.");

@@ -541,26 +541,81 @@ body{font-family:'Cera Stencil','Montserrat',sans-serif;background:#ccc;display:
 <!-- ADMIN PANEL BAĞLANTI SCRIPTI -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Admin paneldeki verileri çek
-            const savedData = JSON.parse(localStorage.getItem('pennylane_data'));
-            if(!savedData) return;
+            // 1. FİYATLARI VERİTABANINDAN (API) ÇEK VE GÜNCELLE
+            fetch('/api/cms')
+                .then(r => r.json())
+                .then(cmsData => {
+                    const data = cmsData.data || cmsData;
+                    if (data && data.menu && data.menu.categories) {
+                        console.log("Fiyatlar veritabanından başarıyla yüklendi.");
+                        
+                        const normalizeName = (str) => {
+                            if (!str) return '';
+                            return str
+                                .toLowerCase()
+                                .trim()
+                                .replace(/ğ/g, 'g')
+                                .replace(/ü/g, 'u')
+                                .replace(/ş/g, 's')
+                                .replace(/ı/g, 'i')
+                                .replace(/ö/g, 'o')
+                                .replace(/ç/g, 'c')
+                                .replace(/[^a-z0-9]/g, '');
+                        };
 
-            // 1. FİYATLARI GÜNCELLE
-            if(savedData.prices) {
-                savedData.prices.forEach(item => {
-                    let selector = `[data-n="${item.UrunAdi}"]`;
-                    // Eger Birim (Orn: SHOT, TEK, 50 CL vs.) varsa sadece spesifik elemani degistir
-                    if(item.Birim) {
-                        selector += `[data-u="${item.Birim}"]`;
+                        const customMappings = {
+                          'briocheekmekuzeriavokadoluposeyumurta': 'briocheekmekavokadolu',
+                          'tazebaharatlipeynirliomlet': 'peynirliomlet',
+                          'eksimeyaekmekuzeripastramiposeyumurta': 'pastramiposeyumurta'
+                        };
+
+                        const priceElements = document.querySelectorAll('[data-n]');
+                        priceElements.forEach(element => {
+                            const htmlName = element.getAttribute('data-n');
+                            const normHtml = normalizeName(htmlName);
+
+                            let matchedItem = null;
+                            data.menu.categories.forEach(cat => {
+                                cat.items.forEach(item => {
+                                    const dName = item.name?.tr || item.name;
+                                    const normDigital = normalizeName(dName);
+
+                                    if (normDigital === normHtml || customMappings[normDigital] === normHtml) {
+                                        matchedItem = item;
+                                    } else if (normDigital.length > 3 && normHtml.length > 3 && (normDigital.includes(normHtml) || normHtml.includes(normDigital))) {
+                                        matchedItem = item;
+                                    }
+                                });
+                            });
+
+                            if (matchedItem) {
+                                element.innerHTML = `₺ ${matchedItem.price}`;
+                            }
+                        });
                     }
-                    const elements = document.querySelectorAll(selector);
-                    if(elements.length > 0) {
-                        elements.forEach(element => {
-                            element.innerHTML = `₺ ${item.Fiyat}`;
+                })
+                .catch(err => {
+                    console.warn("API'den fiyatlar yüklenemedi, localStorage kontrol ediliyor:", err);
+                    const savedData = JSON.parse(localStorage.getItem('pennylane_data'));
+                    if (savedData && savedData.prices) {
+                        savedData.prices.forEach(item => {
+                            let selector = `[data-n="${item.UrunAdi}"]`;
+                            if(item.Birim) {
+                                selector += `[data-u="${item.Birim}"]`;
+                            }
+                            const elements = document.querySelectorAll(selector);
+                            if(elements.length > 0) {
+                                elements.forEach(element => {
+                                    element.innerHTML = `₺ ${item.Fiyat}`;
+                                });
+                            }
                         });
                     }
                 });
-            }
+
+            // 2. DİĞER LOKAL AYARLAR VE HAPPY HOUR (LocalStorage varsa)
+            const savedData = JSON.parse(localStorage.getItem('pennylane_data'));
+            if(!savedData) return;
 
             
             
