@@ -347,7 +347,6 @@ const AdminPanel = ({ initialData }) => {
     { id: 'team', label: 'EKİP', icon: Users },
     { id: 'newsletter', label: 'BÜLTEN', icon: Mail },
     { id: 'allergens', label: 'ALERJENLER', icon: Info },
-    { id: 'policies', label: 'Politikalar', icon: Shield },
     { id: 'footer', label: 'FOOTER', icon: Settings },
     { id: 'settings', label: 'AYARLAR', icon: Settings },
     { id: 'print_menu', label: 'BASKI MENÜSÜ', icon: Download },
@@ -1447,7 +1446,6 @@ const AdminPanel = ({ initialData }) => {
                       <Download className="w-3.5 h-3.5" />
                       <span>Excel'e Aktar</span>
                     </button>
-                    
                     <label className="flex items-center space-x-2 bg-green-600/20 hover:bg-green-600/40 border border-green-500/30 text-green-400 text-[10px] font-black uppercase tracking-widest px-4 py-2.5 rounded-lg transition-all cursor-pointer">
                       <Upload className="w-3.5 h-3.5" />
                       <span>Excel'den Yükle</span>
@@ -1458,128 +1456,7 @@ const AdminPanel = ({ initialData }) => {
               </motion.div>
             )}
 
-            {activeTab === 'footer' && (
-              <motion.div key="footer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
-
-                {/* Şirket Bilgisi */}
-                <div className="space-y-4 bg-dark/20 p-6 rounded-xl border border-secondary/10">
-                  <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">Şirket Bilgisi</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Marka Adı</label>
-                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                      </div>
-                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white font-serif font-bold text-lg focus:border-secondary outline-none transition-colors"
-                        value={getVal(data.footer.company_info?.name, lang)} onChange={e => {
-                          setData({...data, footer: {...data.footer, company_info: {...data.footer.company_info, name: updateVal(data.footer.company_info?.name, lang, e.target.value)}}});
-                          setHasChanges(true);
-                        }} />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Kısa Açıklama</label>
-                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                      </div>
-                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
-                        value={getVal(data.footer.company_info?.description, lang)} onChange={e => {
-                          setData({...data, footer: {...data.footer, company_info: {...data.footer.company_info, description: updateVal(data.footer.company_info?.description, lang, e.target.value)}}});
-                          setHasChanges(true);
-                        }} />
-                    </div>
-                  </div>
-                </div>
-
-                {/* İletişim Bilgileri */}
-                <div className="space-y-4 bg-dark/20 p-6 rounded-xl border border-secondary/10">
-                  <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">İletişim Bilgileri</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase font-bold text-secondary tracking-widest">Telefon</label>
-                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
-                        value={data.footer.contact_info?.phone || ''} onChange={e => { setData({...data, footer: {...data.footer, contact_info: {...data.footer.contact_info, phone: e.target.value}}}); setHasChanges(true); }} />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase font-bold text-secondary tracking-widest">E-posta</label>
-                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
-                        value={data.footer.contact_info?.email || ''} onChange={e => { setData({...data, footer: {...data.footer, contact_info: {...data.footer.contact_info, email: e.target.value}}}); setHasChanges(true); }} />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Çalışma Saatleri</label>
-                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                      </div>
-                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
-                        value={getVal(data.footer.opening_hours, lang)} onChange={e => { setData({...data, footer: {...data.footer, opening_hours: updateVal(data.footer.opening_hours, lang, e.target.value)}}); setHasChanges(true); }} />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <label className="text-xs uppercase font-bold text-secondary tracking-widest">Adres</label>
-                      <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                    </div>
-                    <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
-                      value={getVal(data.footer.contact_info?.address, lang)} onChange={e => { setData({...data, footer: {...data.footer, contact_info: {...data.footer.contact_info, address: updateVal(data.footer.contact_info?.address, lang, e.target.value)}}}); setHasChanges(true); }} />
-                  </div>
-                </div>
-
-                {/* Copyright & Tasarım */}
-                <div className="space-y-4 bg-dark/20 p-6 rounded-xl border border-secondary/10">
-                  <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">Alt Satır Bilgileri</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Telif Hakkı Metni</label>
-                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                      </div>
-                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
-                        value={getVal(data.footer.copyright, lang)} onChange={e => { setData({...data, footer: {...data.footer, copyright: updateVal(data.footer.copyright, lang, e.target.value)}}); setHasChanges(true); }} />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Tasarım Kredisi</label>
-                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
-                      </div>
-                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
-                        value={getVal(data.footer.design_credit, lang)} onChange={e => { setData({...data, footer: {...data.footer, design_credit: updateVal(data.footer.design_credit, lang, e.target.value)}}); setHasChanges(true); }} />
-                    </div>
-                  </div>
-
-                  <div className="space-y-3 pt-2 border-t border-secondary/10">
-                    <label className="text-xs uppercase font-bold text-secondary tracking-widest">Yasal Linkler</label>
-                    {(data.footer.legal_links || []).map((link, idx) => (
-                      <div key={idx} className="flex items-center space-x-2">
-                        <input type="text" className="flex-1 bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
-                          value={link.label} placeholder="Link Metni"
-                          onChange={e => {
-                            const links = [...data.footer.legal_links]; links[idx].label = e.target.value;
-                            setData({...data, footer: {...data.footer, legal_links: links}});
-                          }} />
-                        <input type="text" className="flex-1 bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-textSecondary text-sm focus:border-secondary outline-none"
-                          value={link.href} placeholder="#link"
-                          onChange={e => {
-                            const links = [...data.footer.legal_links]; links[idx].href = e.target.value;
-                            setData({...data, footer: {...data.footer, legal_links: links}});
-                          }} />
-                        <button onClick={() => {
-                          const links = data.footer.legal_links.filter((_, i) => i !== idx);
-                          setData({...data, footer: {...data.footer, legal_links: links}});
-                        }} className="text-red-500 hover:text-red-400 text-[10px] font-bold uppercase px-2 py-2 bg-dark rounded border border-red-500/20">SİL</button>
-                      </div>
-                    ))}
-                    <button onClick={() => {
-                      const links = [...(data.footer.legal_links || []), { label: 'Yeni Link', href: '#' }];
-                      setData({...data, footer: {...data.footer, legal_links: links}});
-                    }} className="text-secondary text-xs font-bold uppercase tracking-widest hover:text-white transition-colors border border-secondary/20 rounded-lg px-4 py-2 hover:bg-secondary/10">
-                      + Link Ekle
-                    </button>
-                  </div>
-                </div>
-
-              </motion.div>
-            )}
-
-            {activeTab === 'policies' && (() => {
+            {activeTab === 'footer' && (() => {
               const policies = data.policies || {
                 privacy: {
                   title: { tr: 'Gizlilik Politikası', en: 'Privacy Policy' },
@@ -1594,45 +1471,162 @@ const AdminPanel = ({ initialData }) => {
               };
 
               return (
-                <motion.div key="policies" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
-                  {/* Policy Selector Buttons */}
-                  <div className="flex bg-dark/60 p-1.5 rounded-xl border border-secondary/20 w-fit">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedPolicyType('privacy')}
-                      className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all uppercase tracking-wider cursor-pointer ${
-                        selectedPolicyType === 'privacy'
-                          ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
-                          : 'text-textSecondary hover:text-white'
-                      }`}
-                    >
-                      Gizlilik Politikası
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedPolicyType('cookie')}
-                      className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all uppercase tracking-wider cursor-pointer ${
-                        selectedPolicyType === 'cookie'
-                          ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
-                          : 'text-textSecondary hover:text-white'
-                      }`}
-                    >
-                      Çerez Politikası
-                    </button>
-                  </div>
+                <motion.div key="footer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
 
-                  {/* Policy Details Card */}
-                  <div className="space-y-6 bg-dark/20 p-6 rounded-xl border border-secondary/10">
-                    <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">
-                      {selectedPolicyType === 'privacy' ? 'Gizlilik Politikası Ayarları' : 'Çerez Politikası Ayarları'}
-                    </h4>
-                    
+                  {/* Şirket Bilgisi */}
+                  <div className="space-y-4 bg-dark/20 p-6 rounded-xl border border-secondary/10">
+                    <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">Şirket Bilgisi</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Policy Title TR & EN */}
                       <div className="space-y-2">
                         <div className="flex items-center space-x-2">
-                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Politika Başlığı (TR)</label>
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Marka Adı</label>
+                          <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
                         </div>
+                        <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white font-serif font-bold text-lg focus:border-secondary outline-none transition-colors"
+                          value={getVal(data.footer.company_info?.name, lang)} onChange={e => {
+                            setData({...data, footer: {...data.footer, company_info: {...data.footer.company_info, name: updateVal(data.footer.company_info?.name, lang, e.target.value)}}});
+                            setHasChanges(true);
+                          }} />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Kısa Açıklama</label>
+                          <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                        </div>
+                        <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={getVal(data.footer.company_info?.description, lang)} onChange={e => {
+                            setData({...data, footer: {...data.footer, company_info: {...data.footer.company_info, description: updateVal(data.footer.company_info?.description, lang, e.target.value)}}});
+                            setHasChanges(true);
+                          }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* İletişim Bilgileri */}
+                  <div className="space-y-4 bg-dark/20 p-6 rounded-xl border border-secondary/10">
+                    <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">İletişim Bilgileri</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Telefon</label>
+                        <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={data.footer.contact_info?.phone || ''} onChange={e => { setData({...data, footer: {...data.footer, contact_info: {...data.footer.contact_info, phone: e.target.value}}}); setHasChanges(true); }} />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">E-posta</label>
+                        <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={data.footer.contact_info?.email || ''} onChange={e => { setData({...data, footer: {...data.footer, contact_info: {...data.footer.contact_info, email: e.target.value}}}); setHasChanges(true); }} />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Çalışma Saatleri</label>
+                          <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                        </div>
+                        <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={getVal(data.footer.opening_hours, lang)} onChange={e => { setData({...data, footer: {...data.footer, opening_hours: updateVal(data.footer.opening_hours, lang, e.target.value)}}); setHasChanges(true); }} />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Adres</label>
+                        <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                      </div>
+                      <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                        value={getVal(data.footer.contact_info?.address, lang)} onChange={e => { setData({...data, footer: {...data.footer, contact_info: {...data.footer.contact_info, address: updateVal(data.footer.contact_info?.address, lang, e.target.value)}}}); setHasChanges(true); }} />
+                    </div>
+                  </div>
+
+                  {/* Copyright & Tasarım */}
+                  <div className="space-y-4 bg-dark/20 p-6 rounded-xl border border-secondary/10">
+                    <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">Alt Satır Bilgileri</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Telif Hakkı Metni</label>
+                          <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                        </div>
+                        <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={getVal(data.footer.copyright, lang)} onChange={e => { setData({...data, footer: {...data.footer, copyright: updateVal(data.footer.copyright, lang, e.target.value)}}); setHasChanges(true); }} />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Tasarım Kredisi</label>
+                          <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-bold ${lang === 'tr' ? 'bg-secondary text-primary' : 'bg-dark/60 text-textSecondary border border-secondary/20'}`}>{lang === 'tr' ? 'TR' : 'EN'}</span>
+                        </div>
+                        <input type="text" className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={getVal(data.footer.design_credit, lang)} onChange={e => { setData({...data, footer: {...data.footer, design_credit: updateVal(data.footer.design_credit, lang, e.target.value)}}); setHasChanges(true); }} />
+                      </div>
+                    </div>
+
+                    <div className="space-y-3 pt-2 border-t border-secondary/10">
+                      <label className="text-xs uppercase font-bold text-secondary tracking-widest">Yasal Linkler</label>
+                      {(data.footer.legal_links || []).map((link, idx) => (
+                        <div key={idx} className="flex items-center space-x-2">
+                          <input type="text" className="flex-1 bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
+                            value={link.label} placeholder="Link Metni"
+                            onChange={e => {
+                              const links = [...data.footer.legal_links]; links[idx].label = e.target.value;
+                              setData({...data, footer: {...data.footer, legal_links: links}});
+                            }} />
+                          <input type="text" className="flex-1 bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-textSecondary text-sm focus:border-secondary outline-none"
+                            value={link.href} placeholder="#link"
+                            onChange={e => {
+                              const links = [...data.footer.legal_links]; links[idx].href = e.target.value;
+                              setData({...data, footer: {...data.footer, legal_links: links}});
+                            }} />
+                          <button onClick={() => {
+                            const links = data.footer.legal_links.filter((_, i) => i !== idx);
+                            setData({...data, footer: {...data.footer, legal_links: links}});
+                          }} className="text-red-500 hover:text-red-400 text-[10px] font-bold uppercase px-2 py-2 bg-dark rounded border border-red-500/20">SİL</button>
+                        </div>
+                      ))}
+                      <button onClick={() => {
+                        const links = [...(data.footer.legal_links || []), { label: 'Yeni Link', href: '#' }];
+                        setData({...data, footer: {...data.footer, legal_links: links}});
+                      }} className="text-secondary text-xs font-bold uppercase tracking-widest hover:text-white transition-colors border border-secondary/20 rounded-lg px-4 py-2 hover:bg-secondary/10">
+                        + Link Ekle
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Yasal Politikalar Düzenleyici */}
+                  <div className="space-y-6 bg-dark/20 p-6 rounded-xl border border-secondary/10">
+                    <div className="border-b border-secondary/10 pb-3">
+                      <h4 className="text-secondary font-bold uppercase tracking-widest text-sm mb-1">
+                        Yasal Politika Metinleri (Sözleşmeler)
+                      </h4>
+                      <p className="text-textSecondary text-[10px] md:text-xs font-light italic">Footer'daki yasal bağlantılara tıklanınca açılacak sözleşme metinlerini buradan düzenleyebilirsiniz.</p>
+                    </div>
+                    
+                    {/* Policy Selector Buttons */}
+                    <div className="flex bg-dark/60 p-1.5 rounded-xl border border-secondary/20 w-fit">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedPolicyType('privacy')}
+                        className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all uppercase tracking-wider cursor-pointer ${
+                          selectedPolicyType === 'privacy'
+                            ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
+                            : 'text-textSecondary hover:text-white'
+                        }`}
+                      >
+                        Gizlilik Politikası
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedPolicyType('cookie')}
+                        className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all uppercase tracking-wider cursor-pointer ${
+                          selectedPolicyType === 'cookie'
+                            ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
+                            : 'text-textSecondary hover:text-white'
+                        }`}
+                      >
+                        Çerez Politikası
+                      </button>
+                    </div>
+
+                    {/* Policy Details Fields */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                      <div className="space-y-2">
+                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Politika Başlığı (TR)</label>
                         <input 
                           type="text" 
                           className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
@@ -1647,9 +1641,7 @@ const AdminPanel = ({ initialData }) => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Politika Başlığı (EN)</label>
-                        </div>
+                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Politika Başlığı (EN)</label>
                         <input 
                           type="text" 
                           className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
@@ -1666,11 +1658,8 @@ const AdminPanel = ({ initialData }) => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Last Updated TR & EN */}
                       <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Son Güncelleme Tarihi (TR)</label>
-                        </div>
+                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Son Güncelleme Tarihi (TR)</label>
                         <input 
                           type="text" 
                           className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
@@ -1685,9 +1674,7 @@ const AdminPanel = ({ initialData }) => {
                         />
                       </div>
                       <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Son Güncelleme Tarihi (EN)</label>
-                        </div>
+                        <label className="text-xs uppercase font-bold text-secondary tracking-widest">Son Güncelleme Tarihi (EN)</label>
                         <input 
                           type="text" 
                           className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
@@ -1702,163 +1689,164 @@ const AdminPanel = ({ initialData }) => {
                         />
                       </div>
                     </div>
+
+                    {/* Policy Sections Editor */}
+                    <div className="space-y-6 pt-4 border-t border-secondary/10">
+                      <div className="flex justify-between items-center pb-2">
+                        <h5 className="text-secondary font-bold uppercase tracking-widest text-xs">Bölümler ve İçerikler</h5>
+                        <button 
+                          type="button"
+                          onClick={() => {
+                            const updatedPolicies = { ...policies };
+                            const newSection = {
+                              title: { tr: 'Yeni Bölüm', en: 'New Section' },
+                              content: { tr: '', en: '' }
+                            };
+                            updatedPolicies[selectedPolicyType].sections = [
+                              ...(updatedPolicies[selectedPolicyType].sections || []),
+                              newSection
+                            ];
+                            setData({ ...data, policies: updatedPolicies });
+                            setHasChanges(true);
+                          }} 
+                          className="text-secondary text-xs font-bold uppercase tracking-widest hover:text-white transition-colors border border-secondary/20 rounded-lg px-4 py-2 hover:bg-secondary/10 cursor-pointer"
+                        >
+                          + Yeni Bölüm Ekle
+                        </button>
+                      </div>
+
+                      <div className="space-y-6">
+                        {(policies[selectedPolicyType]?.sections || []).map((section, idx) => (
+                          <div key={idx} className="p-5 rounded-xl border border-secondary/10 bg-dark/40 space-y-4 relative">
+                            {/* Section Header Controls */}
+                            <div className="flex justify-between items-center border-b border-secondary/5 pb-2">
+                              <span className="text-xs font-bold text-secondary uppercase tracking-widest">Bölüm #{idx + 1}</span>
+                              <div className="flex space-x-4">
+                                <button
+                                  type="button"
+                                  disabled={idx === 0}
+                                  onClick={() => {
+                                    const updatedPolicies = { ...policies };
+                                    const sections = [...updatedPolicies[selectedPolicyType].sections];
+                                    const temp = sections[idx];
+                                    sections[idx] = sections[idx - 1];
+                                    sections[idx - 1] = temp;
+                                    updatedPolicies[selectedPolicyType].sections = sections;
+                                    setData({ ...data, policies: updatedPolicies });
+                                    setHasChanges(true);
+                                  }}
+                                  className="text-[10px] text-textSecondary hover:text-secondary disabled:opacity-30 cursor-pointer"
+                                >
+                                  ▲ YUKARI
+                                </button>
+                                <button
+                                  type="button"
+                                  disabled={idx === (policies[selectedPolicyType].sections.length - 1)}
+                                  onClick={() => {
+                                    const updatedPolicies = { ...policies };
+                                    const sections = [...updatedPolicies[selectedPolicyType].sections];
+                                    const temp = sections[idx];
+                                    sections[idx] = sections[idx + 1];
+                                    sections[idx + 1] = temp;
+                                    updatedPolicies[selectedPolicyType].sections = sections;
+                                    setData({ ...data, policies: updatedPolicies });
+                                    setHasChanges(true);
+                                  }}
+                                  className="text-[10px] text-textSecondary hover:text-secondary disabled:opacity-30 cursor-pointer"
+                                >
+                                  ▼ AŞAĞI
+                                </button>
+                                <button 
+                                  type="button"
+                                  onClick={() => {
+                                    const updatedPolicies = { ...policies };
+                                    updatedPolicies[selectedPolicyType].sections = updatedPolicies[selectedPolicyType].sections.filter((_, i) => i !== idx);
+                                    setData({ ...data, policies: updatedPolicies });
+                                    setHasChanges(true);
+                                  }} 
+                                  className="text-red-500 hover:text-red-400 text-[10px] font-bold uppercase px-2 py-1 bg-dark rounded border border-red-500/20 cursor-pointer"
+                                >
+                                  SİL
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Title Inputs TR & EN */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm Başlığı (TR)</label>
+                                <input 
+                                  type="text" 
+                                  className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
+                                  value={section.title?.tr || ''}
+                                  onChange={e => {
+                                    const updatedPolicies = { ...policies };
+                                    updatedPolicies[selectedPolicyType].sections[idx].title = updatedPolicies[selectedPolicyType].sections[idx].title || { tr: '', en: '' };
+                                    updatedPolicies[selectedPolicyType].sections[idx].title.tr = e.target.value;
+                                    setData({ ...data, policies: updatedPolicies });
+                                    setHasChanges(true);
+                                  }}
+                                />
+                              </div>
+                              <div className="space-y-2">
+                                <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm Başlığı (EN)</label>
+                                <input 
+                                  type="text" 
+                                  className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
+                                  value={section.title?.en || ''}
+                                  onChange={e => {
+                                    const updatedPolicies = { ...policies };
+                                    updatedPolicies[selectedPolicyType].sections[idx].title = updatedPolicies[selectedPolicyType].sections[idx].title || { tr: '', en: '' };
+                                    updatedPolicies[selectedPolicyType].sections[idx].title.en = e.target.value;
+                                    setData({ ...data, policies: updatedPolicies });
+                                    setHasChanges(true);
+                                  }}
+                                />
+                              </div>
+                            </div>
+
+                            {/* Content Textareas TR & EN */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm İçeriği (TR)</label>
+                                <textarea 
+                                  className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-xs h-32 focus:border-secondary outline-none resize-none overflow-y-auto leading-relaxed"
+                                  value={section.content?.tr || ''}
+                                  onChange={e => {
+                                    const updatedPolicies = { ...policies };
+                                    updatedPolicies[selectedPolicyType].sections[idx].content = updatedPolicies[selectedPolicyType].sections[idx].content || { tr: '', en: '' };
+                                    updatedPolicies[selectedPolicyType].sections[idx].content.tr = e.target.value;
+                                    setData({ ...data, policies: updatedPolicies });
+                                    setHasChanges(true);
+                                  }}
+                                />
+                              </div>
+                              <div className="space-y-2">
+                                <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm İçeriği (EN)</label>
+                                <textarea 
+                                  className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-xs h-32 focus:border-secondary outline-none resize-none overflow-y-auto leading-relaxed"
+                                  value={section.content?.en || ''}
+                                  onChange={e => {
+                                    const updatedPolicies = { ...policies };
+                                    updatedPolicies[selectedPolicyType].sections[idx].content = updatedPolicies[selectedPolicyType].sections[idx].content || { tr: '', en: '' };
+                                    updatedPolicies[selectedPolicyType].sections[idx].content.en = e.target.value;
+                                    setData({ ...data, policies: updatedPolicies });
+                                    setHasChanges(true);
+                                  }}
+                                />
+                              </div>
+                            </div>
+
+                          </div>
+                        ))}
+
+                        {(policies[selectedPolicyType]?.sections || []).length === 0 && (
+                          <p className="text-textSecondary text-xs italic text-center py-4">Henüz bir bölüm eklenmemiş. "+ Yeni Bölüm Ekle" butonuna basarak içerik yazmaya başlayabilirsiniz.</p>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Policy Sections Card */}
-                  <div className="space-y-6 bg-dark/20 p-6 rounded-xl border border-secondary/10">
-                    <div className="flex justify-between items-center border-b border-secondary/10 pb-3">
-                      <h4 className="text-secondary font-bold uppercase tracking-widest text-sm">Bölümler ve İçerikler</h4>
-                      <button 
-                        type="button"
-                        onClick={() => {
-                          const updatedPolicies = { ...policies };
-                          const newSection = {
-                            title: { tr: 'Yeni Bölüm', en: 'New Section' },
-                            content: { tr: '', en: '' }
-                          };
-                          updatedPolicies[selectedPolicyType].sections = [
-                            ...(updatedPolicies[selectedPolicyType].sections || []),
-                            newSection
-                          ];
-                          setData({ ...data, policies: updatedPolicies });
-                          setHasChanges(true);
-                        }} 
-                        className="text-secondary text-xs font-bold uppercase tracking-widest hover:text-white transition-colors border border-secondary/20 rounded-lg px-4 py-2 hover:bg-secondary/10 cursor-pointer"
-                      >
-                        + Yeni Bölüm Ekle
-                      </button>
-                    </div>
-
-                    <div className="space-y-6">
-                      {(policies[selectedPolicyType]?.sections || []).map((section, idx) => (
-                        <div key={idx} className="p-5 rounded-xl border border-secondary/10 bg-dark/40 space-y-4 relative">
-                          {/* Section Header Controls */}
-                          <div className="flex justify-between items-center border-b border-secondary/5 pb-2">
-                            <span className="text-xs font-bold text-secondary uppercase tracking-widest">Bölüm #{idx + 1}</span>
-                            <div className="flex space-x-4">
-                              <button
-                                type="button"
-                                disabled={idx === 0}
-                                onClick={() => {
-                                  const updatedPolicies = { ...policies };
-                                  const sections = [...updatedPolicies[selectedPolicyType].sections];
-                                  const temp = sections[idx];
-                                  sections[idx] = sections[idx - 1];
-                                  sections[idx - 1] = temp;
-                                  updatedPolicies[selectedPolicyType].sections = sections;
-                                  setData({ ...data, policies: updatedPolicies });
-                                  setHasChanges(true);
-                                }}
-                                className="text-[10px] text-textSecondary hover:text-secondary disabled:opacity-30 cursor-pointer"
-                              >
-                                ▲ YUKARI
-                              </button>
-                              <button
-                                type="button"
-                                disabled={idx === (policies[selectedPolicyType].sections.length - 1)}
-                                onClick={() => {
-                                  const updatedPolicies = { ...policies };
-                                  const sections = [...updatedPolicies[selectedPolicyType].sections];
-                                  const temp = sections[idx];
-                                  sections[idx] = sections[idx + 1];
-                                  sections[idx + 1] = temp;
-                                  updatedPolicies[selectedPolicyType].sections = sections;
-                                  setData({ ...data, policies: updatedPolicies });
-                                  setHasChanges(true);
-                                }}
-                                className="text-[10px] text-textSecondary hover:text-secondary disabled:opacity-30 cursor-pointer"
-                              >
-                                ▼ AŞAĞI
-                              </button>
-                              <button 
-                                type="button"
-                                onClick={() => {
-                                  const updatedPolicies = { ...policies };
-                                  updatedPolicies[selectedPolicyType].sections = updatedPolicies[selectedPolicyType].sections.filter((_, i) => i !== idx);
-                                  setData({ ...data, policies: updatedPolicies });
-                                  setHasChanges(true);
-                                }} 
-                                className="text-red-500 hover:text-red-400 text-[10px] font-bold uppercase px-2 py-1 bg-dark rounded border border-red-500/20 cursor-pointer"
-                              >
-                                SİL
-                              </button>
-                            </div>
-                          </div>
-
-                          {/* Title Inputs TR & EN */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm Başlığı (TR)</label>
-                              <input 
-                                type="text" 
-                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
-                                value={section.title?.tr || ''}
-                                onChange={e => {
-                                  const updatedPolicies = { ...policies };
-                                  updatedPolicies[selectedPolicyType].sections[idx].title = updatedPolicies[selectedPolicyType].sections[idx].title || { tr: '', en: '' };
-                                  updatedPolicies[selectedPolicyType].sections[idx].title.tr = e.target.value;
-                                  setData({ ...data, policies: updatedPolicies });
-                                  setHasChanges(true);
-                                }}
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm Başlığı (EN)</label>
-                              <input 
-                                type="text" 
-                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
-                                value={section.title?.en || ''}
-                                onChange={e => {
-                                  const updatedPolicies = { ...policies };
-                                  updatedPolicies[selectedPolicyType].sections[idx].title = updatedPolicies[selectedPolicyType].sections[idx].title || { tr: '', en: '' };
-                                  updatedPolicies[selectedPolicyType].sections[idx].title.en = e.target.value;
-                                  setData({ ...data, policies: updatedPolicies });
-                                  setHasChanges(true);
-                                }}
-                              />
-                            </div>
-                          </div>
-
-                          {/* Content Textareas TR & EN */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm İçeriği (TR)</label>
-                              <textarea 
-                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-xs h-32 focus:border-secondary outline-none resize-none overflow-y-auto leading-relaxed"
-                                value={section.content?.tr || ''}
-                                onChange={e => {
-                                  const updatedPolicies = { ...policies };
-                                  updatedPolicies[selectedPolicyType].sections[idx].content = updatedPolicies[selectedPolicyType].sections[idx].content || { tr: '', en: '' };
-                                  updatedPolicies[selectedPolicyType].sections[idx].content.tr = e.target.value;
-                                  setData({ ...data, policies: updatedPolicies });
-                                  setHasChanges(true);
-                                }}
-                              />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm İçeriği (EN)</label>
-                              <textarea 
-                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-xs h-32 focus:border-secondary outline-none resize-none overflow-y-auto leading-relaxed"
-                                value={section.content?.en || ''}
-                                onChange={e => {
-                                  const updatedPolicies = { ...policies };
-                                  updatedPolicies[selectedPolicyType].sections[idx].content = updatedPolicies[selectedPolicyType].sections[idx].content || { tr: '', en: '' };
-                                  updatedPolicies[selectedPolicyType].sections[idx].content.en = e.target.value;
-                                  setData({ ...data, policies: updatedPolicies });
-                                  setHasChanges(true);
-                                }}
-                              />
-                            </div>
-                          </div>
-
-                        </div>
-                      ))}
-
-                      {(policies[selectedPolicyType]?.sections || []).length === 0 && (
-                        <p className="text-textSecondary text-xs italic text-center py-4">Henüz bir bölüm eklenmemiş. "+ Yeni Bölüm Ekle" butonuna basarak içerik yazmaya başlayabilirsiniz.</p>
-                      )}
-                    </div>
-                  </div>
                 </motion.div>
               );
             })()}
