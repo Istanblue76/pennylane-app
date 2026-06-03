@@ -4,12 +4,12 @@ import { X, Shield, Cookie, FileText } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { policyTexts } from '../../utils/policyTexts';
 
-const PolicyModal = ({ isOpen, onClose, policyType }) => {
+const PolicyModal = ({ isOpen, onClose, policyType, policyData }) => {
   const { t } = useLanguage();
 
   if (!isOpen || !policyType) return null;
 
-  const policy = policyTexts[policyType];
+  const policy = policyData || policyTexts[policyType];
   if (!policy) return null;
 
   return (

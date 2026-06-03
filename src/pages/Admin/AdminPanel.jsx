@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 import { 
   Save, LogOut, Layout, Image as ImageIcon, Menu as MenuIcon, Info, 
   Settings, Users, Calendar, Mail, CheckCircle, Smartphone, Monitor, Upload, Download, X,
-  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight, Edit2, Eye, Printer
+  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight, Edit2, Eye, Printer, Shield
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { getVal, updateVal } from '../../utils/i18n';
@@ -21,6 +21,7 @@ const AdminPanel = ({ initialData }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hasChanges, setHasChanges] = useState(false);
   const [managementMode, setManagementMode] = useState(false);
+  const [selectedPolicyType, setSelectedPolicyType] = useState('privacy');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -346,6 +347,7 @@ const AdminPanel = ({ initialData }) => {
     { id: 'team', label: 'EKİP', icon: Users },
     { id: 'newsletter', label: 'BÜLTEN', icon: Mail },
     { id: 'allergens', label: 'ALERJENLER', icon: Info },
+    { id: 'policies', label: 'Politikalar', icon: Shield },
     { id: 'footer', label: 'FOOTER', icon: Settings },
     { id: 'settings', label: 'AYARLAR', icon: Settings },
     { id: 'print_menu', label: 'BASKI MENÜSÜ', icon: Download },
@@ -1576,6 +1578,290 @@ const AdminPanel = ({ initialData }) => {
 
               </motion.div>
             )}
+
+            {activeTab === 'policies' && (() => {
+              const policies = data.policies || {
+                privacy: {
+                  title: { tr: 'Gizlilik Politikası', en: 'Privacy Policy' },
+                  lastUpdated: { tr: 'Son Güncelleme: 1 Haziran 2026', en: 'Last Updated: June 1, 2026' },
+                  sections: []
+                },
+                cookie: {
+                  title: { tr: 'Çerez Politikası', en: 'Cookie Policy' },
+                  lastUpdated: { tr: 'Son Güncelleme: 1 Haziran 2026', en: 'Last Updated: June 1, 2026' },
+                  sections: []
+                }
+              };
+
+              return (
+                <motion.div key="policies" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
+                  {/* Policy Selector Buttons */}
+                  <div className="flex bg-dark/60 p-1.5 rounded-xl border border-secondary/20 w-fit">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPolicyType('privacy')}
+                      className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all uppercase tracking-wider cursor-pointer ${
+                        selectedPolicyType === 'privacy'
+                          ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
+                          : 'text-textSecondary hover:text-white'
+                      }`}
+                    >
+                      Gizlilik Politikası
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPolicyType('cookie')}
+                      className={`px-6 py-2.5 rounded-lg text-xs font-bold transition-all uppercase tracking-wider cursor-pointer ${
+                        selectedPolicyType === 'cookie'
+                          ? 'bg-secondary text-primary font-black shadow-md shadow-secondary/10'
+                          : 'text-textSecondary hover:text-white'
+                      }`}
+                    >
+                      Çerez Politikası
+                    </button>
+                  </div>
+
+                  {/* Policy Details Card */}
+                  <div className="space-y-6 bg-dark/20 p-6 rounded-xl border border-secondary/10">
+                    <h4 className="text-secondary font-bold uppercase tracking-widest text-sm border-b border-secondary/10 pb-3">
+                      {selectedPolicyType === 'privacy' ? 'Gizlilik Politikası Ayarları' : 'Çerez Politikası Ayarları'}
+                    </h4>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Policy Title TR & EN */}
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Politika Başlığı (TR)</label>
+                        </div>
+                        <input 
+                          type="text" 
+                          className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={policies[selectedPolicyType]?.title?.tr || ''} 
+                          onChange={e => {
+                            const updatedPolicies = { ...policies };
+                            updatedPolicies[selectedPolicyType].title = updatedPolicies[selectedPolicyType].title || { tr: '', en: '' };
+                            updatedPolicies[selectedPolicyType].title.tr = e.target.value;
+                            setData({ ...data, policies: updatedPolicies });
+                            setHasChanges(true);
+                          }} 
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Politika Başlığı (EN)</label>
+                        </div>
+                        <input 
+                          type="text" 
+                          className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={policies[selectedPolicyType]?.title?.en || ''} 
+                          onChange={e => {
+                            const updatedPolicies = { ...policies };
+                            updatedPolicies[selectedPolicyType].title = updatedPolicies[selectedPolicyType].title || { tr: '', en: '' };
+                            updatedPolicies[selectedPolicyType].title.en = e.target.value;
+                            setData({ ...data, policies: updatedPolicies });
+                            setHasChanges(true);
+                          }} 
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Last Updated TR & EN */}
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Son Güncelleme Tarihi (TR)</label>
+                        </div>
+                        <input 
+                          type="text" 
+                          className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={policies[selectedPolicyType]?.lastUpdated?.tr || ''} 
+                          onChange={e => {
+                            const updatedPolicies = { ...policies };
+                            updatedPolicies[selectedPolicyType].lastUpdated = updatedPolicies[selectedPolicyType].lastUpdated || { tr: '', en: '' };
+                            updatedPolicies[selectedPolicyType].lastUpdated.tr = e.target.value;
+                            setData({ ...data, policies: updatedPolicies });
+                            setHasChanges(true);
+                          }} 
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-2">
+                          <label className="text-xs uppercase font-bold text-secondary tracking-widest">Son Güncelleme Tarihi (EN)</label>
+                        </div>
+                        <input 
+                          type="text" 
+                          className="w-full bg-dark border border-secondary/20 rounded-lg px-4 py-3 text-white focus:border-secondary outline-none transition-colors"
+                          value={policies[selectedPolicyType]?.lastUpdated?.en || ''} 
+                          onChange={e => {
+                            const updatedPolicies = { ...policies };
+                            updatedPolicies[selectedPolicyType].lastUpdated = updatedPolicies[selectedPolicyType].lastUpdated || { tr: '', en: '' };
+                            updatedPolicies[selectedPolicyType].lastUpdated.en = e.target.value;
+                            setData({ ...data, policies: updatedPolicies });
+                            setHasChanges(true);
+                          }} 
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Policy Sections Card */}
+                  <div className="space-y-6 bg-dark/20 p-6 rounded-xl border border-secondary/10">
+                    <div className="flex justify-between items-center border-b border-secondary/10 pb-3">
+                      <h4 className="text-secondary font-bold uppercase tracking-widest text-sm">Bölümler ve İçerikler</h4>
+                      <button 
+                        type="button"
+                        onClick={() => {
+                          const updatedPolicies = { ...policies };
+                          const newSection = {
+                            title: { tr: 'Yeni Bölüm', en: 'New Section' },
+                            content: { tr: '', en: '' }
+                          };
+                          updatedPolicies[selectedPolicyType].sections = [
+                            ...(updatedPolicies[selectedPolicyType].sections || []),
+                            newSection
+                          ];
+                          setData({ ...data, policies: updatedPolicies });
+                          setHasChanges(true);
+                        }} 
+                        className="text-secondary text-xs font-bold uppercase tracking-widest hover:text-white transition-colors border border-secondary/20 rounded-lg px-4 py-2 hover:bg-secondary/10 cursor-pointer"
+                      >
+                        + Yeni Bölüm Ekle
+                      </button>
+                    </div>
+
+                    <div className="space-y-6">
+                      {(policies[selectedPolicyType]?.sections || []).map((section, idx) => (
+                        <div key={idx} className="p-5 rounded-xl border border-secondary/10 bg-dark/40 space-y-4 relative">
+                          {/* Section Header Controls */}
+                          <div className="flex justify-between items-center border-b border-secondary/5 pb-2">
+                            <span className="text-xs font-bold text-secondary uppercase tracking-widest">Bölüm #{idx + 1}</span>
+                            <div className="flex space-x-4">
+                              <button
+                                type="button"
+                                disabled={idx === 0}
+                                onClick={() => {
+                                  const updatedPolicies = { ...policies };
+                                  const sections = [...updatedPolicies[selectedPolicyType].sections];
+                                  const temp = sections[idx];
+                                  sections[idx] = sections[idx - 1];
+                                  sections[idx - 1] = temp;
+                                  updatedPolicies[selectedPolicyType].sections = sections;
+                                  setData({ ...data, policies: updatedPolicies });
+                                  setHasChanges(true);
+                                }}
+                                className="text-[10px] text-textSecondary hover:text-secondary disabled:opacity-30 cursor-pointer"
+                              >
+                                ▲ YUKARI
+                              </button>
+                              <button
+                                type="button"
+                                disabled={idx === (policies[selectedPolicyType].sections.length - 1)}
+                                onClick={() => {
+                                  const updatedPolicies = { ...policies };
+                                  const sections = [...updatedPolicies[selectedPolicyType].sections];
+                                  const temp = sections[idx];
+                                  sections[idx] = sections[idx + 1];
+                                  sections[idx + 1] = temp;
+                                  updatedPolicies[selectedPolicyType].sections = sections;
+                                  setData({ ...data, policies: updatedPolicies });
+                                  setHasChanges(true);
+                                }}
+                                className="text-[10px] text-textSecondary hover:text-secondary disabled:opacity-30 cursor-pointer"
+                              >
+                                ▼ AŞAĞI
+                              </button>
+                              <button 
+                                type="button"
+                                onClick={() => {
+                                  const updatedPolicies = { ...policies };
+                                  updatedPolicies[selectedPolicyType].sections = updatedPolicies[selectedPolicyType].sections.filter((_, i) => i !== idx);
+                                  setData({ ...data, policies: updatedPolicies });
+                                  setHasChanges(true);
+                                }} 
+                                className="text-red-500 hover:text-red-400 text-[10px] font-bold uppercase px-2 py-1 bg-dark rounded border border-red-500/20 cursor-pointer"
+                              >
+                                SİL
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* Title Inputs TR & EN */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm Başlığı (TR)</label>
+                              <input 
+                                type="text" 
+                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
+                                value={section.title?.tr || ''}
+                                onChange={e => {
+                                  const updatedPolicies = { ...policies };
+                                  updatedPolicies[selectedPolicyType].sections[idx].title = updatedPolicies[selectedPolicyType].sections[idx].title || { tr: '', en: '' };
+                                  updatedPolicies[selectedPolicyType].sections[idx].title.tr = e.target.value;
+                                  setData({ ...data, policies: updatedPolicies });
+                                  setHasChanges(true);
+                                }}
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm Başlığı (EN)</label>
+                              <input 
+                                type="text" 
+                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-sm focus:border-secondary outline-none"
+                                value={section.title?.en || ''}
+                                onChange={e => {
+                                  const updatedPolicies = { ...policies };
+                                  updatedPolicies[selectedPolicyType].sections[idx].title = updatedPolicies[selectedPolicyType].sections[idx].title || { tr: '', en: '' };
+                                  updatedPolicies[selectedPolicyType].sections[idx].title.en = e.target.value;
+                                  setData({ ...data, policies: updatedPolicies });
+                                  setHasChanges(true);
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                          {/* Content Textareas TR & EN */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm İçeriği (TR)</label>
+                              <textarea 
+                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-xs h-32 focus:border-secondary outline-none resize-none overflow-y-auto leading-relaxed"
+                                value={section.content?.tr || ''}
+                                onChange={e => {
+                                  const updatedPolicies = { ...policies };
+                                  updatedPolicies[selectedPolicyType].sections[idx].content = updatedPolicies[selectedPolicyType].sections[idx].content || { tr: '', en: '' };
+                                  updatedPolicies[selectedPolicyType].sections[idx].content.tr = e.target.value;
+                                  setData({ ...data, policies: updatedPolicies });
+                                  setHasChanges(true);
+                                }}
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <label className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Bölüm İçeriği (EN)</label>
+                              <textarea 
+                                className="w-full bg-dark border border-secondary/10 rounded-lg px-3 py-2 text-white text-xs h-32 focus:border-secondary outline-none resize-none overflow-y-auto leading-relaxed"
+                                value={section.content?.en || ''}
+                                onChange={e => {
+                                  const updatedPolicies = { ...policies };
+                                  updatedPolicies[selectedPolicyType].sections[idx].content = updatedPolicies[selectedPolicyType].sections[idx].content || { tr: '', en: '' };
+                                  updatedPolicies[selectedPolicyType].sections[idx].content.en = e.target.value;
+                                  setData({ ...data, policies: updatedPolicies });
+                                  setHasChanges(true);
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                        </div>
+                      ))}
+
+                      {(policies[selectedPolicyType]?.sections || []).length === 0 && (
+                        <p className="text-textSecondary text-xs italic text-center py-4">Henüz bir bölüm eklenmemiş. "+ Yeni Bölüm Ekle" butonuna basarak içerik yazmaya başlayabilirsiniz.</p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })()}
 
             {activeTab === 'menu_showcase' && (
               <motion.div key="menu_showcase" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">

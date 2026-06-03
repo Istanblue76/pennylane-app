@@ -213,6 +213,7 @@ export default function App() {
                   isOpen={!!activePolicy}
                   onClose={() => setActivePolicy(null)}
                   policyType={activePolicy}
+                  policyData={cmsData?.policies?.[activePolicy]}
                 />
               )}
             </AnimatePresence>
