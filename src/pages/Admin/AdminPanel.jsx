@@ -267,9 +267,93 @@ const AdminPanel = ({ initialData }) => {
     setHasChanges(true);
   };
 
+  const compressImage = (file, maxWidth = 1200, maxHeight = 1200, quality = 0.8) => {
+    return new Promise((resolve) => {
+      try {
+        const reader = new FileReader();
+        reader.onerror = () => resolve(file);
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+          try {
+            const img = new Image();
+            img.onerror = () => resolve(file);
+            img.src = event.target.result;
+            img.onload = () => {
+              try {
+                let width = img.width;
+                let height = img.height;
+
+                if (width <= 0 || height <= 0) {
+                  resolve(file);
+                  return;
+                }
+
+                if (width > maxWidth || height > maxHeight) {
+                  if (width > height) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                  } else {
+                    width = Math.round((width * maxHeight) / height);
+                    height = maxHeight;
+                  }
+                }
+
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+
+                canvas.toBlob(
+                  (blob) => {
+                    try {
+                      if (!blob) {
+                        resolve(file);
+                        return;
+                      }
+                      const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                        type: 'image/jpeg',
+                        lastModified: Date.now(),
+                      });
+                      resolve(compressedFile);
+                    } catch (e) {
+                      console.error("toBlob callback error:", e);
+                      resolve(file);
+                    }
+                  },
+                  'image/jpeg',
+                  quality
+                );
+              } catch (e) {
+                console.error("img.onload error:", e);
+                resolve(file);
+              }
+            };
+          } catch (e) {
+            console.error("reader.onload error:", e);
+            resolve(file);
+          }
+        };
+      } catch (err) {
+        console.error("Compression error:", err);
+        resolve(file);
+      }
+    });
+  };
+
   const handleImageUpload = async (e, section, field, nestedPath = null, index = null) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const rawFile = e.target.files[0];
+    if (!rawFile) return;
+
+    let file = rawFile;
+    const isImage = rawFile.type.startsWith('image/') || /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(rawFile.name);
+    if (isImage) {
+      try {
+        file = await compressImage(rawFile);
+      } catch (err) {
+        console.error("Sıkıştırma sırasında hata oluştu:", err);
+      }
+    }
 
     // Check if file is large (e.g. > 4MB) to bypass Vercel serverless function body size limit of 4.5MB
     if (file.size > 4 * 1024 * 1024) {
@@ -293,10 +377,18 @@ const AdminPanel = ({ initialData }) => {
 
           if (uploadResp.ok) {
             const publicUrl = `${supabaseUrl}/storage/v1/object/public/pennylane/${fileName}`;
-            if (nestedPath && index !== null) {
-              const newArray = [...data[section][nestedPath]];
-              newArray[index][field] = publicUrl;
-              setData({ ...data, [section]: { ...data[section], [nestedPath]: newArray }});
+            if (index !== null) {
+              if (nestedPath) {
+                const newArray = [...data[section][nestedPath]];
+                newArray[index][field] = publicUrl;
+                setData({ ...data, [section]: { ...data[section], [nestedPath]: newArray }});
+              } else if (Array.isArray(data[section])) {
+                const newArray = [...data[section]];
+                newArray[index][field] = publicUrl;
+                setData({ ...data, [section]: newArray });
+              } else {
+                updateField(section, field, publicUrl);
+              }
             } else {
               updateField(section, field, publicUrl);
             }
@@ -320,10 +412,18 @@ const AdminPanel = ({ initialData }) => {
       });
       
       if (resp.data.status === 'success') {
-        if (nestedPath && index !== null) {
-          const newArray = [...data[section][nestedPath]];
-          newArray[index][field] = resp.data.url;
-          setData({ ...data, [section]: { ...data[section], [nestedPath]: newArray }});
+        if (index !== null) {
+          if (nestedPath) {
+            const newArray = [...data[section][nestedPath]];
+            newArray[index][field] = resp.data.url;
+            setData({ ...data, [section]: { ...data[section], [nestedPath]: newArray }});
+          } else if (Array.isArray(data[section])) {
+            const newArray = [...data[section]];
+            newArray[index][field] = resp.data.url;
+            setData({ ...data, [section]: newArray });
+          } else {
+            updateField(section, field, resp.data.url);
+          }
         } else {
           updateField(section, field, resp.data.url);
         }
@@ -743,62 +843,7 @@ const AdminPanel = ({ initialData }) => {
               </motion.div>
             )}
 
-            {activeTab === 'print_menu' && (
-              <motion.div key="print_menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-10">
-                <div className="bg-secondary/10 border-2 border-dashed border-secondary/30 rounded-3xl p-10 text-center space-y-6">
-                   <div className="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto text-secondary shadow-lg shadow-secondary/10 border border-secondary/20 scale-110">
-                      <Download className="w-10 h-10" />
-                   </div>
-                   <div className="max-w-md mx-auto space-y-4">
-                      <h3 className="text-3xl font-serif font-black text-white uppercase tracking-tighter">BASKI MENÜSÜ TASARIMCISI</h3>
-                      <p className="text-textSecondary text-sm leading-relaxed font-light">Pennylane için özel olarak tasarlanmış <strong>SVG bazlı PDF Menü</strong> düzenleme aracını başlatın. Fiyatları güncelleyebilir ve profesyonel baskı alabilirsiniz.</p>
-                   </div>
-                   
-                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-                      <a 
-                        href="/menu-pdf/admin.html" 
-                        target="_blank"
-                        className="bg-secondary text-primary px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-xl shadow-secondary/20 flex items-center space-x-3"
-                      >
-                         <Edit2 className="w-4 h-4" />
-                         <span>TASARIMCIYI BAŞLAT</span>
-                      </a>
-                      <a 
-                        href="/menu-pdf/index.html" 
-                        target="_blank"
-                        className="bg-dark/60 border border-secondary/20 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-secondary/10 hover:border-secondary transition-all flex items-center space-x-3"
-                      >
-                         <Eye className="w-4 h-4 text-secondary" />
-                         <span>ÖNİZLEME</span>
-                      </a>
-                   </div>
-                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   <div className="bg-dark/40 border border-secondary/10 p-6 rounded-2xl space-y-3">
-                      <h5 className="text-secondary font-bold text-xs uppercase tracking-widest flex items-center space-x-2">
-                         <Info className="w-4 h-4" />
-                         <span>NASIL KULLANILIR?</span>
-                      </h5>
-                      <ul className="text-textSecondary text-[11px] space-y-2 list-disc pl-4 leading-relaxed font-light">
-                         <li><strong>TASARIMCIYI BAŞLAT</strong> butonuna basın.</li>
-                         <li>Açılan pencerede Excel dosyanızı yükleyin veya manuel fiyatları girin.</li>
-                         <li>Değişiklikleri SVG üzerine uygulayın ve kaydedin.</li>
-                         <li><strong>ÖNİZLEME</strong> kısmından tasarımı kontrol edin.</li>
-                      </ul>
-                   </div>
-                   <div className="bg-dark/40 border border-secondary/10 p-6 rounded-2xl space-y-3">
-                      <h5 className="text-secondary font-bold text-xs uppercase tracking-widest flex items-center space-x-2">
-                         <Printer className="w-4 h-4" />
-                         <span>PDF KAYDETME (CRITICAL)</span>
-                      </h5>
-                      <p className="text-textSecondary text-[11px] leading-relaxed font-light italic">
-                         Menü açıldıktan sonra tarayıcınızda <strong>CTRL + P</strong> (Yazdır) tuşuna basın. Hedef olarak <strong>"PDF Olarak Kaydet"</strong> seçeneğini belirleyin ve <strong>"Arka Plan Grafikleri"</strong> ayarının açık olduğundan emin olun.
-                      </p>
-                   </div>
-                </div>
-              </motion.div>
-            )}
 
             {activeTab === 'gallery' && (
               <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8">
@@ -1174,6 +1219,40 @@ const AdminPanel = ({ initialData }) => {
                                        />
                                        <button
                                          onClick={(e) => {
+                                           e.stopPropagation();
+                                           const newCats = [...(data?.menu?.categories || [])];
+                                           const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                           if (sIdx > 0) {
+                                             [newCats[cIdx].subcategories[sIdx - 1], newCats[cIdx].subcategories[sIdx]] = [newCats[cIdx].subcategories[sIdx], newCats[cIdx].subcategories[sIdx - 1]];
+                                             setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                             setHasChanges(true);
+                                           }
+                                         }}
+                                         title="Sola Taşı"
+                                         className="px-1 text-secondary/50 hover:text-secondary transition-colors disabled:opacity-20 border-l border-secondary/20 pl-2"
+                                         disabled={sIdx === 0}
+                                       >
+                                         <ChevronLeft className="w-3 h-3" />
+                                       </button>
+                                       <button
+                                         onClick={(e) => {
+                                           e.stopPropagation();
+                                           const newCats = [...(data?.menu?.categories || [])];
+                                           const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                           if (sIdx < newCats[cIdx].subcategories.length - 1) {
+                                             [newCats[cIdx].subcategories[sIdx + 1], newCats[cIdx].subcategories[sIdx]] = [newCats[cIdx].subcategories[sIdx], newCats[cIdx].subcategories[sIdx + 1]];
+                                             setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                             setHasChanges(true);
+                                           }
+                                         }}
+                                         title="Sağa Taşı"
+                                         className="px-1 text-secondary/50 hover:text-secondary transition-colors disabled:opacity-20"
+                                         disabled={sIdx === (data?.menu?.categories?.find(c => c.id === selectedCategoryAdmin)?.subcategories?.length || 1) - 1}
+                                       >
+                                         <ChevronRight className="w-3 h-3" />
+                                       </button>
+                                       <button
+                                         onClick={(e) => {
                                             e.stopPropagation();
                                             if (confirm('Bu alt kategoriyi silmek istediğinize emin misiniz? (Ürünler silinmeyecek)')) {
                                                const newCats = [...(data?.menu?.categories || [])];
@@ -1184,7 +1263,7 @@ const AdminPanel = ({ initialData }) => {
                                                setHasChanges(true);
                                             }
                                          }}
-                                         className="ml-2 pl-2 border-l border-secondary/20 text-secondary/50 hover:text-red-400"
+                                         className="pl-1 border-l border-secondary/20 text-secondary/50 hover:text-red-400"
                                        ><X className="w-3 h-3" /></button>
                                    </>
                                ) : (
@@ -1254,25 +1333,36 @@ const AdminPanel = ({ initialData }) => {
                                <label className="absolute inset-0 bg-dark/60 opacity-0 hover:opacity-100 flex items-center justify-center cursor-pointer transition-opacity rounded-lg">
                                   <Upload className="w-4 h-4 text-white" />
                                   <input type="file" className="hidden" onChange={async (e) => {
-                                    const file = e.target.files[0];
-                                    if (!file) return;
-                                    const formData = new FormData();
-                                    formData.append('image', file);
-                                    try {
-                                      const resp = await axios.post('/api/upload', formData, {
-                                        headers: { 'Content-Type': 'multipart/form-data' }
-                                      });
-                                      if (resp.data.status === 'success') {
-                                        const newCats = [...(data?.menu?.categories || [])];
-                                        const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
-                                        if (catIdx !== -1) {
-                                          newCats[catIdx].items[idx].image_url = resp.data.url;
-                                          setData({ ...data, menu: { ...data.menu, categories: newCats } });
-                                          setHasChanges(true);
-                                        }
-                                      }
-                                    } catch (err) { alert('Görsel yüklenemedi.'); }
-                                  }} />
+                                     const rawFile = e.target.files[0];
+                                     if (!rawFile) return;
+
+                                     let file = rawFile;
+                                     const isImage = rawFile.type.startsWith('image/') || /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(rawFile.name);
+                                     if (isImage) {
+                                       try {
+                                         file = await compressImage(rawFile);
+                                       } catch (err) {
+                                         console.error("Sıkıştırma hatası:", err);
+                                       }
+                                     }
+
+                                     const formData = new FormData();
+                                     formData.append('image', file);
+                                     try {
+                                       const resp = await axios.post('/api/upload', formData, {
+                                         headers: { 'Content-Type': 'multipart/form-data' }
+                                       });
+                                       if (resp.data.status === 'success') {
+                                         const newCats = [...(data?.menu?.categories || [])];
+                                         const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                         if (catIdx !== -1) {
+                                           newCats[catIdx].items[idx].image_url = resp.data.url;
+                                           setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                           setHasChanges(true);
+                                         }
+                                       }
+                                     } catch (err) { alert('Görsel yüklenemedi.'); }
+                                   }} />
                                </label>
                             </div>
                             <div className="flex-grow space-y-2">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Infinity, Lock, User } from 'lucide-react';
 import Button from '../../components/Common/Button';
 
@@ -40,7 +40,18 @@ const Login = () => {
         <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rotate-45 translate-x-12 -translate-y-12" />
         
         <div className="flex flex-col items-center mb-10 text-center">
-          <img src="/assets/img/pennylane_logo_white.png" alt="Pennylane Logo" className="h-16 mb-6" />
+          <Link 
+            to="/" 
+            onClick={(e) => {
+              if (window.location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+            className="cursor-pointer hover:opacity-90 transition-opacity"
+          >
+            <img src="/assets/img/pennylane_logo_white.png" alt="Pennylane Logo" className="h-16 mb-6" />
+          </Link>
           <h1 className="text-3xl font-serif font-bold text-white uppercase tracking-widest mb-2">PENNYLANE YÖNETİM</h1>
           <p className="text-textSecondary text-sm font-light italic">Lütfen yetkili girişi yapın.</p>
         </div>

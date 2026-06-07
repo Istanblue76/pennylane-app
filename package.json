@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "node server/index.js",
-    "pull-cms": "node scripts/pull-cms.js"
+    "pull-cms": "node scripts/pull-cms.js",
+    "import-excel": "node scripts/import_excel.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.0",

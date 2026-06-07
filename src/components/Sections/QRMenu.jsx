@@ -236,6 +236,122 @@ const categorySVGs = {
 };
 
 /* ─────────────────────────────────────────
+   SUBCATEGORY TAB BAR
+   ───────────────────────────────────────── */
+const SubcategoryBar = ({ subcategories, activeId, onSelect, items, depth, activePath, t, tk, isDark, allLabel }) => {
+  if (!subcategories || subcategories.length === 0) return null;
+
+  const getCount = (subId) => {
+    return items.filter(i => {
+      if (i.passive) return false;
+      const itemPath = i.categoryPath || [i.subcategory, i.subSubcategory].filter(Boolean);
+      
+      // Match parent paths up to depth
+      for(let j=0; j<depth; j++) {
+         if (activePath[j] !== 'all' && itemPath[j] !== activePath[j]) return false;
+      }
+      
+      // Match current level
+      if (subId !== 'all') {
+         if (itemPath[depth] !== subId) return false;
+      }
+      return true;
+    }).length;
+  };
+
+  const tabs = [{ id: 'all', title: { tr: allLabel || 'TÜMÜ', en: allLabel || 'ALL' } }, ...subcategories];
+
+  return (
+    <div className="mb-10 w-full px-4 sm:px-0 transition-all duration-500" style={{ transform: `scale(${1 - depth * 0.05})`, marginTop: depth > 0 ? '-1.5rem' : '0' }}>
+      <div className="flex flex-wrap gap-3 justify-center">
+        {tabs.map((sub) => {
+          const isActive = activeId === sub.id;
+          const count = getCount(sub.id);
+          
+          return (
+            <button
+              key={sub.id}
+              onClick={() => onSelect(sub.id)}
+              className="relative flex items-center justify-between px-3 py-1.5 rounded-lg transition-all duration-300 border"
+              style={{
+                backgroundColor: isActive ? tk.accent : (isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)'),
+                borderColor: isActive ? tk.accent : `${tk.accent}30`,
+                boxShadow: isActive ? `0 2px 8px ${tk.accent}30` : 'none'
+              }}
+            >
+              <span 
+                className="text-[8px] font-black uppercase tracking-widest text-left"
+                style={{ 
+                  color: isActive ? '#fff' : (isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)')
+                }}
+              >
+                {t(sub.title)}
+              </span>
+              
+              <span 
+                className="ml-2 flex items-center justify-center px-1.5 py-0.5 min-w-[16px] rounded-full text-[7px] font-black border flex-shrink-0"
+                style={{
+                  backgroundColor: isActive ? 'rgba(0,0,0,0.2)' : `${tk.accent}15`,
+                  color: isActive ? '#fff' : tk.accent,
+                  borderColor: isActive ? 'transparent' : `${tk.accent}30`
+                }}
+              >
+                {count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────
+   RECURSIVE SUBCATEGORY WRAPPER
+   ───────────────────────────────────────── */
+const CategoryTabsRecursive = ({ categoryNode, items, activePath, setActivePath, depth = 0, t, tk, isDark }) => {
+  if (!categoryNode?.subcategories || categoryNode.subcategories.length === 0) return null;
+  
+  const activeId = activePath[depth] || 'all';
+
+  return (
+    <>
+      <SubcategoryBar
+        subcategories={categoryNode.subcategories}
+        activeId={activeId}
+        onSelect={(id) => {
+          const newPath = [...activePath.slice(0, depth), id, 'all'];
+          setActivePath(newPath);
+        }}
+        items={items}
+        depth={depth}
+        activePath={activePath}
+        t={t}
+        tk={tk}
+        isDark={isDark}
+      />
+      
+      {activeId !== 'all' && (() => {
+        const selectedSub = categoryNode.subcategories.find(s => s.id === activeId);
+        if (selectedSub?.subcategories) {
+           return <CategoryTabsRecursive
+             categoryNode={selectedSub}
+             items={items}
+             activePath={activePath}
+             setActivePath={setActivePath}
+             depth={depth + 1}
+             t={t}
+             tk={tk}
+             isDark={isDark}
+           />
+        }
+        return null;
+      })()}
+    </>
+  );
+};
+
+/* ─────────────────────────────────────────
    CATEGORY CARD — Premium split layout
    ───────────────────────────────────────── */
 const CategoryCard = ({ cat, onClick, t, tk, index }) => {
@@ -630,7 +746,7 @@ const BasketDrawer = ({ isOpen, onClose, cart, updateQuantity, removeFromCart, t
 const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   const { t, lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(null);
-  const [activeSubcategory, setActiveSubcategory] = useState('all');
+  const [activePath, setActivePath] = useState(['all']);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [viewMode, setViewMode] = useState(settings?.menu_display_mode === 'all' ? 'categories' : (settings?.menu_display_mode || 'categories'));
@@ -682,7 +798,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   useEffect(() => {
     if (data?.categories && !activeCategory) {
       setActiveCategory(data.categories[0]?.id);
-      setActiveSubcategory('all');
+      setActivePath(['all']);
     }
   }, [data, activeCategory]);
 
@@ -701,12 +817,18 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
     return allItems.filter(item => {
       if (drilledCategory && item.categoryId !== drilledCategory.id) return false;
       const matchesCat = activeCategory === 'all' || item.categoryId === activeCategory;
-      const matchesSubCat = activeSubcategory === 'all' || item.subcategory === activeSubcategory || !item.subcategory;
+      
+      const itemPath = item.categoryPath || [item.subcategory, item.subSubcategory].filter(Boolean);
+      const matchesPath = activePath.every((p, idx) => {
+        if (p === 'all') return true;
+        return itemPath[idx] === p;
+      });
+
       const q = searchQuery.toLowerCase();
       const matchesSearch = t(item.name).toLowerCase().includes(q) || t(item.description).toLowerCase().includes(q);
-      return matchesCat && matchesSubCat && matchesSearch && !item.passive;
+      return matchesCat && matchesPath && matchesSearch && !item.passive;
     });
-  }, [data, activeCategory, activeSubcategory, searchQuery, t, drilledCategory]);
+  }, [data, activeCategory, activePath, searchQuery, t, drilledCategory]);
 
   if (!data?.categories) return null;
 
@@ -757,21 +879,34 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
           </div>
 
           {isDrilled && (
-            <button
-              onClick={() => setDrilledCategory(null)}
-              className="mb-8 flex items-center space-x-2 transition-all active:scale-95 group"
-              style={{ color: tk.accent }}
-            >
-              <div
-                className="w-10 h-10 rounded-2xl flex items-center justify-center"
-                style={{ backgroundColor: `${tk.accent}18`, border: `1px solid ${tk.accent}35` }}
+            <div className="mb-8">
+              <button
+                onClick={() => { setDrilledCategory(null); setActivePath(['all']); }}
+                className="mb-6 flex items-center space-x-2 transition-all active:scale-95 group"
+                style={{ color: tk.accent }}
               >
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-widest opacity-70">
-                {t({ tr: 'Kategoriler', en: 'Categories' })}
-              </span>
-            </button>
+                <div
+                  className="w-10 h-10 rounded-2xl flex items-center justify-center"
+                  style={{ backgroundColor: `${tk.accent}18`, border: `1px solid ${tk.accent}35` }}
+                >
+                  <ArrowLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-widest opacity-70">
+                  {t({ tr: 'Kategoriler', en: 'Categories' })}
+                </span>
+              </button>
+
+              {/* Drilled-view subcategory tab bar (Recursive) */}
+              <CategoryTabsRecursive
+                 categoryNode={drilledCategory}
+                 items={drilledCategory?.items || []}
+                 activePath={activePath}
+                 setActivePath={setActivePath}
+                 t={t}
+                 tk={tk}
+                 isDark={isDark}
+              />
+            </div>
           )}
 
           {viewMode === 'grid' && !isDrilled && (
@@ -782,7 +917,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
                 return (
                   <button
                     key={cat.id}
-                    onClick={() => { setActiveCategory(cat.id); setActiveSubcategory('all'); setDrilledCategory(null); }}
+                    onClick={() => { setActiveCategory(cat.id); setActivePath(['all']); setDrilledCategory(null); }}
                     className="px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border"
                     style={isActive
                       ? { backgroundColor: tk.accent, color: '#fff', borderColor: tk.accent }
@@ -798,31 +933,23 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
                 );
               })}
             </div>
-            
-            {activeCategory !== 'all' && data.categories.find(c => c.id === activeCategory)?.subcategories && (
-               <div className="flex flex-wrap gap-2 mb-6">
-                 {[{ id: 'all', title: { tr: 'Tümü', en: 'All' } }, ...data.categories.find(c => c.id === activeCategory).subcategories].map(sub => {
-                    const isActive = activeSubcategory === sub.id;
-                    return (
-                        <button
-                          key={sub.id}
-                          onClick={() => setActiveSubcategory(sub.id)}
-                          className="px-5 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest transition-all border"
-                          style={isActive
-                            ? { backgroundColor: tk.accent, color: '#fff', borderColor: tk.accent }
-                            : {
-                                backgroundColor: 'transparent',
-                                color: isDark ? 'rgba(255,255,255,0.4)' : 'rgba(28,20,16,0.4)',
-                                borderColor: `${tk.accent}20`,
-                              }
-                          }
-                        >
-                          {t(sub.title)}
-                        </button>
-                    )
-                 })}
-               </div>
-            )}
+
+            {activeCategory !== 'all' && (() => {
+               const activeCat = data.categories.find(c => c.id === activeCategory);
+               if (!activeCat?.subcategories) return null;
+               
+               return (
+                 <CategoryTabsRecursive
+                    categoryNode={activeCat}
+                    items={activeCat.items || []}
+                    activePath={activePath}
+                    setActivePath={setActivePath}
+                    t={t}
+                    tk={tk}
+                    isDark={isDark}
+                 />
+               );
+            })()}
             </>
           )}
         </div>
@@ -932,11 +1059,12 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             : <><span>Discover Our </span><span className="text-[#c9a96e]">Delicious Menu</span></>}
         </motion.h2>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {/* Category pills */}
+        <div className="flex flex-wrap justify-center gap-2 mb-4">
           {[{ id: 'all', title: { tr: 'Hepsi', en: 'All' } }, ...data.categories].map(cat => (
             <button
               key={cat.id}
-              onClick={() => { setActiveCategory(cat.id); setActiveSubcategory('all'); }}
+              onClick={() => { setActiveCategory(cat.id); setActivePath(['all']); }}
               className="px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all border"
               style={activeCategory === cat.id
                 ? { backgroundColor: '#c9a96e', color: '#fff', borderColor: '#c9a96e' }
@@ -951,6 +1079,24 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             </button>
           ))}
         </div>
+
+        {/* Subcategory tab bar (Recursive) */}
+        {activeCategory !== 'all' && (() => {
+          const activeCat = data.categories.find(c => c.id === activeCategory);
+          return activeCat?.subcategories ? (
+            <div className="max-w-3xl mx-auto mb-8">
+              <CategoryTabsRecursive
+                categoryNode={activeCat}
+                items={activeCat.items || []}
+                activePath={activePath}
+                setActivePath={setActivePath}
+                t={t}
+                tk={darkTheme}
+                isDark={true}
+              />
+            </div>
+          ) : null;
+        })()}
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8 px-4 sm:px-0">
           <AnimatePresence mode="popLayout">

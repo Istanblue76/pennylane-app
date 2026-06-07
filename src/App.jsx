@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { useFetchCMS } from './hooks/useFetchCMS';
 import Header from './components/Layout/Header';
@@ -17,6 +17,7 @@ import PolicyModal from './components/Common/PolicyModal';
 import AdminPanel from './pages/Admin/AdminPanel';
 import Login from './pages/Admin/Login';
 import QRMenuPage from './pages/QRMenuPage';
+import PrintMenuPage from './pages/PrintMenuPage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, MapPin, X, AlertTriangle } from 'lucide-react';
 import { useLanguage } from './context/LanguageContext';
@@ -156,21 +157,154 @@ const Home = ({ cmsData }) => {
   );
 };
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 export default function App() {
   const { cmsData, loading, error } = useFetchCMS();
   const [activePolicy, setActivePolicy] = React.useState(null);
+  const [progress, setProgress] = React.useState(0);
+  const [showLoader, setShowLoader] = React.useState(true);
 
-  if (loading) {
+  // 1. Progress animation (runs once on mount, takes exactly 2.5 seconds to go 0 -> 100)
+  React.useEffect(() => {
+    let start = null;
+    const duration = 2500; // 2.5 seconds minimum load time for smooth vinyl feel
+    let animationFrameId;
+
+    const animate = (timestamp) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const progressVal = Math.min((elapsed / duration) * 100, 100);
+      setProgress(progressVal);
+
+      if (progressVal < 100) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  // 2. Hide loader when animation is complete (progress === 100) and API loading is finished (loading === false)
+  React.useEffect(() => {
+    if (progress === 100 && !loading) {
+      const timer = setTimeout(() => setShowLoader(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [progress, loading]);
+
+  const getNeedleAngle = (prog) => {
+    if (prog === 0) return -32;
+    if (prog < 15) {
+      const ratio = prog / 15;
+      return -32 + ratio * 22; // -32 to -10 (lifts and swings to outer grooves)
+    }
+    const ratio = (prog - 15) / 85;
+    return -10 + ratio * 22; // -10 to 12 (slowly crawls inwards)
+  };
+
+  if (showLoader) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-dark text-secondary">
-        <motion.div
-           animate={{ rotate: 360 }}
-           transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-           className="w-16 h-16 border-4 border-secondary/20 border-t-secondary rounded-full mb-8 shadow-2xl shadow-secondary/50"
-        />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-dark text-secondary select-none">
+        {/* Plak ve İğne Kutusu */}
+        <div className="relative w-[240px] h-[240px] mb-4 flex items-center justify-center">
+          
+          {/* Dönen Plak (Vinyl Record) */}
+          <div className="absolute left-[40px] top-[40px] w-[160px] h-[160px]">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+              className="w-full h-full"
+            >
+              <svg viewBox="0 0 160 160" className="w-full h-full drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
+                {/* Plak Gövdesi */}
+                <circle cx="80" cy="80" r="78" fill="#121212" stroke="#d4af37" strokeWidth="0.5" />
+                <circle cx="80" cy="80" r="76" fill="#161616" />
+                
+                {/* Plak Kanalları (İzler) */}
+                <circle cx="80" cy="80" r="70" stroke="#222" strokeWidth="0.5" fill="none" />
+                <circle cx="80" cy="80" r="65" stroke="#2a2a2a" strokeWidth="0.75" fill="none" />
+                <circle cx="80" cy="80" r="60" stroke="#1d1d1d" strokeWidth="0.5" fill="none" />
+                <circle cx="80" cy="80" r="55" stroke="#2a2a2a" strokeWidth="0.5" fill="none" />
+                <circle cx="80" cy="80" r="50" stroke="#1d1d1d" strokeWidth="0.5" fill="none" />
+                <circle cx="80" cy="80" r="45" stroke="#2a2a2a" strokeWidth="0.75" fill="none" />
+                <circle cx="80" cy="80" r="40" stroke="#1d1d1d" strokeWidth="0.5" fill="none" />
+                <circle cx="80" cy="80" r="34" stroke="#222" strokeWidth="0.5" fill="none" />
+                
+                {/* Göbek Etiketi (Gold/Bronz) */}
+                <circle cx="80" cy="80" r="26" fill="#d4af37" />
+                <circle cx="80" cy="80" r="23" fill="#121212" stroke="#d4af37" strokeWidth="1" />
+                
+                {/* Göbek Logosu */}
+                <text x="80" y="83" fill="#d4af37" fontSize="5.5" fontWeight="bold" textAnchor="middle" letterSpacing="0.8" fontFamily="serif">PENNYLANE</text>
+                
+                {/* Spindle Deliği */}
+                <circle cx="80" cy="80" r="3" fill="#121212" />
+              </svg>
+            </motion.div>
+          </div>
+
+          {/* İğne Katmanı (Needle overlay) */}
+          <div className="absolute inset-0 pointer-events-none">
+            <svg viewBox="0 0 240 240" className="w-full h-full">
+              {/* İğne Yatağı / Armrest */}
+              <path d="M 213,65 Q 218,75 218,85" stroke="#2a2a2a" strokeWidth="2.5" fill="none" />
+              <line x1="213" y1="85" x2="223" y2="85" stroke="#333" strokeWidth="2" />
+              
+              {/* Kol Grubu (Tonearm) */}
+              <g 
+                style={{ 
+                  transform: `rotate(${getNeedleAngle(progress)}deg)`, 
+                  transformOrigin: "200px 40px",
+                  transition: "transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
+                }}
+              >
+                {/* Bağlantı noktası dikey pimi */}
+                <line x1="200" y1="40" x2="200" y2="52" stroke="#444" strokeWidth="3" />
+                
+                {/* Metal Kol Borusu */}
+                <path d="M 200,40 Q 185,90 80,130" stroke="#888" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+                <path d="M 200,40 Q 185,90 80,130" stroke="#d4af37" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                
+                {/* Kafa / Kartuş (Headshell) */}
+                <g transform="translate(68, 125) rotate(-35)">
+                  <rect x="0" y="0" width="18" height="9" rx="1.5" fill="#222" stroke="#d4af37" strokeWidth="1" />
+                  {/* Kartuş detayı */}
+                  <rect x="2" y="2" width="5" height="5" fill="#d4af37" />
+                  {/* İğne ucu */}
+                  <line x1="12" y1="9" x2="14" y2="12" stroke="#fff" strokeWidth="1.5" />
+                </g>
+                
+                {/* Döner Kol Tabanı */}
+                <circle cx="200" cy="40" r="11" fill="#222" stroke="#d4af37" strokeWidth="2" />
+                <circle cx="200" cy="40" r="6" fill="#3a3a3a" />
+                
+                {/* Ağırlık / Counterweight */}
+                <rect x="194" y="20" width="12" height="8" rx="1" fill="#111" stroke="#d4af37" strokeWidth="1" />
+              </g>
+            </svg>
+          </div>
+
+        </div>
+
+        {/* Yüzde & Metin */}
+        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary/60 mb-3 font-mono">
+          {Math.round(progress)}%
+        </div>
         <div className="flex flex-col items-center">
-           <h2 className="text-3xl font-serif font-bold animate-pulse tracking-widest uppercase mb-2">PENNYLANE</h2>
-           <span className="text-[10px] uppercase font-semibold tracking-[1em] opacity-60">GASTROPUB EXPERIENCE</span>
+          <h2 className="text-3xl font-serif font-bold tracking-widest uppercase mb-1.5">PENNYLANE</h2>
+          <span className="text-[9px] uppercase font-semibold tracking-[0.9em] opacity-50">GASTROPUB EXPERIENCE</span>
         </div>
       </div>
     );
@@ -193,6 +327,7 @@ export default function App() {
     <LanguageProvider>
       <ErrorBoundary>
         <Router>
+          <ScrollToTop />
           <div className="bg-dark text-white min-h-screen selection:bg-secondary selection:text-primary">
             <Routes>
               <Route path="/" element={
@@ -205,6 +340,7 @@ export default function App() {
               <Route path="/admin" element={<AdminPanel initialData={cmsData} />} />
               <Route path="/login" element={<Login />} />
               <Route path="/menu" element={<QRMenuPage cmsData={cmsData} />} />
+              <Route path="/print-menu" element={<PrintMenuPage cmsData={cmsData} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             <AnimatePresence>

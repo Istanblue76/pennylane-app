@@ -33,7 +33,16 @@ const Header = ({ data }) => {
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-primary/95 backdrop-blur-md shadow-2xl py-3' : 'bg-transparent py-6'}`}>
       <div className="section-container flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2 group">
+        <Link 
+          to="/" 
+          onClick={(e) => {
+            if (window.location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          className="flex items-center space-x-2 group"
+        >
           {data?.logo?.image ? (
             <img src={data.logo.image} alt={t(data.logo.text)} className="h-10 md:h-12 w-auto transition-transform duration-700 group-hover:scale-105" />
           ) : (

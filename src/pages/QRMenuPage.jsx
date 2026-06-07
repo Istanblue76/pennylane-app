@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import QRMenu from '../components/Sections/QRMenu';
 import { useLanguage } from '../context/LanguageContext';
 import { ChevronLeft, Globe, Sun, Moon } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const QRMenuPage = ({ cmsData }) => {
   const { lang, setLang, t } = useLanguage();
@@ -69,7 +69,16 @@ const QRMenuPage = ({ cmsData }) => {
         <div className="w-8 sm:w-20" />
 
         {/* Logo */}
-        <div className="flex flex-col items-center">
+        <Link 
+          to="/" 
+          onClick={(e) => {
+            if (window.location.pathname === '/') {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          className="flex flex-col items-center hover:opacity-85 transition-opacity cursor-pointer"
+        >
           <h1
             className="text-xl font-serif font-black tracking-[0.32em]"
             style={{ color: textColor }}
@@ -82,7 +91,7 @@ const QRMenuPage = ({ cmsData }) => {
           >
             Digital Menu
           </span>
-        </div>
+        </Link>
 
         {/* Sağ kontroller: Tema + Dil */}
         <div className="flex items-center space-x-2">

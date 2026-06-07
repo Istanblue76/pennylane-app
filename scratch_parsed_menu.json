@@ -1,0 +1,1992 @@
+[
+  {
+    "name": "Beers",
+    "sku": "2201",
+    "items": [],
+    "subcategories": [
+      {
+        "name": "Bottled Beers",
+        "sku": "1000",
+        "items": [
+          {
+            "name": "3 Kafadar Aşna Vişne",
+            "sku": "03070",
+            "price": 400
+          },
+          {
+            "name": "3 Kafadar English Gold 33 cl",
+            "sku": "03649",
+            "price": 400
+          },
+          {
+            "name": "3 Kafadar Kölsch 33 cl",
+            "sku": "03744",
+            "price": 400
+          },
+          {
+            "name": "3 Kafadar Mosaic IPA 33 cl",
+            "sku": "02578",
+            "price": 400
+          },
+          {
+            "name": "3 Kafadar amerikan Pale Ale 33cl",
+            "sku": "1036",
+            "price": 400
+          },
+          {
+            "name": "Blanc 33 NBR cl.",
+            "sku": "1029",
+            "price": 320
+          },
+          {
+            "name": "Budweiser Budvar 33 cl.",
+            "sku": "1001",
+            "price": 350
+          },
+          {
+            "name": "Carsberg Luna 50cl ŞİŞE",
+            "sku": "02244",
+            "price": 360
+          },
+          {
+            "name": "Carsberg Şişe 50cl",
+            "sku": "02247",
+            "price": 300
+          },
+          {
+            "name": "Das Dies Ale",
+            "sku": "1058",
+            "price": 460
+          },
+          {
+            "name": "Daura Damm Glutensiz 33 cl",
+            "sku": "03179",
+            "price": 360
+          },
+          {
+            "name": "Desperados 33cl Şişe",
+            "sku": "02243",
+            "price": 400
+          },
+          {
+            "name": "Efes Glutensiz 50 cl",
+            "sku": "03865",
+            "price": 360
+          },
+          {
+            "name": "Frederik India Pale Ale 35 cl.",
+            "sku": "1050",
+            "price": 350
+          },
+          {
+            "name": "Frederik Marzen Lager 35 cl.",
+            "sku": "1043",
+            "price": 350
+          },
+          {
+            "name": "Frederik Yakıma IPA 35 cl.",
+            "sku": "1046",
+            "price": 350
+          },
+          {
+            "name": "Heineken 33 cl.",
+            "sku": "1004",
+            "price": 350
+          },
+          {
+            "name": "Kirin İchiban 33 cl.",
+            "sku": "03739",
+            "price": 455
+          },
+          {
+            "name": "Mythos 33cl Şişe",
+            "sku": "02245",
+            "price": 400
+          },
+          {
+            "name": "Sol Cerveza",
+            "sku": "1052",
+            "price": 310
+          },
+          {
+            "name": "Stella Artois 44 cl.",
+            "sku": "03873",
+            "price": 400
+          },
+          {
+            "name": "Tuborg Amber 50cl ŞİŞE",
+            "sku": "02246",
+            "price": 320
+          },
+          {
+            "name": "Tuborg Filtresiz 50 cl. Şişe",
+            "sku": "02231",
+            "price": 320
+          },
+          {
+            "name": "Tuborg Gold 50 cl. NBR Şişe",
+            "sku": "02241",
+            "price": 290
+          },
+          {
+            "name": "Tuborg Ice 33Cl Şişe",
+            "sku": "03709",
+            "price": 260
+          },
+          {
+            "name": "Tuborg Smooth 33Cl Şişe",
+            "sku": "03993",
+            "price": 280
+          },
+          {
+            "name": "Weihenstephaner 33 cl. NBR",
+            "sku": "1037",
+            "price": 410
+          },
+          {
+            "name": "Weihenstephaner Vitus 33 cl. NBR",
+            "sku": "1040",
+            "price": 440
+          }
+        ]
+      },
+      {
+        "name": "Draft Beers",
+        "sku": "1060",
+        "items": [
+          {
+            "name": "Blanc Fıçı 33 cl.",
+            "sku": "1075",
+            "price": 310
+          },
+          {
+            "name": "Blanc Fıçı 50 cl.",
+            "sku": "1073",
+            "price": 360
+          },
+          {
+            "name": "Carlsberg Fıçı 33 cl",
+            "sku": "1063",
+            "price": 250
+          },
+          {
+            "name": "Carlsberg Fıçı 50 cl",
+            "sku": "1061",
+            "price": 290
+          },
+          {
+            "name": "Carlsberg LUNA Fıçı 33 cl",
+            "sku": "1078",
+            "price": 290
+          },
+          {
+            "name": "Carlsberg LUNA Fıçı 50 cl",
+            "sku": "1077",
+            "price": 330
+          },
+          {
+            "name": "Guinness Fıçı Half Pint 25 cl.",
+            "sku": "1072",
+            "price": 390
+          },
+          {
+            "name": "Guinness Fıçı Pint 50 cl.",
+            "sku": "1071",
+            "price": 450
+          },
+          {
+            "name": "Tuborg Gold Fıçı  33 cl",
+            "sku": "1067",
+            "price": 240
+          },
+          {
+            "name": "Tuborg Gold Fıçı 50 cl",
+            "sku": "1065",
+            "price": 280
+          },
+          {
+            "name": "Weihenstephan Fıçı 33 cl",
+            "sku": "1070",
+            "price": 390
+          },
+          {
+            "name": "Weihenstephan Fıçı 50 cl",
+            "sku": "1069",
+            "price": 460
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Breakfast",
+    "sku": "1091",
+    "items": [
+      {
+        "name": "Breakfast Burrito",
+        "sku": "03929",
+        "price": 450
+      },
+      {
+        "name": "Pretzel Brunch",
+        "sku": "03930",
+        "price": 700
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Burger & Sandwich",
+    "sku": "1108",
+    "items": [
+      {
+        "name": "Cheeseburger",
+        "sku": "1115",
+        "price": 600
+      },
+      {
+        "name": "PennyBurger",
+        "sku": "1112",
+        "price": 690
+      },
+      {
+        "name": "Tiftik Burger",
+        "sku": "03991",
+        "price": 710
+      },
+      {
+        "name": "Trüflü Burger ",
+        "sku": "03720",
+        "price": 670
+      },
+      {
+        "name": "Vejeteryan Burger",
+        "sku": "1124",
+        "price": 400
+      },
+      {
+        "name": "Çıtır Tavuk Burger",
+        "sku": "1109",
+        "price": 500
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Cider",
+    "sku": "2248",
+    "items": [
+      {
+        "name": "Strongbow Apple Cider 33 cl şişe",
+        "sku": "03874",
+        "price": 440
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Coffee",
+    "sku": "2202",
+    "items": [],
+    "subcategories": [
+      {
+        "name": "Brewed Coffee",
+        "sku": "1150",
+        "items": [
+          {
+            "name": "Türk Kahvesi",
+            "sku": "1209",
+            "price": 150
+          }
+        ]
+      },
+      {
+        "name": "Espresso Based Coffee",
+        "sku": "1127",
+        "items": [
+          {
+            "name": "Americano",
+            "sku": "1128",
+            "price": 200
+          },
+          {
+            "name": "Double Espresso",
+            "sku": "03585",
+            "price": 200
+          },
+          {
+            "name": "Espresso",
+            "sku": "1162",
+            "price": 160
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Coffee Beans",
+    "sku": "2204",
+    "items": [],
+    "subcategories": [
+      {
+        "name": "Turkish coffee",
+        "sku": "1264",
+        "items": [
+          {
+            "name": "Türk Kahvesi Kg",
+            "sku": "1265",
+            "price": 800
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Desserts",
+    "sku": "1271",
+    "items": [
+      {
+        "name": "Churros",
+        "sku": "03981",
+        "price": 350
+      },
+      {
+        "name": "Penny Brownie ",
+        "sku": "03239",
+        "price": 350
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Main",
+    "sku": "1742",
+    "items": [
+      {
+        "name": "Arpa Risottolu Tavuk Pirzola",
+        "sku": "03971",
+        "price": 600
+      },
+      {
+        "name": "Falafel",
+        "sku": "03064",
+        "price": 430
+      },
+      {
+        "name": "Fish & Chips",
+        "sku": "03942",
+        "price": 500
+      },
+      {
+        "name": "Ispanaklı Izgara Tavuk",
+        "sku": "03068",
+        "price": 520
+      },
+      {
+        "name": "Izgara Sebzeli Fettucine",
+        "sku": "03721",
+        "price": 450
+      },
+      {
+        "name": "Mantarlı Paccheri",
+        "sku": "03548",
+        "price": 500
+      },
+      {
+        "name": "Pırasalı Fettucine Vegetarian",
+        "sku": "03943",
+        "price": 450
+      },
+      {
+        "name": "Tavuk Schinitzel",
+        "sku": "03951",
+        "price": 570
+      },
+      {
+        "name": "Yakitori Beef",
+        "sku": "03953",
+        "price": 890
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Mini Tuzlu",
+    "sku": "1749",
+    "items": [
+      {
+        "name": "Kuruyemiş",
+        "sku": "1750",
+        "price": 150
+      },
+      {
+        "name": "Tuzlu Fıstık",
+        "sku": "03643",
+        "price": 120
+      },
+      {
+        "name": "Zeytin",
+        "sku": "03852",
+        "price": 120
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Mocktail Cocktails",
+    "sku": "2247",
+    "items": [
+      {
+        "name": "Acı Mocktail",
+        "sku": "03619",
+        "price": 300
+      },
+      {
+        "name": "Ekşi Mocktail",
+        "sku": "03621",
+        "price": 300
+      },
+      {
+        "name": "Tatlı Mocktail",
+        "sku": "03620",
+        "price": 300
+      },
+      {
+        "name": "Virgin Mary",
+        "sku": "03704",
+        "price": 300
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Salads",
+    "sku": "1777",
+    "items": [
+      {
+        "name": "Deniz Mahsüllü Salata",
+        "sku": "03722",
+        "price": 700
+      },
+      {
+        "name": "Izgara Tavuk Salata",
+        "sku": "03392",
+        "price": 490
+      },
+      {
+        "name": "Kuru Etli Salata",
+        "sku": "03938",
+        "price": 720
+      },
+      {
+        "name": "Sezar Salata ",
+        "sku": "03546",
+        "price": 490
+      },
+      {
+        "name": "Sezar Salata KARİDES",
+        "sku": "03973",
+        "price": 510
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Soft Drinks",
+    "sku": "1781",
+    "items": [
+      {
+        "name": "Churchill",
+        "sku": "1782",
+        "price": 150
+      },
+      {
+        "name": "Coca Cola Original 250 ml.",
+        "sku": "1791",
+        "price": 140
+      },
+      {
+        "name": "Coca Cola Zero 250 ml.",
+        "sku": "1793",
+        "price": 140
+      },
+      {
+        "name": "Red Bull Energy Drink",
+        "sku": "1795",
+        "price": 200
+      },
+      {
+        "name": "Soda",
+        "sku": "1784",
+        "price": 80
+      },
+      {
+        "name": "Sprite 200 ml",
+        "sku": "02440",
+        "price": 140
+      },
+      {
+        "name": "Su",
+        "sku": "1785",
+        "price": 80
+      },
+      {
+        "name": "Thon Hick's Premium Tonik Cucumber&Lemon",
+        "sku": "04010",
+        "price": 180
+      },
+      {
+        "name": "Thon Hick's Premium Tonik Light",
+        "sku": "04008",
+        "price": 170
+      },
+      {
+        "name": "Tonic",
+        "sku": "03164",
+        "price": 75
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Spirits",
+    "sku": "2205",
+    "items": [],
+    "subcategories": [
+      {
+        "name": "Double",
+        "sku": "2219",
+        "items": [
+          {
+            "name": "Gin",
+            "sku": "2220",
+            "price": 0
+          },
+          {
+            "name": "Liqueur",
+            "sku": "2221",
+            "price": 0
+          },
+          {
+            "name": "Rum / Cognac / Cachaca",
+            "sku": "2222",
+            "price": 0
+          },
+          {
+            "name": "Tequila & Mezcal",
+            "sku": "2223",
+            "price": 0
+          },
+          {
+            "name": "Vodka",
+            "sku": "2226",
+            "price": 0
+          },
+          {
+            "name": "Whisky",
+            "sku": "2227",
+            "price": 0
+          }
+        ]
+      },
+      {
+        "name": "Gin",
+        "sku": "1273",
+        "items": [
+          {
+            "name": "Beefeater 5 cl.",
+            "sku": "1414",
+            "price": 450
+          },
+          {
+            "name": "Bombay Sapphire Premier Cru 5 cl.",
+            "sku": "03475",
+            "price": 690
+          },
+          {
+            "name": "Bombay Sapphire Tek 5 cl.",
+            "sku": "1394",
+            "price": 500
+          },
+          {
+            "name": "Bulldog Gin 5 cl.",
+            "sku": "03439",
+            "price": 440
+          },
+          {
+            "name": "Fords Gin 5 cl.",
+            "sku": "1464",
+            "price": 440
+          },
+          {
+            "name": "Gibson Blood Orange 5 cl.",
+            "sku": "03761",
+            "price": 400
+          },
+          {
+            "name": "Gin Mare Capri 5 cl.",
+            "sku": "03848",
+            "price": 750
+          },
+          {
+            "name": "Gin Mare Mediterranean 5 cl.",
+            "sku": "1314",
+            "price": 640
+          },
+          {
+            "name": "Gordon's Pink 5 cl",
+            "sku": "1484",
+            "price": 440
+          },
+          {
+            "name": "Gordon's Sicilian Lemon 5 cl",
+            "sku": "03395",
+            "price": 440
+          },
+          {
+            "name": "Green Baboon 5 cl.",
+            "sku": "1434",
+            "price": 490
+          },
+          {
+            "name": "Greenalls Gin 5 cl.",
+            "sku": "03436",
+            "price": 440
+          },
+          {
+            "name": "Hendrick's 5 cl.",
+            "sku": "1294",
+            "price": 790
+          },
+          {
+            "name": "Hendrick's Flora Adora 5 cl",
+            "sku": "02590",
+            "price": 860
+          },
+          {
+            "name": "Hendrick's Grand Cabaret 5 cl.",
+            "sku": "03788",
+            "price": 860
+          },
+          {
+            "name": "Hendrick's Lunar 5 cl.",
+            "sku": "1274",
+            "price": 860
+          },
+          {
+            "name": "Hendrick's Neptuna 5 cl.",
+            "sku": "1324",
+            "price": 860
+          },
+          {
+            "name": "Hendrick's Orbium 5 cl.",
+            "sku": "1304",
+            "price": 860
+          },
+          {
+            "name": "Knut Hansen 5 cl.",
+            "sku": "1444",
+            "price": 510
+          },
+          {
+            "name": "MONKEY 47 BARREL CUT  5 CL",
+            "sku": "1526",
+            "price": 990
+          },
+          {
+            "name": "MONKEY 47 SLOE 5 CL",
+            "sku": "1515",
+            "price": 600
+          },
+          {
+            "name": "Malfy Gin 5 cl.",
+            "sku": "1424",
+            "price": 550
+          },
+          {
+            "name": "Malfy Gin Pink 5 cl.",
+            "sku": "02701",
+            "price": 530
+          },
+          {
+            "name": "Malfy Gin limone  5 cl.",
+            "sku": "02702",
+            "price": 550
+          },
+          {
+            "name": "Monkey 47 5 cl.",
+            "sku": "1474",
+            "price": 790
+          },
+          {
+            "name": "Mosaic Gin 5 cl.",
+            "sku": "03312",
+            "price": 550
+          },
+          {
+            "name": "NO:1 London Gin 5 cl",
+            "sku": "03188",
+            "price": 780
+          },
+          {
+            "name": "Nikka Coffey Gin 5 cl.",
+            "sku": "03746",
+            "price": 750
+          },
+          {
+            "name": "Oxley 5 cl.",
+            "sku": "1494",
+            "price": 800
+          },
+          {
+            "name": "Roku Gin 5 cl.",
+            "sku": "1404",
+            "price": 650
+          },
+          {
+            "name": "Skagerrak Gin 5 cl.",
+            "sku": "03509",
+            "price": 510
+          },
+          {
+            "name": "Tanqueray 5 cl.",
+            "sku": "1364",
+            "price": 500
+          },
+          {
+            "name": "Tanqueray Flor de Sevilla 5 cl.",
+            "sku": "1384",
+            "price": 500
+          },
+          {
+            "name": "Tanqueray Ten 5 cl.",
+            "sku": "1374",
+            "price": 680
+          },
+          {
+            "name": "Votanikan 5 cl.",
+            "sku": "03478",
+            "price": 530
+          }
+        ]
+      },
+      {
+        "name": "Liqueur",
+        "sku": "1623",
+        "items": [
+          {
+            "name": "Amarula 5 cl.",
+            "sku": "1624",
+            "price": 320
+          },
+          {
+            "name": "Amarula Etiyopya 5 cl.",
+            "sku": "03427",
+            "price": 320
+          },
+          {
+            "name": "Amarula Raspberry Chocolate  5 cl.",
+            "sku": "03191",
+            "price": 320
+          },
+          {
+            "name": "Amarula Vanilya 5 cl.",
+            "sku": "03187",
+            "price": 320
+          },
+          {
+            "name": "Ancho Reyes 5 cl.",
+            "sku": "1673",
+            "price": 450
+          },
+          {
+            "name": "Ancho Reyes Chile 5 cl.",
+            "sku": "03796",
+            "price": 450
+          },
+          {
+            "name": "Archers 5 cl.",
+            "sku": "1648",
+            "price": 320
+          },
+          {
+            "name": "Bailey's 5 cl.",
+            "sku": "1628",
+            "price": 320
+          },
+          {
+            "name": "Bailey's Chocolate 5 cl.",
+            "sku": "03755",
+            "price": 320
+          },
+          {
+            "name": "Bols Yoghurt 5 cl.",
+            "sku": "03513",
+            "price": 320
+          },
+          {
+            "name": "Botega Pistacchio 5 cl.",
+            "sku": "03450",
+            "price": 320
+          },
+          {
+            "name": "Campari 5 cl.",
+            "sku": "03182",
+            "price": 320
+          },
+          {
+            "name": "Cardinal Melon 5 cl.",
+            "sku": "1650",
+            "price": 320
+          },
+          {
+            "name": "Di Marco Meloncello 5 cl.",
+            "sku": "03683",
+            "price": 320
+          },
+          {
+            "name": "Diserrano Amaretto 5 cl.",
+            "sku": "1654",
+            "price": 320
+          },
+          {
+            "name": "Drambuie 5 cl.",
+            "sku": "1662",
+            "price": 460
+          },
+          {
+            "name": "Fernet Blanca 5 cl.",
+            "sku": "1666",
+            "price": 350
+          },
+          {
+            "name": "Frangelico 5cl.",
+            "sku": "03401",
+            "price": 350
+          },
+          {
+            "name": "Jagermeister 5 cl.",
+            "sku": "02293",
+            "price": 350
+          },
+          {
+            "name": "Jagermeister Cold Brew  5 cl.",
+            "sku": "02472",
+            "price": 380
+          },
+          {
+            "name": "Jagermeister Manifest 5 cl.",
+            "sku": "02469",
+            "price": 430
+          },
+          {
+            "name": "Jagermeister Orange 5 cl.",
+            "sku": "03752",
+            "price": 430
+          },
+          {
+            "name": "Kahlua 5 cl.",
+            "sku": "1640",
+            "price": 320
+          },
+          {
+            "name": "Kleos  5 cl.",
+            "sku": "03183",
+            "price": 480
+          },
+          {
+            "name": "Koskenkorva Rhubarb 5 cl.",
+            "sku": "03501",
+            "price": 320
+          },
+          {
+            "name": "Koskenkorva Salmiakki  5 cl.",
+            "sku": "03497",
+            "price": 320
+          },
+          {
+            "name": "Malibu 5 cl.",
+            "sku": "1642",
+            "price": 320
+          },
+          {
+            "name": "Metaxa 12 Star 5 cl.",
+            "sku": "03858",
+            "price": 635
+          },
+          {
+            "name": "Nane Likörü 5 cl.",
+            "sku": "03887",
+            "price": 200
+          },
+          {
+            "name": "Passoa 5 cl.",
+            "sku": "1669",
+            "price": 320
+          },
+          {
+            "name": "Ramazotti Sambuca 5 cl.",
+            "sku": "1668",
+            "price": 380
+          },
+          {
+            "name": "Ramazzotti Amaro 5 cl.",
+            "sku": "1660",
+            "price": 320
+          },
+          {
+            "name": "Rodnik's Absinthe Classic 5 cl.",
+            "sku": "03184",
+            "price": 320
+          },
+          {
+            "name": "Rossi Dasiago Limoncello 5 cl.",
+            "sku": "1664",
+            "price": 350
+          },
+          {
+            "name": "Safari 5 cl.",
+            "sku": "1646",
+            "price": 320
+          },
+          {
+            "name": "Shanky's Whip 5 CL",
+            "sku": "1672",
+            "price": 320
+          },
+          {
+            "name": "Skinos Mastiha 5 cl.",
+            "sku": "1658",
+            "price": 350
+          },
+          {
+            "name": "Southern Comfort 5 cl.",
+            "sku": "1670",
+            "price": 380
+          },
+          {
+            "name": "St Germain Tek 5 cl.",
+            "sku": "1652",
+            "price": 530
+          },
+          {
+            "name": "Tia Maria Cold Brew 5 cl.",
+            "sku": "03830",
+            "price": 320
+          },
+          {
+            "name": "Valhalla 5 cl.",
+            "sku": "03666",
+            "price": 320
+          },
+          {
+            "name": "Villa Massa Limoncello 5 cl.",
+            "sku": "03834",
+            "price": 350
+          },
+          {
+            "name": "İtalicus Bergamot 5 cl.",
+            "sku": "03856",
+            "price": 600
+          }
+        ]
+      },
+      {
+        "name": "Rum / Cognac / Cachaca",
+        "sku": "1267",
+        "items": [
+          {
+            "name": "Angostura 3 YO White Rum 5 cl.",
+            "sku": "1727",
+            "price": 470
+          },
+          {
+            "name": "Apollon Brandy 5 cl.",
+            "sku": "03629",
+            "price": 450
+          },
+          {
+            "name": "Bacardi Carta Blanca Tek 5 cl.",
+            "sku": "1722",
+            "price": 500
+          },
+          {
+            "name": "Bumbu Rum 5 Cl.",
+            "sku": "03257",
+            "price": 550
+          },
+          {
+            "name": "Bumbu XO 5 Cl.",
+            "sku": "03348",
+            "price": 610
+          },
+          {
+            "name": "Captain Morgan Spiced Gold 5 cl",
+            "sku": "1726",
+            "price": 400
+          },
+          {
+            "name": "Captain Morgan White Rom 5 cl.",
+            "sku": "1720",
+            "price": 400
+          },
+          {
+            "name": "Courvoisier XO Imperial 5 cl.",
+            "sku": "1719",
+            "price": 2750
+          },
+          {
+            "name": "Dead Mans Finger Rum 5 cl.",
+            "sku": "03673",
+            "price": 350
+          },
+          {
+            "name": "Diplomatico Tek 5 cl.",
+            "sku": "03765",
+            "price": 780
+          },
+          {
+            "name": "Havana Club 3 Anos Tek 5 cl.",
+            "sku": "1723",
+            "price": 510
+          },
+          {
+            "name": "Havana Club 7 Anos 5 cl.",
+            "sku": "03281",
+            "price": 590
+          },
+          {
+            "name": "Havana Club Seleccion 5 cl.",
+            "sku": "03282",
+            "price": 860
+          },
+          {
+            "name": "Hennessy Cognac 5 cl.",
+            "sku": "1725",
+            "price": 680
+          },
+          {
+            "name": "Kraken Spiced Rum Tek 5 cl.",
+            "sku": "03323",
+            "price": 480
+          },
+          {
+            "name": "Martell VS 5 cl.",
+            "sku": "1721",
+            "price": 760
+          },
+          {
+            "name": "REMY MARTİN 5 CL",
+            "sku": "1268",
+            "price": 960
+          },
+          {
+            "name": "Run Piet Rum 5 cl. ",
+            "sku": "03579",
+            "price": 480
+          },
+          {
+            "name": "TAKAMAKA RUM BLANC 5 cl.",
+            "sku": "02713",
+            "price": 400
+          },
+          {
+            "name": "TAKAMAKA RUM DARK SPICED 5 cl.",
+            "sku": "02714",
+            "price": 400
+          },
+          {
+            "name": "TAKAMAKA RUM KOKO 5 cl.",
+            "sku": "02715",
+            "price": 400
+          },
+          {
+            "name": "Weber Haus Cachaca 5 cl.",
+            "sku": "1718",
+            "price": 550
+          },
+          {
+            "name": "Zacapa 23 Rom 5 cl.",
+            "sku": "1724",
+            "price": 750
+          }
+        ]
+      },
+      {
+        "name": "Shots",
+        "sku": "1536",
+        "items": [
+          {
+            "name": "Cachaca Shot",
+            "sku": "1771",
+            "price": 0
+          },
+          {
+            "name": "Cognac Shot",
+            "sku": "1773",
+            "price": 0
+          },
+          {
+            "name": "Gin Shot",
+            "sku": "1537",
+            "price": 0
+          },
+          {
+            "name": "Liqueur Shot",
+            "sku": "1680",
+            "price": 0
+          },
+          {
+            "name": "Mezcal Shot",
+            "sku": "2200",
+            "price": 0
+          },
+          {
+            "name": "Mixed Shots",
+            "sku": "1709",
+            "price": 0
+          },
+          {
+            "name": "Rum Shot",
+            "sku": "1763",
+            "price": 0
+          },
+          {
+            "name": "Tequila Shot",
+            "sku": "1921",
+            "price": 0
+          },
+          {
+            "name": "Vodka Shot",
+            "sku": "1977",
+            "price": 0
+          },
+          {
+            "name": "Whisky Shot",
+            "sku": "1991",
+            "price": 0
+          }
+        ]
+      },
+      {
+        "name": "Tequila & Mezcal",
+        "sku": "1877",
+        "items": [
+          {
+            "name": "Mezcal",
+            "sku": "1878",
+            "price": 0
+          },
+          {
+            "name": "Tequila",
+            "sku": "1881",
+            "price": 0
+          }
+        ]
+      },
+      {
+        "name": "Vermouth",
+        "sku": "1941",
+        "items": [
+          {
+            "name": "Botega Vermouth 6 cl.",
+            "sku": "03826",
+            "price": 410
+          },
+          {
+            "name": "Carpano Antica Formula 6 cl.",
+            "sku": "03831",
+            "price": 500
+          },
+          {
+            "name": "Cinzano Bianco 6 cl.",
+            "sku": "03589",
+            "price": 400
+          },
+          {
+            "name": "Cinzano Extra Dry 6 cl.",
+            "sku": "03590",
+            "price": 400
+          },
+          {
+            "name": "Cinzano Rosso 6 cl.",
+            "sku": "03591",
+            "price": 400
+          },
+          {
+            "name": "Martini Bianco 6 cl.",
+            "sku": "1942",
+            "price": 400
+          },
+          {
+            "name": "Martini Extra Dry 6 cl.",
+            "sku": "1943",
+            "price": 400
+          },
+          {
+            "name": "Martini Fiero  6 cl.",
+            "sku": "03791",
+            "price": 370
+          },
+          {
+            "name": "Martini Rosso 6 cl.",
+            "sku": "1944",
+            "price": 400
+          },
+          {
+            "name": "Otto's Vermuet 6 cl.",
+            "sku": "03832",
+            "price": 370
+          }
+        ]
+      },
+      {
+        "name": "Vodka",
+        "sku": "1952",
+        "items": [
+          {
+            "name": "Absolut 5 cl.",
+            "sku": "03782",
+            "price": 350
+          },
+          {
+            "name": "Absolut Citron 5 cl.",
+            "sku": "1960",
+            "price": 350
+          },
+          {
+            "name": "Absolut Mandarin 5 Cl ",
+            "sku": "03277",
+            "price": 350
+          },
+          {
+            "name": "Absolut Pears 5 Cl",
+            "sku": "03278",
+            "price": 350
+          },
+          {
+            "name": "Absolut Raspberri 5 Cl",
+            "sku": "03279",
+            "price": 350
+          },
+          {
+            "name": "Beluga Noble 5 cl.",
+            "sku": "1953",
+            "price": 1150
+          },
+          {
+            "name": "Belvedere 5 cl.",
+            "sku": "1956",
+            "price": 710
+          },
+          {
+            "name": "Elit Eighteen Vodka  5 cl.",
+            "sku": "02597",
+            "price": 740
+          },
+          {
+            "name": "Finlandia Redberry Vodka 5 cl.",
+            "sku": "03884",
+            "price": 420
+          },
+          {
+            "name": "Finlandia Vodka 5 cl.",
+            "sku": "03814",
+            "price": 420
+          },
+          {
+            "name": "Grey Goose Tek 5 cl.",
+            "sku": "1954",
+            "price": 780
+          },
+          {
+            "name": "Haku 5 cl.",
+            "sku": "1961",
+            "price": 740
+          },
+          {
+            "name": "Ketel One Vodka 5 cl.",
+            "sku": "03320",
+            "price": 610
+          },
+          {
+            "name": "Koskenkorva Lime Lemon  5 cl.",
+            "sku": "03506",
+            "price": 350
+          },
+          {
+            "name": "Koskenkorva Vanilla  5 cl.",
+            "sku": "03503",
+            "price": 350
+          },
+          {
+            "name": "Lithuanian Vodka 5 cl.",
+            "sku": "03584",
+            "price": 340
+          },
+          {
+            "name": "Puschkin 5 cl.",
+            "sku": "03611",
+            "price": 340
+          },
+          {
+            "name": "Royal Bison 5 cl.",
+            "sku": "1958",
+            "price": 640
+          },
+          {
+            "name": "Skyy Vodka 5 cl.",
+            "sku": "03813",
+            "price": 380
+          },
+          {
+            "name": "Smirnoff Green Apple 5 cl.",
+            "sku": "1959",
+            "price": 350
+          },
+          {
+            "name": "Smirnoff North 5 cl.",
+            "sku": "1964",
+            "price": 350
+          },
+          {
+            "name": "Smirnoff Red 5 cl.",
+            "sku": "1957",
+            "price": 350
+          },
+          {
+            "name": "Stolichnaya Karamel 5 cl.",
+            "sku": "1955",
+            "price": 450
+          },
+          {
+            "name": "Tito's Handmade 5 cl.",
+            "sku": "1962",
+            "price": 590
+          }
+        ]
+      },
+      {
+        "name": "Whisky",
+        "sku": "2046",
+        "items": [
+          {
+            "name": "Blended Scotch Whisky",
+            "sku": "2047",
+            "price": 0
+          },
+          {
+            "name": "Bourbon & Tennessee Whiskey",
+            "sku": "2076",
+            "price": 0
+          },
+          {
+            "name": "Irish Whiskey",
+            "sku": "2093",
+            "price": 0
+          },
+          {
+            "name": "Japanese Whisky",
+            "sku": "2120",
+            "price": 0
+          },
+          {
+            "name": "Rye Whiskey",
+            "sku": "2125",
+            "price": 0
+          },
+          {
+            "name": "Single Malt Whisky",
+            "sku": "2127",
+            "price": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Starters & Sauces",
+    "sku": "1834",
+    "items": [
+      {
+        "name": "Acı Mayonez",
+        "sku": "1840",
+        "price": 40
+      },
+      {
+        "name": "Baby Patates Tabağı ",
+        "sku": "03545",
+        "price": 300
+      },
+      {
+        "name": "Chicken Lolipop",
+        "sku": "03977",
+        "price": 400
+      },
+      {
+        "name": "Dört Peynirli Pizzetta",
+        "sku": "1853",
+        "price": 450
+      },
+      {
+        "name": "Füme Sucuklu Pizzetta",
+        "sku": "1854",
+        "price": 490
+      },
+      {
+        "name": "Izgara Sebze Pizzetta",
+        "sku": "03062",
+        "price": 400
+      },
+      {
+        "name": "Kokoreç Pizetta",
+        "sku": "03061",
+        "price": 750
+      },
+      {
+        "name": "Parmesan",
+        "sku": "03627",
+        "price": 30
+      },
+      {
+        "name": "Pastrami Ball",
+        "sku": "03972",
+        "price": 560
+      },
+      {
+        "name": "Patates Kızartması",
+        "sku": "1850",
+        "price": 300
+      },
+      {
+        "name": "Peynir Tabağı",
+        "sku": "03383",
+        "price": 890
+      },
+      {
+        "name": "Popcorn Karides",
+        "sku": "1846",
+        "price": 490
+      },
+      {
+        "name": "Popcorn Midye",
+        "sku": "03554",
+        "price": 350
+      },
+      {
+        "name": "Popcorn Tavuk",
+        "sku": "1845",
+        "price": 450
+      },
+      {
+        "name": "Rarebit Tapas",
+        "sku": "03974",
+        "price": 490
+      },
+      {
+        "name": "Sarımsaklı Ekmek",
+        "sku": "03937",
+        "price": 240
+      },
+      {
+        "name": "Sosis Tabağı",
+        "sku": "1847",
+        "price": 700
+      },
+      {
+        "name": "Tartar Sos",
+        "sku": "1842",
+        "price": 40
+      },
+      {
+        "name": "Trüf Extra",
+        "sku": "03784",
+        "price": 30
+      },
+      {
+        "name": "Çıtır Tavuk",
+        "sku": "1848",
+        "price": 420
+      }
+    ],
+    "subcategories": []
+  },
+  {
+    "name": "Wine&Prosecco",
+    "sku": "2206",
+    "items": [],
+    "subcategories": [
+      {
+        "name": "Glass of Wine",
+        "sku": "2156",
+        "items": [
+          {
+            "name": "Suvla Kabatepe Beyaz Kadeh",
+            "sku": "03399",
+            "price": 440
+          },
+          {
+            "name": "Suvla Kabatepe Blush Kadeh",
+            "sku": "2160",
+            "price": 440
+          },
+          {
+            "name": "Suvla Kabatepe Kırmızı Kadeh",
+            "sku": "03483",
+            "price": 440
+          }
+        ]
+      },
+      {
+        "name": "Prosecco",
+        "sku": "1740",
+        "items": [
+          {
+            "name": "Bellini Cipriani ŞİŞE",
+            "sku": "03840",
+            "price": 3200
+          },
+          {
+            "name": "Cinzano Prosecco Kadeh",
+            "sku": "1741",
+            "price": 850
+          },
+          {
+            "name": "Cinzano Prosecco ŞİŞE",
+            "sku": "02249",
+            "price": 3400
+          },
+          {
+            "name": "Marengo Rose ŞİŞE",
+            "sku": "03837",
+            "price": 2700
+          }
+        ]
+      },
+      {
+        "name": "Red Wine",
+        "sku": "2172",
+        "items": [
+          {
+            "name": "Chateau Claud-Bellevue Merlot-Cabernet Franc 2018 (Fransa)",
+            "sku": "2174",
+            "price": 3200
+          },
+          {
+            "name": "Dor Cabernet Sauvignon (Moldova)",
+            "sku": "2188",
+            "price": 2200
+          },
+          {
+            "name": "Dor Rara Neagra Cabernet Sauvignon (Moldova)",
+            "sku": "2189",
+            "price": 2500
+          },
+          {
+            "name": "SUVLA MERLOT B.A 2020 75 cl",
+            "sku": "03097",
+            "price": 2500
+          },
+          {
+            "name": "SUVLA PAPAZ KARASI 75 cl",
+            "sku": "03171",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Boğazkere-Öküzgözü",
+            "sku": "2181",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Cabarnet Sauvignon-Merlot",
+            "sku": "2186",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Kabatepe Kırmızı 2020",
+            "sku": "2180",
+            "price": 1950
+          },
+          {
+            "name": "Suvla Kirte Cabarnet Sauvignon-Syrah-Petit Verdot",
+            "sku": "2183",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Kumkale Merlot75 cl",
+            "sku": "03173",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Kumkale Öküzgözü 75 cl",
+            "sku": "03172",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Sur Barrel Aged (Gelibolu) 2020",
+            "sku": "2185",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Sır (Gelibolu) 2019",
+            "sku": "2184",
+            "price": 2500
+          }
+        ]
+      },
+      {
+        "name": "Rose & Blush Wine",
+        "sku": "2190",
+        "items": [
+          {
+            "name": "Dor Merlot Saperavi (Moldova)",
+            "sku": "2198",
+            "price": 2500
+          },
+          {
+            "name": "Myrina Blush",
+            "sku": "03862",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Blush Karasakız",
+            "sku": "2197",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Kabatepe Blush",
+            "sku": "2196",
+            "price": 2500
+          }
+        ]
+      },
+      {
+        "name": "White Wine",
+        "sku": "2199",
+        "items": [
+          {
+            "name": "Kavaklıdere Emir 2020",
+            "sku": "2201",
+            "price": 2500
+          },
+          {
+            "name": "Myrina Beyaz",
+            "sku": "03863",
+            "price": 2000
+          },
+          {
+            "name": "Prinz V Hessen2024 Riesling (Almanya)",
+            "sku": "04006",
+            "price": 3600
+          },
+          {
+            "name": "SUVLA SAUVIGNON BLANC 2024",
+            "sku": "2209",
+            "price": 2500
+          },
+          {
+            "name": "Sartori Pinot Grigio2024 Delle Venezie (İtalya)",
+            "sku": "04005",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Chardonnay 2023",
+            "sku": "03215",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Kabatepe Beyaz",
+            "sku": "2211",
+            "price": 1950
+          },
+          {
+            "name": "Suvla Kınalı Yapıncak (Gelibolu) 2022",
+            "sku": "2208",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Misket-Narince 2023 (Gelibolu)",
+            "sku": "2202",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Narince ",
+            "sku": "03236",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Sıdalan 2023 (Gelibolu)",
+            "sku": "03378",
+            "price": 2500
+          },
+          {
+            "name": "Suvla Viognier",
+            "sku": "2210",
+            "price": 2500
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "cocktails",
+    "sku": "2203",
+    "items": [],
+    "subcategories": [
+      {
+        "name": "Aperitives",
+        "sku": "1560",
+        "items": [
+          {
+            "name": "Aperol Spritz",
+            "sku": "1561",
+            "price": 660
+          },
+          {
+            "name": "Campari Americano",
+            "sku": "1563",
+            "price": 600
+          },
+          {
+            "name": "Campari Spritz",
+            "sku": "1562",
+            "price": 660
+          },
+          {
+            "name": "DRY Martini (Gin)",
+            "sku": "03526",
+            "price": 660
+          },
+          {
+            "name": "DRY Martini (votka)",
+            "sku": "02410",
+            "price": 660
+          },
+          {
+            "name": "Dırty  Martini",
+            "sku": "1568",
+            "price": 660
+          },
+          {
+            "name": "Lillet Rose Spritz",
+            "sku": "03587",
+            "price": 600
+          },
+          {
+            "name": "Lillet Spritz",
+            "sku": "03586",
+            "price": 600
+          },
+          {
+            "name": "Negroni",
+            "sku": "1567",
+            "price": 660
+          },
+          {
+            "name": "Negroni Oxley",
+            "sku": "03486",
+            "price": 700
+          }
+        ]
+      },
+      {
+        "name": "International",
+        "sku": "1570",
+        "items": [
+          {
+            "name": "Amaretto Sour",
+            "sku": "1601",
+            "price": 660
+          },
+          {
+            "name": "Apple Martini",
+            "sku": "1583",
+            "price": 660
+          },
+          {
+            "name": "Bellini",
+            "sku": "03020",
+            "price": 660
+          },
+          {
+            "name": "Black Russian",
+            "sku": "1592",
+            "price": 660
+          },
+          {
+            "name": "Bloody Mary",
+            "sku": "1577",
+            "price": 660
+          },
+          {
+            "name": "Boulevardier",
+            "sku": "1602",
+            "price": 660
+          },
+          {
+            "name": "Caipirinha",
+            "sku": "1580",
+            "price": 660
+          },
+          {
+            "name": "Cosmopolitan",
+            "sku": "1585",
+            "price": 660
+          },
+          {
+            "name": "Espresso Martini",
+            "sku": "1571",
+            "price": 660
+          },
+          {
+            "name": "Gin Fizz",
+            "sku": "1572",
+            "price": 660
+          },
+          {
+            "name": "Long Island",
+            "sku": "1573",
+            "price": 660
+          },
+          {
+            "name": "Lynchburg Lemonade",
+            "sku": "1589",
+            "price": 660
+          },
+          {
+            "name": "Manhattan",
+            "sku": "1588",
+            "price": 660
+          },
+          {
+            "name": "Margarita",
+            "sku": "1574",
+            "price": 660
+          },
+          {
+            "name": "Mezcal Margarita",
+            "sku": "03021",
+            "price": 700
+          },
+          {
+            "name": "Mojito",
+            "sku": "1575",
+            "price": 660
+          },
+          {
+            "name": "Moskov Mule",
+            "sku": "03016",
+            "price": 660
+          },
+          {
+            "name": "New York Sour",
+            "sku": "1587",
+            "price": 660
+          },
+          {
+            "name": "Old Fasioned",
+            "sku": "1586",
+            "price": 660
+          },
+          {
+            "name": "Paloma",
+            "sku": "1603",
+            "price": 660
+          },
+          {
+            "name": "Pina Colada",
+            "sku": "1578",
+            "price": 660
+          },
+          {
+            "name": "Pornstar Martini",
+            "sku": "03017",
+            "price": 660
+          },
+          {
+            "name": "Tommy's Margarita",
+            "sku": "1598",
+            "price": 660
+          },
+          {
+            "name": "Whiskey Sour",
+            "sku": "1593",
+            "price": 660
+          },
+          {
+            "name": "White Lady",
+            "sku": "02496",
+            "price": 660
+          },
+          {
+            "name": "White Russian",
+            "sku": "1576",
+            "price": 660
+          }
+        ]
+      },
+      {
+        "name": "Signature",
+        "sku": "1605",
+        "items": [
+          {
+            "name": "Calamity Jane",
+            "sku": "1611",
+            "price": 660
+          },
+          {
+            "name": "Carpe - DM",
+            "sku": "03987",
+            "price": 660
+          },
+          {
+            "name": "Clockwork Orange",
+            "sku": "03728",
+            "price": 660
+          },
+          {
+            "name": "DE - JA - VODOO",
+            "sku": "03983",
+            "price": 660
+          },
+          {
+            "name": "GIGA",
+            "sku": "03984",
+            "price": 660
+          },
+          {
+            "name": "LET IT GO",
+            "sku": "03985",
+            "price": 660
+          },
+          {
+            "name": "Light My Fire",
+            "sku": "03565",
+            "price": 660
+          },
+          {
+            "name": "Pennywise",
+            "sku": "03986",
+            "price": 660
+          },
+          {
+            "name": "Yellow Submarine",
+            "sku": "03562",
+            "price": 660
+          },
+          {
+            "name": "Yuzu",
+            "sku": "03731",
+            "price": 660
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "deneme 1",
+    "sku": "03623",
+    "items": [],
+    "subcategories": []
+  }
+]
