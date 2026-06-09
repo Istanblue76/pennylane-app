@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import QRMenu from '../components/Sections/QRMenu';
 import { useLanguage } from '../context/LanguageContext';
 import { ChevronLeft, Globe, Sun, Moon } from 'lucide-react';
@@ -21,11 +21,20 @@ const QRMenuPage = ({ cmsData }) => {
     }
   });
 
+  const [showWelcome, setShowWelcome] = useState(true);
+
   // Admin default değişince, kullanıcı daha önce bir seçim yapmamışsa güncelle
   useEffect(() => {
     const saved = localStorage.getItem('qr_theme');
     if (!saved) setTheme(adminDefault);
   }, [adminDefault]);
+
+  // Sayfa gizli ise ana sayfaya yönlendir
+  useEffect(() => {
+    if (cmsData && cmsData?.settings?.visible_sections?.menu === false) {
+      navigate('/');
+    }
+  }, [cmsData, navigate]);
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -53,6 +62,128 @@ const QRMenuPage = ({ cmsData }) => {
         transition: 'background-color 0.6s ease, color 0.6s ease',
       }}
     >
+      {/* ── Welcome Splash Screen ── */}
+      <AnimatePresence>
+        {showWelcome && (
+          <motion.div
+            key="welcome-screen"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.05, filter: 'blur(8px)' }}
+            transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}
+            className="fixed inset-0 z-[300] flex flex-col justify-between items-center py-20 px-6 cursor-pointer select-none text-white"
+            style={{
+              backgroundColor: '#0a0a0a',
+              backgroundImage: 'radial-gradient(circle at center, #1b1712 0%, #070707 100%)',
+            }}
+            onClick={() => setShowWelcome(false)}
+          >
+            {/* Top slogan / brand label */}
+            <motion.div 
+              initial={{ y: -10, opacity: 0 }}
+              animate={{ y: 0, opacity: 0.4 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-[9px] uppercase tracking-[0.45em] text-[#c9a96e] font-black text-center"
+            >
+              {t({ tr: 'Pennylane Gastropub Deneyimi', en: 'Pennylane Gastropub Experience' })}
+            </motion.div>
+
+            {/* Center Logo & Brand Name */}
+            <div className="flex flex-col items-center text-center">
+              <motion.div
+                initial={{ scale: 0.85, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 1, ease: 'easeOut' }}
+                className="relative w-28 h-28 mb-8 flex items-center justify-center"
+              >
+                {/* Glowing aura */}
+                <div className="absolute inset-0 rounded-full bg-[#c9a96e]/10 blur-2xl animate-pulse" />
+                <img
+                  src="/assets/img/pennylane_logo_white.png"
+                  alt="Pennylane Logo"
+                  className="w-full h-full object-contain filter drop-shadow-[0_12px_24px_rgba(201,169,110,0.25)]"
+                  onError={(e) => {
+                    e.target.style.display = 'none'; // Fallback if image not found
+                  }}
+                />
+              </motion.div>
+
+              <motion.h1
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.7 }}
+                className="text-4xl sm:text-5xl font-serif font-black tracking-[0.25em] text-white uppercase"
+              >
+                PENNYLANE
+              </motion.h1>
+
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: 48 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className="h-[1.5px] bg-[#c9a96e] my-4 opacity-50"
+              />
+
+              <motion.span
+                initial={{ y: 15, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.7 }}
+                className="text-[10px] uppercase font-bold tracking-[0.7em] text-[#c9a96e]/80"
+              >
+                GASTROPUB & EATERY
+              </motion.span>
+            </div>
+
+            {/* Bottom Actions, Disclaimer & Languages */}
+            <div 
+              className="w-full max-w-sm flex flex-col items-center text-center space-y-8" 
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Click / Tap to Enter Action */}
+              <div className="space-y-5 cursor-pointer w-full flex flex-col items-center" onClick={() => setShowWelcome(false)}>
+                <motion.div
+                  animate={{ opacity: [0.6, 1, 0.6], scale: [0.97, 1.03, 0.97] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                  className="text-sm sm:text-base font-black uppercase tracking-[0.35em] text-[#c9a96e] drop-shadow-[0_0_8px_rgba(201,169,110,0.45)]"
+                >
+                  {t({ tr: 'BAŞLAMAK İÇİN TIKLAYIN!', en: 'TAP TO START!' })}
+                </motion.div>
+                
+                <div className="text-[9.5px] text-white/50 uppercase tracking-[0.18em] leading-relaxed font-medium">
+                  {t({ tr: 'FİYATLARIMIZA TÜM VERGİLER DAHİLDİR.', en: 'ALL TAXES ARE INCLUDED IN OUR PRICES.' })}
+                  <span className="opacity-70 mt-1.5 block font-mono">
+                    {t({ tr: 'Son fiyat güncellemesi: 14.05.2026', en: 'Last price update: 14.05.2026' })}
+                  </span>
+                </div>
+              </div>
+
+              {/* Language Selection Buttons */}
+              <div className="flex items-center justify-center space-x-4 pt-6 border-t border-[#c9a96e]/15 w-full">
+                <button
+                  onClick={() => { setLang('tr'); setShowWelcome(false); }}
+                  className={`flex items-center space-x-2.5 px-6 py-3 rounded-2xl transition-all duration-350 hover:scale-105 active:scale-95 border cursor-pointer ${
+                    lang === 'tr' 
+                      ? 'border-[#c9a96e] bg-[#c9a96e]/10 text-[#c9a96e] shadow-lg shadow-[#c9a96e]/5' 
+                      : 'border-white/10 text-white/60 hover:text-white hover:border-white/20'
+                  }`}
+                >
+                  <span className="text-[10px] font-black uppercase tracking-widest">TR - TÜRKÇE</span>
+                </button>
+                
+                <button
+                  onClick={() => { setLang('en'); setShowWelcome(false); }}
+                  className={`flex items-center space-x-2.5 px-6 py-3 rounded-2xl transition-all duration-350 hover:scale-105 active:scale-95 border cursor-pointer ${
+                    lang === 'en' 
+                      ? 'border-[#c9a96e] bg-[#c9a96e]/10 text-[#c9a96e] shadow-lg shadow-[#c9a96e]/5' 
+                      : 'border-white/10 text-white/60 hover:text-white hover:border-white/20'
+                  }`}
+                >
+                  <span className="text-[10px] font-black uppercase tracking-widest">EN - ENGLISH</span>
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* ── Sticky Header ── */}
       <motion.header
         initial={{ y: -100 }}
@@ -171,7 +302,7 @@ const QRMenuPage = ({ cmsData }) => {
           className="text-[10px] uppercase tracking-[0.3em]"
           style={{ color: textColor, opacity: 0.3 }}
         >
-          {cmsData?.footer?.copyright || '© 2025 Pennylane Gastropub'}
+          {t(cmsData?.footer?.copyright) || '© 2025 Pennylane Gastropub'}
         </p>
       </motion.footer>
     </div>

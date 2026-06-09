@@ -11,7 +11,7 @@ const TeamSection = ({ data }) => {
   return (
     <section id="team" className="py-24 md:py-36 bg-dark">
       <div className="section-container">
-        <SectionHeading title={data.section_title} subtitle="Sizin İçin En İyisini Hazırlayan Profesyoneller" />
+        <SectionHeading title={data.section_title} subtitle={t({ tr: "Sizin İçin En İyisini Hazırlayan Profesyoneller", en: "Professionals Preparing the Best for You" })} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {data.members?.map((member, index) => (

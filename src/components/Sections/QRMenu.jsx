@@ -351,89 +351,130 @@ const CategoryTabsRecursive = ({ categoryNode, items, activePath, setActivePath,
   );
 };
 
+const getCategorySvg = (catId, color) => {
+  const idMap = {
+    'starters-sauces': 'starter-sauces',
+    'salads': 'salad',
+    'wineprosecco': 'wine-prosecco',
+    'mocktail-cocktails': 'cocktails',
+    'cider': 'beers',
+    'whisky': 'spirits',
+    'tequila-mezcal': 'cocktails',
+  };
+  const key = idMap[catId] || catId;
+  return categorySVGs[key] ? categorySVGs[key](color) : null;
+};
+
 /* ─────────────────────────────────────────
-   CATEGORY CARD — Premium split layout
+   CATEGORY CARD — Premium square layout
    ───────────────────────────────────────── */
-const CategoryCard = ({ cat, onClick, t, tk, index }) => {
-  const itemCount = cat.items?.filter(i => !i.passive)?.length || 0;
+const CategoryCard = ({ cat, onClick, t, tk, index, isDark }) => {
+  const svgElement = getCategorySvg(cat.id, tk.accent);
+  const customSvg = svgElement ? React.cloneElement(svgElement, {
+    style: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      opacity: 0.9,
+      pointerEvents: 'none'
+    }
+  }) : null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.07 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
       onClick={onClick}
-      className={`group relative cursor-pointer rounded-[2rem] overflow-hidden border ${tk.catCardBorder} ${tk.catCardBg} shadow-xl hover:shadow-2xl transition-all duration-700`}
-      style={{ boxShadow: `0 8px 40px rgba(0,0,0,0.18)` }}
+      className={`group relative cursor-pointer aspect-square rounded-xl sm:rounded-2xl overflow-hidden border transition-all duration-500 flex flex-col justify-between ${
+        isDark 
+          ? 'border-white/[0.06] hover:border-[#c9a96e]/60' 
+          : 'border-[#1c1410]/[0.06] hover:border-[#8b5e3c]/60'
+      }`}
+      style={{
+        backgroundColor: isDark ? '#0e0d0b' : '#faf9f6',
+        backgroundImage: !cat.image_url 
+          ? (isDark 
+              ? 'radial-gradient(circle at center, #1b1712 0%, #0a0907 100%)' 
+              : 'radial-gradient(circle at center, #fbfafa 0%, #f2eedf 100%)')
+          : 'none',
+        boxShadow: `0 8px 30px rgba(0,0,0,0.12)`,
+      }}
     >
-      <div className="relative h-[320px] sm:h-[360px] w-full overflow-hidden">
-        {cat.image_url ? (
-          <img
-            src={cat.image_url}
-            alt=""
-            loading="eager"
-            className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[2500ms] ease-out"
-            style={{ filter: 'brightness(0.72) saturate(0.85)' }}
+      {cat.image_url ? (
+        <>
+          {/* Background Image (Mockup Photo Style) */}
+          <img 
+            src={cat.image_url} 
+            alt="" 
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1000ms] ease-out" 
           />
-        ) : (
-          <div
-            className="w-full h-full"
+          {/* Dark overlay for text legibility */}
+          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/25 transition-colors duration-500" />
+        </>
+      ) : (
+        <>
+          {/* Premium glowing background overlay on hover */}
+          <div 
+            className="absolute inset-0 opacity-40 group-hover:opacity-75 transition-opacity duration-500 pointer-events-none"
             style={{
-              background: `linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(20,16,12,0.98) 100%)`,
+              background: isDark
+                ? 'radial-gradient(circle at center, rgba(201,169,110,0.18) 0%, rgba(20,18,15,0) 70%)'
+                : 'radial-gradient(circle at center, rgba(139,94,60,0.12) 0%, rgba(252,251,250,0) 70%)'
             }}
           />
-        )}
 
-        {/* Decorative SVG watermark */}
-        {categorySVGs[cat.id] && categorySVGs[cat.id](tk.accent)}
+          {/* Subtle geometric dot pattern overlay */}
+          <div 
+            className="absolute inset-0 opacity-5 group-hover:opacity-8 transition-opacity duration-500 pointer-events-none"
+            style={{
+              backgroundImage: isDark
+                ? 'radial-gradient(circle, #c9a96e 1px, transparent 1px)'
+                : 'radial-gradient(circle, #8b5e3c 1px, transparent 1px)',
+              backgroundSize: '14px 14px'
+            }}
+          />
+        </>
+      )}
 
-        {/* Gradient overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none"
+      {/* Center Icon Wrapper (only shown if there is no image_url) */}
+      {!cat.image_url && (
+        <div className="flex-grow flex items-center justify-center relative pb-8 sm:pb-14 p-3 sm:p-5">
+          {/* Glow behind the SVG */}
+          <div 
+            className="absolute w-18 h-18 sm:w-32 sm:h-32 rounded-full blur-xl opacity-0 group-hover:opacity-35 transition-all duration-500 pointer-events-none"
+            style={{ backgroundColor: tk.accent }}
+          />
+          
+          {customSvg ? (
+            <div className="relative w-16 h-16 sm:w-28 sm:h-28 scale-[2.3] sm:scale-[2.1] group-hover:scale-[2.5] sm:group-hover:scale-[2.3] transition-all duration-500 filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] [&_path]:stroke-[3.5] [&_circle]:stroke-[3.5] [&_rect]:stroke-[3.5] [&_line]:stroke-[3.5] [&_path]:stroke-round [&_circle]:stroke-round [&_rect]:stroke-round [&_line]:stroke-round">
+              {customSvg}
+            </div>
+          ) : (
+            <div className="w-16 h-16 sm:w-28 sm:h-28 scale-[2.3] sm:scale-[2.1] group-hover:scale-[2.5] sm:group-hover:scale-[2.3] flex items-center justify-center text-4xl sm:text-6xl font-serif text-secondary opacity-65 group-hover:opacity-100 transition-all duration-500">
+              {cat.title?.tr?.[0] || cat.title?.[0]}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Bottom Title overlay (matching mockup style) */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 py-2 sm:py-3.5 px-1.5 text-center backdrop-blur-[2px] transition-all duration-300 border-t border-white/[0.03] z-10"
+        style={{
+          background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0) 100%)',
+        }}
+      >
+        <h3
+          className="font-sans font-black uppercase tracking-[0.05em] sm:tracking-[0.12em] text-white text-[9px] sm:text-[11px] md:text-[13px] leading-tight transition-colors duration-300 group-hover:text-[#c9a96e]"
           style={{
-            background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0.0) 75%)'
+            textShadow: '0 1px 3px rgba(0,0,0,0.9)',
           }}
-        />
-
-        {/* Arrow — top right */}
-        <div
-          className="absolute top-6 right-6 w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-opacity-30"
-          style={{ borderColor: `${tk.accent}55`, backgroundColor: `${tk.accent}12` }}
         >
-          <ChevronRight className="w-4 h-4" style={{ color: tk.accent }} />
-        </div>
-
-        {/* Bottom content — category name centered, count bottom-left */}
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-7 pointer-events-none">
-          <div
-            className="mb-4 transition-all duration-700 group-hover:w-16"
-            style={{ height: '1.5px', width: '36px', backgroundColor: tk.accent, opacity: 0.75 }}
-          />
-          <h3
-            className="font-serif font-black uppercase tracking-[0.14em] text-white leading-tight text-center px-6 transition-all duration-500"
-            style={{
-              fontSize: 'clamp(1.1rem, 2.8vw, 1.7rem)',
-              textShadow: '0 2px 20px rgba(0,0,0,0.8)',
-            }}
-          >
-            {t(cat.title)}
-          </h3>
-        </div>
-
-        {/* Item count — top LEFT */}
-        <div className="absolute top-6 left-6 pointer-events-none">
-          <div
-            className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full"
-            style={{ backgroundColor: `${tk.accent}20`, border: `1px solid ${tk.accent}38` }}
-          >
-            <span
-              className="text-[9px] font-black tracking-[0.5em] uppercase"
-              style={{ color: tk.accent }}
-            >
-              {itemCount} {t({ tr: 'ÜRÜN', en: 'ITEMS' })}
-            </span>
-          </div>
-        </div>
+          {t(cat.title)}
+        </h3>
       </div>
     </motion.div>
   );
@@ -447,7 +488,7 @@ const ProductCard = ({ item, onClick, t, tk, onAddToCart }) => (
     className={`group relative ${tk.cardBg} border ${tk.cardBorder} ${tk.cardHover} rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl cursor-pointer p-3 md:p-4 flex flex-col`}
     onClick={onClick}
   >
-    <div className="relative aspect-square md:aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden mb-3 md:mb-5">
+    <div className="relative aspect-square md:aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden mb-3 md:mb-5 bg-black/40 flex items-center justify-center">
       <img
         src={item.image_url || ''}
         alt=""
@@ -516,13 +557,13 @@ const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart, isM
         </button>
 
         <div 
-          className="w-full md:w-[45%] h-[280px] md:h-full relative flex-shrink-0 group cursor-pointer overflow-hidden" 
+          className="w-full md:w-[45%] h-[280px] md:h-full relative flex-shrink-0 group cursor-pointer overflow-hidden bg-black/40 flex items-center justify-center" 
           onClick={() => setIsFullscreen(true)}
         >
           <img
             src={product.image_url}
             alt=""
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
             loading="eager"
           />
           <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
@@ -959,7 +1000,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
             <motion.div
               key="cats"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+              className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-6 md:gap-8"
             >
               {data.categories.map((cat, i) => (
                 <CategoryCard
@@ -1112,7 +1153,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
                   className="group cursor-pointer text-left"
                   onClick={() => setSelectedProduct(item)}
                 >
-                  <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-[#1a1a1a] border border-white/5 group-hover:border-secondary/30 transition-all duration-500">
+                  <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-[#1a1a1a] border border-white/5 group-hover:border-secondary/30 transition-all duration-500 flex items-center justify-center">
                     <img 
                       src={item.image_url || '/assets/img/pennylane-default.png'} 
                       alt="" 

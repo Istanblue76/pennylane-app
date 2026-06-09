@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 import { 
   Save, LogOut, Layout, Image as ImageIcon, Menu as MenuIcon, Info, 
   Settings, Users, Calendar, Mail, CheckCircle, Smartphone, Monitor, Upload, Download, X,
-  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight, Edit2, Eye, Printer, Shield
+  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight, Edit2, Eye, Printer, Shield, Search, Star
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { getVal, updateVal } from '../../utils/i18n';
@@ -23,6 +23,24 @@ const AdminPanel = ({ initialData }) => {
   const [managementMode, setManagementMode] = useState(false);
   const [selectedPolicyType, setSelectedPolicyType] = useState('privacy');
   const navigate = useNavigate();
+  const adminToken = localStorage.getItem('adminToken');
+  const isSuperAdmin = adminToken === 'super-token';
+
+  const navItems = [
+    { id: 'hero', label: 'HERO', icon: Layout },
+    { id: 'menu_showcase', label: 'Spesiyaller', icon: MenuIcon },
+    { id: 'menu', label: 'Menü Yönetimi', icon: MenuIcon },
+    { id: 'about', label: 'HAKKIMIZDA', icon: Info },
+    { id: 'gallery', label: 'GALERİ', icon: ImageIcon },
+    { id: 'events', label: 'ETKİNLİKLER', icon: Calendar },
+    { id: 'team', label: 'EKİP', icon: Users },
+    { id: 'newsletter', label: 'BÜLTEN', icon: Mail },
+    { id: 'allergens', label: 'ALERJENLER', icon: Info },
+    { id: 'seo', label: 'SEO AYARLARI', icon: Search },
+    { id: 'footer', label: 'FOOTER', icon: Settings },
+    { id: 'settings', label: 'AYARLAR', icon: Settings },
+    { id: 'print_menu', label: 'BASKI MENÜSÜ', icon: Download },
+  ];
 
   useEffect(() => {
     if (data?.menu?.categories?.length > 0 && !selectedCategoryAdmin) {
@@ -44,6 +62,17 @@ const AdminPanel = ({ initialData }) => {
       navigate('/login');
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (data && !isSuperAdmin) {
+      const visibleSections = data?.settings?.visible_sections || {};
+      const isTabHidden = !['settings', 'allergens', 'footer'].includes(activeTab) && visibleSections[activeTab] === false;
+      if (isTabHidden) {
+        const firstVisible = navItems.find(item => ['settings', 'allergens', 'footer'].includes(item.id) || visibleSections[item.id] !== false);
+        setActiveTab(firstVisible ? firstVisible.id : 'settings');
+      }
+    }
+  }, [activeTab, data, isSuperAdmin]);
 
   if (!data) return null;
 
@@ -437,20 +466,7 @@ const AdminPanel = ({ initialData }) => {
     }
   };
 
-  const navItems = [
-    { id: 'hero', label: 'HERO', icon: Layout },
-    { id: 'menu_showcase', label: 'Spesiyaller', icon: MenuIcon },
-    { id: 'menu', label: 'Menü Yönetimi', icon: MenuIcon },
-    { id: 'about', label: 'HAKKIMIZDA', icon: Info },
-    { id: 'gallery', label: 'GALERİ', icon: ImageIcon },
-    { id: 'events', label: 'ETKİNLİKLER', icon: Calendar },
-    { id: 'team', label: 'EKİP', icon: Users },
-    { id: 'newsletter', label: 'BÜLTEN', icon: Mail },
-    { id: 'allergens', label: 'ALERJENLER', icon: Info },
-    { id: 'footer', label: 'FOOTER', icon: Settings },
-    { id: 'settings', label: 'AYARLAR', icon: Settings },
-    { id: 'print_menu', label: 'BASKI MENÜSÜ', icon: Download },
-  ];
+
 
   const ImageUploader = ({ label, value, onChange }) => (
     <div className="space-y-4">
@@ -484,6 +500,15 @@ const AdminPanel = ({ initialData }) => {
     </div>
   );
 
+  const filteredNavItems = navItems.filter(item => {
+    if (isSuperAdmin) return true;
+    if (['settings', 'allergens', 'footer'].includes(item.id)) return true;
+    const visibleSections = data?.settings?.visible_sections || {};
+    return visibleSections[item.id] !== false;
+  });
+
+  const selectedCategory = (data?.menu?.categories || []).find(c => c.id === selectedCategoryAdmin);
+
   return (
     <div className="min-h-screen bg-dark flex flex-col md:flex-row p-4 md:p-10 space-y-6 md:space-y-0 md:space-x-10 text-white font-sans">
       <aside className="w-full md:w-80 bg-primary/40 backdrop-blur-xl border-2 border-secondary/20 p-6 rounded-3xl flex flex-col md:h-[calc(100vh-80px)] sticky top-10 overflow-hidden">
@@ -493,7 +518,7 @@ const AdminPanel = ({ initialData }) => {
         </div>
 
         <nav className="flex flex-col space-y-1.5 pr-2 mb-6 overflow-y-auto custom-scrollbar flex-grow">
-          {navItems.map(item => (
+          {filteredNavItems.map(item => (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
@@ -631,6 +656,185 @@ const AdminPanel = ({ initialData }) => {
                    <p className="mt-6 text-textSecondary text-[10px] italic">Bu ayar QR Menü sayfasının arka plan ve yazı renklerini anında değiştirir. Pennylane atmosferini günün saatine göre optimize edin.</p>
                 </div>
 
+                {isSuperAdmin && (
+                    <div className="bg-secondary/5 p-8 rounded-3xl border border-secondary/10 space-y-6 animate-fadeIn">
+                       <div className="flex items-center space-x-4 mb-2">
+                          <div className="w-10 h-10 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary border border-secondary/20">
+                             <Shield className="w-5 h-5" />
+                          </div>
+                          <div>
+                             <h4 className="text-xl font-serif font-black text-white uppercase tracking-tight">SAYFA BÖLÜMLERİ GÖRÜNÜRLÜĞÜ (SUPER ADMIN)</h4>
+                             <p className="text-textSecondary text-xs font-light italic">Hangi bölümlerin web sayfasında ve normal admin panelinde aktif olacağını seçin.</p>
+                          </div>
+                       </div>
+
+                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                         {[
+                           { id: 'hero', label: 'Giriş Ekranı (Hero)', desc: 'Ana sayfa giriş bölümü ve arka plan görseli/videosu.', icon: Layout },
+                           { id: 'events', label: 'Etkinlikler (Events)', desc: 'Yaklaşan etkinlikler, konserler ve özel geceler.', icon: Calendar },
+                           { id: 'about', label: 'Hakkımızda (About)', desc: 'Pennylane hikayesi ve mekan bilgileri.', icon: Info },
+                           { id: 'menu_showcase', label: 'Öne Çıkan Spesiyaller (Specialties)', desc: 'Menüden öne çıkan lezzetlerin sergilendiği slayt.', icon: Star },
+                           { id: 'qr_menu', label: 'QR Menü (Dijital Menü)', desc: 'Müşterilerin eriştiği dijital QR menu sayfası (/menu).', icon: Smartphone },
+                           { id: 'menu', label: 'Menü Yönetimi (Menu Edit)', desc: 'Admin panelindeki ürün, kategori ve fiyat düzenleme sekmeleri.', icon: MenuIcon },
+                           { id: 'print_menu', label: 'Baskı Menüsü (Print Menu)', desc: 'Yazdırılabilir PDF/Baskı menüsü sayfası (/print-menu) ve editörü.', icon: Printer },
+                           { id: 'gallery', label: 'Galeri (Gallery)', desc: 'Mekandan ve lezzetlerden fotoğraflar.', icon: ImageIcon },
+                           { id: 'testimonials', label: 'Müşteri Yorumları (Testimonials)', desc: 'Misafirlerimizin Pennylane hakkındaki düşünceleri.', icon: Users },
+                           { id: 'team', label: 'Ekip (Team)', desc: 'Pennylane mutfak ve servis kadrosu.', icon: Users },
+                           { id: 'newsletter', label: 'Bülten Aboneliği (Newsletter)', desc: 'Kullanıcıların bültene abone olabildiği form alanı.', icon: Mail },
+                           { id: 'seo', label: 'SEO Ayarları (SEO Settings)', desc: 'Arama motoru optimizasyonu (title, meta description, keywords) ve paylaşım görseli yönetimi.', icon: Search },
+                         ].map((sec) => {
+                            const isVisible = data.settings?.visible_sections?.[sec.id] !== false;
+                            return (
+                              <div 
+                                key={sec.id}
+                                className={`p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between bg-dark/40 ${isVisible ? 'border-secondary/20 shadow-lg shadow-secondary/5' : 'border-white/5 opacity-60'}`}
+                              >
+                                 <div className="flex items-center space-x-4">
+                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-300 ${isVisible ? 'bg-secondary/15 text-secondary' : 'bg-white/5 text-textSecondary'}`}>
+                                       <sec.icon className="w-5 h-5" />
+                                    </div>
+                                    <div>
+                                       <h5 className="font-bold text-sm text-white">{sec.label}</h5>
+                                       <p className="text-[10px] text-textSecondary leading-snug mt-1">{sec.desc}</p>
+                                    </div>
+                                 </div>
+                                 <button
+                                   onClick={() => {
+                                     const currentSections = data.settings?.visible_sections || {};
+                                     const nextVal = !isVisible;
+                                     setData({
+                                       ...data,
+                                       settings: {
+                                         ...data.settings,
+                                         visible_sections: {
+                                           ...currentSections,
+                                           [sec.id]: nextVal
+                                         }
+                                       }
+                                     });
+                                     setHasChanges(true);
+                                   }}
+                                   className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${isVisible ? 'bg-secondary' : 'bg-dark/80 border-secondary/10'}`}
+                                 >
+                                   <span
+                                     className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${isVisible ? 'translate-x-5' : 'translate-x-0'}`}
+                                   />
+                                 </button>
+                              </div>
+                            );
+                         })}
+                       </div>
+                    </div>
+                  )}
+
+              </motion.div>
+            )}
+
+            {activeTab === 'seo' && (
+              <motion.div key="seo" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-8 animate-fadeIn">
+                <div className="bg-secondary/5 p-8 rounded-3xl border border-secondary/10 space-y-6">
+                  <div className="flex items-center space-x-4 mb-2">
+                    <div className="w-10 h-10 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary border border-secondary/20">
+                      <Search className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-serif font-black text-white uppercase tracking-tight">ARAMA MOTORU OPTİMİZASYONU (SEO) AYARLARI</h4>
+                      <p className="text-textSecondary text-xs font-light italic">Google ve diğer arama motorlarında görünürlüğünüzü artıracak meta başlıkları ve açıklamaları yönetin.</p>
+                    </div>
+                  </div>
+
+                  {/* SEO Title */}
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase font-bold text-secondary tracking-widest flex items-center space-x-2">
+                      <span>Arama Sonucu Başlığı (SEO Title)</span>
+                      <span className="bg-secondary/20 text-secondary px-1.5 py-0.5 rounded text-[8px]">{lang.toUpperCase()}</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      className="w-full bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white focus:border-secondary outline-none transition-all" 
+                      value={getVal(data.seo?.title, lang)} 
+                      onChange={e => {
+                        const currentSeo = data.seo || {};
+                        setData({ 
+                          ...data, 
+                          seo: { 
+                            ...currentSeo, 
+                            title: updateVal(currentSeo.title, lang, e.target.value) 
+                          } 
+                        });
+                        setHasChanges(true);
+                      }} 
+                      maxLength={70}
+                    />
+                    <div className="flex justify-between text-[10px] text-textSecondary uppercase tracking-widest font-bold font-mono">
+                      <span>Tavsiye edilen: Maks. 60 Karakter</span>
+                      <span>{getVal(data.seo?.title, lang)?.length || 0} / 70</span>
+                    </div>
+                  </div>
+
+                  {/* SEO Description */}
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase font-bold text-secondary tracking-widest flex items-center space-x-2">
+                      <span>Arama Sonucu Açıklaması (Meta Description)</span>
+                      <span className="bg-secondary/20 text-secondary px-1.5 py-0.5 rounded text-[8px]">{lang.toUpperCase()}</span>
+                    </label>
+                    <textarea 
+                      rows={3}
+                      className="w-full bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white focus:border-secondary outline-none transition-all resize-none" 
+                      value={getVal(data.seo?.description, lang)} 
+                      onChange={e => {
+                        const currentSeo = data.seo || {};
+                        setData({ 
+                          ...data, 
+                          seo: { 
+                            ...currentSeo, 
+                            description: updateVal(currentSeo.description, lang, e.target.value) 
+                          } 
+                        });
+                        setHasChanges(true);
+                      }} 
+                      maxLength={170}
+                    />
+                    <div className="flex justify-between text-[10px] text-textSecondary uppercase tracking-widest font-bold font-mono">
+                      <span>Tavsiye edilen: Maks. 150-160 Karakter</span>
+                      <span>{getVal(data.seo?.description, lang)?.length || 0} / 170</span>
+                    </div>
+                  </div>
+
+                  {/* SEO Keywords */}
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase font-bold text-secondary tracking-widest flex items-center space-x-2">
+                      <span>Anahtar Kelimeler (Keywords - Virgülle Ayırın)</span>
+                      <span className="bg-secondary/20 text-secondary px-1.5 py-0.5 rounded text-[8px]">{lang.toUpperCase()}</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      className="w-full bg-dark/60 border border-secondary/20 rounded-xl px-6 py-4 text-white focus:border-secondary outline-none transition-all" 
+                      value={getVal(data.seo?.keywords, lang)} 
+                      onChange={e => {
+                        const currentSeo = data.seo || {};
+                        setData({ 
+                          ...data, 
+                          seo: { 
+                            ...currentSeo, 
+                            keywords: updateVal(currentSeo.keywords, lang, e.target.value) 
+                          } 
+                        });
+                        setHasChanges(true);
+                      }} 
+                    />
+                    <p className="text-[10px] text-textSecondary italic">Örnek: pennylane, gastropub, caddebostan bar, imza kokteyller</p>
+                  </div>
+
+                  {/* OpenGraph Image Preview / Editing */}
+                  <div className="pt-4 border-t border-secondary/10">
+                    <ImageUploader 
+                      label="SOSYAL MEDYA PAYLAŞIM GÖRSELİ (OG:IMAGE - TAVSİYE: 1200x630)" 
+                      value={data.seo?.og_image} 
+                      onChange={(e) => handleImageUpload(e, 'seo', 'og_image')} 
+                    />
+                  </div>
+                </div>
               </motion.div>
             )}
             {activeTab === 'hero' && (
@@ -1078,7 +1282,71 @@ const AdminPanel = ({ initialData }) => {
                 {/* Safety-First Category Management */}
                 <div className="flex flex-col space-y-4 pb-6 border-b border-secondary/10">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <h3 className="text-sm font-bold text-secondary uppercase tracking-[0.2em] flex-shrink-0">Kategoriler</h3>
+                    <div className="flex items-center space-x-4">
+                      <h3 className="text-sm font-bold text-secondary uppercase tracking-[0.2em] flex-shrink-0">Kategoriler</h3>
+                      {selectedCategory && (
+                        <div className="flex items-center space-x-3 bg-dark/40 border border-secondary/15 px-3 py-1.5 rounded-xl">
+                          <span className="text-[10px] uppercase font-bold text-textSecondary tracking-widest">Kategori Görseli:</span>
+                          {selectedCategory.image_url ? (
+                            <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-secondary/30 group">
+                              <img src={selectedCategory.image_url} alt="" className="w-full h-full object-cover" />
+                              <button 
+                                onClick={() => {
+                                  const newCats = [...(data?.menu?.categories || [])];
+                                  const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                  if (cIdx !== -1) {
+                                    newCats[cIdx].image_url = '';
+                                    setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                    setHasChanges(true);
+                                  }
+                                }}
+                                className="absolute inset-0 bg-red-600/90 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                                title="Görseli Kaldır"
+                              >
+                                <X className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          ) : (
+                            <span className="text-[10px] text-textSecondary/50 font-bold uppercase tracking-widest">YOK</span>
+                          )}
+                          <label className="cursor-pointer bg-secondary/10 hover:bg-secondary/20 border border-secondary/30 rounded-lg px-3 py-1 flex items-center space-x-1.5 transition-all">
+                            <Upload className="w-3.5 h-3.5 text-secondary" />
+                            <span className="text-[10px] text-secondary font-black uppercase tracking-wider">Seç</span>
+                            <input 
+                              type="file" 
+                              className="hidden" 
+                              accept="image/*" 
+                              onChange={async (e) => {
+                                const rawFile = e.target.files[0];
+                                if (!rawFile) return;
+                                let file = rawFile;
+                                if (rawFile.type.startsWith('image/')) {
+                                  try { file = await compressImage(rawFile); } catch (err) { console.error(err); }
+                                }
+                                const formData = new FormData();
+                                formData.append('image', file);
+                                try {
+                                  const resp = await axios.post('/api/upload', formData, {
+                                    headers: { 'Content-Type': 'multipart/form-data' }
+                                  });
+                                  if (resp.data.status === 'success') {
+                                    const newCats = [...(data?.menu?.categories || [])];
+                                    const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                    if (cIdx !== -1) {
+                                      newCats[cIdx].image_url = resp.data.url;
+                                      setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                      setHasChanges(true);
+                                    }
+                                  }
+                                } catch (err) {
+                                  alert('Yükleme başarısız!');
+                                }
+                              }} 
+                            />
+                          </label>
+                        </div>
+                      )}
+                    </div>
                     <div className="flex flex-wrap items-center gap-3">
                       <input 
                         type="text" 
@@ -2223,16 +2491,16 @@ const NewsletterManager = ({ t, lang, data, setData, setHasChanges }) => {
     return isLocal ? 'http://localhost:5000' : '';
   };
 
-  useEffect(() => {
-    fetchSubscribers();
-  }, []);
-
   const fetchSubscribers = async () => {
     try {
       const res = await axios.get(`${getApiBase()}/api/newsletter/subscribers`);
       if (res.data.status === 'success') setSubscribers(res.data.data);
     } catch (err) { console.error(err); }
   };
+
+  useEffect(() => {
+    fetchSubscribers();
+  }, []);
 
   const handleApplyEvent = (ev) => {
     setMailSubject(getVal(ev.title, lang));

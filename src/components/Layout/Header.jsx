@@ -5,7 +5,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Common/Button';
 
-const Header = ({ data }) => {
+const Header = ({ data, settings }) => {
   const { lang, setLang, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,6 +28,22 @@ const Header = ({ data }) => {
   }, []);
 
   if (!data) return null;
+
+  const visibleSections = settings?.visible_sections || {};
+  const isSectionVisible = (href) => {
+    if (!href) return true;
+    if (href.startsWith('#')) {
+      const sectionId = href.substring(1);
+      if (sectionId === 'menu') {
+        return visibleSections.qr_menu !== false;
+      }
+      return visibleSections[sectionId] !== false;
+    }
+    return true;
+  };
+
+  const filteredNavigation = (data.navigation || []).filter(item => isSectionVisible(item.href));
+  const showMenuCta = visibleSections.qr_menu !== false;
 
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-primary/95 backdrop-blur-md shadow-2xl py-3' : 'bg-transparent py-6'}`}>
@@ -55,7 +71,7 @@ const Header = ({ data }) => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-8">
-          {data.navigation.map((item, index) => (
+          {filteredNavigation.map((item, index) => (
             <div key={index} className="relative group">
               <a href={item.href} className="nav-link">
                 {t(item.label)}
@@ -101,16 +117,18 @@ const Header = ({ data }) => {
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           
-          <div className="hidden sm:block">
-            <a 
-              href="/menu" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn-primary py-2 px-6 rounded-full text-xs font-bold uppercase tracking-widest transition-all hover:bg-white hover:text-primary active:scale-95 shadow-lg shadow-secondary/10"
-            >
-                {t(data.cta_button.text)}
-            </a>
-          </div>
+          {showMenuCta && (
+            <div className="hidden sm:block">
+              <a 
+                href="/menu" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn-primary py-2 px-6 rounded-full text-xs font-bold uppercase tracking-widest transition-all hover:bg-white hover:text-primary active:scale-95 shadow-lg shadow-secondary/10"
+              >
+                  {t(data.cta_button.text)}
+              </a>
+            </div>
+          )}
 
           <button 
             className="lg:hidden text-white"
@@ -132,7 +150,7 @@ const Header = ({ data }) => {
             className="fixed inset-0 top-[60px] bg-primary z-40 lg:hidden"
           >
             <div className="flex flex-col items-center justify-center h-full space-y-8 p-6">
-              {data.navigation.map((item, index) => (
+              {filteredNavigation.map((item, index) => (
                 <div key={index} className="text-center">
                   <a 
                     href={item.href} 
@@ -152,15 +170,17 @@ const Header = ({ data }) => {
                   )}
                 </div>
               ))}
-              <a 
-                href="/menu" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-full max-w-xs btn-primary text-center py-4 rounded-xl font-bold uppercase tracking-widest"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t(data.cta_button.text)}
-              </a>
+              {showMenuCta && (
+                <a 
+                  href="/menu" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full max-w-xs btn-primary text-center py-4 rounded-xl font-bold uppercase tracking-widest"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t(data.cta_button.text)}
+                </a>
+              )}
             </div>
           </motion.div>
         )}

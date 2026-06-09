@@ -4,6 +4,12 @@ import { X, Maximize2 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import SectionHeading from '../Common/SectionHeading';
 
+const categoryTranslations = {
+  interior: { tr: 'İç Mekan', en: 'Interior' },
+  drinks: { tr: 'İçecekler', en: 'Drinks' },
+  events: { tr: 'Etkinlikler', en: 'Events' }
+};
+
 const GallerySection = ({ data }) => {
   const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -29,7 +35,7 @@ const GallerySection = ({ data }) => {
                 filter === cat ? 'bg-secondary text-primary border-secondary shadow-lg shadow-secondary/20' : 'text-textSecondary border-textSecondary/20 hover:border-secondary hover:text-secondary'
               }`}
             >
-              {t(cat).toUpperCase()}
+              {t(categoryTranslations[cat] || cat).toUpperCase()}
             </button>
           ))}
         </div>
@@ -104,7 +110,7 @@ const GallerySection = ({ data }) => {
                     {t(selectedImage.caption) || 'PENNYLANE'}
                   </h3>
                   <span className="text-textSecondary text-[10px] font-bold uppercase tracking-[0.4em] opacity-60">
-                    {t(selectedImage.category)}
+                    {t(categoryTranslations[selectedImage.category] || selectedImage.category)}
                   </span>
                 </div>
               </div>

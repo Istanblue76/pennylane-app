@@ -1,4 +1,19 @@
 {
+  "seo": {
+    "title": {
+      "tr": "PENNYLANE | Caddebostan Premium Gastropub Deneyimi",
+      "en": "PENNYLANE | Premium Gastropub Experience in Caddebostan"
+    },
+    "description": {
+      "tr": "Pennylane Gastropub - Caddebostan'da premium pub deneyimi. Enfes imza kokteyller, zengin craft bira kütüphanesi ve seçkin gastronomi lezzetleri.",
+      "en": "Pennylane Gastropub - Premium gastropub experience in Caddebostan. Exquisite signature cocktails, extensive craft beer library, and curated gastronomy."
+    },
+    "keywords": {
+      "tr": "pennylane gastropub, caddebostan bar, bağdat caddesi pub, anadolu yakası en iyi barlar, kadıköy gastropub, imza kokteyller istanbul, craft bira barı caddebostan, istanbul yeni nesil pub, canlı müzik bar caddebostan, premium pub deneyimi",
+      "en": "best bars in istanbul, caddebostan pub and restaurant, gastropub istanbul asian side, craft beer bar istanbul, signature cocktails caddebostan, pennylane istanbul, premium gastropub, istanbul nightlife caddebostan"
+    },
+    "og_image": "/assets/img/pennylane_logo_white.png"
+  },
   "hero": {
     "cta_primary": {
       "href": "#menu",
@@ -68,7 +83,8 @@
         "title": {
           "tr": "BREAKFAST",
           "en": "BREAKFAST"
-        }
+        },
+        "image_url": "/assets/img/1780992038488-Pennylane_BREAKFAST.jpg"
       },
       {
         "id": "burger-sandwich",
@@ -167,7 +183,8 @@
         "title": {
           "tr": "BURGER & SANDWICH",
           "en": "BURGER & SANDWICH"
-        }
+        },
+        "image_url": "/assets/img/1780992050625-Pennylane_BURGER&SANDWICH.jpg"
       },
       {
         "id": "starters-sauces",
@@ -476,193 +493,8 @@
         "title": {
           "tr": "STARTERS & SAUCES",
           "en": "STARTERS & SAUCES"
-        }
-      },
-      {
-        "id": "cider",
-        "items": [
-          {
-            "id": "03874",
-            "name": {
-              "tr": "STRONGBOW APPLE CIDER 33 CL ŞIŞE",
-              "en": "STRONGBOW APPLE CIDER 33 CL ŞIŞE"
-            },
-            "price": "440",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          }
-        ],
-        "title": {
-          "tr": "CIDER",
-          "en": "CIDER"
-        }
-      },
-      {
-        "id": "coffee",
-        "items": [
-          {
-            "id": "1209",
-            "name": {
-              "tr": "TÜRK KAHVESI",
-              "en": "TÜRK KAHVESI"
-            },
-            "price": "150",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            },
-            "subcategory": "brewed-coffee"
-          },
-          {
-            "id": "1128",
-            "name": {
-              "tr": "AMERICANO",
-              "en": "AMERICANO"
-            },
-            "price": "200",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            },
-            "subcategory": "espresso-based-coffee"
-          },
-          {
-            "id": "03585",
-            "name": {
-              "tr": "DOUBLE ESPRESSO",
-              "en": "DOUBLE ESPRESSO"
-            },
-            "price": "200",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            },
-            "subcategory": "espresso-based-coffee"
-          },
-          {
-            "id": "1162",
-            "name": {
-              "tr": "ESPRESSO",
-              "en": "ESPRESSO"
-            },
-            "price": "160",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            },
-            "subcategory": "espresso-based-coffee"
-          }
-        ],
-        "title": {
-          "tr": "COFFEE",
-          "en": "COFFEE"
         },
-        "subcategories": [
-          {
-            "id": "brewed-coffee",
-            "title": {
-              "tr": "BREWED COFFEE",
-              "en": "BREWED COFFEE"
-            }
-          },
-          {
-            "id": "espresso-based-coffee",
-            "title": {
-              "tr": "ESPRESSO BASED COFFEE",
-              "en": "ESPRESSO BASED COFFEE"
-            }
-          }
-        ]
-      },
-      {
-        "id": "coffee-beans",
-        "items": [
-          {
-            "id": "1265",
-            "name": {
-              "tr": "TÜRK KAHVESI KG",
-              "en": "TÜRK KAHVESI KG"
-            },
-            "price": "800",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            },
-            "subcategory": "turkish-coffee"
-          }
-        ],
-        "title": {
-          "tr": "COFFEE BEANS",
-          "en": "COFFEE BEANS"
-        },
-        "subcategories": [
-          {
-            "id": "turkish-coffee",
-            "title": {
-              "tr": "TURKISH COFFEE",
-              "en": "TURKISH COFFEE"
-            }
-          }
-        ]
-      },
-      {
-        "id": "desserts",
-        "items": [
-          {
-            "id": "03981",
-            "name": {
-              "tr": "CHURROS",
-              "en": "CHURROS"
-            },
-            "price": "350",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          },
-          {
-            "id": "03239",
-            "name": {
-              "tr": "PENNY BROWNIE",
-              "en": "PENNY BROWNIE"
-            },
-            "price": "350",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          }
-        ],
-        "title": {
-          "tr": "DESSERTS",
-          "en": "DESSERTS"
-        }
+        "image_url": "/assets/img/1780992059680-Pennylane_STARTERS-&-SAUCES.jpg"
       },
       {
         "id": "main",
@@ -806,7 +638,8 @@
         "title": {
           "tr": "MAIN",
           "en": "MAIN"
-        }
+        },
+        "image_url": "/assets/img/1780992066673-Pennylane_MAIN.jpg"
       },
       {
         "id": "salads",
@@ -890,18 +723,19 @@
         "title": {
           "tr": "SALADS",
           "en": "SALADS"
-        }
+        },
+        "image_url": "/assets/img/1780992073795-Pennylane_SALADS.jpg"
       },
       {
-        "id": "mini-tuzlu",
+        "id": "desserts",
         "items": [
           {
-            "id": "1750",
+            "id": "03981",
             "name": {
-              "tr": "KURUYEMIŞ",
-              "en": "KURUYEMIŞ"
+              "tr": "CHURROS",
+              "en": "CHURROS"
             },
-            "price": "150",
+            "price": "350",
             "passive": false,
             "allergens": [],
             "image_url": "/assets/img/1776219428839-pennylane-default.png",
@@ -911,27 +745,12 @@
             }
           },
           {
-            "id": "03643",
+            "id": "03239",
             "name": {
-              "tr": "TUZLU FISTIK",
-              "en": "TUZLU FISTIK"
+              "tr": "PENNY BROWNIE",
+              "en": "PENNY BROWNIE"
             },
-            "price": "120",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          },
-          {
-            "id": "03852",
-            "name": {
-              "tr": "ZEYTIN",
-              "en": "ZEYTIN"
-            },
-            "price": "120",
+            "price": "350",
             "passive": false,
             "allergens": [],
             "image_url": "/assets/img/1776219428839-pennylane-default.png",
@@ -942,9 +761,35 @@
           }
         ],
         "title": {
-          "tr": "MINI TUZLU",
-          "en": "MINI TUZLU"
-        }
+          "tr": "DESSERTS",
+          "en": "DESSERTS"
+        },
+        "image_url": "/assets/img/1781007041669-Pennylane_DESSERTS.jpg"
+      },
+      {
+        "id": "cider",
+        "items": [
+          {
+            "id": "03874",
+            "name": {
+              "tr": "STRONGBOW APPLE CIDER 33 CL ŞIŞE",
+              "en": "STRONGBOW APPLE CIDER 33 CL ŞIŞE"
+            },
+            "price": "440",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          }
+        ],
+        "title": {
+          "tr": "CIDER",
+          "en": "CIDER"
+        },
+        "image_url": "/assets/img/1780992084005-Pennylane_CIDER.jpg"
       },
       {
         "id": "soft-drinks",
@@ -988,7 +833,7 @@
             "price": "140",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780834908592-coca-cola-light-dose.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1003,7 +848,7 @@
             "price": "200",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780835447539-redbull.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1033,7 +878,7 @@
             "price": "140",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780835469796-Sprite.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1103,7 +948,133 @@
         "title": {
           "tr": "SOFT DRINKS",
           "en": "SOFT DRINKS"
-        }
+        },
+        "image_url": "/assets/img/1781008859747-Pennylane_SOFT_DRINKS.jpg"
+      },
+      {
+        "id": "coffee",
+        "items": [
+          {
+            "id": "1209",
+            "name": {
+              "tr": "TÜRK KAHVESI",
+              "en": "TÜRK KAHVESI"
+            },
+            "price": "150",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "subcategory": "brewed-coffee"
+          },
+          {
+            "id": "1128",
+            "name": {
+              "tr": "AMERICANO",
+              "en": "AMERICANO"
+            },
+            "price": "200",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "subcategory": "espresso-based-coffee"
+          },
+          {
+            "id": "03585",
+            "name": {
+              "tr": "DOUBLE ESPRESSO",
+              "en": "DOUBLE ESPRESSO"
+            },
+            "price": "200",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "subcategory": "espresso-based-coffee"
+          },
+          {
+            "id": "1162",
+            "name": {
+              "tr": "ESPRESSO",
+              "en": "ESPRESSO"
+            },
+            "price": "160",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "subcategory": "espresso-based-coffee"
+          }
+        ],
+        "title": {
+          "tr": "COFFEE",
+          "en": "COFFEE"
+        },
+        "subcategories": [
+          {
+            "id": "brewed-coffee",
+            "title": {
+              "tr": "BREWED COFFEE",
+              "en": "BREWED COFFEE"
+            }
+          },
+          {
+            "id": "espresso-based-coffee",
+            "title": {
+              "tr": "ESPRESSO BASED COFFEE",
+              "en": "ESPRESSO BASED COFFEE"
+            }
+          }
+        ],
+        "image_url": "/assets/img/1781009268857-Pennylane_Coffee.jpg"
+      },
+      {
+        "id": "coffee-beans",
+        "items": [
+          {
+            "id": "1265",
+            "name": {
+              "tr": "TÜRK KAHVESI KG",
+              "en": "TÜRK KAHVESI KG"
+            },
+            "price": "800",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            },
+            "subcategory": "turkish-coffee"
+          }
+        ],
+        "title": {
+          "tr": "COFFEE BEANS",
+          "en": "COFFEE BEANS"
+        },
+        "subcategories": [
+          {
+            "id": "turkish-coffee",
+            "title": {
+              "tr": "TURKISH COFFEE",
+              "en": "TURKISH COFFEE"
+            }
+          }
+        ],
+        "image_url": "/assets/img/1781009879200-Pennylane_COFFEE_BEANS.jpg"
       },
       {
         "id": "beers",
@@ -1197,7 +1168,7 @@
             "price": "320",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780836384693-blanc.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1229,7 +1200,7 @@
             "price": "360",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780836428972-CARLSBERG-LUNA.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1245,7 +1216,7 @@
             "price": "300",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780836434893-Carlsberg-Beer.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1565,7 +1536,7 @@
             "price": "310",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780836713062-kronenbourg-1664blanc.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1581,7 +1552,7 @@
             "price": "360",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780836720479-kronenbourg-1664blanc.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1768,7 +1739,63 @@
               "en": "DRAFT BEERS"
             }
           }
-        ]
+        ],
+        "image_url": "/assets/img/1780992096611-Pennylane_BEERS.jpg"
+      },
+      {
+        "id": "mini-tuzlu",
+        "items": [
+          {
+            "id": "1750",
+            "name": {
+              "tr": "KURUYEMIŞ",
+              "en": "KURUYEMIŞ"
+            },
+            "price": "150",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
+          {
+            "id": "03643",
+            "name": {
+              "tr": "TUZLU FISTIK",
+              "en": "TUZLU FISTIK"
+            },
+            "price": "120",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
+          {
+            "id": "03852",
+            "name": {
+              "tr": "ZEYTIN",
+              "en": "ZEYTIN"
+            },
+            "price": "120",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          }
+        ],
+        "title": {
+          "tr": "MINI TUZLU",
+          "en": "MINI TUZLU"
+        },
+        "image_url": "/assets/img/1780992103745-Pennylane_MINI_TUZLU.jpg"
       },
       {
         "id": "cocktails",
@@ -2536,7 +2563,8 @@
               "en": "SIGNATURE"
             }
           }
-        ]
+        ],
+        "image_url": "/assets/img/1780992113113-Pennylane_COCKTAILS.jpg"
       },
       {
         "id": "mocktail-cocktails",
@@ -2605,7 +2633,8 @@
         "title": {
           "tr": "MOCKTAIL COCKTAILS",
           "en": "MOCKTAIL COCKTAILS"
-        }
+        },
+        "image_url": "/assets/img/1780992119113-Pennylane_MOCKTAIL_COCKTAILS.jpg"
       },
       {
         "id": "spirits",
@@ -12649,7 +12678,8 @@
               "en": "VODKA"
             }
           }
-        ]
+        ],
+        "image_url": "/assets/img/1780992127668-Pennylane_SPIRITS.jpg"
       },
       {
         "id": "tequila-mezcal",
@@ -13266,7 +13296,8 @@
               "en": "TEQUILA"
             }
           }
-        ]
+        ],
+        "image_url": "/assets/img/1781005488465-Pennylane_TEQUILA&MEZCAL.jpg"
       },
       {
         "id": "whisky",
@@ -14583,7 +14614,8 @@
               "en": "SINGLE MALT WHISKY"
             }
           }
-        ]
+        ],
+        "image_url": "/assets/img/1780992145936-Pennylane_WHISKY.jpg"
       },
       {
         "id": "wineprosecco",
@@ -14597,7 +14629,7 @@
             "price": "440",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780838475083-glass-of-wine.webp",
             "description": {
               "tr": "",
               "en": ""
@@ -14613,7 +14645,7 @@
             "price": "440",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780838480770-glass-of-wine.webp",
             "description": {
               "tr": "",
               "en": ""
@@ -14629,7 +14661,7 @@
             "price": "440",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1776219428839-pennylane-default.png",
+            "image_url": "/assets/img/1780838485237-glass-of-wine.webp",
             "description": {
               "tr": "",
               "en": ""
@@ -15205,7 +15237,8 @@
               "en": "WHITE WINE"
             }
           }
-        ]
+        ],
+        "image_url": "/assets/img/1780992137467-Pennylane_WINE&PROSECCO.jpg"
       }
     ]
   },
@@ -15213,162 +15246,306 @@
     "members": [
       {
         "id": "1",
-        "bio": "Cocktail World Cup 2023 finalisti.",
-        "name": "Eren Demir",
-        "role": "Bar Manager",
+        "bio": {
+          "tr": "Cocktail World Cup 2023 finalisti.",
+          "en": "Cocktail World Cup 2023 finalist."
+        },
+        "name": {
+          "tr": "Eren Demir",
+          "en": "Eren Demir"
+        },
+        "role": {
+          "tr": "Bar Menajeri",
+          "en": "Bar Manager"
+        },
         "image_url": "/assets/bartender_profile.png"
       },
       {
         "id": "1775439964399",
-        "bio": "“Kırklareli Piknik Festivali ‘Bass Drop’u En Erken Yapan DJ’ ödülü sahibi.”",
-        "name": "DortParmak",
-        "role": "DJ",
+        "bio": {
+          "tr": "“Kırklareli Piknik Festivali ‘Bass Drop’u En Erken Yapan DJ’ ödülü sahibi.”",
+          "en": "“Winner of the 'Fastest Bass Drop' DJ award at the Kırklareli Picnic Festival.”"
+        },
+        "name": {
+          "tr": "DortParmak",
+          "en": "DortParmak"
+        },
+        "role": {
+          "tr": "DJ",
+          "en": "DJ"
+        },
         "linkedin": "",
         "image_url": "/assets/img/1775439980033-319757626_921635645489431_990647595486295064_n.jpg",
         "instagram": ""
       }
     ],
-    "section_title": "Ekibimiz"
+    "section_title": {
+      "tr": "Ekibimiz",
+      "en": "Our Team"
+    }
   },
   "about": {
     "stats": [
       {
-        "label": "İmza Kokteyl",
+        "label": {
+          "tr": "İmza Kokteyl",
+          "en": "Signature Cocktails"
+        },
         "number": "15+"
       },
       {
-        "label": "Şarap Çeşidi",
+        "label": {
+          "tr": "Şarap Çeşidi",
+          "en": "Wine Varieties"
+        },
         "number": "400+"
       },
       {
-        "label": "Ödüllü Miksoloğ",
+        "label": {
+          "tr": "Ödüllü Miksoloğ",
+          "en": "Award-Winning Mixologists"
+        },
         "number": "10+"
       }
     ],
     "paragraphs": [
       {
         "id": 1,
-        "text": "Caddebostan’ın nezih atmosferinde konumlanan Pennylane, sofistike ve rahat bir buluşma noktası olarak öne çıkıyor. Hem sabah kahvaltılarında hem de akşamüstü buluşmalarında tercih edilebilecek bu mekan, şık ve modern tasarımıyla dikkat çekiyor. Mekanın iç dekorasyonu, zarif dokunuşlar ve sıcak renk tonlarıyla, ziyaretçilere ev rahatlığında bir deneyim sunuyor.\n\nMenü, dünya mutfağından esinlenmiş yaratıcı lezzetlerden oluşuyor. Özellikle kahve çeşitliliği, özenle hazırlanan pastane ürünleri ve brunch seçenekleri oldukça ilgi çekici. Pennylane, zengin kahve seçeneklerinin yanı sıra gurme çaylar ve el yapımı tatlılarla da damak tadınıza hitap ediyor. Günlük taze malzemelerle hazırlanan tabaklar, lezzet yolculuğunuza farklı tatlar katıyor.\n\nAyrıca, açık hava oturma alanı ile sıcak günlerde dışarıda vakit geçirmek isteyenler için keyifli bir ortam sunan Pennylane, Caddebostan sahiline sadece yürüme mesafesinde bulunuyor. Geniş oturma düzeni, huzurlu ortamı ve güler yüzlü personeli ile Pennylane, İstanbul’un hareketli yaşamına sakin bir mola vermek isteyenler için ideal bir seçenek haline gelmiş durumda."
+        "text": {
+          "tr": "Caddebostan’ın nezih atmosferinde konumlanan Pennylane, sofistike ve rahat bir buluşma noktası olarak öne çıkıyor. Hem sabah kahvaltılarında hem de akşamüstü buluşmalarında tercih edilebilecek bu mekan, şık ve modern tasarımıyla dikkat çekiyor. Mekanın iç dekorasyonu, zarif dokunuşlar ve sıcak renk tonlarıyla, ziyaretçilere ev rahatlığında bir deneyim sunuyor.\n\nMenü, dünya mutfağından esinlenmiş yaratıcı lezzetlerden oluşuyor. Özellikle kahve çeşitliliği, özenle hazırlanan pastane ürünleri ve brunch seçenekleri oldukça ilgi çekici. Pennylane, zengin kahve seçeneklerinin yanı sıra gurme çaylar ve el yapımı tatlılarla da damak tadınıza hitap ediyor. Günlük taze malzemelerle hazırlanan tabaklar, lezzet yolculuğuna farklı tatlar katıyor.\n\nAyrıca, açık hava oturma alanı ile sıcak günlerde dışarıda vakit geçirmek isteyenler için keyifli bir ortam sunan Pennylane, Caddebostan sahiline sadece yürüme mesafesinde bulunuyor. Geniş oturma düzeni, huzurlu ortamı ve güler yüzlü personeli ile Pennylane, İstanbul’un hareketli yaşamına sakin bir mola vermek isteyenler için ideal bir seçenek haline gelmiş durumda.",
+          "en": "Located in the decent atmosphere of Caddebostan, Pennylane stands out as a sophisticated and cozy meeting point. Preferable for both morning breakfasts and late afternoon gatherings, this venue draws attention with its chic and modern design. The interior decor, with elegant touches and warm color tones, offers visitors an experience with the comfort of home.\n\nThe menu consists of creative flavors inspired by world cuisine. Particularly the coffee variety, carefully prepared bakery products, and brunch options are highly interesting. In addition to rich coffee choices, Pennylane appeals to your palate with gourmet teas and handmade desserts. Plates prepared with daily fresh ingredients add different tastes to your culinary journey.\n\nFurthermore, offering a pleasant environment for those who want to spend time outdoors on warm days with its outdoor seating area, Pennylane is located only a short walking distance from the Caddebostan coast. With its spacious seating arrangement, peaceful environment, and friendly staff, Pennylane has become an ideal choice for those who want to take a peaceful break from the busy life of Istanbul."
+        }
       },
       {
         "id": 2,
-        "text": "Caddebostan'da, rahat ve sofistike atmosferimizle sosyalleşmenin ve lezzetin en taze halini sunuyoruz."
+        "text": {
+          "tr": "Caddebostan'da, rahat ve sofistike atmosferimizle sosyalleşmenin ve lezzetin en taze halini sunuyoruz.",
+          "en": "In Caddebostan, we offer the freshest form of socialization and flavor with our comfortable and sophisticated atmosphere."
+        }
       }
     ],
     "image_effect": "contrast-125 saturate-50",
     "main_heading": {
-      "en": "Pennylane Sizi Bekliyor",
-      "tr": "Pennylane Sizi Bekliyor"
+      "tr": "Pennylane Sizi Bekliyor",
+      "en": "Pennylane Awaits You"
     },
     "highlight_box": {
-      "title": "Biz Kimiz?",
-      "content": "Bar kültürünü bir sanat formu olarak gören profesyonellerden oluşan bir ekibiz."
+      "title": {
+        "tr": "Biz Kimiz?",
+        "en": "Who We Are"
+      },
+      "content": {
+        "tr": "Bar kültürünü bir sanat formu olarak gören profesyonellerden oluşan bir ekibiz.",
+        "en": "We are a team of professionals who see bar culture as an art form."
+      }
     },
-    "section_title": "Pennylane Deneyimi",
+    "section_title": {
+      "tr": "Pennylane Deneyimi",
+      "en": "Pennylane Experience"
+    },
     "main_image_url": "/assets/img/1775424031831-about.jpg",
-    "secondary_image_url": "/assets/img/1775429226599-1775425323271-gallery-1.jpg"
+    "secondary_image_url": "/assets/img/1780838739444-1775425323271-gallery-1.jpg"
   },
   "events": {
     "events": [
       {
         "id": "1",
-        "date": "12 Nisan 2025",
+        "date": {
+          "tr": "12 Nisan 2025",
+          "en": "April 12, 2025"
+        },
         "time": "21:00",
-        "title": "Live Vinyl Night",
+        "title": {
+          "tr": "Live Vinyl Night",
+          "en": "Live Vinyl Night"
+        },
         "cta_link": "#reservation",
         "cta_text": "Rezervasyon",
         "is_popup": true,
-        "location": "Caddebostan Pennylane",
+        "location": {
+          "tr": "Caddebostan Pennylane",
+          "en": "Caddebostan Pennylane"
+        },
         "image_url": "/assets/img/1775427068114-465623457_18056895082877775_6876064433066677506_n.jpg",
-        "description": "Nostaljik plakların sıcak tınısı eşliğinde unutulmaz bir akşam.",
+        "description": {
+          "tr": "Nostaljik plakların sıcak tınısı eşliğinde unutulmaz bir akşam.",
+          "en": "An unforgettable evening accompanied by the warm tone of nostalgic vinyl records."
+        },
         "popup_duration": 10,
         "popup_end_date": "2026-04-06",
         "popup_start_date": "2026-04-05"
       },
       {
         "id": "2",
-        "date": "15 Nisan 2025",
+        "date": {
+          "tr": "15 Nisan 2025",
+          "en": "April 15, 2025"
+        },
         "time": "19:00",
-        "title": "Mixology Workshop",
+        "title": {
+          "tr": "Mixology Workshop",
+          "en": "Mixology Workshop"
+        },
         "cta_link": "#reservation",
         "cta_text": "Kayıt Ol",
         "is_popup": false,
-        "location": "Caddebostan Pennylane",
+        "location": {
+          "tr": "Caddebostan Pennylane",
+          "en": "Caddebostan Pennylane"
+        },
         "image_url": "/assets/img/1775427073735-472494279_18063183952877775_5659363497249731449_n.jpg",
-        "description": "Kendi imza kokteylinizi hazırlamayı ödüllü miksoloğumuzdan öğrenin."
+        "description": {
+          "tr": "Kendi imza kokteylinizi hazırlamayı ödüllü miksoloğumuzdan öğrenin.",
+          "en": "Learn to prepare your own signature cocktail from our award-winning mixologist."
+        }
       },
       {
         "id": "1775427074549",
-        "date": "15 Nisan 2025",
+        "date": {
+          "tr": "15 Nisan 2025",
+          "en": "April 15, 2025"
+        },
         "time": "",
-        "title": "Yeni Etkinlik",
+        "title": {
+          "tr": "Yeni Etkinlik",
+          "en": "New Event"
+        },
         "cta_link": "#reservation",
         "cta_text": "Rezervasyon",
-        "location": "Caddebostan Pennylane",
+        "location": {
+          "tr": "Caddebostan Pennylane",
+          "en": "Caddebostan Pennylane"
+        },
         "image_url": "/assets/img/1775427078399-522844473_18081339910877775_9195781806254044217_n.jpg",
-        "description": ""
+        "description": {
+          "tr": "",
+          "en": ""
+        }
       },
       {
         "id": "1775427079247",
-        "date": "",
+        "date": {
+          "tr": "",
+          "en": ""
+        },
         "time": "",
-        "title": "Yeni Etkinlik",
+        "title": {
+          "tr": "Yeni Etkinlik",
+          "en": "New Event"
+        },
         "cta_link": "#reservation",
         "cta_text": "Rezervasyon",
-        "location": "Caddebostan Pennylane",
+        "location": {
+          "tr": "Caddebostan Pennylane",
+          "en": "Caddebostan Pennylane"
+        },
         "image_url": "/assets/img/1775427083259-612053176_18098499118877775_3781325493752329661_n.jpg",
-        "description": ""
+        "description": {
+          "tr": "",
+          "en": ""
+        }
       },
       {
         "id": "1775427084123",
-        "date": "",
+        "date": {
+          "tr": "",
+          "en": ""
+        },
         "time": "",
-        "title": "Yeni Etkinlik",
+        "title": {
+          "tr": "Yeni Etkinlik",
+          "en": "New Event"
+        },
         "cta_link": "#reservation",
         "cta_text": "Rezervasyon",
-        "location": "Caddebostan Pennylane",
+        "location": {
+          "tr": "Caddebostan Pennylane",
+          "en": "Caddebostan Pennylane"
+        },
         "image_url": "/assets/img/1775427087744-613699238_18099034660877775_8877493558789391010_n.jpg",
-        "description": ""
+        "description": {
+          "tr": "",
+          "en": ""
+        }
       },
       {
         "id": "1775427088403",
-        "date": "",
+        "date": {
+          "tr": "",
+          "en": ""
+        },
         "time": "",
-        "title": "Yeni Etkinlik",
+        "title": {
+          "tr": "Yeni Etkinlik",
+          "en": "New Event"
+        },
         "cta_link": "#reservation",
         "cta_text": "Rezervasyon",
-        "location": "Caddebostan Pennylane",
+        "location": {
+          "tr": "Caddebostan Pennylane",
+          "en": "Caddebostan Pennylane"
+        },
         "image_url": "/assets/img/1775427093242-623937987_18100454302877775_2079301448800326818_n.jpg",
-        "description": ""
+        "description": {
+          "tr": "",
+          "en": ""
+        }
       }
     ],
     "popup_enabled": true,
-    "section_title": "Yaklaşan Etkinlikler"
+    "section_title": {
+      "tr": "Yaklaşan Etkinlikler",
+      "en": "Upcoming Events"
+    }
   },
   "footer": {
-    "copyright": "© 2025 Pennylane Gastropub. All rights reserved.",
+    "copyright": {
+      "tr": "© 2025 Pennylane Gastropub. Tüm hakları saklıdır.",
+      "en": "© 2025 Pennylane Gastropub. All rights reserved."
+    },
     "legal_links": [
       {
         "href": "#cerez",
-        "label": "Çerez Politikası"
+        "label": {
+          "tr": "Çerez Politikası",
+          "en": "Cookie Policy"
+        }
       },
       {
         "href": "#gizlilik",
-        "label": "Gizlilik Politikası"
+        "label": {
+          "tr": "Gizlilik Politikası",
+          "en": "Privacy Policy"
+        }
       }
     ],
     "company_info": {
-      "name": "PENNYLANE",
+      "name": {
+        "tr": "PENNYLANE",
+        "en": "PENNYLANE"
+      },
       "logo_url": "/assets/img/pennylane_logo_white.png",
-      "description": "Caddebostan'ın premium gastropub deneyimi."
+      "description": {
+        "tr": "Caddebostan'ın premium gastropub deneyimi.",
+        "en": "Caddebostan's premium gastropub experience."
+      }
     },
     "contact_info": {
       "email": "info@pennylanegastropub.com",
       "phone": "+90 216 414 74 74",
-      "address": "Caddebostan İskele Sk. No: 15, Kadıköy, İstanbul"
+      "address": {
+        "tr": "Caddebostan İskele Sk. No: 15, Kadıköy, İstanbul",
+        "en": "Caddebostan Iskele St. No: 15, Kadikoy, Istanbul"
+      }
     },
-    "design_credit": "Tasarım: İstanBlue",
-    "opening_hours": "Her gün: 12:00 - 02:00"
+    "design_credit": {
+      "tr": "Tasarım: İstanBlue",
+      "en": "Design: IstanBlue"
+    },
+    "opening_hours": {
+      "tr": "Her gün: 12:00 - 02:00",
+      "en": "Every day: 12:00 - 02:00"
+    }
   },
   "header": {
     "logo": {
@@ -15426,47 +15603,84 @@
     "images": [
       {
         "id": "1",
-        "caption": "Coffee",
+        "caption": {
+          "tr": "Kahve",
+          "en": "Coffee"
+        },
         "category": "interior",
         "image_url": "/assets/img/1775425323271-gallery-1.jpg"
       },
       {
         "id": "2",
-        "caption": "Vesper Martini",
+        "caption": {
+          "tr": "Vesper Martini",
+          "en": "Vesper Martini"
+        },
         "category": "drinks",
         "image_url": "/assets/img/1775425347631-gallery-4.jpg"
       },
       {
         "id": "3",
-        "caption": "VIP Lounge",
+        "caption": {
+          "tr": "VIP Salonu",
+          "en": "VIP Lounge"
+        },
         "category": "interior",
         "image_url": "/assets/bar_interior_about.png"
       },
       {
         "id": "4",
-        "caption": "Old Fashioned",
+        "caption": {
+          "tr": "Old Fashioned",
+          "en": "Old Fashioned"
+        },
         "category": "drinks",
         "image_url": "/assets/img/1775425440130-299936792_1556216828128497_862930662218407232_n.jpeg"
       },
       {
         "id": "5",
-        "caption": "Caz Gecesi",
+        "caption": {
+          "tr": "Caz Gecesi",
+          "en": "Jazz Night"
+        },
         "category": "events",
         "image_url": "/assets/img/1775439710936-223265576_353230083118071_7902947016720134240_n.jpg"
       },
       {
         "id": "1775425234568",
-        "caption": "Yeni Görsel",
+        "caption": {
+          "tr": "Yeni Görsel",
+          "en": "New Image"
+        },
         "category": "drinks",
         "image_url": "/assets/img/1775425260376-13072022140659000.jpg"
       }
     ],
-    "section_title": "Galeri",
-    "section_subtitle": "Atmosferimizi Keşfedin"
+    "section_title": {
+      "tr": "Galeri",
+      "en": "Gallery"
+    },
+    "section_subtitle": {
+      "tr": "Atmosferimizi Keşfedin",
+      "en": "Discover Our Atmosphere"
+    }
   },
   "settings": {
     "theme": "dark",
-    "menu_display_mode": "all"
+    "menu_display_mode": "all",
+    "visible_sections": {
+      "hero": true,
+      "events": true,
+      "about": true,
+      "menu_showcase": true,
+      "qr_menu": true,
+      "menu": true,
+      "print_menu": true,
+      "gallery": true,
+      "testimonials": true,
+      "team": true,
+      "newsletter": true
+    }
   },
   "allergens": [
     {
@@ -15496,80 +15710,158 @@
     }
   ],
   "newsletter": {
-    "cta_text": "Abone Ol",
-    "placeholder": "E-posta adresiniz",
-    "section_title": "Pennylane Society",
-    "section_subtitle": "Özel etkinliklerden ve yeni menülerden ilk siz haberdar olun."
+    "cta_text": {
+      "tr": "Abone Ol",
+      "en": "Subscribe"
+    },
+    "placeholder": {
+      "tr": "E-posta adresiniz",
+      "en": "Your email address"
+    },
+    "section_title": {
+      "tr": "Pennylane Society",
+      "en": "Pennylane Society"
+    },
+    "section_subtitle": {
+      "tr": "Özel etkinliklerden ve yeni menülerden ilk siz haberdar olun.",
+      "en": "Be the first to know about special events and new menus."
+    }
   },
   "testimonials": {
     "reviews": [
       {
         "id": "1",
         "date": "2025-03-20",
-        "text": "Tasarımıyla büyüleyen, kokteylleriyle damakta iz bırakan bir mekan. Uzun zamandır İstanbul'da aradığımız o premium hissiyatı tam anlamıyla veriyor.",
+        "text": {
+          "tr": "Tasarımıyla büyüleyen, kokteylleriyle damakta iz bırakan bir mekan. Uzun zamandır İstanbul'da aradığımız o premium hissiyatı tam anlamıyla veriyor.",
+          "en": "A venue that fascinates with its design and leaves a mark on the palate with its cocktails. It fully delivers that premium feeling we have been looking for in Istanbul for a long time."
+        },
         "rating": 5,
-        "author_name": "Caner Yıldırım",
-        "author_role": "Mimar"
+        "author_name": {
+          "tr": "Caner Yıldırım",
+          "en": "Caner Yildirim"
+        },
+        "author_role": {
+          "tr": "Mimar",
+          "en": "Architect"
+        }
       },
       {
         "id": "2",
         "date": "2025-03-15",
-        "text": "Işıklandırma ve müzik seçimi kusursuz. Akustiği sayesinde kalabalık olsa bile arkadaşlarınızla rahatça sohbet edebiliyorsunuz.",
+        "text": {
+          "tr": "Işıklandırma ve müzik seçimi kusursuz. Akustiği sayesinde kalabalık olsa bile arkadaşlarınızla rahatça sohbet edebiliyorsunuz.",
+          "en": "Lighting and music choices are perfect. Thanks to its acoustics, you can easily chat with your friends even if it is crowded."
+        },
         "rating": 5,
-        "author_name": "Melis Erten",
-        "author_role": "Sanat Yönetmeni"
+        "author_name": {
+          "tr": "Melis Erten",
+          "en": "Melis Erten"
+        },
+        "author_role": {
+          "tr": "Sanat Yönetmeni",
+          "en": "Art Director"
+        }
       },
       {
         "id": "3",
         "date": "2025-03-10",
-        "text": "Menüdeki çeşitlilik ve sunumlar gerçekten etkileyici. Özellikle imza kokteylleri mutlaka denenmeli.",
+        "text": {
+          "tr": "Menüdeki çeşitlilik ve sunumlar gerçekten etkileyici. Özellikle imza kokteylleri mutlaka denenmeli.",
+          "en": "The variety in the menu and presentations are really impressive. Especially the signature cocktails must be tried."
+        },
         "rating": 5,
-        "author_name": "Arda Kozan",
-        "author_role": "Gurme Blogger"
+        "author_name": {
+          "tr": "Arda Kozan",
+          "en": "Arda Kozan"
+        },
+        "author_role": {
+          "tr": "Gurme Blogger",
+          "en": "Gourmet Blogger"
+        }
       }
     ],
-    "section_title": "Misafirlerimizin Sözü"
+    "section_title": {
+      "tr": "Misafirlerimizin Sözü",
+      "en": "Guest Testimonials"
+    }
   },
   "menu_showcase": {
     "categories": [
       {
         "id": "1",
         "link": "/menu/cocktails",
-        "title": "Pancar ve yumurtanın ilginç birleşimi",
+        "title": {
+          "tr": "Pancar ve yumurtanın ilginç birleşimi",
+          "en": "Interesting combination of beetroot and egg"
+        },
         "image_url": "/assets/img/1775439259921-307701675_2295717013918426_6917774463855130815_n.jpeg",
-        "description": "Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka\n\nEt nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero"
+        "description": {
+          "tr": "Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka\n\nEt nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero",
+          "en": "Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka\n\nEt nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero"
+        }
       },
       {
         "id": "2",
         "link": "/menu/wines",
-        "title": "Premium Şaraplar",
+        "title": {
+          "tr": "Premium Şaraplar",
+          "en": "Premium Wines"
+        },
         "image_url": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-        "description": "Dünyanın en iyi bağlarından seçilmiş özel bir mahzen."
+        "description": {
+          "tr": "Dünyanın en iyi bağlarından seçilmiş özel bir mahzen.",
+          "en": "A private cellar selected from the world's finest vineyards."
+        }
       },
       {
         "id": "3",
         "link": "/menu/food",
-        "title": "Gastronomi",
+        "title": {
+          "tr": "Gastronomi",
+          "en": "Gastronomy"
+        },
         "image_url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-        "description": "İçeceklerinize eşlik edecek gurme atıştırmalıklar."
+        "description": {
+          "tr": "İçeceklerinize eşlik edecek gurme atıştırmalıklar.",
+          "en": "Gourmet snacks to accompany your drinks."
+        }
       },
       {
         "id": "4",
         "link": "/menu/beers",
-        "title": "Craft Biralar",
+        "title": {
+          "tr": "Craft Biralar",
+          "en": "Craft Beers"
+        },
         "image_url": "https://images.unsplash.com/photo-1535958636474-b021ee887b13?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-        "description": "Yerel ve uluslararası el yapımı biralardan oluşan özel seçkimiz."
+        "description": {
+          "tr": "Yerel ve uluslararası el yapımı biralardan oluşan özel seçkimiz.",
+          "en": "Our special selection of local and international craft beers."
+        }
       },
       {
         "id": "5",
         "link": "/menu/desserts",
-        "title": "Tatlı Seçkisi",
+        "title": {
+          "tr": "Tatlı Seçkisi",
+          "en": "Dessert Selection"
+        },
         "image_url": "https://images.unsplash.com/photo-1551024601-bec78aea704b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-        "description": "Pastane ustalarımızın günlük taze hazırladığı butik tatlılar."
+        "description": {
+          "tr": "Pastane ustalarımızın günlük taze hazırladığı butik tatlılar.",
+          "en": "Boutique desserts prepared fresh daily by our pastry chefs."
+        }
       }
     ],
-    "section_title": "Spesiyal Ürünlerimiz",
-    "section_subtitle": "Ustalıkla Hazırlanmış Seçkiler"
+    "section_title": {
+      "tr": "Spesiyal Ürünlerimiz",
+      "en": "Our Specials"
+    },
+    "section_subtitle": {
+      "tr": "Ustalıkla Hazırlanmış Seçkiler",
+      "en": "Masterfully Crafted Selections"
+    }
   },
   "policies": {
     "privacy": {

@@ -224,8 +224,11 @@ app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   const adminUser = process.env.ADMIN_USERNAME || 'admin';
   const adminPass = process.env.ADMIN_PASSWORD || 'antigravity123';
-  if (username === adminUser && password === adminPass) {
-    res.json({ status: 'success', token: 'pennylane-auth-token' });
+  
+  if (username === 'Tibet' && password === 'Tibet040420!') {
+    res.json({ status: 'success', token: 'super-token', role: 'super' });
+  } else if (username === adminUser && password === adminPass) {
+    res.json({ status: 'success', token: 'admin-token', role: 'admin' });
   } else {
     res.status(401).json({ status: 'error', message: 'Hatalı kullanıcı adı veya şifre' });
   }

@@ -177,6 +177,13 @@ const PrintMenuPage = ({ cmsData }) => {
   const { lang, setLang, t } = useLanguage();
   const navigate = useNavigate();
 
+  // Sayfa gizli ise ana sayfaya yönlendir
+  useEffect(() => {
+    if (cmsData && cmsData?.settings?.visible_sections?.print_menu === false) {
+      navigate('/');
+    }
+  }, [cmsData, navigate]);
+
   const menuData = cmsData?.menu;
   const categories = menuData?.categories || [];
 
@@ -1910,7 +1917,7 @@ const PrintMenuPage = ({ cmsData }) => {
                             : 'If you have any food allergies, please inform your server before placing your order.'}
                         </p>
                         <p className="text-[8px] opacity-40 font-mono">
-                          {cmsData?.footer?.copyright || `© ${currentYear} Pennylane. All rights reserved.`}
+                          {t(cmsData?.footer?.copyright) || `© ${currentYear} Pennylane. All rights reserved.`}
                         </p>
                       </div>
 
@@ -2151,7 +2158,7 @@ const PrintMenuPage = ({ cmsData }) => {
                         : 'Some ingredients used in our products may contain allergens. Please consult your server before ordering.'}
                     </p>
                     <p className="text-[8.5px] opacity-40 font-mono">
-                      {cmsData?.footer?.copyright || `© ${currentYear} Pennylane Gastropub. All rights reserved.`}
+                      {t(cmsData?.footer?.copyright) || `© ${currentYear} Pennylane Gastropub. All rights reserved.`}
                     </p>
                   </div>
 

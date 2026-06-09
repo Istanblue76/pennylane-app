@@ -33,12 +33,12 @@ const EventsSection = ({ data }) => {
   return (
     <section id="events" className="py-24 md:py-36 bg-dark/70 relative overflow-hidden">
       <div className="section-container">
-        <SectionHeading title={data.section_title} subtitle="Unutulmaz Anlar İçin Takipte Kalın" />
+        <SectionHeading title={data.section_title} subtitle={t({ tr: "Unutulmaz Anlar İçin Takipte Kalın", en: "Stay Tuned for Unforgettable Moments" })} />
 
         {/* Horizontal Drag Instruction */}
         <div className="flex items-center justify-center space-x-2 text-textSecondary/60 text-xs uppercase tracking-[0.2em] mt-8 mb-4">
           <Grab className="w-4 h-4 animate-pulse text-secondary" />
-          <span>Kaydırmak için sürükleyin</span>
+          <span>{t({ tr: "Kaydırmak için sürükleyin", en: "Drag to scroll" })}</span>
         </div>
 
         {/* Carousel Viewport Container */}
@@ -55,7 +55,7 @@ const EventsSection = ({ data }) => {
             style={{ width: 'max-content' }}
           >
             {data.events.map((event) => {
-              const dateStr = t(event.date) || 'YAKINDA';
+              const dateStr = t(event.date) || t({ tr: 'YAKINDA', en: 'COMING SOON' });
               const day = dateStr.split(' ')[0];
               const month = dateStr.split(' ')[1]?.slice(0, 3) || '';
               
@@ -88,7 +88,7 @@ const EventsSection = ({ data }) => {
                   <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 flex flex-col justify-end z-10">
                     <span className="text-secondary/60 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-2 flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-secondary" />
-                      {t(event.location) || 'PENNYLANE CADDE'}
+                      {t(event.location) || t({ tr: 'PENNYLANE CADDE', en: 'PENNYLANE CADDE' })}
                     </span>
 
                     <h3 className="font-serif font-bold uppercase text-xl md:text-2xl text-white tracking-wide group-hover:text-secondary transition-colors duration-300 mb-3 line-clamp-2">
@@ -100,7 +100,7 @@ const EventsSection = ({ data }) => {
                     </p>
 
                     <div className="flex items-center space-x-3 text-secondary text-xs font-black uppercase tracking-widest border-t border-secondary/15 pt-4 group-hover:border-secondary/40 transition-colors">
-                      <span>DETAYLARI GÖR</span>
+                      <span>{t({ tr: 'DETAYLARI GÖR', en: 'VIEW DETAILS' })}</span>
                       <ArrowRight className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" />
                     </div>
                   </div>
@@ -150,7 +150,7 @@ const EventsSection = ({ data }) => {
                 <div className="space-y-6 relative z-10">
                     <div className="flex items-center space-x-4 text-secondary text-[11px] font-bold uppercase tracking-[0.5em]">
                         <Calendar className="w-5 h-5" />
-                        <span>{t(selectedEvent.date) || 'TARİH YAKINDA'}</span>
+                        <span>{t(selectedEvent.date) || t({ tr: 'TARİH YAKINDA', en: 'DATE COMING SOON' })}</span>
                         {selectedEvent.time && (
                             <>
                                 <div className="w-1.5 h-1.5 rounded-full bg-secondary/40 mx-2" />

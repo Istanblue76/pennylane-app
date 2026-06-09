@@ -25,10 +25,10 @@ import { useLanguage } from './context/LanguageContext';
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
   static getDerivedStateFromError(error) {
-    return { hasError: true };
+    return { hasError: true, error };
   }
   componentDidCatch(error, errorInfo) {
     console.error("Critical Render Error:", error, errorInfo);
@@ -42,6 +42,13 @@ class ErrorBoundary extends Component {
           <p className="text-textSecondary text-lg italic max-w-2xl font-light mb-10 opacity-70 leading-relaxed">
             İçerik verilerinde bir yapısal fark oluştuğu için sayfa yüklenemedi. Admin panelinden yaptığınız son değişikliği kontrol edin veya sayfayı yenileyin.
           </p>
+          {this.state.error && (
+            <pre className="text-left text-xs text-red-500 overflow-auto bg-black/80 border border-red-500/20 p-6 rounded-2xl max-w-4xl w-full mb-10 font-mono whitespace-pre-wrap select-text">
+              <strong>Error: {this.state.error.message}</strong>
+              {"\n\n"}
+              {this.state.error.stack}
+            </pre>
+          )}
           <button onClick={() => { localStorage.clear(); window.location.reload(); }} className="btn-outline">SİSTEMİ SIFIRLA VE YENİLE</button>
         </div>
       );
@@ -55,6 +62,7 @@ const Home = ({ cmsData }) => {
   const [showPopup, setShowPopup] = React.useState(false);
 
   const featuredEvent = React.useMemo(() => {
+    if (cmsData?.settings?.visible_sections?.events === false) return null;
     if (!cmsData?.events?.events) return null;
     const today = new Date().setHours(0, 0, 0, 0);
     return cmsData.events.events.find(ev => {
@@ -143,15 +151,15 @@ const Home = ({ cmsData }) => {
       </AnimatePresence>
 
       <AnimatePresence mode="wait">
-        <HeroSection data={cmsData?.hero} />
-        <EventsSection data={cmsData?.events} />
-        <AboutSection data={cmsData?.about} />
-        <MenuShowcase data={cmsData?.menu_showcase} />
-        <QRMenu data={cmsData?.menu} allergens={cmsData?.allergens} settings={cmsData?.settings} />
-        <GallerySection data={cmsData?.gallery} />
-        <TestimonialsSection data={cmsData?.testimonials} />
-        <TeamSection data={cmsData?.team} />
-        <NewsletterSection data={cmsData?.newsletter} />
+        {cmsData?.settings?.visible_sections?.hero !== false && <HeroSection data={cmsData?.hero} />}
+        {cmsData?.settings?.visible_sections?.events !== false && <EventsSection data={cmsData?.events} />}
+        {cmsData?.settings?.visible_sections?.about !== false && <AboutSection data={cmsData?.about} />}
+        {cmsData?.settings?.visible_sections?.menu_showcase !== false && <MenuShowcase data={cmsData?.menu_showcase} />}
+        {cmsData?.settings?.visible_sections?.qr_menu !== false && <QRMenu data={cmsData?.menu} allergens={cmsData?.allergens} settings={cmsData?.settings} />}
+        {cmsData?.settings?.visible_sections?.gallery !== false && <GallerySection data={cmsData?.gallery} />}
+        {cmsData?.settings?.visible_sections?.testimonials !== false && <TestimonialsSection data={cmsData?.testimonials} />}
+        {cmsData?.settings?.visible_sections?.team !== false && <TeamSection data={cmsData?.team} />}
+        {cmsData?.settings?.visible_sections?.newsletter !== false && <NewsletterSection data={cmsData?.newsletter} />}
       </AnimatePresence>
     </main>
   );
@@ -166,6 +174,73 @@ function ScrollToTop() {
 
   return null;
 }
+
+const SeoUpdater = ({ cmsData }) => {
+  const { lang } = useLanguage();
+
+  React.useEffect(() => {
+    if (cmsData?.seo && cmsData?.settings?.visible_sections?.seo !== false) {
+      // 1. Title
+      const seoTitle = cmsData.seo.title?.[lang] || cmsData.seo.title || 'PENNYLANE | Gastropub Experience';
+      document.title = seoTitle;
+
+      // 2. Description
+      const seoDesc = cmsData.seo.description?.[lang] || cmsData.seo.description || '';
+      const descMeta = document.querySelector('meta[name="description"]');
+      if (descMeta) {
+        descMeta.setAttribute('content', seoDesc);
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = 'description';
+        meta.content = seoDesc;
+        document.head.appendChild(meta);
+      }
+
+      // 3. Keywords
+      const seoKeywords = cmsData.seo.keywords?.[lang] || cmsData.seo.keywords || '';
+      const keywordsMeta = document.querySelector('meta[name="keywords"]');
+      if (keywordsMeta) {
+        keywordsMeta.setAttribute('content', seoKeywords);
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = 'keywords';
+        meta.content = seoKeywords;
+        document.head.appendChild(meta);
+      }
+
+      // 4. OpenGraph og:title
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      if (!ogTitle) {
+        ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        document.head.appendChild(ogTitle);
+      }
+      ogTitle.setAttribute('content', seoTitle);
+
+      // 5. OpenGraph og:description
+      let ogDesc = document.querySelector('meta[property="og:description"]');
+      if (!ogDesc) {
+        ogDesc = document.createElement('meta');
+        ogDesc.setAttribute('property', 'og:description');
+        document.head.appendChild(ogDesc);
+      }
+      ogDesc.setAttribute('content', seoDesc);
+
+      // 6. OpenGraph og:image
+      if (cmsData.seo.og_image) {
+        let ogImage = document.querySelector('meta[property="og:image"]');
+        if (!ogImage) {
+          ogImage = document.createElement('meta');
+          ogImage.setAttribute('property', 'og:image');
+          document.head.appendChild(ogImage);
+        }
+        ogImage.setAttribute('content', cmsData.seo.og_image);
+      }
+    }
+  }, [cmsData, lang]);
+
+  return null;
+};
 
 export default function App() {
   const { cmsData, loading, error } = useFetchCMS();
@@ -325,6 +400,7 @@ export default function App() {
 
   return (
     <LanguageProvider>
+      <SeoUpdater cmsData={cmsData} />
       <ErrorBoundary>
         <Router>
           <ScrollToTop />
@@ -332,7 +408,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={
                 <>
-                  <Header data={cmsData?.header} />
+                  <Header data={cmsData?.header} settings={cmsData?.settings} />
                   <Home cmsData={cmsData} />
                   <Footer data={cmsData?.footer} onOpenPolicy={setActivePolicy} />
                 </>

@@ -28,7 +28,7 @@ const TestimonialsSection = ({ data }) => {
       <Quote className="absolute bottom-10 right-10 w-48 h-48 text-secondary opacity-5 pointer-events-none rotate-[168deg]" />
 
       <div className="section-container relative z-10">
-        <SectionHeading title={data.section_title} light={false} subtitle="Sizin İçin Buradayız" />
+        <SectionHeading title={data.section_title} light={false} subtitle={t({ tr: "Sizin İçin Buradayız", en: "We Are Here for You" })} />
 
         <div className="relative max-w-4xl mx-auto px-10">
           <AnimatePresence mode="wait">
