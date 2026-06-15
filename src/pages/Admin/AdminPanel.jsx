@@ -700,7 +700,17 @@ const AdminPanel = ({ initialData }) => {
     <div className="min-h-screen bg-dark flex flex-col md:flex-row p-4 md:p-10 space-y-6 md:space-y-0 md:space-x-10 text-white font-sans">
       <aside className="w-full md:w-80 bg-primary/40 backdrop-blur-xl border-2 border-secondary/20 p-6 rounded-3xl flex flex-col md:h-[calc(100vh-80px)] sticky top-10 overflow-hidden">
         <div className="flex flex-col items-center mb-6 border-b border-secondary/20 pb-6 text-center flex-shrink-0">
-          <img src="/assets/img/pennylane_logo_white.png" alt="Logo" className="h-10 mb-4" />
+          <label className="cursor-pointer group relative block" title="Logoyu Değiştirmek İçin Tıklayın">
+            <img 
+              src={data?.header?.logo?.image || "/assets/img/pennylane_logo_white.png"} 
+              alt="Logo" 
+              className="h-10 mb-4 group-hover:opacity-40 transition-opacity duration-300" 
+            />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <Upload className="w-5 h-5 text-secondary" />
+            </div>
+            <input type="file" className="hidden" accept="image/*" onChange={handleLogoUpload} />
+          </label>
           <span className="font-serif font-bold text-lg uppercase tracking-widest text-secondary">PENNYLANE CMS</span>
         </div>
 
