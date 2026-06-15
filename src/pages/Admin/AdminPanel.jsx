@@ -587,6 +587,56 @@ const AdminPanel = ({ initialData }) => {
     }
   };
 
+  const handleLogoUpload = async (e) => {
+    const rawFile = e.target.files[0];
+    if (!rawFile) return;
+
+    let file = rawFile;
+    const isImage = rawFile.type.startsWith('image/') || /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(rawFile.name);
+    if (isImage) {
+      try {
+        file = await compressImage(rawFile);
+      } catch (err) {
+        console.error("Sıkıştırma sırasında hata oluştu:", err);
+      }
+    }
+
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('category', 'logo');
+
+    try {
+      const resp = await axios.post('/api/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      
+      if (resp.data.status === 'success') {
+        const logoUrl = resp.data.url;
+        setData({
+          ...data,
+          header: {
+            ...data.header,
+            logo: {
+              ...(data.header?.logo || {}),
+              image: logoUrl
+            }
+          },
+          footer: {
+            ...data.footer,
+            company_info: {
+              ...(data.footer?.company_info || {}),
+              logo_url: logoUrl
+            }
+          }
+        });
+        setHasChanges(true);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Logo yüklenemedi.');
+    }
+  };
+
 
 
   const ImageUploader = ({ label, value, onChange }) => (
@@ -778,6 +828,27 @@ const AdminPanel = ({ initialData }) => {
                       })}
                    </div>
                    <p className="mt-6 text-textSecondary text-[10px] italic">Bu ayar QR Menü sayfasının arka plan ve yazı renklerini anında değiştirir. Pennylane atmosferini günün saatine göre optimize edin.</p>
+                </div>
+
+                {/* Logo Yönetimi */}
+                <div className="bg-secondary/5 p-8 rounded-3xl border border-secondary/10 space-y-6">
+                   <div className="flex items-center space-x-4 mb-2">
+                      <div className="w-10 h-10 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary border border-secondary/20">
+                         <ImageIcon className="w-5 h-5" />
+                      </div>
+                      <div>
+                         <h4 className="text-xl font-serif font-black text-white uppercase tracking-tight">LOGO VE MARKA GÖRSELİ</h4>
+                         <p className="text-textSecondary text-xs font-light italic">Mekanınızın tüm sayfalardaki (header ve footer) ana logosunu buradan değiştirin.</p>
+                      </div>
+                   </div>
+                   <div className="bg-dark/40 p-6 rounded-2xl border border-secondary/10">
+                      <ImageUploader 
+                        label="GÜNCEL MEKAN LOGOSU" 
+                        value={data.header?.logo?.image} 
+                        onChange={handleLogoUpload} 
+                      />
+                      <p className="mt-4 text-textSecondary text-[10px] italic">Tavsiye Edilen: Şeffaf (Transparent PNG veya WebP) formatta ve beyaz renkte/konturda logolar tercih edilmelidir.</p>
+                   </div>
                 </div>
 
                 {isSuperAdmin && (
