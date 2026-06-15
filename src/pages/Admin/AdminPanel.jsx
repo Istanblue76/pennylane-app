@@ -416,6 +416,13 @@ const AdminPanel = ({ initialData }) => {
   const compressImage = (file, maxWidth = 1200, maxHeight = 1200, quality = 0.8) => {
     return new Promise((resolve) => {
       try {
+        const isPNG = file.type === 'image/png' || /\.png$/i.test(file.name);
+        const isWEBP = file.type === 'image/webp' || /\.webp$/i.test(file.name);
+        
+        // Preserve transparency format if PNG or WEBP, otherwise use JPEG
+        const outputType = isPNG ? 'image/png' : (isWEBP ? 'image/webp' : 'image/jpeg');
+        const outputExt = isPNG ? '.png' : (isWEBP ? '.webp' : '.jpg');
+
         const reader = new FileReader();
         reader.onerror = () => resolve(file);
         reader.readAsDataURL(file);
@@ -448,6 +455,15 @@ const AdminPanel = ({ initialData }) => {
                 canvas.width = width;
                 canvas.height = height;
                 const ctx = canvas.getContext('2d');
+                
+                // Clear canvas or set transparent background for PNG/WEBP
+                if (outputType === 'image/jpeg') {
+                  ctx.fillStyle = '#FFFFFF';
+                  ctx.fillRect(0, 0, width, height);
+                } else {
+                  ctx.clearRect(0, 0, width, height);
+                }
+                
                 ctx.drawImage(img, 0, 0, width, height);
 
                 canvas.toBlob(
@@ -457,8 +473,8 @@ const AdminPanel = ({ initialData }) => {
                         resolve(file);
                         return;
                       }
-                      const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
-                        type: 'image/jpeg',
+                      const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + outputExt, {
+                        type: outputType,
                         lastModified: Date.now(),
                       });
                       resolve(compressedFile);
@@ -467,7 +483,7 @@ const AdminPanel = ({ initialData }) => {
                       resolve(file);
                     }
                   },
-                  'image/jpeg',
+                  outputType,
                   quality
                 );
               } catch (e) {
