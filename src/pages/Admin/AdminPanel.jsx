@@ -856,26 +856,6 @@ const AdminPanel = ({ initialData }) => {
                    <p className="mt-6 text-textSecondary text-[10px] italic">Bu ayar QR Menü sayfasının arka plan ve yazı renklerini anında değiştirir. Pennylane atmosferini günün saatine göre optimize edin.</p>
                 </div>
 
-                {/* Logo Yönetimi */}
-                <div className="bg-secondary/5 p-8 rounded-3xl border border-secondary/10 space-y-6">
-                   <div className="flex items-center space-x-4 mb-2">
-                      <div className="w-10 h-10 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary border border-secondary/20">
-                         <ImageIcon className="w-5 h-5" />
-                      </div>
-                      <div>
-                         <h4 className="text-xl font-serif font-black text-white uppercase tracking-tight">LOGO VE MARKA GÖRSELİ</h4>
-                         <p className="text-textSecondary text-xs font-light italic">Mekanınızın tüm sayfalardaki (header ve footer) ana logosunu buradan değiştirin.</p>
-                      </div>
-                   </div>
-                   <div className="bg-dark/40 p-6 rounded-2xl border border-secondary/10">
-                      <ImageUploader 
-                        label="GÜNCEL MEKAN LOGOSU" 
-                        value={data.header?.logo?.image} 
-                        onChange={handleLogoUpload} 
-                      />
-                      <p className="mt-4 text-textSecondary text-[10px] italic">Tavsiye Edilen: Şeffaf (Transparent PNG veya WebP) formatta ve beyaz renkte/konturda logolar tercih edilmelidir.</p>
-                   </div>
-                </div>
 
                 {isSuperAdmin && (
                     <div className="bg-secondary/5 p-8 rounded-3xl border border-secondary/10 space-y-6 animate-fadeIn">
