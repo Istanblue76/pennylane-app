@@ -54,6 +54,7 @@ const AdminPanel = ({ initialData }) => {
   const [activeTab, setActiveTab] = useState(() => localStorage.getItem('adminTab') || 'hero');
   const [saveStatus, setSaveStatus] = useState('idle');
   const [selectedCategoryAdmin, setSelectedCategoryAdmin] = useState(() => localStorage.getItem('selectedCategoryAdmin') || '');
+  const [selectedSubcategoryFilter, setSelectedSubcategoryFilter] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [hasChanges, setHasChanges] = useState(false);
   const [managementMode, setManagementMode] = useState(false);
@@ -162,6 +163,7 @@ const AdminPanel = ({ initialData }) => {
     if (selectedCategoryAdmin) {
       localStorage.setItem('selectedCategoryAdmin', selectedCategoryAdmin);
     }
+    setSelectedSubcategoryFilter(null);
   }, [selectedCategoryAdmin]);
 
   useEffect(() => {
@@ -1671,76 +1673,99 @@ const AdminPanel = ({ initialData }) => {
                       <h3 className="text-xs font-bold text-textSecondary uppercase tracking-[0.2em]">Alt Kategoriler</h3>
                     </div>
                     <div className="flex flex-wrap gap-2 items-center">
-                      {((data?.menu?.categories?.find(c => c.id === selectedCategoryAdmin)?.subcategories) || []).map((sub, sIdx) => (
-                           <div key={sub.id} className="flex items-center rounded bg-dark/50 border border-secondary/20 px-3 py-1">
-                               {managementMode ? (
-                                   <>
-                                       <input
-                                         type="text"
-                                         className="bg-transparent border-none text-[9px] font-bold uppercase tracking-widest text-secondary outline-none w-20"
-                                         value={getVal(sub.title, lang)}
-                                         onChange={(e) => {
-                                           const newCats = [...(data?.menu?.categories || [])];
-                                           const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
-                                           newCats[cIdx].subcategories[sIdx].title = updateVal(newCats[cIdx].subcategories[sIdx].title, lang, e.target.value.toUpperCase());
-                                           setData({ ...data, menu: { ...data.menu, categories: newCats } });
-                                           setHasChanges(true);
-                                         }}
-                                       />
-                                       <button
-                                         onClick={(e) => {
-                                           e.stopPropagation();
-                                           const newCats = [...(data?.menu?.categories || [])];
-                                           const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
-                                           if (sIdx > 0) {
-                                             [newCats[cIdx].subcategories[sIdx - 1], newCats[cIdx].subcategories[sIdx]] = [newCats[cIdx].subcategories[sIdx], newCats[cIdx].subcategories[sIdx - 1]];
+                      {((data?.menu?.categories?.find(c => c.id === selectedCategoryAdmin)?.subcategories) || []).map((sub, sIdx) => {
+                           const isSubcategoryActive = selectedSubcategoryFilter === sub.id;
+                           return (
+                             <div 
+                               key={sub.id} 
+                               onClick={() => {
+                                 if (!managementMode) {
+                                   if (selectedSubcategoryFilter === sub.id) {
+                                     setSelectedSubcategoryFilter(null);
+                                   } else {
+                                     setSelectedSubcategoryFilter(sub.id);
+                                   }
+                                 }
+                               }}
+                               className={`flex items-center rounded px-3 py-1 border transition-all ${
+                                 !managementMode ? 'cursor-pointer select-none' : ''
+                               } ${
+                                 !managementMode && isSubcategoryActive
+                                   ? 'bg-secondary text-primary border-secondary shadow-lg shadow-secondary/10'
+                                   : 'bg-dark/50 border-secondary/20 text-secondary hover:border-secondary/50'
+                               }`}
+                             >
+                                 {managementMode ? (
+                                     <>
+                                         <input
+                                           type="text"
+                                           className="bg-transparent border-none text-[9px] font-bold uppercase tracking-widest text-secondary outline-none w-20"
+                                           value={getVal(sub.title, lang)}
+                                           onChange={(e) => {
+                                             const newCats = [...(data?.menu?.categories || [])];
+                                             const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                             newCats[cIdx].subcategories[sIdx].title = updateVal(newCats[cIdx].subcategories[sIdx].title, lang, e.target.value.toUpperCase());
                                              setData({ ...data, menu: { ...data.menu, categories: newCats } });
                                              setHasChanges(true);
-                                           }
-                                         }}
-                                         title="Sola Taşı"
-                                         className="px-1 text-secondary/50 hover:text-secondary transition-colors disabled:opacity-20 border-l border-secondary/20 pl-2"
-                                         disabled={sIdx === 0}
-                                       >
-                                         <ChevronLeft className="w-3 h-3" />
-                                       </button>
-                                       <button
-                                         onClick={(e) => {
-                                           e.stopPropagation();
-                                           const newCats = [...(data?.menu?.categories || [])];
-                                           const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
-                                           if (sIdx < newCats[cIdx].subcategories.length - 1) {
-                                             [newCats[cIdx].subcategories[sIdx + 1], newCats[cIdx].subcategories[sIdx]] = [newCats[cIdx].subcategories[sIdx], newCats[cIdx].subcategories[sIdx + 1]];
-                                             setData({ ...data, menu: { ...data.menu, categories: newCats } });
-                                             setHasChanges(true);
-                                           }
-                                         }}
-                                         title="Sağa Taşı"
-                                         className="px-1 text-secondary/50 hover:text-secondary transition-colors disabled:opacity-20"
-                                         disabled={sIdx === (data?.menu?.categories?.find(c => c.id === selectedCategoryAdmin)?.subcategories?.length || 1) - 1}
-                                       >
-                                         <ChevronRight className="w-3 h-3" />
-                                       </button>
-                                       <button
-                                         onClick={(e) => {
-                                            e.stopPropagation();
-                                            if (confirm('Bu alt kategoriyi silmek istediğinize emin misiniz? (Ürünler silinmeyecek)')) {
-                                               const newCats = [...(data?.menu?.categories || [])];
-                                               const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
-                                               newCats[cIdx].subcategories = newCats[cIdx].subcategories.filter((s, i) => i !== sIdx);
-                                               if (newCats[cIdx].subcategories.length === 0) delete newCats[cIdx].subcategories;
+                                           }}
+                                         />
+                                         <button
+                                           onClick={(e) => {
+                                             e.stopPropagation();
+                                             const newCats = [...(data?.menu?.categories || [])];
+                                             const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                             if (sIdx > 0) {
+                                               [newCats[cIdx].subcategories[sIdx - 1], newCats[cIdx].subcategories[sIdx]] = [newCats[cIdx].subcategories[sIdx], newCats[cIdx].subcategories[sIdx - 1]];
                                                setData({ ...data, menu: { ...data.menu, categories: newCats } });
                                                setHasChanges(true);
-                                            }
-                                         }}
-                                         className="pl-1 border-l border-secondary/20 text-secondary/50 hover:text-red-400"
-                                       ><X className="w-3 h-3" /></button>
-                                   </>
-                               ) : (
-                                   <span className="text-[9px] font-bold uppercase tracking-widest text-secondary">{getVal(sub.title, lang)}</span>
-                               )}
-                           </div>
-                      ))}
+                                             }
+                                           }}
+                                           title="Sola Taşı"
+                                           className="px-1 text-secondary/50 hover:text-secondary transition-colors disabled:opacity-20 border-l border-secondary/20 pl-2"
+                                           disabled={sIdx === 0}
+                                         >
+                                           <ChevronLeft className="w-3 h-3" />
+                                         </button>
+                                         <button
+                                           onClick={(e) => {
+                                             e.stopPropagation();
+                                             const newCats = [...(data?.menu?.categories || [])];
+                                             const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                             if (sIdx < newCats[cIdx].subcategories.length - 1) {
+                                               [newCats[cIdx].subcategories[sIdx + 1], newCats[cIdx].subcategories[sIdx]] = [newCats[cIdx].subcategories[sIdx], newCats[cIdx].subcategories[sIdx + 1]];
+                                               setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                               setHasChanges(true);
+                                             }
+                                           }}
+                                           title="Sağa Taşı"
+                                           className="px-1 text-secondary/50 hover:text-secondary transition-colors disabled:opacity-20"
+                                           disabled={sIdx === (data?.menu?.categories?.find(c => c.id === selectedCategoryAdmin)?.subcategories?.length || 1) - 1}
+                                         >
+                                           <ChevronRight className="w-3 h-3" />
+                                         </button>
+                                         <button
+                                           onClick={(e) => {
+                                              e.stopPropagation();
+                                              if (confirm('Bu alt kategoriyi silmek istediğinize emin misiniz? (Ürünler silinmeyecek)')) {
+                                                 const newCats = [...(data?.menu?.categories || [])];
+                                                 const cIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                                 newCats[cIdx].subcategories = newCats[cIdx].subcategories.filter((s, i) => i !== sIdx);
+                                                 if (newCats[cIdx].subcategories.length === 0) delete newCats[cIdx].subcategories;
+                                                 setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                                 setHasChanges(true);
+                                              }
+                                           }}
+                                           className="pl-1 border-l border-secondary/20 text-secondary/50 hover:text-red-400"
+                                         ><X className="w-3 h-3" /></button>
+                                     </>
+                                 ) : (
+                                     <span className={`text-[9px] font-bold uppercase tracking-widest transition-colors ${
+                                       isSubcategoryActive ? 'text-primary' : 'text-secondary'
+                                     }`}>{getVal(sub.title, lang)}</span>
+                                 )}
+                             </div>
+                           );
+                      })}
                       {managementMode && (
                            <button onClick={() => {
                                const newCats = [...(data?.menu?.categories || [])];
@@ -1762,6 +1787,7 @@ const AdminPanel = ({ initialData }) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {(data?.menu?.categories?.find(c => c.id === selectedCategoryAdmin)?.items || [])
                       .map((item, originalIdx) => ({ item, originalIdx }))
+                      .filter(({item}) => !selectedSubcategoryFilter || item.subcategory === selectedSubcategoryFilter)
                       .filter(({item}) => !searchQuery || (item.name?.tr || '').toLowerCase().includes(searchQuery.toLowerCase()) || (item.name?.en || '').toLowerCase().includes(searchQuery.toLowerCase()))
                       .map(({item, originalIdx: idx}) => {
                       if (!item) return null;
