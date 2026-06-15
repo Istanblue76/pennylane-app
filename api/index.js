@@ -20,8 +20,9 @@ app.use(bodyParser.json({ limit: '50mb' }));
 const DATA_PATH = path.join(process.cwd(), 'src/utils/mockData.json');
 
 // Supabase
-const supabase = (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) 
-  ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY) 
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+const supabase = (process.env.SUPABASE_URL && supabaseKey) 
+  ? createClient(process.env.SUPABASE_URL, supabaseKey) 
   : null;
 
 async function readCMSData() {
@@ -244,6 +245,25 @@ app.post('/api/cms/update-prices', async (req, res) => {
   }
 });
 
+// Temporary migration endpoint to sync local mockData paths to live Supabase
+app.get('/api/admin/migrate-db', async (req, res) => {
+  if (!supabase) {
+    return res.status(400).json({ status: 'error', message: 'Supabase client is not initialized.' });
+  }
+  try {
+    const localData = JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
+    const { data: dbData, error } = await supabase
+      .from('pennylane_cms')
+      .upsert({ id: 'main', content: localData })
+      .select();
+
+    if (error) throw error;
+    res.json({ status: 'success', message: 'Database successfully migrated to new folder paths!', dbData });
+  } catch (err) {
+    console.error('Migration endpoint error:', err);
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+});
 
 // Login
 app.post('/api/login', (req, res) => {
@@ -282,11 +302,23 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     return res.status(400).json({ status: 'error', message: 'Dosya yüklenemedi' });
   }
 
+  // Get category/section folder from body (clean slug format)
+  let categoryFolder = req.body.category ? req.body.category.toLowerCase().replace(/[^a-z0-9-]+/g, '-') : '';
+
+  // If a category/section is sent, and it is NOT a general section, prefix it with 'menu/' to isolate menu assets
+  if (categoryFolder) {
+    const generalSections = ['hero', 'about', 'gallery', 'events', 'team', 'seo', 'menu_showcase'];
+    if (!generalSections.includes(categoryFolder)) {
+      categoryFolder = `menu/${categoryFolder}`;
+    }
+  }
+
   if (useCloudinary) {
     try {
+      const folderName = categoryFolder ? `pennylane/${categoryFolder}` : 'pennylane';
       const result = await new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
-          { folder: 'pennylane', resource_type: 'auto', use_filename: true, unique_filename: true },
+          { folder: folderName, resource_type: 'auto', use_filename: true, unique_filename: true },
           (error, result) => (error ? reject(error) : resolve(result))
         );
         stream.end(req.file.buffer);
@@ -298,7 +330,8 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     }
   } else if (supabase) {
     try {
-      const fileName = Date.now() + '-' + req.file.originalname.replace(/\s+/g, '-');
+      const categoryPath = categoryFolder ? `${categoryFolder}/` : '';
+      const fileName = categoryPath + Date.now() + '-' + req.file.originalname.replace(/\s+/g, '-');
       
       // Ensure bucket exists (ignores error if already exists)
       await supabase.storage.createBucket('pennylane', { public: true }).catch(() => {});
@@ -322,12 +355,23 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 
   // Local fallback (will fail on Vercel but works locally)
   try {
-    const uploadDir = path.join(process.cwd(), 'public/assets/img');
+    const uploadDir = categoryFolder 
+      ? path.join(process.cwd(), 'public/assets/img', categoryFolder)
+      : path.join(process.cwd(), 'public/assets/img');
+      
     if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-    const localPath = path.join(uploadDir, Date.now() + '-' + req.file.originalname.replace(/\s+/g, '-'));
+    
+    const fileName = Date.now() + '-' + req.file.originalname.replace(/\s+/g, '-');
+    const localPath = path.join(uploadDir, fileName);
     fs.writeFileSync(localPath, req.file.buffer);
-    res.json({ status: 'success', url: `/assets/img/${path.basename(localPath)}` });
+    
+    const publicUrl = categoryFolder
+      ? `/assets/img/${categoryFolder}/${fileName}`
+      : `/assets/img/${fileName}`;
+      
+    res.json({ status: 'success', url: publicUrl });
   } catch (err) {
+    console.error('Local fallback write error:', err);
     res.status(500).json({ status: 'error', message: 'Sunucuya dosya yazılamadı (Salt-okunur sistem). Lütfen Supabase/Cloudinary kullanın.' });
   }
 });

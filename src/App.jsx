@@ -246,10 +246,16 @@ export default function App() {
   const { cmsData, loading, error } = useFetchCMS();
   const [activePolicy, setActivePolicy] = React.useState(null);
   const [progress, setProgress] = React.useState(0);
-  const [showLoader, setShowLoader] = React.useState(true);
+  
+  const isMenuPath = window.location.pathname.startsWith('/menu');
+  const [showLoader, setShowLoader] = React.useState(!isMenuPath);
 
   // 1. Progress animation (runs once on mount, takes exactly 2.5 seconds to go 0 -> 100)
   React.useEffect(() => {
+    if (isMenuPath) {
+      setProgress(100);
+      return;
+    }
     let start = null;
     const duration = 2500; // 2.5 seconds minimum load time for smooth vinyl feel
     let animationFrameId;

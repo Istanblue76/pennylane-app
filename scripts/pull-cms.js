@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -6,9 +7,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Production Supabase Credentials (vfqwjxwmguojbavcgaqx)
-const supabaseUrl = "https://vfqwjxwmguojbavcgaqx.supabase.co";
-const supabaseKey = "sb_publishable_4bmIXcMuXcG5HEZsVS2FFw_b4TGGYde";
+// Load env variables
+dotenv.config({ path: path.join(__dirname, '../.env.production') });
+dotenv.config({ path: path.join(__dirname, '../.env.local') });
+dotenv.config({ path: path.join(__dirname, '../.env') });
+
+const supabaseUrl = process.env.SUPABASE_URL || "https://vfqwjxwmguojbavcgaqx.supabase.co";
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "sb_publishable_4bmIXcMuXcG5HEZsVS2FFw_b4TGGYde";
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 const DATA_PATH = path.join(__dirname, '../src/utils/mockData.json');

@@ -6,25 +6,132 @@ import * as XLSX from 'xlsx';
 import { 
   Save, LogOut, Layout, Image as ImageIcon, Menu as MenuIcon, Info, 
   Settings, Users, Calendar, Mail, CheckCircle, Smartphone, Monitor, Upload, Download, X,
-  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight, Edit2, Eye, Printer, Shield, Search, Star
+  List, LayoutGrid, Sun, Moon, ChevronLeft, ChevronRight, Edit2, Eye, Printer, Shield, Search, Star, GripVertical
 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { getVal, updateVal } from '../../utils/i18n';
 import Button from '../../components/Common/Button';
+
+const OrderInput = ({ value, onChange }) => {
+  const [localVal, setLocalVal] = useState(value);
+  
+  useEffect(() => {
+    setLocalVal(value);
+  }, [value]);
+
+  const handleBlurOrEnter = () => {
+    const num = parseInt(localVal, 10);
+    if (!isNaN(num) && num !== value) {
+      onChange(num);
+    } else {
+      setLocalVal(value);
+    }
+  };
+
+  return (
+    <input
+      type="text"
+      value={localVal}
+      onChange={(e) => {
+        const val = e.target.value.replace(/\D/g, '');
+        setLocalVal(val);
+      }}
+      onBlur={handleBlurOrEnter}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          e.currentTarget.blur();
+        }
+      }}
+      className="w-8 h-6 bg-dark/60 border border-secondary/20 rounded text-center text-xs font-bold text-secondary focus:text-white focus:border-secondary outline-none transition-colors"
+      title="Sıra Numarası"
+    />
+  );
+};
 
 const AdminPanel = ({ initialData }) => {
   const [data, setData] = useState(initialData);
   const { lang, setLang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState(() => localStorage.getItem('adminTab') || 'hero');
   const [saveStatus, setSaveStatus] = useState('idle');
-  const [selectedCategoryAdmin, setSelectedCategoryAdmin] = useState('');
+  const [selectedCategoryAdmin, setSelectedCategoryAdmin] = useState(() => localStorage.getItem('selectedCategoryAdmin') || '');
   const [searchQuery, setSearchQuery] = useState('');
   const [hasChanges, setHasChanges] = useState(false);
   const [managementMode, setManagementMode] = useState(false);
   const [selectedPolicyType, setSelectedPolicyType] = useState('privacy');
+  const [draggedItemIdx, setDraggedItemIdx] = useState(null);
+  const [draggedOverItemIdx, setDraggedOverItemIdx] = useState(null);
   const navigate = useNavigate();
   const adminToken = localStorage.getItem('adminToken');
   const isSuperAdmin = adminToken === 'super-token';
+
+  const handleDragStart = (e, idx) => {
+    const tagName = e.target.tagName.toLowerCase();
+    if (
+      tagName === 'input' || 
+      tagName === 'select' || 
+      tagName === 'textarea' || 
+      tagName === 'button' || 
+      e.target.closest('button') || 
+      e.target.closest('input') || 
+      e.target.closest('select') || 
+      e.target.closest('textarea')
+    ) {
+      e.preventDefault();
+      return;
+    }
+    setDraggedItemIdx(idx);
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragOver = (e, idx) => {
+    e.preventDefault();
+    if (draggedItemIdx !== idx) {
+      setDraggedOverItemIdx(idx);
+    }
+  };
+
+  const handleDrop = (e, idx) => {
+    e.preventDefault();
+    if (draggedItemIdx === null || draggedItemIdx === idx) return;
+
+    const newCats = [...(data?.menu?.categories || [])];
+    const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+    if (catIdx !== -1) {
+      const items = [...newCats[catIdx].items];
+      const draggedItem = items[draggedItemIdx];
+      items.splice(draggedItemIdx, 1);
+      items.splice(idx, 0, draggedItem);
+      newCats[catIdx].items = items;
+      setData({ ...data, menu: { ...data.menu, categories: newCats } });
+      setHasChanges(true);
+    }
+    setDraggedItemIdx(null);
+    setDraggedOverItemIdx(null);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedItemIdx(null);
+    setDraggedOverItemIdx(null);
+  };
+
+  const handleOrderChange = (currentIdx, targetOrder) => {
+    const items = data?.menu?.categories?.find(c => c.id === selectedCategoryAdmin)?.items || [];
+    if (isNaN(targetOrder)) return;
+    const targetIdx = Math.max(0, Math.min(items.length - 1, targetOrder - 1));
+    if (currentIdx === targetIdx) return;
+
+    const newCats = [...(data?.menu?.categories || [])];
+    const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+    if (catIdx !== -1) {
+      const catItems = [...newCats[catIdx].items];
+      const [movedItem] = catItems.splice(currentIdx, 1);
+      catItems.splice(targetIdx, 0, movedItem);
+      newCats[catIdx].items = catItems;
+      setData({ ...data, menu: { ...data.menu, categories: newCats } });
+      setHasChanges(true);
+    }
+  };
+
 
   const navItems = [
     { id: 'hero', label: 'HERO', icon: Layout },
@@ -43,10 +150,19 @@ const AdminPanel = ({ initialData }) => {
   ];
 
   useEffect(() => {
-    if (data?.menu?.categories?.length > 0 && !selectedCategoryAdmin) {
-      setSelectedCategoryAdmin(data.menu.categories[0].id);
+    if (data?.menu?.categories?.length > 0) {
+      const exists = data.menu.categories.some(c => c.id === selectedCategoryAdmin);
+      if (!exists) {
+        setSelectedCategoryAdmin(data.menu.categories[0].id);
+      }
     }
   }, [data, selectedCategoryAdmin]);
+
+  useEffect(() => {
+    if (selectedCategoryAdmin) {
+      localStorage.setItem('selectedCategoryAdmin', selectedCategoryAdmin);
+    }
+  }, [selectedCategoryAdmin]);
 
   useEffect(() => {
     localStorage.setItem('adminTab', activeTab);
@@ -166,6 +282,7 @@ const AdminPanel = ({ initialData }) => {
               id: existingCat?.id || toSlug(catName) || `cat-${Math.random().toString(36).substr(2,6)}`,
               title: { tr: catName, en: existingCat?.title?.en || String(row.Kategori_EN || '') },
               subcategories: existingCat?.subcategories || [],
+              image_url: existingCat?.image_url || '',
               items: []
             };
           }
@@ -391,7 +508,8 @@ const AdminPanel = ({ initialData }) => {
         const credsResp = await axios.get('/api/supabase-credentials');
         if (credsResp.data && credsResp.data.url && credsResp.data.anonKey) {
           const { url: supabaseUrl, anonKey: supabaseAnonKey } = credsResp.data;
-          const fileName = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+          const categoryPath = section ? `${section.toLowerCase().replace(/[^a-z0-9-]+/g, '-')}/` : '';
+          const fileName = `${categoryPath}${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
           const uploadUrl = `${supabaseUrl}/storage/v1/object/pennylane/${fileName}`;
 
           const uploadResp = await fetch(uploadUrl, {
@@ -434,6 +552,9 @@ const AdminPanel = ({ initialData }) => {
     // Default serverless function upload path for standard sized files (< 4MB)
     const formData = new FormData();
     formData.append('image', file);
+    if (section) {
+      formData.append('category', section);
+    }
 
     try {
       const resp = await axios.post('/api/upload', formData, {
@@ -596,13 +717,16 @@ const AdminPanel = ({ initialData }) => {
                       </div>
                    </div>
 
-                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {[
-                        { id: 'all', label: 'HEPSİ (HİBRİT)', desc: 'Müşteri büyük veya küçük görünüm arasında seçim yapabilir.', icon: Layout },
-                        { id: 'small', label: 'BÜYÜK (KATEGORİ)', desc: 'Önce dev kategori kartları gözükür, içine girince ürünler açılır.', icon: List },
-                        { id: 'large', label: 'KÜÇÜK (TAM LİSTE)', desc: 'Tüm ürünler narin bir liste/grid akışında sergilenir.', icon: LayoutGrid }
+                        { id: 'categories', label: 'B\u00dcY\u00dcK (KATEGOR\u0130)', desc: 'Men\u00fc a\u00e7\u0131ld\u0131\u011f\u0131nda varsay\u0131lan olarak dev kategori kartlar\u0131 g\u00f6sterilir.', icon: List },
+                        { id: 'grid', label: 'K\u00dc\u00c7\u00dcK (TAM L\u0130STE)', desc: 'Men\u00fc a\u00e7\u0131ld\u0131\u011f\u0131nda varsay\u0131lan olarak t\u00fcm \u00fcr\u00fcnler narin bir liste ak\u0131\u015f\u0131nda sergilenir.', icon: LayoutGrid }
                       ].map((mode) => {
-                        const isActive = (data.settings?.menu_display_mode || 'all') === mode.id;
+                        const rawMode = data.settings?.menu_display_mode || 'categories';
+                        const currentMode = (rawMode === 'small' || rawMode === 'categories' || rawMode === 'all') 
+                          ? 'categories' 
+                          : 'grid';
+                        const isActive = currentMode === mode.id;
                         return (
                           <button 
                             key={mode.id}
@@ -1325,6 +1449,7 @@ const AdminPanel = ({ initialData }) => {
                                 }
                                 const formData = new FormData();
                                 formData.append('image', file);
+                                formData.append('category', selectedCategoryAdmin);
                                 try {
                                   const resp = await axios.post('/api/upload', formData, {
                                     headers: { 'Content-Type': 'multipart/form-data' }
@@ -1564,9 +1689,38 @@ const AdminPanel = ({ initialData }) => {
                       .map(({item, originalIdx: idx}) => {
                       if (!item) return null;
                       return (
-                        <div key={idx} className={`bg-dark/40 p-4 rounded-xl border space-y-4 group relative transition-opacity ${item.passive ? 'opacity-50 border-red-500/20' : 'border-secondary/10'}`}>
-                          <div className="absolute top-2 right-2 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                        <div 
+                          key={idx} 
+                          draggable={true}
+                          onDragStart={(e) => handleDragStart(e, idx)}
+                          onDragOver={(e) => handleDragOver(e, idx)}
+                          onDragEnd={handleDragEnd}
+                          onDrop={(e) => handleDrop(e, idx)}
+                          className={`bg-dark/40 p-4 rounded-xl border space-y-4 group relative transition-all duration-200 ${
+                            draggedItemIdx === idx ? 'opacity-30' : ''
+                          } ${
+                            draggedOverItemIdx === idx 
+                              ? 'border-yellow-500/50 bg-secondary/10 scale-[1.01]' 
+                              : item.passive 
+                                ? 'opacity-50 border-red-500/20' 
+                                : 'border-secondary/10'
+                          }`}
+                        >
+                          {/* Sıralama ve Grip Barı */}
+                          <div className="flex items-center space-x-2 border-b border-secondary/5 pb-2">
+                            <div className="cursor-grab active:cursor-grabbing text-secondary/40 hover:text-white transition-colors" title="Sürükle ve Bırak ile Sırala">
+                              <GripVertical className="w-4 h-4" />
+                            </div>
+                            <span className="text-[10px] text-secondary/50 uppercase tracking-widest font-black">SIRA:</span>
+                            <OrderInput 
+                              value={idx + 1} 
+                              onChange={(newOrder) => handleOrderChange(idx, newOrder)} 
+                            />
+                          </div>
+
+                          <div className="absolute top-2 right-2 flex items-center space-x-1.5 opacity-0 group-hover:opacity-100 transition-opacity z-10 bg-dark/80 backdrop-blur px-2 py-1 rounded-lg border border-secondary/15">
                             <button 
+
                               onClick={() => {
                                 const newCats = [...(data?.menu?.categories || [])];
                                 const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
@@ -1576,7 +1730,7 @@ const AdminPanel = ({ initialData }) => {
                                   setHasChanges(true);
                                 }
                               }}
-                              className={`text-[10px] font-bold px-2 py-1 rounded border ${item.passive ? 'bg-red-500/20 text-red-500 border-red-500/30' : 'bg-green-500/20 text-green-500 border-green-500/30'}`}
+                              className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded border transition-all ${item.passive ? 'bg-red-500/20 text-red-500 border-red-500/30' : 'bg-green-500/20 text-green-500 border-green-500/30'}`}
                             >
                               {item.passive ? 'PASİF' : 'AKTİF'}
                             </button>
@@ -1616,6 +1770,7 @@ const AdminPanel = ({ initialData }) => {
 
                                      const formData = new FormData();
                                      formData.append('image', file);
+                                     formData.append('category', selectedCategoryAdmin);
                                      try {
                                        const resp = await axios.post('/api/upload', formData, {
                                          headers: { 'Content-Type': 'multipart/form-data' }
@@ -2359,7 +2514,7 @@ const AdminPanel = ({ initialData }) => {
                   <div>
                     <h3 className="text-white font-serif font-bold text-xl uppercase tracking-tight">Baskı Menüsü</h3>
                     <p className="text-textSecondary text-sm font-light mt-1">
-                      3 adımda menü fiyatlarını düzenleyin, önizleyin ve PDF olarak indirin.
+                      Öne çıkan ürünlerinizi seçerek matbaaya veya çıktıya hazır şık bir basılı menü oluşturun.
                     </p>
                   </div>
                 </div>
@@ -2367,66 +2522,56 @@ const AdminPanel = ({ initialData }) => {
                 {/* 3-Step Workflow Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-                  {/* Step 1 - Edit */}
+                  {/* Step 1 - Selection */}
                   <div className="bg-dark/50 border border-secondary/15 rounded-2xl p-6 flex flex-col gap-4 hover:border-secondary/40 transition-all group">
                     <div className="flex items-center gap-3">
                       <span className="w-9 h-9 rounded-full bg-secondary/20 border border-secondary/30 text-secondary text-sm font-black flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:text-primary transition-all">1</span>
-                      <span className="text-white font-bold text-sm uppercase tracking-widest">Düzenle</span>
+                      <span className="text-white font-bold text-sm uppercase tracking-widest">Kürasyon & Seçim</span>
                     </div>
                     <p className="text-textSecondary text-xs leading-relaxed flex-1">
-                      Fiyatları, Happy Hour saatlerini ve görselleri değiştirin. Panelde düzenleme yapın ve <strong className="text-secondary">Kaydet</strong> butonuna basın.
+                      Tüm menü öğelerinizi listeleyin, baskı menüsünde yer almasını istediğiniz popüler veya yeni ürünleri işaretleyin.
                     </p>
-                    <a
-                      href="/menu-pdf/admin.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2 bg-secondary/10 border border-secondary/30 text-secondary px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
-                    >
-                      <Settings className="w-4 h-4" />
-                      Düzenleme Panelini Aç
-                    </a>
                   </div>
 
-                  {/* Step 2 - Preview */}
+                  {/* Step 2 - Design */}
                   <div className="bg-dark/50 border border-secondary/15 rounded-2xl p-6 flex flex-col gap-4 hover:border-secondary/40 transition-all group">
                     <div className="flex items-center gap-3">
                       <span className="w-9 h-9 rounded-full bg-secondary/20 border border-secondary/30 text-secondary text-sm font-black flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:text-primary transition-all">2</span>
-                      <span className="text-white font-bold text-sm uppercase tracking-widest">Önizle</span>
+                      <span className="text-white font-bold text-sm uppercase tracking-widest">Tema & Düzen</span>
                     </div>
                     <p className="text-textSecondary text-xs leading-relaxed flex-1">
-                      Değişikliklerinizi kaydettikten sonra menünün A4 baskı görünümünü kontrol edin. Her sayfa doğru mu?
+                      Krem kağıt dokulu klasik tema veya modern koyu tema seçenekleri arasından A4/A3 düzeninde dilediğinizi seçin.
                     </p>
-                    <a
-                      href="/menu-pdf/index.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2 bg-secondary/10 border border-secondary/30 text-secondary px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-secondary/20 transition-all"
-                    >
-                      <Monitor className="w-4 h-4" />
-                      Menüyü Önizle
-                    </a>
                   </div>
 
-                  {/* Step 3 - PDF */}
+                  {/* Step 3 - Print */}
                   <div className="bg-secondary/10 border-2 border-secondary/40 rounded-2xl p-6 flex flex-col gap-4 hover:border-secondary/70 transition-all group">
                     <div className="flex items-center gap-3">
                       <span className="w-9 h-9 rounded-full bg-secondary text-primary text-sm font-black flex items-center justify-center flex-shrink-0">3</span>
-                      <span className="text-white font-bold text-sm uppercase tracking-widest">PDF İndir</span>
+                      <span className="text-white font-bold text-sm uppercase tracking-widest">Hazırla & Yazdır</span>
                     </div>
                     <p className="text-textSecondary text-xs leading-relaxed flex-1">
-                      Menü açıkken <kbd className="bg-dark/60 border border-secondary/20 rounded px-1.5 py-0.5 text-secondary font-mono text-[10px]">Ctrl+P</kbd> basın → <strong className="text-white">PDF olarak kaydet</strong> seçin → İndir.
+                      Tek tıkla tarayıcı yazdırma panelini açın, kenar boşluklarını yok sayarak PDF olarak kaydedin veya doğrudan yazdırın.
                     </p>
-                    <a
-                      href="/menu-pdf/index.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2 bg-secondary text-primary px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:opacity-90 transition-all shadow-lg shadow-secondary/20"
-                    >
-                      <Download className="w-4 h-4" />
-                      Aç ve PDF Al
-                    </a>
                   </div>
 
+                </div>
+
+                {/* Launch Button */}
+                <div className="bg-primary/30 border border-secondary/20 rounded-3xl p-8 text-center max-w-2xl mx-auto space-y-6">
+                  <h4 className="text-white font-serif font-bold text-xl uppercase tracking-tight">Yeni İnteraktif Baskı Menü Aracını Açın</h4>
+                  <p className="text-textSecondary text-sm font-light max-w-md mx-auto leading-relaxed">
+                    Tüm ürünleriniz, kategorileriniz ve güncel fiyatlarınızla senkronize çalışan yeni nesil basılı menü hazırlama aracını başlatın.
+                  </p>
+                  <a
+                    href="/print-menu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-secondary text-primary px-8 py-4 rounded-xl text-sm font-black uppercase tracking-widest hover:bg-white hover:shadow-[0_0_30px_rgba(244,228,193,0.3)] transition-all transform hover:-translate-y-0.5"
+                  >
+                    <Monitor className="w-5 h-5" />
+                    Baskı Menü Aracını Başlat
+                  </a>
                 </div>
 
                 {/* Info Cards */}
@@ -2434,18 +2579,18 @@ const AdminPanel = ({ initialData }) => {
                   <div className="bg-dark/40 border border-secondary/10 rounded-xl p-5 flex items-start gap-3">
                     <Info className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
                     <div className="text-xs text-textSecondary">
-                      <p className="text-white font-bold text-xs uppercase tracking-widest mb-2">PDF Baskı Ayarları</p>
-                      <p className="mb-1">Chrome/Edge baskı penceresinde şunlara dikkat edin:</p>
-                      <p>• <strong className="text-secondary">Kenar boşlukları:</strong> Yok</p>
-                      <p>• <strong className="text-secondary">Ölçeklendirme:</strong> %100</p>
-                      <p>• <strong className="text-secondary">Arka plan grafikleri:</strong> Açık ✓</p>
+                      <p className="text-white font-bold text-xs uppercase tracking-widest mb-2">Baskı & Çıktı Tavsiyeleri</p>
+                      <p className="mb-1">Yazdırma panelini açtıktan sonra en yüksek kalite için şu ayarları yapın:</p>
+                      <p>• <strong className="text-secondary">Kenar Boşlukları (Margins):</strong> Yok (None) veya En Az (Minimum)</p>
+                      <p>• <strong className="text-secondary">Arka Plan Grafikleri (Background Graphics):</strong> Açık/İşaretli (Krem/Siyah arka plan dokusu için)</p>
+                      <p>• <strong className="text-secondary">Ölçek (Scale):</strong> %100 veya Sayfaya Sığdır</p>
                     </div>
                   </div>
                   <div className="bg-dark/40 border border-secondary/10 rounded-xl p-5 flex items-start gap-3">
                     <Info className="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
                     <div className="text-xs text-textSecondary">
-                      <p className="text-white font-bold text-xs uppercase tracking-widest mb-2">Önemli Not</p>
-                      <p>Düzenleme panelindeki değişiklikler <strong className="text-secondary">bu tarayıcıda</strong> saklanır. Başka bir cihaz veya tarayıcıda değişiklikler görünmez — her cihazda yeniden kaydetmeniz gerekir.</p>
+                      <p className="text-white font-bold text-xs uppercase tracking-widest mb-2">Canlı Veritabanı Entegrasyonu</p>
+                      <p>Bu araç tamamen Supabase veritabanına bağlıdır. Admin panelinde yaptığınız her fiyat veya açıklama güncellemesi **baskı menüsüne anında yansır.** Matbaa öncesi tek tek elle düzenleme yapmanıza gerek kalmaz.</p>
                     </div>
                   </div>
                 </div>

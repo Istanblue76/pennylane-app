@@ -790,7 +790,11 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   const [activePath, setActivePath] = useState(['all']);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [viewMode, setViewMode] = useState(settings?.menu_display_mode === 'all' ? 'categories' : (settings?.menu_display_mode || 'categories'));
+  const [viewMode, setViewMode] = useState(() => {
+    const mode = settings?.menu_display_mode;
+    if (mode === 'small' || mode === 'categories') return 'categories';
+    return 'grid'; // Default fallback
+  });
   const [drilledCategory, setDrilledCategory] = useState(null);
   
   // Basket State
@@ -827,8 +831,12 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   };
 
   useEffect(() => {
-    const mode = settings?.menu_display_mode || 'all';
-    setViewMode(mode === 'small' ? 'categories' : 'grid');
+    const mode = settings?.menu_display_mode;
+    if (mode === 'small' || mode === 'categories') {
+      setViewMode('categories');
+    } else if (mode === 'large' || mode === 'grid') {
+      setViewMode('grid');
+    }
   }, [settings]);
 
   useEffect(() => {
@@ -896,27 +904,25 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 opacity-30" style={{ color: isDark ? '#fff' : '#1c1410' }} />
             </div>
 
-            {(settings?.menu_display_mode === 'all' || !settings?.menu_display_mode) && (
-              <div className={`flex p-1 rounded-2xl border ${tk.pillBg}`}>
-                {[
-                  { key: 'grid',       label: t({ tr: 'Liste', en: 'List' }),      icon: LayoutGrid },
-                  { key: 'categories', label: t({ tr: 'Büyük', en: 'Large' }),     icon: List       },
-                ].map(({ key, label, icon: Icon }) => (
-                  <button
-                    key={key}
-                    onClick={() => { setViewMode(key); if (key === 'grid') setDrilledCategory(null); }}
-                    className={`flex items-center space-x-1.5 px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all`}
-                    style={viewMode === key
-                      ? { backgroundColor: tk.accent, color: '#fff' }
-                      : { color: isDark ? 'rgba(255,255,255,0.4)' : 'rgba(28,20,16,0.4)' }
-                    }
-                  >
-                    <Icon className="w-3 h-3" />
-                    <span>{label}</span>
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className={`flex p-1 rounded-2xl border ${tk.pillBg}`}>
+              {[
+                { key: 'grid',       label: t({ tr: 'Liste', en: 'List' }),      icon: LayoutGrid },
+                { key: 'categories', label: t({ tr: 'Büyük', en: 'Large' }),     icon: List       },
+              ].map(({ key, label, icon: Icon }) => (
+                <button
+                  key={key}
+                  onClick={() => { setViewMode(key); if (key === 'grid') setDrilledCategory(null); }}
+                  className={`flex items-center space-x-1.5 px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all`}
+                  style={viewMode === key
+                    ? { backgroundColor: tk.accent, color: '#fff' }
+                    : { color: isDark ? 'rgba(255,255,255,0.4)' : 'rgba(28,20,16,0.4)' }
+                  }
+                >
+                  <Icon className="w-3 h-3" />
+                  <span>{label}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           {isDrilled && (

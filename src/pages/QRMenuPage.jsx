@@ -42,7 +42,17 @@ const QRMenuPage = ({ cmsData }) => {
     try { localStorage.setItem('qr_theme', next); } catch {}
   };
 
-  if (!cmsData) return null;
+  if (!cmsData) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-dark" style={{ backgroundColor: '#0c0c0c' }}>
+        <div className="relative w-12 h-12 mb-4">
+          <div className="absolute inset-0 rounded-full border-2 border-[#c9a96e]/10 animate-pulse" />
+          <div className="w-12 h-12 rounded-full border-2 border-transparent border-t-[#c9a96e] animate-spin" />
+        </div>
+        <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-[#c9a96e]/60">SİSTEM YÜKLENİYOR...</span>
+      </div>
+    );
+  }
 
   const isDark   = theme === 'dark';
   const accent   = isDark ? '#c9a96e' : '#8b5e3c';
