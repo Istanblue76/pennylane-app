@@ -45,14 +45,8 @@ if (useCloudinary) {
   console.log('ℹ️  Cloudinary env değişkenleri bulunamadı — yerel depolama kullanılacak.');
 }
 
-// ─── Multer: memory for Cloudinary, disk for local ───────────────────────────
-const storage = useCloudinary
-  ? multer.memoryStorage()
-  : multer.diskStorage({
-      destination: (req, file, cb) => cb(null, uploadDir),
-      filename:    (req, file, cb) => cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '-')),
-    });
-const upload = multer({ storage });
+// ─── Multer: memory storage ──────────────────────────────────────────────────
+const upload = multer({ storage: multer.memoryStorage() });
 
 // ─── MongoDB Setup ────────────────────────────────────────────────────────────
 let cmsCollection = null;
@@ -249,12 +243,24 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     return res.status(400).json({ status: 'error', message: 'Dosya yüklenemedi' });
   }
 
+  // Get category/section folder from body (clean slug format)
+  let categoryFolder = req.body.category ? req.body.category.toLowerCase().replace(/[^a-z0-9-]+/g, '-') : '';
+
+  // If a category/section is sent, and it is NOT a general section, prefix it with 'menu/' to isolate menu assets
+  if (categoryFolder) {
+    const generalSections = ['hero', 'about', 'gallery', 'events', 'team', 'seo', 'menu_showcase'];
+    if (!generalSections.includes(categoryFolder)) {
+      categoryFolder = `menu/${categoryFolder}`;
+    }
+  }
+
   if (useCloudinary) {
     try {
+      const folderName = categoryFolder ? `pennylane/${categoryFolder}` : 'pennylane';
       // Upload buffer to Cloudinary
       const result = await new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
-          { folder: 'pennylane', resource_type: 'auto', use_filename: true, unique_filename: true },
+          { folder: folderName, resource_type: 'auto', use_filename: true, unique_filename: true },
           (error, result) => (error ? reject(error) : resolve(result))
         );
         stream.end(req.file.buffer);
@@ -267,8 +273,28 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
   }
 
   // Local fallback
-  const imageUrl = `/assets/img/${req.file.filename}`;
-  res.json({ status: 'success', url: imageUrl });
+  try {
+    const targetDir = categoryFolder
+      ? path.join(uploadDir, categoryFolder)
+      : uploadDir;
+
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+    }
+
+    const fileName = Date.now() + '-' + req.file.originalname.replace(/\s+/g, '-');
+    const localPath = path.join(targetDir, fileName);
+    fs.writeFileSync(localPath, req.file.buffer);
+
+    const publicUrl = categoryFolder
+      ? `/assets/img/${categoryFolder}/${fileName}`
+      : `/assets/img/${fileName}`;
+
+    res.json({ status: 'success', url: publicUrl });
+  } catch (err) {
+    console.error('Local upload error:', err);
+    res.status(500).json({ status: 'error', message: 'Sunucuya dosya yazılamadı.' });
+  }
 });
 
 // ─── Production: Serve built React app ───────────────────────────────────────

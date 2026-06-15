@@ -98,7 +98,7 @@
             "price": "600",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
             "description": {
               "tr": "",
               "en": ""
@@ -113,7 +113,7 @@
             "price": "690",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
             "description": {
               "tr": "",
               "en": ""
@@ -128,7 +128,7 @@
             "price": "710",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
             "description": {
               "tr": "",
               "en": ""
@@ -143,7 +143,7 @@
             "price": "670",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
             "description": {
               "tr": "",
               "en": ""
@@ -158,7 +158,7 @@
             "price": "400",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
             "description": {
               "tr": "",
               "en": ""
@@ -173,7 +173,7 @@
             "price": "500",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
             "description": {
               "tr": "",
               "en": ""
@@ -318,7 +318,7 @@
             "price": "300",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1781525441914-25112021024620000.jpg",
+            "image_url": "/assets/img/menu/starters-sauces/1781525441914-25112021024620000.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -348,7 +348,7 @@
             "price": "490",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1781525517309-25112021023930000.jpg",
+            "image_url": "/assets/img/menu/starters-sauces/1781525517309-25112021023930000.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -378,7 +378,7 @@
             "price": "450",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1781525531319-25112021023901000.jpg",
+            "image_url": "/assets/img/menu/starters-sauces/1781525531319-25112021023901000.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -438,7 +438,7 @@
             "price": "420",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1781525544079-13122021201059000.jpg",
+            "image_url": "/assets/img/menu/starters-sauces/1781525544079-13122021201059000.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -653,7 +653,7 @@
             "price": "700",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1781525601862-25112021030859000.jpg",
+            "image_url": "/assets/img/menu/salads/1781525601862-25112021030859000.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1136,7 +1136,7 @@
             "price": "400",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528123552-_CEF7791.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1152,7 +1152,7 @@
             "price": "400",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781527877200-_CEF7780.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1200,7 +1200,7 @@
             "price": "360",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/menu/beers/1780836428972-CARLSBERG-LUNA.jpg",
+            "image_url": "/assets/img/menu/beers/1781527751268-_CEF7777.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1216,7 +1216,7 @@
             "price": "300",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/menu/beers/1780836434893-Carlsberg-Beer.jpg",
+            "image_url": "/assets/img/menu/beers/1781527651007-_CEF7775.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1232,7 +1232,7 @@
             "price": "460",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528254977-_CEF7797.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1264,7 +1264,7 @@
             "price": "400",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781527933736-_CEF7782.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1296,7 +1296,7 @@
             "price": "350",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528165602-_CEF7793.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1312,7 +1312,7 @@
             "price": "350",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528182973-_CEF7794.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1328,7 +1328,7 @@
             "price": "350",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528148750-_CEF7792.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1376,7 +1376,7 @@
             "price": "400",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528096163-_CEF7790.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1392,7 +1392,7 @@
             "price": "310",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781527974140-_CEF7784.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1424,7 +1424,7 @@
             "price": "320",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528039975-_CEF7787.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1440,7 +1440,7 @@
             "price": "320",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781528214230-_CEF7795.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1456,7 +1456,7 @@
             "price": "290",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781527800255-_CEF7778.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -1754,7 +1754,7 @@
             "price": "150",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/1781524793810-mini-tuzlu.jpg",
+            "image_url": "/assets/img/menu/mini-tuzlu/1781524793810-mini-tuzlu.jpg",
             "description": {
               "tr": "",
               "en": ""
