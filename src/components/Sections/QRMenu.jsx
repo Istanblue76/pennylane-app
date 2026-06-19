@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Star, X, Info, LayoutGrid, List, ArrowLeft, ChevronRight, ZoomIn, ShoppingBasket, Plus, Minus, Trash2 } from 'lucide-react';
+import { Search, Star, X, Info, LayoutGrid, List, ArrowLeft, ChevronRight, ZoomIn, ShoppingBasket, Plus, Minus, Trash2, Check, Flame } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 /* ─────────────────────────────────────────
@@ -497,6 +497,18 @@ const ProductCard = ({ item, onClick, t, tk, onAddToCart }) => (
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-50 pointer-events-none" />
       
+      {/* New Product Badge */}
+      {item.isNew && (
+        <div 
+          className="absolute top-2 left-2 z-20 px-2 py-1 rounded-md shadow-lg backdrop-blur-md"
+          style={{ backgroundColor: tk.accent, color: '#fff' }}
+        >
+          <span className="text-[9px] font-black tracking-[0.2em] uppercase">
+            {t({ tr: 'YENİ', en: 'NEW' })}
+          </span>
+        </div>
+      )}
+      
       {/* Quick Add Button */}
       <button 
         onClick={(e) => { e.stopPropagation(); onAddToCart(item); }}
@@ -530,9 +542,39 @@ const ProductCard = ({ item, onClick, t, tk, onAddToCart }) => (
 /* ─────────────────────────────────────────
    PRODUCT MODAL
    ───────────────────────────────────────── */
-const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart, isMinimal = false }) => {
+export const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart, isMinimal = false, allProducts = [] }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [modalView, setModalView] = useState('main'); // 'main' | 'extras' | 'pairs_well'
+  const [addedPairs, setAddedPairs] = useState({}); // To track newly added pairs well items
+  const { lang } = useLanguage();
   const tk = isDark ? darkTheme : lightTheme;
+
+  // Dynamic extras state
+  const extrasOptions = product.extras || [];
+  const hasExtras = extrasOptions.length > 0;
+  const [selectedExtras, setSelectedExtras] = useState(() => {
+    const initial = {};
+    extrasOptions.forEach(opt => {
+      initial[opt.id] = false;
+    });
+    return initial;
+  });
+
+  const handleToggleExtra = (id) => {
+    setSelectedExtras(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const activeExtrasCount = Object.values(selectedExtras).filter(Boolean).length;
+
+  const basePrice = parseFloat(product.price?.toString().replace(/[^\d.]/g, '') || 0);
+  const extraPrice = extrasOptions.reduce((sum, opt) => sum + (selectedExtras[opt.id] ? opt.price : 0), 0);
+  const currentPrice = basePrice + extraPrice;
+
+  // Dynamic pairs well products
+  const pairsWellIds = product.pairs_well || [];
+  const pairsWellProducts = useMemo(() => {
+    return allProducts.filter(p => pairsWellIds.includes(p.id));
+  }, [allProducts, pairsWellIds]);
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
@@ -569,86 +611,333 @@ const ProductModal = ({ product, onClose, t, allergens, isDark, onAddToCart, isM
           <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
             <ZoomIn className="w-12 h-12 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]" />
           </div>
+          
+          {/* New Product Badge for Modal */}
+          {product.isNew && (
+            <div 
+              className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-lg shadow-lg backdrop-blur-md"
+              style={{ backgroundColor: tk.accent, color: '#fff' }}
+            >
+              <span className="text-[11px] font-black tracking-[0.2em] uppercase">
+                {t({ tr: 'YENİ', en: 'NEW' })}
+              </span>
+            </div>
+          )}
         </div>
 
         <div
           className={`w-full md:w-[55%] p-8 md:p-12 flex flex-col overflow-y-auto no-scrollbar ${isDark ? 'bg-[#0e0e0e]' : 'bg-white'}`}
         >
-          <div className="flex-grow">
-            <div className="flex items-center space-x-3 mb-5">
-              <div className="h-[1.5px] w-8 flex-shrink-0" style={{ backgroundColor: tk.accent }} />
-              <span className="text-[9px] font-black tracking-[0.5em] uppercase" style={{ color: tk.accent, opacity: 0.7 }}>
-                {t(product.categoryTitle)}
-              </span>
-            </div>
+          {modalView === 'main' && (
+            <>
+              <div className="flex-grow">
+                <div className="flex items-center space-x-3 mb-5">
+                  <div className="h-[1.5px] w-8 flex-shrink-0" style={{ backgroundColor: tk.accent }} />
+                  <span className="text-[9px] font-black tracking-[0.5em] uppercase" style={{ color: tk.accent, opacity: 0.7 }}>
+                    {t(product.categoryTitle)}
+                  </span>
+                </div>
 
-            <h3 className={`font-serif font-black uppercase leading-tight tracking-tight mb-5 ${tk.text}`}
-              style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)' }}>
-              {t(product.name)}
-            </h3>
+                <h3 className={`font-serif font-black uppercase leading-tight tracking-tight mb-5 ${tk.text}`}
+                  style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)' }}>
+                  {t(product.name)}
+                </h3>
 
-            {product.price && product.price !== '0' && product.price !== '0 TL' && (
-              <div
-                className="inline-flex items-center px-5 py-2 rounded-2xl mb-6"
-                style={{ backgroundColor: `${tk.accent}18`, border: `1px solid ${tk.accent}35` }}
-              >
-                <span className="font-black text-2xl" style={{ color: tk.accent }}>
-                  {product.price.toString().replace(/ TL/g, '').replace(/ ₺/g, '')}₺
-                </span>
+                {product.price && product.price !== '0' && product.price !== '0 TL' && (
+                  <div
+                    className="inline-flex items-center px-5 py-2 rounded-2xl mb-6"
+                    style={{ backgroundColor: `${tk.accent}18`, border: `1px solid ${tk.accent}35` }}
+                  >
+                    <span className="font-black text-2xl" style={{ color: tk.accent }}>
+                      {currentPrice}₺
+                    </span>
+                  </div>
+                )}
+
+                <div className="border-l-2 pl-5 mb-6" style={{ borderColor: `${tk.accent}50` }}>
+                  <p className={`${tk.textMuted} text-sm font-light italic leading-relaxed`}>
+                    {t(product.description)}
+                  </p>
+                </div>
+
+                {/* Extras Button */}
+                {hasExtras && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setModalView('extras');
+                    }}
+                    className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all text-xs font-bold mb-4 ${
+                      isDark ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20' : 'bg-black/5 border-black/10 hover:bg-black/10 hover:border-black/20'
+                    }`}
+                    style={{ color: tk.text }}
+                  >
+                    <span className="uppercase tracking-wider flex items-center gap-2">
+                      <Star className="w-4 h-4" style={{ color: tk.accent }} />
+                      {t({ tr: 'Ekstralar / Seçenekler', en: 'Extras / Options' })}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {activeExtrasCount > 0 ? (
+                        <span className="px-3 py-1 rounded-xl text-[10px] font-black text-white animate-pulse" style={{ backgroundColor: tk.accent }}>
+                          +{extraPrice}₺ ({activeExtrasCount})
+                        </span>
+                      ) : (
+                        <span className={`text-[10px] font-bold ${tk.textMuted}`}>
+                          {t({ tr: 'SEÇİN', en: 'CHOOSE' })}
+                        </span>
+                      )}
+                      <ChevronRight className="w-4 h-4 opacity-50" />
+                    </div>
+                  </button>
+                )}
+
+                {/* Pairs Well Button */}
+                {pairsWellProducts.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setModalView('pairs_well');
+                    }}
+                    className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all text-xs font-bold mb-4 ${
+                      isDark ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20' : 'bg-black/5 border-black/10 hover:bg-black/10 hover:border-black/20'
+                    }`}
+                    style={{ color: tk.text }}
+                  >
+                    <span className="uppercase tracking-wider flex items-center gap-2">
+                      <Plus className="w-4 h-4" style={{ color: tk.accent }} />
+                      {t({ tr: 'Yanında İyi Gider', en: 'Pairs Well With' })}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="px-3 py-1 rounded-xl text-[10px] font-black text-white animate-pulse" style={{ backgroundColor: tk.accent }}>
+                        {pairsWellProducts.length}
+                      </span>
+                      <ChevronRight className="w-4 h-4 opacity-50" />
+                    </div>
+                  </button>
+                )}
+
+                {(product.allergens?.length > 0 || product.isSpicy) && (
+                  <div className="mt-6">
+                    <span className={`text-[9px] ${tk.textSubtle} uppercase font-bold tracking-[0.25em] block mb-3`}>
+                      {product.allergens?.length > 0 ? t({ tr: 'Alerjenler & Uyarılar', en: 'Allergens & Warnings' }) : t({ tr: 'Uyarılar', en: 'Warnings' })}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {(product.allergens || []).map(id => {
+                        const a = (allergens || []).find(x => x.id === id);
+                        if (!a) return null;
+                        return (
+                          <div
+                            key={id}
+                            className={`w-10 h-10 rounded-xl border flex items-center justify-center p-2 transition-all shadow-sm`}
+                            style={{ backgroundColor: `${tk.accent}10`, borderColor: `${tk.accent}25` }}
+                          >
+                            {a.icon_url
+                              ? <img src={a.icon_url} alt="" className="w-full h-full object-contain" />
+                              : <Info className="w-4 h-4" style={{ color: tk.accent }} />}
+                          </div>
+                        );
+                      })}
+                      {product.isSpicy && (
+                        <div
+                          className="w-10 h-10 rounded-xl border flex items-center justify-center p-2 transition-all shadow-sm bg-red-500/10 border-red-500/30"
+                          title={t({ tr: 'Acılı', en: 'Spicy' })}
+                        >
+                          <Flame className="w-5 h-5 text-red-600" fill="currentColor" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
 
-            <div className="border-l-2 pl-5 mb-8" style={{ borderColor: `${tk.accent}50` }}>
-              <p className={`${tk.textMuted} text-sm font-light italic leading-relaxed`}>
-                {t(product.description)}
-              </p>
-            </div>
+              <div className="grid grid-cols-1 gap-3 mt-8">
+                {!isMinimal && (
+                  <button
+                    onClick={() => {
+                      if (hasExtras) {
+                        const activeExtras = extrasOptions.filter(opt => selectedExtras[opt.id]);
+                        if (activeExtras.length > 0) {
+                          const extrasIdStr = activeExtras.map(e => e.id).sort().join('-');
+                          const extraNamesTr = activeExtras.map(e => e.name.tr).join(', ');
+                          const extraNamesEn = activeExtras.map(e => e.name.en).join(', ');
+                          
+                          const modifiedProduct = {
+                            ...product,
+                            id: `${product.id}-${extrasIdStr}`,
+                            price: currentPrice.toString(),
+                            name: {
+                              tr: `${product.name.tr} (${extraNamesTr})`,
+                              en: `${product.name.en} (${extraNamesEn})`,
+                            },
+                            baseProductId: product.id,
+                            selectedExtras: activeExtras
+                          };
+                          onAddToCart(modifiedProduct);
+                        } else {
+                          onAddToCart(product);
+                        }
+                      } else {
+                        onAddToCart(product);
+                      }
+                      onClose();
+                    }}
+                    className="font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 flex items-center justify-center space-x-3 shadow-lg cursor-pointer"
+                    style={{ backgroundColor: tk.accent, color: '#fff' }}
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>{t({ tr: 'SEPETE EKLE', en: 'ADD TO BASKET' })}</span>
+                  </button>
+                )}
+                <button
+                    onClick={onClose}
+                    className={`font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] cursor-pointer ${isMinimal ? 'bg-secondary text-primary' : 'opacity-40 hover:opacity-100 ' + tk.text}`}
+                    style={isMinimal ? { backgroundColor: tk.accent, color: '#fff' } : {}}
+                >
+                    {t({ tr: 'KAPAT', en: 'CLOSE' })}
+                </button>
+              </div>
+            </>
+          )}
 
-            {product.allergens?.length > 0 && (
-              <div>
-                <span className={`text-[9px] ${tk.textSubtle} uppercase font-bold tracking-[0.25em] block mb-3`}>
-                  {t({ tr: 'Alerjenler', en: 'Allergens' })}
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {product.allergens.map(id => {
-                    const a = (allergens || []).find(x => x.id === id);
-                    if (!a) return null;
-                    return (
-                      <div
-                        key={id}
-                        className={`w-10 h-10 rounded-xl border flex items-center justify-center p-2 transition-all shadow-sm`}
-                        style={{ backgroundColor: `${tk.accent}10`, borderColor: `${tk.accent}25` }}
-                      >
-                        {a.icon_url
-                          ? <img src={a.icon_url} alt="" className="w-full h-full object-contain" />
-                          : <Info className="w-4 h-4" style={{ color: tk.accent }} />}
+          {modalView === 'extras' && (
+            <>
+              <div className="flex-grow">
+                <div className="flex items-center gap-3 mb-6">
+                  <button 
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setModalView('main');
+                    }}
+                    className={`p-2 rounded-full transition-colors ${isDark ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
+                  >
+                    <ArrowLeft className={`w-5 h-5 ${tk.text}`} />
+                  </button>
+                  <span className={`text-sm font-black uppercase tracking-[0.2em] ${tk.text}`}>
+                    {t({ tr: 'Ekstralar / Seçenekler', en: 'Extras / Options' })}
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {extrasOptions.map(option => (
+                    <label
+                      key={option.id}
+                      className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer select-none transition-all duration-200 ${
+                        selectedExtras[option.id]
+                          ? `bg-[#c9a96e]/10 border-[#c9a96e] ${tk.text}`
+                          : `bg-transparent ${tk.cardBorder} ${tk.textMuted} hover:border-white/20`
+                      }`}
+                      style={selectedExtras[option.id] ? { borderColor: tk.accent, backgroundColor: `${tk.accent}15`, color: tk.accent } : {}}
+                    >
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          checked={selectedExtras[option.id]}
+                          onChange={() => handleToggleExtra(option.id)}
+                          className="w-4 h-4 rounded border-white/20 text-[#c9a96e] focus:ring-[#c9a96e] focus:ring-offset-0 bg-transparent cursor-pointer"
+                          style={{ accentColor: tk.accent }}
+                        />
+                        <span className={`text-xs font-bold uppercase tracking-wide ${selectedExtras[option.id] ? '' : tk.text}`}>
+                          {t(option.name)}
+                        </span>
                       </div>
-                    );
-                  })}
+                      <span className="text-xs font-mono font-bold">
+                        +{option.price}₺
+                      </span>
+                    </label>
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
 
-          <div className="grid grid-cols-1 gap-3 mt-8">
-            {!isMinimal && (
-              <button
-                onClick={() => { onAddToCart(product); onClose(); }}
-                className="font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 flex items-center justify-center space-x-3 shadow-lg"
-                style={{ backgroundColor: tk.accent, color: '#fff' }}
-              >
-                <Plus className="w-4 h-4" />
-                <span>{t({ tr: 'SEPETE EKLE', en: 'ADD TO BASKET' })}</span>
-              </button>
-            )}
-            <button
-                onClick={onClose}
-                className={`font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] ${isMinimal ? 'bg-secondary text-primary' : 'opacity-40 hover:opacity-100 ' + tk.text}`}
-                style={isMinimal ? { backgroundColor: tk.accent, color: '#fff' } : {}}
-            >
-                {t({ tr: 'KAPAT', en: 'CLOSE' })}
-            </button>
-          </div>
+              <div className="grid grid-cols-1 gap-3 mt-8">
+                <button
+                  onClick={() => setModalView('main')}
+                  className="font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 flex items-center justify-center space-x-3 shadow-lg cursor-pointer"
+                  style={{ backgroundColor: tk.accent, color: '#fff' }}
+                >
+                  <span>{t({ tr: 'SEÇİMİ TAMAMLA', en: 'COMPLETE SELECTION' })}</span>
+                </button>
+              </div>
+            </>
+          )}
+
+          {modalView === 'pairs_well' && (
+            <>
+              <div className="flex-grow">
+                <div className="flex items-center gap-3 mb-6">
+                  <button 
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setModalView('main');
+                    }}
+                    className={`p-2 rounded-full transition-colors ${isDark ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
+                  >
+                    <ArrowLeft className={`w-5 h-5 ${tk.text}`} />
+                  </button>
+                  <span className={`text-sm font-black uppercase tracking-[0.2em] ${tk.text}`}>
+                    {t({ tr: 'Yanında İyi Gider', en: 'Pairs Well With' })}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {pairsWellProducts.map(pwItem => (
+                    <div
+                      key={pwItem.id}
+                      className={`flex items-center justify-between p-3.5 rounded-2xl border ${tk.cardBorder} ${tk.cardBg} transition-all duration-200 hover:border-[#c9a96e]/30`}
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-black/10">
+                          <img src={pwItem.image_url} alt="" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className={`text-xs font-bold uppercase tracking-wide truncate ${tk.text}`}>
+                            {t(pwItem.name)}
+                          </h4>
+                          <span className="text-[10px] font-mono font-bold" style={{ color: tk.accent }}>
+                            {pwItem.price && pwItem.price !== '0' ? `${pwItem.price.toString().replace(/ TL/g, '').replace(/ ₺/g, '')}₺` : ''}
+                          </span>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onAddToCart(pwItem);
+                          setAddedPairs(prev => ({ ...prev, [pwItem.id]: true }));
+                          setTimeout(() => {
+                            setAddedPairs(prev => ({ ...prev, [pwItem.id]: false }));
+                          }, 1500);
+                        }}
+                        className={`flex items-center justify-center w-8 h-8 rounded-lg text-white hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-md ${
+                          addedPairs[pwItem.id] ? 'bg-green-500 shadow-green-500/20' : 'shadow-[#c9a96e]/10'
+                        }`}
+                        style={!addedPairs[pwItem.id] ? { backgroundColor: tk.accent } : {}}
+                      >
+                        {addedPairs[pwItem.id] ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-3 mt-8">
+                <button
+                  onClick={() => setModalView('main')}
+                  className="font-black uppercase tracking-[0.35em] py-4 px-10 rounded-2xl transition-all text-[10px] active:scale-95 flex items-center justify-center space-x-3 shadow-lg cursor-pointer"
+                  style={{ backgroundColor: tk.accent, color: '#fff' }}
+                >
+                  <span>{t({ tr: 'ANA ÜRÜNE DÖN', en: 'BACK TO PRODUCT' })}</span>
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </motion.div>
 
@@ -728,7 +1017,7 @@ const BasketDrawer = ({ isOpen, onClose, cart, updateQuantity, removeFromCart, t
                                             <img src={item.image_url} alt="" className="w-full h-full object-cover" />
                                         </div>
                                         <div className="flex-grow">
-                                            <h4 className={`font-serif font-black text-xs uppercase tracking-wider ${tk.text} line-clamp-1`}>{t(item.name)}</h4>
+                                            <h4 className={`font-serif font-black text-xs uppercase tracking-wider ${tk.text} line-clamp-2`}>{t(item.name)}</h4>
                                             <p className="text-sm font-black mt-1" style={{ color: tk.accent }}>
                                                 {parseFloat(item.price?.toString().replace(/[^\d.]/g, '') || 0)}₺
                                             </p>
@@ -788,6 +1077,17 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
   const { t, lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(null);
   const [activePath, setActivePath] = useState(['all']);
+
+  const allProducts = useMemo(() => {
+    if (!data?.categories) return [];
+    const list = [];
+    data.categories.forEach(cat => {
+      (cat.items || []).forEach(item => {
+        list.push({ ...item, categoryTitle: cat.title });
+      });
+    });
+    return list;
+  }, [data]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [viewMode, setViewMode] = useState(() => {
@@ -1071,6 +1371,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
               allergens={allergens}
               isDark={isDark}
               onAddToCart={addToCart}
+              allProducts={allProducts}
             />
           )}
           <BasketDrawer 
@@ -1195,6 +1496,7 @@ const QRMenu = ({ data, allergens, settings, isPage = false }) => {
               isDark={isDark}
               onAddToCart={() => {}} // Ana sayfada sepete ekleme yok
               isMinimal={true} // Yeni prop
+              allProducts={allProducts}
             />
           )}
       </AnimatePresence>

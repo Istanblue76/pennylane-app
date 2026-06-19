@@ -1,0 +1,44 @@
+{
+  "pages": [
+    {
+      "id": "page-1",
+      "title": {
+        "tr": "İMZA LEZZETLER",
+        "en": "SIGNATURE FLAVORS"
+      },
+      "hero_image_url": "/assets/img/hero/1775415903325-2022-06-14.jpg",
+      "active": true,
+      "sort_order": 1,
+      "layouts": [
+        {
+          "id": "l-1",
+          "product_id": "03383",
+          "x": 20.0,
+          "y": 30.0,
+          "number": 1
+        },
+        {
+          "id": "l-2",
+          "product_id": "1840",
+          "x": 75.0,
+          "y": 25.0,
+          "number": 2
+        },
+        {
+          "id": "l-3",
+          "product_id": "1115",
+          "x": 45.0,
+          "y": 60.0,
+          "number": 3
+        },
+        {
+          "id": "l-4",
+          "product_id": "03722",
+          "x": 80.0,
+          "y": 75.0,
+          "number": 4
+        }
+      ]
+    }
+  ]
+}

@@ -15,7 +15,8 @@ import {
   LayoutGrid,
   Image as ImageIcon,
   GripVertical,
-  AlertTriangle
+  AlertTriangle,
+  Layers
 } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -144,6 +145,71 @@ const CoffeeSketch = ({ color = 'currentColor' }) => (
     <path d="M24 20Q26 16 25 12" />
     <path d="M32 20Q34 14 33 12" />
     <path d="M40 20Q42 16 41 12" />
+  </svg>
+);
+
+const ThreeCoffeeCups = ({ color = 'currentColor' }) => (
+  <div className="flex items-center justify-start gap-4 my-2 opacity-75 print:opacity-75">
+    <svg viewBox="0 0 64 64" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
+      <path d="M20 30C20 38 24 40 32 40C40 40 44 38 44 30H20Z" />
+      <path d="M44 32C47 32 49 33 49 35C49 37 47 38 44 38" />
+      <path d="M16 44C24 47 40 47 48 44" />
+      <path d="M28 24Q30 20 29 16" />
+      <path d="M36 24Q38 20 37 16" />
+    </svg>
+    <svg viewBox="0 0 64 64" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
+      <path d="M16 28C16 38 22 42 32 42C42 42 48 38 48 28H16Z" />
+      <path d="M48 32C52 32 54 34 54 36C54 39 51 40 48 40" />
+      <path d="M12 46C20 50 44 50 52 46" />
+      <path d="M26 22Q28 18 27 14" />
+      <path d="M32 22Q34 16 33 14" />
+      <path d="M38 22Q40 18 39 14" />
+    </svg>
+    <svg viewBox="0 0 64 64" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
+      <path d="M18 26C18 36 24 38 32 38C40 38 46 36 46 26H18Z" />
+      <path d="M46 29C49 29 51 30 51 32C51 34 49 35 46 35" />
+      <path d="M14 42C22 45 42 45 50 42" />
+      <path d="M52 40L42 44" />
+      <path d="M30 20C32 18 30 15 32 13" />
+      <path d="M34 20C36 18 34 15 36 13" />
+    </svg>
+  </div>
+);
+
+const WindowIllustration = ({ color = 'currentColor' }) => (
+  <svg viewBox="0 0 100 220" fill="none" stroke={color} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-full max-w-[280px] h-full max-h-[190mm] opacity-75 print:opacity-75">
+    {/* Frame and grid structure */}
+    <path d="M10 30 C10 5, 90 5, 90 30 L90 200 L10 200 Z" />
+    {/* Double lines for frame depth */}
+    <path d="M13 32 C13 9, 87 9, 87 32 L87 197 L13 197 Z" />
+    
+    {/* Window panes */}
+    <path d="M13 70 H87" />
+    <path d="M13 110 H87" />
+    <path d="M13 150 H87" />
+    <path d="M50 10 V197" />
+    
+    {/* Curtains */}
+    <path d="M13 32 Q35 60, 25 110 Q15 150, 13 197" />
+    <path d="M87 32 Q65 60, 75 110 Q85 150, 87 197" />
+    
+    {/* Hanging lamp */}
+    <path d="M50 10 V45" />
+    <path d="M40 45 H60 L55 53 H45 Z" />
+    <circle cx="50" cy="56" r="3" fill={color} />
+    
+    {/* Bistro Table */}
+    <path d="M25 197 L35 160 H65 L75 197" />
+    <ellipse cx="50" cy="160" rx="28" ry="6" />
+    
+    {/* Wine glass & bottle */}
+    <path d="M42 158 V146 C42 144, 44 143, 45 143 V136 H47 V143 C48 143, 50 144, 50 146 V158 Z" />
+    {/* Stem glass */}
+    <path d="M58 158 V152 H54 H62 M58 152 V148 C58 146, 60 146, 60 148 L60 152" />
+    
+    {/* Classical Chair backrest silhouette */}
+    <path d="M20 197 V165 C20 165, 23 155, 28 155 C33 155, 30 165, 30 197" />
+    <path d="M18 175 H32" />
   </svg>
 );
 
@@ -844,6 +910,84 @@ const PrintMenuPage = ({ cmsData }) => {
     ];
   }, [processedCategories, layout, lang]);
 
+  // ── EDITORIAL LAYOUT PAGINATION ──
+  // "Yeni Tasarım" menüsü için 2 sütunlu akış mantığı (The Date PDF stili)
+  const paginatedEditorialData = useMemo(() => {
+    if (layout !== 'editorial') return [];
+    
+    // Matched categories lists to group cleanly
+    const matchedIds = [
+      'breakfast', 'burger-sandwich', 'starters-sauces',
+      'main', 'salads', 'mini-tuzlu',
+      'beers', 'cider', 'cocktails',
+      'wineprosecco', 'whisky', 'tequila-mezcal', 'spirits',
+      'coffee', 'coffee-beans', 'desserts', 'soft-drinks', 'mocktail-cocktails'
+    ];
+    // Collect leftovers
+    const leftovers = processedCategories.filter(c => !matchedIds.includes(c.id));
+    
+    const pageGroups = [
+      {
+        id: 'food1',
+        name: lang === 'tr' ? 'BAŞLANGIÇ & LEZZETLER' : 'STARTERS & SAVORIES',
+        categories: processedCategories.filter(c => ['breakfast', 'burger-sandwich', 'starters-sauces'].includes(c.id)),
+        leftCatIds: ['breakfast', 'starters-sauces'],
+        rightCatIds: ['burger-sandwich'],
+        rightSketch: 'burger'
+      },
+      {
+        id: 'food2',
+        name: lang === 'tr' ? 'ANA YEMEKLER & SALATALAR' : 'MAINS & SALADS',
+        categories: processedCategories.filter(c => ['main', 'salads', 'mini-tuzlu'].includes(c.id) || leftovers.map(l => l.id).includes(c.id)),
+        leftCatIds: ['main', ...leftovers.map(l => l.id)],
+        rightCatIds: ['salads', 'mini-tuzlu'],
+        rightSketch: 'steak'
+      },
+      {
+        id: 'bar1',
+        name: lang === 'tr' ? 'BİRA & KOKTEYL KÜTÜPHANESİ' : 'BEER & COCKTAIL LIBRARY',
+        categories: processedCategories.filter(c => ['beers', 'cider', 'cocktails'].includes(c.id)),
+        leftCatIds: ['beers', 'cider'],
+        rightCatIds: ['cocktails'],
+        rightSketch: 'cocktail'
+      },
+      {
+        id: 'bar2',
+        name: lang === 'tr' ? 'MAHSEN & YÜKSEK ALKOLLÜLER' : 'CELLAR & SPIRITS',
+        categories: processedCategories.filter(c => ['wineprosecco', 'whisky', 'tequila-mezcal', 'spirits'].includes(c.id)),
+        leftCatIds: ['wineprosecco'],
+        rightCatIds: ['whisky', 'tequila-mezcal', 'spirits'],
+        rightSketch: 'wine'
+      },
+      {
+        id: 'drinks_sweets',
+        name: lang === 'tr' ? 'SOĞUK & SICAK İÇECEKLER' : 'COLD & HOT DRINKS',
+        categories: processedCategories.filter(c => ['coffee', 'coffee-beans', 'desserts', 'soft-drinks', 'mocktail-cocktails'].includes(c.id)),
+        leftCatIds: ['soft-drinks', 'coffee', 'coffee-beans', 'desserts', 'mocktail-cocktails'],
+        rightCatIds: [],
+        isLastPage: true
+      }
+    ];
+
+    let pageNum = 2;
+    const finalPages = [];
+    pageGroups.forEach(group => {
+      if (group.categories.length > 0) {
+        const leftCats = group.categories.filter(c => group.leftCatIds.includes(c.id));
+        const rightCats = group.categories.filter(c => group.rightCatIds.includes(c.id));
+        finalPages.push({
+          ...group,
+          pageNum,
+          leftCats,
+          rightCats
+        });
+        pageNum++;
+      }
+    });
+
+    return finalPages;
+  }, [processedCategories, layout, lang]);
+
   // ── PAGE CAPACITY WARNINGS ──
   // Computes approximate fill % for each content page so the sidebar can warn the user.
   const pageCapacityInfo = useMemo(() => {
@@ -915,6 +1059,286 @@ const PrintMenuPage = ({ cmsData }) => {
   };
 
   const currentYear = new Date().getFullYear();
+
+  const renderCategory = (cat) => {
+    const hasSubcats = cat.subcategories && cat.subcategories.length > 0;
+    
+    // Custom table for Beers
+    if (cat.id === 'beers') {
+      // Group beers by brand
+      const brands = {
+        'TUBORG': { name: 'TUBORG', draft33: null, draft50: null, bottle: null },
+        'CARLSBERG': { name: 'CARLSBERG', draft33: null, draft50: null, bottle: null },
+        'CARLSBERG LUNA': { name: 'CARLSBERG LUNA', draft33: null, draft50: null, bottle: null },
+        '1664 BLANC': { name: '1664 BLANC', draft33: null, draft50: null, bottle: null },
+        'GUINNESS': { name: 'GUINNESS', draft33: null, draft50: null, bottle: null },
+        'WEIHENSTEPHAN': { name: 'WEIHENSTEPHAN', draft33: null, draft50: null, bottle: null }
+      };
+
+      const others = [];
+      const allBeerItems = [];
+      
+      // Collect all items in beers category
+      if (hasSubcats) {
+        cat.subcategories.forEach(sub => {
+          const subcatItems = cat.itemsBySubcat[sub.id] || [];
+          allBeerItems.push(...subcatItems);
+        });
+      } else {
+        allBeerItems.push(...(cat.itemsBySubcat['none'] || []));
+      }
+
+      allBeerItems.forEach(item => {
+        const nameUpper = item.name[lang]?.toUpperCase() || item.name.tr?.toUpperCase() || '';
+        const priceVal = item.price?.toString().replace(/\s*(TL|₺)/i, '').trim() + ' ₺';
+        
+        // Draft (fıçı) check
+        const isDraft = item.subcategory === 'draft-beers' || nameUpper.includes('FIÇI') || nameUpper.includes('DRAFT');
+        
+        let matched = false;
+        
+        if (nameUpper.includes('TUBORG')) {
+          matched = true;
+          if (isDraft) {
+            if (nameUpper.includes('33')) brands['TUBORG'].draft33 = priceVal;
+            else if (nameUpper.includes('50')) brands['TUBORG'].draft50 = priceVal;
+          } else {
+            brands['TUBORG'].bottle = priceVal;
+          }
+        } else if (nameUpper.includes('CARLSBERG LUNA') || nameUpper.includes('LUNA')) {
+          matched = true;
+          if (isDraft) {
+            if (nameUpper.includes('33')) brands['CARLSBERG LUNA'].draft33 = priceVal;
+            else if (nameUpper.includes('50')) brands['CARLSBERG LUNA'].draft50 = priceVal;
+          } else {
+            brands['CARLSBERG LUNA'].bottle = priceVal;
+          }
+        } else if (nameUpper.includes('CARLSBERG')) {
+          matched = true;
+          if (isDraft) {
+            if (nameUpper.includes('33')) brands['CARLSBERG'].draft33 = priceVal;
+            else if (nameUpper.includes('50')) brands['CARLSBERG'].draft50 = priceVal;
+          } else {
+            brands['CARLSBERG'].bottle = priceVal;
+          }
+        } else if (nameUpper.includes('BLANC') || nameUpper.includes('1664')) {
+          matched = true;
+          if (isDraft) {
+            if (nameUpper.includes('33')) brands['1664 BLANC'].draft33 = priceVal;
+            else if (nameUpper.includes('50')) brands['1664 BLANC'].draft50 = priceVal;
+          } else {
+            brands['1664 BLANC'].bottle = priceVal;
+          }
+        } else if (nameUpper.includes('GUINNESS')) {
+          matched = true;
+          if (isDraft) {
+            if (nameUpper.includes('25') || nameUpper.includes('HALF')) brands['GUINNESS'].draft33 = priceVal;
+            else if (nameUpper.includes('50') || nameUpper.includes('PINT') || nameUpper.includes('44')) brands['GUINNESS'].draft50 = priceVal;
+          } else {
+            brands['GUINNESS'].bottle = priceVal;
+          }
+        } else if (nameUpper.includes('WEIHENSTEPHAN')) {
+          matched = true;
+          if (isDraft) {
+            if (nameUpper.includes('33')) brands['WEIHENSTEPHAN'].draft33 = priceVal;
+            else if (nameUpper.includes('50')) brands['WEIHENSTEPHAN'].draft50 = priceVal;
+          } else {
+            brands['WEIHENSTEPHAN'].bottle = priceVal;
+          }
+        }
+
+        if (!matched) {
+          others.push(item);
+        }
+      });
+
+      const brandList = Object.values(brands).filter(b => b.draft33 || b.draft50 || b.bottle);
+
+      return (
+        <div className="space-y-3 avoid-break">
+          {/* Table Header */}
+          <div className="flex items-end justify-between pb-1.5 border-b-2 mb-2" style={{ borderColor: themeStyles.sketchColor }}>
+            <h3 className={`text-[13px] font-serif font-black uppercase tracking-wider ${themeStyles.titleColor}`}>
+              {t(cat.title)}
+            </h3>
+            
+            <div className="flex items-center gap-6 text-[8px] font-sans font-bold uppercase tracking-wider">
+              {/* Draft Header */}
+              <div className="flex items-center gap-2">
+                <span className="opacity-0 text-[10px]">|</span>
+                <div className="flex flex-col items-center min-w-[80px]">
+                  <span className="text-[7px] opacity-60">DRAFT</span>
+                  <div className="flex gap-4 opacity-75 font-mono text-[8px]">
+                    <span>33CL</span>
+                    <span>50CL</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Bottle Header */}
+              <div className="flex items-center gap-2">
+                <span className="opacity-0 text-[10px]">|</span>
+                <div className="flex flex-col items-end min-w-[40px]">
+                  <span className="text-[7px] opacity-60">BOTTLE</span>
+                  <span className="opacity-75 font-mono text-[8px]">33CL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Table Rows */}
+          <div className="space-y-0">
+            {brandList.map((brand, idx) => {
+              const isLast = idx === brandList.length - 1 && others.length === 0;
+              return (
+                <div key={brand.name} className={`flex items-center justify-between py-1.5 border-b border-current/5 ${isLast ? 'border-b-0' : ''}`}>
+                  <div className="flex flex-col">
+                    <span className={`text-[10.5px] font-bold uppercase tracking-wider ${themeStyles.titleColor}`}>
+                      {brand.name}
+                    </span>
+                    {brand.name === 'GUINNESS' && (
+                      <span className="text-[7px] font-mono opacity-50">25CL / 44CL</span>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center gap-6 font-mono text-[10.5px]">
+                    {/* Draft Column */}
+                    <div className="flex items-center gap-2">
+                      <span className="opacity-30 font-sans text-[10px]">|</span>
+                      <div className="flex gap-4 min-w-[80px] justify-center">
+                        <span className={brand.draft33 ? themeStyles.priceColor : 'opacity-25'}>
+                          {brand.draft33 ? brand.draft33 : '-'}
+                        </span>
+                        <span className={brand.draft50 ? themeStyles.priceColor : 'opacity-25'}>
+                          {brand.draft50 ? brand.draft50 : '-'}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Bottle Column */}
+                    <div className="flex items-center gap-2">
+                      <span className="opacity-30 font-sans text-[10px]">|</span>
+                      <span className={`min-w-[40px] text-right ${brand.bottle ? themeStyles.priceColor : 'opacity-25'}`}>
+                        {brand.bottle ? brand.bottle : '-'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Other beers listed inline in the same style */}
+            {others.map((item, idx) => {
+              const isLast = idx === others.length - 1;
+              return (
+                <div key={item.id} className={`flex items-baseline justify-between py-1.5 border-b border-current/5 ${isLast ? 'border-b-0' : ''}`}>
+                  <div className="flex flex-col">
+                    <span className={`text-[10.5px] font-bold uppercase tracking-wider ${themeStyles.titleColor}`}>
+                      {t(item.name)}
+                    </span>
+                    {item.description?.[lang] && (
+                      <p className={`text-[8px] italic font-light opacity-65 leading-normal pr-16 ${themeStyles.textColor}`}>
+                        {item.description[lang]}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-1.5 font-mono text-[10.5px]">
+                    <span className="opacity-30 font-sans text-[10px]">|</span>
+                    <span className={`text-[10.5px] font-bold ${themeStyles.priceColor}`}>
+                      {item.price?.toString().replace(/\s*(TL|₺)/i, '').trim()} ₺
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      );
+    }
+
+    // Standard Category layout
+    return (
+      <div className="space-y-3 avoid-break">
+        {/* Category Header */}
+        <div className="border-b-2 pb-1.5 mb-2 opacity-95 text-left" style={{ borderColor: themeStyles.sketchColor }}>
+          <h3 className={`text-[13px] font-serif font-black uppercase tracking-wider ${themeStyles.titleColor}`}>
+            {t(cat.title)}
+          </h3>
+        </div>
+
+        {/* Items list */}
+        <div className="space-y-3">
+          {hasSubcats ? (
+            cat.subcategories.map(sub => {
+              const subcatItems = cat.itemsBySubcat[sub.id] || [];
+              if (subcatItems.length === 0) return null;
+              return (
+                <div key={sub.id} className="space-y-1.5 avoid-break">
+                  <div className={`text-[8.5px] font-black uppercase tracking-[0.25em] ${themeStyles.accentColor} mb-2`}>
+                    — {t(sub.title)} —
+                  </div>
+                  <div className="space-y-2 pl-1">
+                    {subcatItems.map(item => (
+                      <div key={item.id} className="flex flex-col space-y-0.5">
+                        <div className="flex items-baseline justify-between w-full">
+                          <span className={`text-[10px] font-bold uppercase tracking-wider ${themeStyles.titleColor}`}>
+                            {t(item.name)}
+                          </span>
+                          <div className="flex items-center gap-1.5 shrink-0 ml-4">
+                            <span className="opacity-30 font-sans text-[10px]">|</span>
+                            <span className={`text-[10.5px] font-bold font-mono ${themeStyles.priceColor}`}>
+                              {item.price?.toString().replace(/\s*(TL|₺)/i, '').trim()} ₺
+                            </span>
+                          </div>
+                        </div>
+                        {item.description?.[lang] && (
+                          <p className={`text-[8px] italic font-light opacity-65 leading-normal pr-16 ${themeStyles.textColor}`}>
+                            {item.description[lang]}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="space-y-2 pl-1">
+              {(cat.itemsBySubcat['none'] || []).map(item => (
+                <div key={item.id} className="flex flex-col space-y-0.5">
+                  <div className="flex items-baseline justify-between w-full">
+                    <span className={`text-[10px] font-bold uppercase tracking-wider ${themeStyles.titleColor}`}>
+                      {t(item.name)}
+                    </span>
+                    <div className="flex items-center gap-1.5 shrink-0 ml-4">
+                      <span className="opacity-30 font-sans text-[10px]">|</span>
+                      <span className={`text-[10.5px] font-bold font-mono ${themeStyles.priceColor}`}>
+                        {item.price?.toString().replace(/\s*(TL|₺)/i, '').trim()} ₺
+                      </span>
+                    </div>
+                  </div>
+                  {item.description?.[lang] && (
+                    <p className={`text-[8px] italic font-light opacity-65 leading-normal pr-16 ${themeStyles.textColor}`}>
+                      {item.description[lang]}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Horizontal Coffee cups line on last page right after Soft Drinks */}
+        {cat.id === 'soft-drinks' && showSketches && (
+          <div className="py-1 flex justify-start">
+            <ThreeCoffeeCups color={themeStyles.sketchColor} />
+          </div>
+        )}
+
+      </div>
+    );
+  };
 
   return (
     <div className="lg:h-screen lg:overflow-hidden bg-[#0a0a0a] text-white flex flex-col lg:flex-row font-sans print-menu-container">
@@ -1078,9 +1502,31 @@ const PrintMenuPage = ({ cmsData }) => {
                   </div>
                   {layout === 'placemat' && <Check className="w-4 h-4 text-secondary" />}
                 </button>
+
+                {/* ── YENİ BASKIMENU TASARIMI (Editöryal) ── */}
+                <button
+                  onClick={() => setLayout('editorial')}
+                  className={`w-full flex items-center justify-between p-4 rounded-xl border text-left transition-all ${
+                    layout === 'editorial'
+                      ? 'border-amber-400 bg-amber-400/8 text-amber-300'
+                      : 'border-white/5 bg-[#1a1a1a] text-textSecondary'
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <Layers className="w-5 h-5" />
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold">Editöryal Baskı Menüsü</span>
+                        <span className="text-[8px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">YENİ</span>
+                      </div>
+                      <div className="text-[9px] opacity-60 mt-0.5">Çift sütunlu, akışkan mizanpaj. The Date PDF tarzı.</div>
+                    </div>
+                  </div>
+                  {layout === 'editorial' && <Check className="w-4 h-4 text-amber-400" />}
+                </button>
               </div>
             </div>
-
+ 
             {/* Language */}
             <div>
               <label className="text-[10px] font-black uppercase tracking-widest text-textSecondary block mb-3">MENÜ DİLİ</label>
@@ -1103,7 +1549,7 @@ const PrintMenuPage = ({ cmsData }) => {
                 </button>
               </div>
             </div>
-
+ 
             {/* Sketches Toggle */}
             <div className="flex items-center justify-between p-3 bg-[#1a1a1a] rounded-xl border border-white/5">
               <div>
@@ -1117,9 +1563,9 @@ const PrintMenuPage = ({ cmsData }) => {
                 <div className={`w-4 h-4 rounded-full bg-primary transition-transform ${showSketches ? 'translate-x-4' : 'translate-x-0'}`} />
               </button>
             </div>
-
-            {/* Cover Page Toggle (Only for Booklet) */}
-            {layout === 'booklet' && (
+ 
+            {/* Cover Page Toggle (Booklet & Editorial) */}
+            {(layout === 'booklet' || layout === 'editorial') && (
               <div className="flex items-center justify-between p-3 bg-[#1a1a1a] rounded-xl border border-white/5">
                 <div>
                   <span className="text-xs font-bold block">Premium Kapak Sayfası</span>
@@ -1854,7 +2300,7 @@ const PrintMenuPage = ({ cmsData }) => {
                                             </span>
                                           </div>
                                           {item.description?.[lang] && (
-                                            <p className={`text-[8.5px] italic font-light leading-normal opacity-60`}>
+                                            <p className={`text-[8.5px] italic font-light leading-normal pr-16 opacity-60`}>
                                               {item.description[lang]}
                                             </p>
                                           )}
@@ -1877,7 +2323,7 @@ const PrintMenuPage = ({ cmsData }) => {
                                     </span>
                                   </div>
                                   {item.description?.[lang] && (
-                                    <p className={`text-[8.5px] italic font-light leading-normal opacity-60`}>
+                                    <p className={`text-[8.5px] italic font-light leading-normal pr-16 opacity-60`}>
                                       {item.description[lang]}
                                     </p>
                                   )}
@@ -2018,6 +2464,235 @@ const PrintMenuPage = ({ cmsData }) => {
           </div>
         )}
 
+        {/* === LAYOUT C: EDITORIAL ("YENİ BASKIMENU") — The Date PDF Style === */}
+        {layout === 'editorial' && (
+          <div className="w-full max-w-[820px] space-y-12">
+
+            {/* KAPAK SAYFASI (Sayfa 1) */}
+            {showCover && (
+              <div
+                ref={el => pageRefs.current[1] = el}
+                className={`print-sheet a4-page shadow-2xl rounded-2xl w-full border ${themeStyles.containerBg} ${themeStyles.textColor} relative overflow-hidden`}
+                style={{ height: '297mm', maxHeight: '297mm', minHeight: '297mm' }}
+              >
+                {/* Köşe süslemeleri */}
+                <div className={`absolute top-7 left-7 w-10 h-10 border-t-2 border-l-2 ${themeStyles.border}`} />
+                <div className={`absolute top-7 right-7 w-10 h-10 border-t-2 border-r-2 ${themeStyles.border}`} />
+                <div className={`absolute bottom-7 left-7 w-10 h-10 border-b-2 border-l-2 ${themeStyles.border}`} />
+                <div className={`absolute bottom-7 right-7 w-10 h-10 border-b-2 border-r-2 ${themeStyles.border}`} />
+
+                {/* İkinci iç çerçeve */}
+                <div className={`absolute top-11 left-11 right-11 bottom-11 border ${themeStyles.border} opacity-30`} />
+
+                <div className="absolute inset-0 flex flex-col items-center justify-between py-20 px-14">
+
+                  {/* Üst alan */}
+                  <div className="text-center space-y-3">
+                    {coverTopQuote && (
+                      <p className={`text-[9px] tracking-[0.5em] uppercase font-bold ${themeStyles.accentColor} opacity-70`}>
+                        {coverTopQuote}
+                      </p>
+                    )}
+                    <div className={`flex items-center gap-4 justify-center`}>
+                      <div className={`flex-1 h-px ${themeStyles.border} opacity-40`} style={{borderTopWidth:'1px', borderTopStyle:'solid'}} />
+                      <div className={`w-2 h-2 rotate-45 border ${themeStyles.border} opacity-60`} />
+                      <div className={`flex-1 h-px ${themeStyles.border} opacity-40`} style={{borderTopWidth:'1px', borderTopStyle:'solid'}} />
+                    </div>
+                  </div>
+
+                  {/* Orta alan — Logo ve Başlık */}
+                  <div className="text-center space-y-6 flex-1 flex flex-col items-center justify-center">
+                    {logoImage ? (
+                      <img src={logoImage} alt="Logo" className="h-24 w-auto object-contain opacity-90 mx-auto" />
+                    ) : (
+                      <div className={`w-20 h-20 rounded-full border-2 ${themeStyles.border} flex items-center justify-center mx-auto`}>
+                        <span className={`text-2xl font-black font-serif ${themeStyles.titleColor}`}>{coverLogoText}</span>
+                      </div>
+                    )}
+
+                    <div className="space-y-2">
+                      <h1 className={`text-[52px] font-serif font-black uppercase tracking-[0.18em] ${themeStyles.titleColor} leading-none`}>
+                        {coverTitle}
+                      </h1>
+                      <div className={`flex items-center gap-3 justify-center`}>
+                        <div className={`flex-1 max-w-16 h-px opacity-40`} style={{borderTop:`1px solid ${isPaper ? '#8c6a2b' : '#c9a861'}`}} />
+                        <p className={`text-[13px] tracking-[0.4em] uppercase font-light ${themeStyles.accentColor}`}>
+                          {coverSubtitle}
+                        </p>
+                        <div className={`flex-1 max-w-16 h-px opacity-40`} style={{borderTop:`1px solid ${isPaper ? '#8c6a2b' : '#c9a861'}`}} />
+                      </div>
+                    </div>
+
+                    {coverEst && (
+                      <p className={`text-[10px] font-mono tracking-[0.6em] uppercase opacity-50 ${themeStyles.textColor}`}>
+                        {coverEst}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Alt alan */}
+                  <div className="text-center space-y-3">
+                    <div className={`flex items-center gap-4 justify-center`}>
+                      <div className={`flex-1 h-px opacity-40`} style={{borderTop:`1px solid ${isPaper ? '#8c6a2b' : '#c9a861'}`}} />
+                      <div className={`w-2 h-2 rotate-45 border opacity-60`} style={{borderColor: isPaper ? '#8c6a2b' : '#c9a861'}} />
+                      <div className={`flex-1 h-px opacity-40`} style={{borderTop:`1px solid ${isPaper ? '#8c6a2b' : '#c9a861'}`}} />
+                    </div>
+                    {coverDesc && (
+                      <p className={`text-[9px] tracking-[0.2em] italic font-light opacity-60 max-w-xs mx-auto ${themeStyles.textColor}`}>
+                        {coverDesc}
+                      </p>
+                    )}
+                  </div>
+
+                </div>
+              </div>
+            )}
+
+            {/* İÇERİK SAYFALARI — The Date Stili Çift Sütun Akış */}
+            {paginatedEditorialData.map(({ pageNum, name, leftCats, rightCats, rightSketch, isLastPage }) => {
+              return (
+                <div
+                  ref={el => pageRefs.current[pageNum] = el}
+                  key={pageNum}
+                  className={`print-sheet a4-page shadow-2xl rounded-2xl w-full border ${themeStyles.containerBg} ${themeStyles.textColor} relative overflow-hidden`}
+                  style={{ height: '297mm', maxHeight: '297mm', minHeight: '297mm' }}
+                >
+                  {/* Köşe ornaments */}
+                  <div className={`absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 ${themeStyles.border}`} />
+                  <div className={`absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 ${themeStyles.border}`} />
+                  <div className={`absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 ${themeStyles.border}`} />
+                  <div className={`absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 ${themeStyles.border}`} />
+
+                  <div className="absolute inset-10 flex flex-col justify-between">
+
+                    {/* Running header */}
+                    <div className={`flex items-center justify-between pb-2 mb-4 border-b ${themeStyles.border} shrink-0 opacity-50`}>
+                      <span className={`text-[7.5px] tracking-[0.4em] uppercase font-bold ${themeStyles.accentColor}`}>
+                        PENNYLANE GASTROPUB
+                      </span>
+                      <span className={`text-[7.5px] tracking-[0.4em] uppercase font-bold ${themeStyles.accentColor}`}>
+                        {lang === 'tr' ? 'MENÜ' : 'MENU'} — {pageNum - (showCover ? 1 : 0)}
+                      </span>
+                    </div>
+
+                    {/* 2-Column Content Grid */}
+                    <div className="grid grid-cols-2 gap-8 items-stretch flex-1 min-h-0 py-2 overflow-hidden text-left">
+                      
+                      {/* Left Column */}
+                      <div className="flex flex-col justify-start space-y-6 overflow-hidden pr-2">
+                        {leftCats.map(cat => (
+                          <div key={cat.id}>
+                            {renderCategory(cat)}
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Right Column */}
+                      <div className="flex flex-col justify-start overflow-hidden pl-2">
+                        {isLastPage ? (
+                          <div className="flex items-center justify-center h-full w-full py-4">
+                            <WindowIllustration color={themeStyles.sketchColor} />
+                          </div>
+                        ) : (
+                          <>
+                            <div className="flex-1 space-y-6">
+                              {rightCats.map(cat => (
+                                <div key={cat.id}>
+                                  {renderCategory(cat)}
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Corner or bottom sketch in right column */}
+                            {rightSketch && showSketches && (
+                              <div className="flex justify-center mt-6 opacity-40 shrink-0 select-none pb-4">
+                                <div className="w-20 h-20">
+                                  {rightSketch === 'burger' && <BurgerSketch color={themeStyles.sketchColor} />}
+                                  {rightSketch === 'steak' && <SteakSketch color={themeStyles.sketchColor} />}
+                                  {rightSketch === 'cocktail' && <CocktailSketch color={themeStyles.sketchColor} />}
+                                  {rightSketch === 'wine' && <WineSketch color={themeStyles.sketchColor} />}
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+
+                    </div>
+
+                    {/* Page Footer */}
+                    {isLastPage ? (
+                      <div className={`shrink-0 mt-3 pt-3 border-t ${themeStyles.border} flex items-center justify-between gap-4`}>
+                        <div className="space-y-0.5">
+                          <p className={`text-[7.5px] opacity-40 font-mono tracking-wider uppercase mb-1 ${themeStyles.textColor}`}>
+                            Fiyatlar 02.01.2026 tarihinde düzenlenmiştir.
+                          </p>
+                          <div className="flex items-baseline gap-2">
+                            <span className={`text-[12px] font-serif font-black tracking-widest ${themeStyles.titleColor}`}>
+                              PENNYLANE
+                            </span>
+                            <span className={`text-[7.5px] tracking-wider uppercase font-bold opacity-60 ${themeStyles.accentColor}`}>
+                              GASTRO & PUB
+                            </span>
+                          </div>
+                          <p className="text-[6.5px] opacity-35 font-mono">
+                            {t(cmsData?.footer?.copyright) || `© ${currentYear} Pennylane. All rights reserved.`}
+                          </p>
+                        </div>
+                        <div className={`flex items-center gap-2 border ${themeStyles.border} ${themeStyles.qrBg} rounded-lg p-1.5 shrink-0`}>
+                          <div className="text-right space-y-0.5">
+                            <p className={`text-[8px] font-black tracking-wide ${themeStyles.accentColor} uppercase`}>
+                              {lang === 'tr' ? 'DİJİTAL MENÜ' : 'DIGITAL MENU'}
+                            </p>
+                            <p className="text-[7px] opacity-55">
+                              {lang === 'tr' ? 'Tüm ürünler için QR okutun' : 'Scan for full menu'}
+                            </p>
+                          </div>
+                          <div className="bg-white p-1 rounded shrink-0 shadow-sm">
+                            <img
+                              src={`https://api.qrserver.com/v1/create-qr-code/?size=52x52&data=${encodeURIComponent(menuUrl)}`}
+                              alt="QR Code"
+                              className="w-10 h-10"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={`shrink-0 mt-2 pt-2 border-t ${themeStyles.border} opacity-40 flex items-center justify-between text-[7px] font-mono uppercase tracking-wider`}>
+                        <span>{footerLeftText}</span>
+                        <span>{footerRightText1}</span>
+                      </div>
+                    )}
+
+                  </div>
+
+                  {/* Yerleştirilen görseller */}
+                  {placedImages.filter(img => img.pageNum === pageNum).map(img => {
+                    const { style: imgStyle, classes: imgClasses } = getImageStyle(img);
+                    const { classes: frameClasses, paddingStyle } = getFrameClasses(img);
+                    return (
+                      <div
+                        key={img.id}
+                        style={{ position: 'absolute', left: `${img.x}%`, top: `${img.y}%`, width: `${img.width || 20}%`, cursor: 'move', zIndex: 50, ...paddingStyle }}
+                        onMouseDown={(e) => handleImageMouseDown(e, img.id, pageNum)}
+                        onClick={(e) => { e.stopPropagation(); setSelectedImageId(img.id); }}
+                        className={`group/placed relative print:ring-0 ${frameClasses} ${selectedImageId === img.id ? 'ring-2 ring-secondary' : 'hover:ring-1 hover:ring-secondary/50'}`}
+                      >
+                        <img src={img.src} alt="Placed Item" style={imgStyle} className={imgClasses} />
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setPlacedImages(prev => prev.filter(p => p.id !== img.id)); if (selectedImageId === img.id) setSelectedImageId(null); }}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold shadow-lg opacity-0 group-hover/placed:opacity-100 transition-opacity z-[60] print:hidden"
+                        >✕</button>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+
+          </div>
+        )}
+
         {/* === LAYOUT B: A3 PLACEMAT (LANDSCAPE 3-COLUMN PREVIEW) === */}
         {layout === 'placemat' && (
           <div 
@@ -2098,7 +2773,7 @@ const PrintMenuPage = ({ cmsData }) => {
                                         </span>
                                       </div>
                                       {item.description?.[lang] && (
-                                        <p className={`text-[8.5px] italic font-light leading-normal opacity-60`}>
+                                        <p className={`text-[8.5px] italic font-light leading-normal pr-16 opacity-60`}>
                                           {item.description[lang]}
                                         </p>
                                       )}
@@ -2121,7 +2796,7 @@ const PrintMenuPage = ({ cmsData }) => {
                                 </span>
                               </div>
                               {item.description?.[lang] && (
-                                <p className={`text-[8.5px] italic font-light leading-normal opacity-60`}>
+                                <p className={`text-[8.5px] italic font-light leading-normal pr-16 opacity-60`}>
                                   {item.description[lang]}
                                 </p>
                               )}

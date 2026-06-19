@@ -18,6 +18,7 @@ import AdminPanel from './pages/Admin/AdminPanel';
 import Login from './pages/Admin/Login';
 import QRMenuPage from './pages/QRMenuPage';
 import PrintMenuPage from './pages/PrintMenuPage';
+import StoryMenu from './pages/StoryMenu/StoryMenu';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, MapPin, X, AlertTriangle } from 'lucide-react';
 import { useLanguage } from './context/LanguageContext';
@@ -423,6 +424,7 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/menu" element={<QRMenuPage cmsData={cmsData} />} />
               <Route path="/print-menu" element={<PrintMenuPage cmsData={cmsData} />} />
+              <Route path="/story" element={<StoryMenu cmsData={cmsData} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
             <AnimatePresence>

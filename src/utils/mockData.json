@@ -75,7 +75,7 @@
             "allergens": [],
             "image_url": "/assets/img/menu/breakfast/1780832162557-_CEF9120.jpg",
             "description": {
-              "tr": "",
+              "tr": "2 Adet Frankfurter Sosis, 1 yumurta,  Guinness - Hardal Mayonez, Pretzel",
               "en": ""
             }
           }
@@ -87,108 +87,29 @@
         "image_url": "/assets/img/menu/breakfast/1780992038488-Pennylane_BREAKFAST.jpg"
       },
       {
-        "id": "burger-sandwich",
-        "items": [
-          {
-            "id": "1115",
-            "name": {
-              "tr": "CHEESEBURGER",
-              "en": "CHEESEBURGER"
-            },
-            "price": "600",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          },
-          {
-            "id": "1112",
-            "name": {
-              "tr": "PENNYBURGER",
-              "en": "PENNYBURGER"
-            },
-            "price": "690",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          },
-          {
-            "id": "03991",
-            "name": {
-              "tr": "TIFTIK BURGER",
-              "en": "TIFTIK BURGER"
-            },
-            "price": "710",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          },
-          {
-            "id": "03720",
-            "name": {
-              "tr": "TRÜFLÜ BURGER",
-              "en": "TRÜFLÜ BURGER"
-            },
-            "price": "670",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          },
-          {
-            "id": "1124",
-            "name": {
-              "tr": "VEJETERYAN BURGER",
-              "en": "VEJETERYAN BURGER"
-            },
-            "price": "400",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          },
-          {
-            "id": "1109",
-            "name": {
-              "tr": "ÇITIR TAVUK BURGER",
-              "en": "ÇITIR TAVUK BURGER"
-            },
-            "price": "500",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          }
-        ],
-        "title": {
-          "tr": "BURGER & SANDWICH",
-          "en": "BURGER & SANDWICH"
-        },
-        "image_url": "/assets/img/menu/burger-sandwich/1780992050625-Pennylane_BURGER&SANDWICH.jpg"
-      },
-      {
         "id": "starters-sauces",
         "items": [
+          {
+            "id": "03383",
+            "name": {
+              "tr": "PEYNIR TABAĞI",
+              "en": "PEYNIR TABAĞI"
+            },
+            "price": "890",
+            "passive": false,
+            "allergens": [
+              "gluten",
+              "nuts",
+              "seafood"
+            ],
+            "image_url": "/assets/img/menu/starters-sauces/1781600791175-_CEF9010.jpg",
+            "description": {
+              "tr": "35 gr Balkan Kuru Et, Kars Gravyer, Parmesan, Danish Blue; Keçi Peyniri, Ceviz, Roka, Kapari Meyvesi, Biber Reçeli, Pita",
+              "en": ""
+            },
+            "isNew": true,
+            "isSpicy": true
+          },
           {
             "id": "03545",
             "name": {
@@ -198,7 +119,7 @@
             "price": "300",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/starters-sauces/1781602327350-_CEF8972.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -318,26 +239,41 @@
             "price": "300",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/menu/starters-sauces/1781525441914-25112021024620000.jpg",
+            "image_url": "/assets/img/menu/starters-sauces/1781600680787-_CEF7379.jpg",
             "description": {
               "tr": "",
               "en": ""
-            }
-          },
-          {
-            "id": "03383",
-            "name": {
-              "tr": "PEYNIR TABAĞI",
-              "en": "PEYNIR TABAĞI"
             },
-            "price": "890",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
+            "extras": [
+              {
+                "id": "truf",
+                "name": {
+                  "tr": "Trüf Yağı",
+                  "en": "Truffle Oil"
+                },
+                "price": 30
+              },
+              {
+                "id": "parmesan",
+                "name": {
+                  "tr": "Parmesan",
+                  "en": "Parmesan"
+                },
+                "price": 30
+              },
+              {
+                "id": "kajun",
+                "name": {
+                  "tr": "Kajun",
+                  "en": "Cajun"
+                },
+                "price": 20
+              }
+            ],
+            "pairs_well": [
+              "1793",
+              "1061"
+            ]
           },
           {
             "id": "1846",
@@ -497,8 +433,123 @@
         "image_url": "/assets/img/menu/starters-sauces/1780992059680-Pennylane_STARTERS-&-SAUCES.jpg"
       },
       {
+        "id": "burger-sandwich",
+        "items": [
+          {
+            "id": "1115",
+            "name": {
+              "tr": "CHEESEBURGER",
+              "en": "CHEESEBURGER"
+            },
+            "price": "600",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
+          {
+            "id": "1112",
+            "name": {
+              "tr": "PENNYBURGER",
+              "en": "PENNYBURGER"
+            },
+            "price": "690",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
+          {
+            "id": "03991",
+            "name": {
+              "tr": "TIFTIK BURGER",
+              "en": "TIFTIK BURGER"
+            },
+            "price": "710",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
+          {
+            "id": "03720",
+            "name": {
+              "tr": "TRÜFLÜ BURGER",
+              "en": "TRÜFLÜ BURGER"
+            },
+            "price": "670",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
+          {
+            "id": "1124",
+            "name": {
+              "tr": "VEJETERYAN BURGER",
+              "en": "VEJETERYAN BURGER"
+            },
+            "price": "400",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
+          {
+            "id": "1109",
+            "name": {
+              "tr": "ÇITIR TAVUK BURGER",
+              "en": "ÇITIR TAVUK BURGER"
+            },
+            "price": "500",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/menu/burger-sandwich/pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          }
+        ],
+        "title": {
+          "tr": "BURGER & SANDWICH",
+          "en": "BURGER & SANDWICH"
+        },
+        "image_url": "/assets/img/menu/burger-sandwich/1780992050625-Pennylane_BURGER&SANDWICH.jpg"
+      },
+      {
         "id": "main",
         "items": [
+          {
+            "id": "03953",
+            "name": {
+              "tr": "YAKITORI BEEF",
+              "en": "YAKITORI BEEF"
+            },
+            "price": "890",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/menu/main/1781551702462-_CEF9081.jpg",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          },
           {
             "id": "03971",
             "name": {
@@ -618,21 +669,6 @@
               "tr": "",
               "en": ""
             }
-          },
-          {
-            "id": "03953",
-            "name": {
-              "tr": "YAKITORI BEEF",
-              "en": "YAKITORI BEEF"
-            },
-            "price": "890",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
           }
         ],
         "title": {
@@ -738,7 +774,7 @@
             "price": "350",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/desserts/1781551555449-_CEF9146.jpg",
             "description": {
               "tr": "",
               "en": ""
@@ -765,31 +801,6 @@
           "en": "DESSERTS"
         },
         "image_url": "/assets/img/menu/desserts/1781007041669-Pennylane_DESSERTS.jpg"
-      },
-      {
-        "id": "cider",
-        "items": [
-          {
-            "id": "03874",
-            "name": {
-              "tr": "STRONGBOW APPLE CIDER 33 CL ŞIŞE",
-              "en": "STRONGBOW APPLE CIDER 33 CL ŞIŞE"
-            },
-            "price": "440",
-            "passive": false,
-            "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
-            "description": {
-              "tr": "",
-              "en": ""
-            }
-          }
-        ],
-        "title": {
-          "tr": "CIDER",
-          "en": "CIDER"
-        },
-        "image_url": "/assets/img/menu/cider/1780992084005-Pennylane_CIDER.jpg"
       },
       {
         "id": "soft-drinks",
@@ -952,6 +963,31 @@
         "image_url": "/assets/img/menu/soft-drinks/1781008859747-Pennylane_SOFT_DRINKS.jpg"
       },
       {
+        "id": "cider",
+        "items": [
+          {
+            "id": "03874",
+            "name": {
+              "tr": "STRONGBOW APPLE CIDER 33 CL ŞIŞE",
+              "en": "STRONGBOW APPLE CIDER 33 CL ŞIŞE"
+            },
+            "price": "440",
+            "passive": false,
+            "allergens": [],
+            "image_url": "/assets/img/pennylane-default.png",
+            "description": {
+              "tr": "",
+              "en": ""
+            }
+          }
+        ],
+        "title": {
+          "tr": "CIDER",
+          "en": "CIDER"
+        },
+        "image_url": "/assets/img/menu/cider/1780992084005-Pennylane_CIDER.jpg"
+      },
+      {
         "id": "coffee",
         "items": [
           {
@@ -1088,7 +1124,7 @@
             "price": "400",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/beers/1781531462064-gray-pena@4x.png",
             "description": {
               "tr": "",
               "en": ""
@@ -15344,7 +15380,7 @@
       "en": "Pennylane Experience"
     },
     "main_image_url": "/assets/img/about/1775424031831-about.jpg",
-    "secondary_image_url": "/assets/img/about/1780838739444-1775425323271-gallery-1.jpg"
+    "secondary_image_url": "/assets/img/about/1781532195448-296692295_1714573422239888_5559706749877498155_n.jpg"
   },
   "events": {
     "events": [
@@ -15602,15 +15638,6 @@
   "gallery": {
     "images": [
       {
-        "id": "1",
-        "caption": {
-          "tr": "Kahve",
-          "en": "Coffee"
-        },
-        "category": "interior",
-        "image_url": "/assets/img/gallery/1775425323271-gallery-1.jpg"
-      },
-      {
         "id": "2",
         "caption": {
           "tr": "Vesper Martini",
@@ -15618,15 +15645,6 @@
         },
         "category": "drinks",
         "image_url": "/assets/img/gallery/1775425347631-gallery-4.jpg"
-      },
-      {
-        "id": "3",
-        "caption": {
-          "tr": "VIP Salonu",
-          "en": "VIP Lounge"
-        },
-        "category": "interior",
-        "image_url": "/assets/bar_interior_about.png"
       },
       {
         "id": "4",
@@ -15654,6 +15672,15 @@
         },
         "category": "drinks",
         "image_url": "/assets/img/gallery/1775425260376-13072022140659000.jpg"
+      },
+      {
+        "id": "1781532246045",
+        "image_url": "/assets/img/gallery/1781532251305-296692295_1714573422239888_5559706749877498155_n.jpg",
+        "category": "drinks",
+        "caption": {
+          "tr": "Kahve",
+          "en": "New Image"
+        }
       }
     ],
     "section_title": {
@@ -15981,5 +16008,50 @@
   },
   "newsletter_subscriptions": [
     "blue021433@gmail.com"
-  ]
+  ],
+  "storyMenu": {
+    "pages": [
+      {
+        "id": "2b145404-901c-4863-b521-2a684dbf86c2",
+        "title": {
+          "tr": "Breakfast",
+          "en": "New Page"
+        },
+        "hero_image_url": "/assets/img/menu/story-menu/1781677012640-ChatGPT-Image-17-Haz-2026-09_13_34.png",
+        "sort_order": 0,
+        "active": true,
+        "layouts": [
+          {
+            "id": "958b09d8-9688-4471-bd7f-1ffba7eb3256",
+            "x": 64.17,
+            "y": 26.09,
+            "product_id": "03929",
+            "number": 1,
+            "label": "BREAKFAST BURRITO",
+            "image_url": "/assets/img/menu/story-menu-products/1781869547105-buritto.png",
+            "size": "xl",
+            "zIndex": 10,
+            "labelX": 78.34,
+            "labelY": 40.15
+          },
+          {
+            "id": "74c978bf-ca09-4f52-8844-2700b6b39831",
+            "x": 36.39,
+            "y": 68.13,
+            "product_id": "03930",
+            "number": 2,
+            "label": "PRETZEL BRUNCH",
+            "image_url": "/assets/img/menu/story-menu-products/1781869571840-pretzel.png",
+            "size": "xl",
+            "zIndex": 10,
+            "labelX": 46.95,
+            "labelY": 85.94
+          }
+        ]
+      }
+    ]
+  },
+  "welcome_screen": {
+    "logo_url": "/assets/img/menu/welcome-screen/1781862316652-1781526967084-gray-pena@4x.jpg"
+  }
 }
