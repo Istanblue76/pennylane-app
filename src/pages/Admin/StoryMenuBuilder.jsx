@@ -145,6 +145,77 @@ const DraggableMarker = ({ layout, isSelected, onSelect, onDragEnd, allProducts,
 };
 
 /* ─────────────────────────────────────────────
+   DRAGGABLE LIST BLOCK (Menu-style list layout)
+───────────────────────────────────────────── */
+const DraggableListBlock = ({ layout, isSelected, onSelect, onDragEnd, allProducts }) => {
+  const ref = useRef(null);
+  const dragStartPos = useRef(null);
+  const hasDragged = useRef(false);
+
+  const handleMouseDown = (e) => {
+    e.stopPropagation();
+    hasDragged.current = false;
+    const parent = ref.current?.closest('[data-canvas]');
+    if (!parent) return;
+    const rect = parent.getBoundingClientRect();
+    dragStartPos.current = {
+      startMouseY: e.clientY,
+      startY: layout.y,
+      rectH: rect.height,
+    };
+    const onMouseMove = (ev) => {
+      if (!dragStartPos.current) return;
+      const { startMouseY, startY, rectH } = dragStartPos.current;
+      const dy = ((ev.clientY - startMouseY) / rectH) * 100;
+      if (Math.abs(dy) > 0.5) hasDragged.current = true;
+      const newY = Math.max(2, Math.min(98, startY + dy));
+      // Keep x fixed at 50, only update y
+      onDragEnd(50, parseFloat(newY.toFixed(2)));
+    };
+    const onMouseUp = () => {
+      if (!hasDragged.current) onSelect();
+      dragStartPos.current = null;
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+  };
+
+  const items = layout.listItems || [];
+
+  return (
+    <div
+      ref={ref}
+      onMouseDown={handleMouseDown}
+      className={`absolute z-20 cursor-ns-resize select-none ${isSelected ? 'ring-2 ring-blue-400 ring-offset-1 ring-offset-transparent rounded' : ''}`}
+      style={{ left: '4%', right: '4%', top: `${layout.y}%`, transform: 'translateY(-50%)' }}
+    >
+      {items.length === 0 ? (
+        <div className={`px-3 py-2 rounded border border-dashed text-center ${isSelected ? 'border-blue-400 bg-blue-400/10' : 'border-white/20 bg-black/40'}`}>
+          <span className="text-white/40 text-[9px]">Liste Boş — Sol panelden Öğe Ekle</span>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-[6px] px-2 py-2 w-full">
+          {items.map((item) => {
+            const prod = allProducts?.find(p => p.id === item.product_id);
+            const name = prod ? (prod.name?.tr || prod.name) : item.label;
+            const price = prod ? prod.price : item.price;
+            return (
+              <div key={item.id} className="flex items-baseline gap-2 w-full">
+                <span className="text-white font-bold text-[11px] leading-tight whitespace-nowrap shrink-0">{name || 'Ürün Adı'}</span>
+                <span className="flex-1 border-b border-dotted border-white/30 mb-[3px]" />
+                <span className="text-white font-bold text-[10px] whitespace-nowrap shrink-0">{price ? `${price} TL` : '— TL'}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
    PRODUCT SEARCH DROPDOWN
 ───────────────────────────────────────────── */
 const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "— Ürün Seçin —" }) => {
@@ -260,6 +331,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
   const [selectedLayoutId, setSelectedLayoutId] = useState(null);
   const [isBgUploading, setIsBgUploading] = useState(false);
   const [isProductUploading, setIsProductUploading] = useState(false);
+  const [showGridLines, setShowGridLines] = useState(false);
 
   /* ── upload helper ── */
   const uploadFile = async (file, category) => {
@@ -400,6 +472,24 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
     setSelectedLayoutId(newLayout.id);
   };
 
+  /* ── NEW: Add a list block (menu list layout) ── */
+  const handleAddListBlock = (pageId) => {
+    const page = pages.find(p => p.id === pageId);
+    const newLayout = {
+      id: crypto.randomUUID(),
+      x: 50, y: 50,
+      listBlock: true,
+      product_id: '',
+      number: (page.layouts?.length || 0) + 1,
+      label: '',
+      size: 'md',
+      zIndex: 20,
+      listItems: [], // array of { id, product_id, label, price }
+    };
+    handleUpdatePage(pageId, { layouts: [...(page.layouts || []), newLayout] });
+    setSelectedLayoutId(newLayout.id);
+  };
+
   /* ── page actions ── */
   const handleAddPage = () => {
     const newPage = {
@@ -487,6 +577,14 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                 </div>
                 <span className="text-[10px] font-medium">Serbest Etiket</span>
               </button>
+              <button onClick={() => handleAddListBlock(page.id)} disabled={!hasBackground} className="flex-1 py-2 rounded-lg bg-dark/50 border border-blue-400/20 hover:border-blue-400/50 text-textSecondary hover:text-blue-300 transition-all flex flex-col items-center justify-center gap-1 group">
+                <div className="w-6 h-6 rounded bg-black/50 border border-white/20 flex flex-col items-center justify-center shadow-md gap-[2px]">
+                  <div className="w-4 h-[2px] bg-white/60 rounded" />
+                  <div className="w-4 h-[2px] bg-white/40 rounded" />
+                  <div className="w-4 h-[2px] bg-white/20 rounded" />
+                </div>
+                <span className="text-[10px] font-medium">Liste Düz.</span>
+              </button>
               <label className="flex-1 py-2 rounded-lg bg-secondary/10 border border-secondary/30 hover:bg-secondary/20 hover:border-secondary/60 text-secondary transition-all flex flex-col items-center justify-center gap-1 cursor-pointer group">
                 <input type="file" accept="image/*" className="hidden" onChange={e => handleNewProductImageUpload(e, page.id)} disabled={isProductUploading || !hasBackground} />
                 {isProductUploading ? (
@@ -533,7 +631,51 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                     </div>
                   )}
 
-                  {/* Step 3: Link product */}
+                  {/* Step 3: Link product OR list block management */}
+                  {selectedLayout.listBlock ? (
+                    <div className="space-y-3">
+                      <label className="text-[10px] text-textSecondary uppercase mb-1 block">📋 Liste Öğeleri</label>
+                      {(selectedLayout.listItems || []).map((item, idx) => {
+                        const prod = allProducts.find(p => p.id === item.product_id);
+                        const itemName = prod ? (prod.name?.tr || prod.name) : item.label;
+                        const itemPrice = prod ? prod.price : item.price;
+                        return (
+                          <div key={item.id} className="flex items-center gap-2 bg-white/5 rounded-lg p-2">
+                            <span className="text-[10px] text-white/40 w-4 shrink-0">{idx + 1}.</span>
+                            <div className="flex-1 min-w-0">
+                              <ProductSearchDropdown
+                                allProducts={allProducts}
+                                value={item.product_id || ''}
+                                onChange={val => {
+                                  const p2 = allProducts.find(p => p.id === val);
+                                  const newItems = (selectedLayout.listItems || []).map((it, i) =>
+                                    i === idx ? { ...it, product_id: val, label: p2 ? (p2.name?.tr || p2.name) : it.label, price: p2 ? p2.price : it.price } : it
+                                  );
+                                  handleUpdateHotspot(page.id, selectedLayout.id, { listItems: newItems });
+                                }}
+                                placeholder={`Öğe ${idx + 1}`}
+                              />
+                            </div>
+                            <button onClick={() => {
+                              const newItems = (selectedLayout.listItems || []).filter((_, i) => i !== idx);
+                              handleUpdateHotspot(page.id, selectedLayout.id, { listItems: newItems });
+                            }} className="p-1 text-red-400 hover:text-red-300 shrink-0">
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                        );
+                      })}
+                      <button
+                        onClick={() => {
+                          const newItem = { id: crypto.randomUUID(), product_id: '', label: '', price: '' };
+                          handleUpdateHotspot(page.id, selectedLayout.id, { listItems: [...(selectedLayout.listItems || []), newItem] });
+                        }}
+                        className="w-full py-1.5 rounded-lg border border-dashed border-blue-400/30 text-blue-400 text-[10px] hover:bg-blue-400/10 transition-colors flex items-center justify-center gap-1"
+                      >
+                        <Plus className="w-3 h-3" /> Öğe Ekle
+                      </button>
+                    </div>
+                  ) : (
                   <div>
                     <label className="text-[10px] text-textSecondary uppercase mb-1 block">🔗 Veritabanından Ürün Seç</label>
                     <ProductSearchDropdown
@@ -549,6 +691,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                       placeholder="-- Ürün Seçin --"
                     />
                   </div>
+                  )}
 
                   {/* Size (only for images) */}
                   {selectedLayout.image_url && (
@@ -616,12 +759,26 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                       className={`w-full flex items-center gap-2 p-2 rounded-lg text-left transition-all ${l.id === selectedLayoutId ? 'bg-secondary/20 border border-secondary/40' : 'bg-white/5 border border-white/5 hover:border-white/20'}`}
                     >
                       <div className="w-8 h-8 shrink-0 rounded overflow-hidden bg-white/5 flex items-center justify-center">
-                        {l.image_url ? <img src={l.image_url} alt="" className="max-w-full max-h-full object-contain" /> : <span className="text-[10px] text-white/30">Etiket</span>}
+                        {l.image_url ? (
+                          <img src={l.image_url} alt="" className="max-w-full max-h-full object-contain" />
+                        ) : l.listBlock ? (
+                          <span className="text-[10px] text-blue-400 font-medium">Liste</span>
+                        ) : (
+                          <span className="text-[10px] text-white/30">Etiket</span>
+                        )}
                       </div>
-                      <span className="flex-1 text-xs text-white truncate">{l.label || `Alan ${l.number}`}</span>
-                      <span className={`text-[9px] px-1.5 py-0.5 rounded ${l.product_id ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
-                        {l.product_id ? '✓' : 'Bağlı değil'}
+                      <span className="flex-1 text-xs text-white truncate">
+                        {l.listBlock ? (l.label || `Liste ${l.number}`) : (l.label || `Alan ${l.number}`)}
                       </span>
+                      {l.listBlock ? (
+                        <span className={`text-[9px] px-1.5 py-0.5 rounded ${(l.listItems && l.listItems.length > 0) ? 'bg-blue-500/20 text-blue-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                          {(l.listItems && l.listItems.length > 0) ? `${l.listItems.length} Ürün` : 'Öğe Yok'}
+                        </span>
+                      ) : (
+                        <span className={`text-[9px] px-1.5 py-0.5 rounded ${l.product_id ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
+                          {l.product_id ? '✓' : 'Bağlı değil'}
+                        </span>
+                      )}
                     </button>
                   ))}
                 </div>
@@ -631,13 +788,26 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
 
           {/* ── Canvas preview ── */}
           <div className="lg:col-span-2 flex flex-col items-center">
-            <p className="text-xs text-textSecondary mb-2 self-start">
-              <span className="text-secondary font-bold">Önizleme:</span> Etiketleri sürükleyip yemeklerin yanına bırakın
-            </p>
+            <div className="flex justify-between items-center w-full max-w-[360px] mb-2 self-start">
+              <p className="text-xs text-textSecondary">
+                <span className="text-secondary font-bold">Önizleme:</span> Etiketleri sürükleyip yemeklerin yanına bırakın
+              </p>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <span className="text-[10px] text-textSecondary">Kılavuz Çizgiler</span>
+                <input type="checkbox" className="sr-only peer" checked={showGridLines} onChange={e => setShowGridLines(e.target.checked)} />
+                <div className="w-7 h-4 bg-dark/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-textSecondary peer-checked:after:bg-secondary after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-secondary/20 relative"></div>
+              </label>
+            </div>
             <div
               data-canvas="true"
               className={`relative w-full max-w-[360px] ${hasBackground ? 'h-auto' : 'aspect-[9/16]'} bg-[#111] rounded-xl overflow-hidden border border-white/10 mx-auto`}
             >
+              {showGridLines && (
+                <div className="absolute inset-0 pointer-events-none z-50" style={{
+                  backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                  backgroundSize: '10% 5%'
+                }} />
+              )}
               {hasBackground ? (
                 <>
                   <div className="relative w-full">
@@ -675,9 +845,21 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                     </React.Fragment>
                   ))}
                   
-                  {/* Markers (no image) */}
-                  {(page.layouts || []).filter(l => !l.image_url).map(layout => (
+                  {/* Markers (no image, no listBlock) */}
+                  {(page.layouts || []).filter(l => !l.image_url && !l.listBlock).map(layout => (
                     <DraggableMarker
+                      key={layout.id}
+                      layout={layout}
+                      isSelected={selectedLayoutId === layout.id}
+                      onSelect={() => setSelectedLayoutId(layout.id)}
+                      onDragEnd={(x, y) => handleUpdateHotspot(page.id, layout.id, { x, y })}
+                      allProducts={allProducts}
+                    />
+                  ))}
+
+                  {/* List Blocks */}
+                  {(page.layouts || []).filter(l => l.listBlock).map(layout => (
+                    <DraggableListBlock
                       key={layout.id}
                       layout={layout}
                       isSelected={selectedLayoutId === layout.id}

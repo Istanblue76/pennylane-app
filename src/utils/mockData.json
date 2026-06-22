@@ -16287,6 +16287,219 @@
             "labelY": 92.16
           }
         ]
+      },
+      {
+        "id": "57914131-6084-454f-9102-d508bd598e4e",
+        "title": {
+          "tr": "Cocktail's",
+          "en": ""
+        },
+        "hero_image_url": "/assets/img/menu/story-menu-bg/1782129346992-bg-alt-yok.webp",
+        "sort_order": 3,
+        "active": true,
+        "layouts": [
+          {
+            "id": "ad58bac6-33a8-4039-8ca9-f92420bc7c05",
+            "x": 18.05,
+            "y": 20.43,
+            "product_id": "1563",
+            "number": 1,
+            "label": "CAMPARI AMERICANO",
+            "image_url": "/assets/img/menu/story-menu-products/1782130143554-BaÅlÄ±ksÄ±z-1.png",
+            "size": "lg",
+            "zIndex": 10,
+            "label_size": "sm",
+            "labelX": 18.61,
+            "labelY": 36.82,
+            "custom_scale": 31
+          },
+          {
+            "id": "a77ded18-b208-4a58-ad0d-26904b6832dd",
+            "x": 52.22,
+            "y": 21.83,
+            "product_id": "1561",
+            "number": 2,
+            "label": "APEROL SPRITZ",
+            "image_url": "/assets/img/menu/story-menu-products/1782130265815-BaÅlÄ±ksÄ±z-2.png",
+            "size": "md",
+            "zIndex": 10,
+            "label_size": "sm",
+            "labelX": 52.22,
+            "labelY": 37.14
+          },
+          {
+            "id": "3e6f6a02-5d03-4cd3-aae7-1cf3f914c86b",
+            "x": 80.28,
+            "y": 21.67,
+            "product_id": "1562",
+            "number": 3,
+            "label": "CAMPARI SPRITZ",
+            "image_url": "/assets/img/menu/story-menu-products/1782137678613-BaÅlÄ±ksÄ±z-4.png",
+            "size": "md",
+            "zIndex": 10,
+            "custom_scale": null,
+            "label_size": "sm",
+            "labelX": 80.84,
+            "labelY": 37.3
+          },
+          {
+            "id": "911af8d3-4d99-405e-bee4-4d650787aef1",
+            "x": 19.44,
+            "y": 51.72,
+            "product_id": "1568",
+            "number": 4,
+            "label": "DIRTY  MARTINI",
+            "image_url": "/assets/img/menu/story-menu-products/1782137919711-BaÅlÄ±ksÄ±z-5.png",
+            "size": "md",
+            "zIndex": 10,
+            "custom_scale": null,
+            "label_size": "sm"
+          },
+          {
+            "id": "a5a36c74-622e-48b4-9bd5-7ef33857c900",
+            "x": 50.83,
+            "y": 51.87,
+            "product_id": "03587",
+            "number": 5,
+            "label": "LILLET ROSE SPRITZ",
+            "image_url": "/assets/img/menu/story-menu-products/1782138129393-BaÅlÄ±ksÄ±z-6.png",
+            "size": "sm",
+            "zIndex": 10,
+            "custom_scale": 18,
+            "label_size": "sm"
+          },
+          {
+            "id": "d9ae0179-5024-4f0e-8cca-6e4e469f09a9",
+            "x": 81.11,
+            "y": 52.03,
+            "product_id": "1567",
+            "number": 6,
+            "label": "NEGRONI",
+            "image_url": "/assets/img/menu/story-menu-products/1782138324019-BaÅlÄ±ksÄ±z-7.png",
+            "size": "sm",
+            "zIndex": 10,
+            "custom_scale": 21,
+            "label_size": "sm"
+          },
+          {
+            "id": "bddab5a6-ae17-49d9-b73b-3c3c82b4285b",
+            "x": 20,
+            "y": 80.83,
+            "product_id": "1601",
+            "number": 7,
+            "label": "AMARETTO SOUR",
+            "image_url": "/assets/img/menu/story-menu-products/1782145515707-BaÅlÄ±ksÄ±z-8.png",
+            "size": "md",
+            "zIndex": 10,
+            "label_size": "sm"
+          },
+          {
+            "id": "772cf996-8b63-401e-9352-47c7dff74aa3",
+            "x": 50,
+            "y": 81.14,
+            "product_id": "1577",
+            "number": 8,
+            "label": "BLOODY MARY",
+            "image_url": "/assets/img/menu/story-menu-products/1782145567136-BaÅlÄ±ksÄ±z-9.png",
+            "size": "md",
+            "zIndex": 10,
+            "label_size": "sm"
+          },
+          {
+            "id": "6bd4f42f-53b0-42e4-b944-2703c6a7ccc8",
+            "x": 79.72,
+            "y": 80.99,
+            "product_id": "1580",
+            "number": 9,
+            "label": "CAIPIRINHA",
+            "image_url": "/assets/img/menu/story-menu-products/1782145591609-BaÅlÄ±ksÄ±z-10.png",
+            "size": "md",
+            "zIndex": 10,
+            "label_size": "sm"
+          }
+        ]
+      },
+      {
+        "id": "6a153550-4664-4c9d-ad12-27734a427eb2",
+        "title": {
+          "tr": "Beer's Draft",
+          "en": ""
+        },
+        "hero_image_url": "/assets/img/menu/story-menu-bg/1782139533270-Table.jpg",
+        "sort_order": 4,
+        "active": true,
+        "layouts": [
+          {
+            "id": "ed8f8883-d552-42cc-9bdd-e7bf1482abe2",
+            "x": 50,
+            "y": 19.18,
+            "listBlock": true,
+            "product_id": "",
+            "number": 1,
+            "label": "",
+            "size": "md",
+            "zIndex": 20,
+            "listItems": [
+              {
+                "id": "efc69042-758c-491a-a264-2be8e212b6cb",
+                "product_id": "02246",
+                "label": "TUBORG AMBER 50CL ŞİŞE",
+                "price": "320"
+              },
+              {
+                "id": "49fd377f-e41a-4976-9532-41327648d546",
+                "product_id": "02231",
+                "label": "TUBORG FILTRESIZ 50 CL. ŞIŞE",
+                "price": "320"
+              },
+              {
+                "id": "7ff63525-661f-4353-afcd-b1ad0fc8bec9",
+                "product_id": "02241",
+                "label": "TUBORG GOLD 50 CL. NBR ŞIŞE",
+                "price": "290"
+              },
+              {
+                "id": "92afe389-ba5b-4b09-9646-ca7376614a38",
+                "product_id": "02244",
+                "label": "CARSBERG LUNA 50CL ŞİŞE",
+                "price": "360"
+              },
+              {
+                "id": "f4bcb635-0d69-4803-9f5f-69e586c76c94",
+                "product_id": "02247",
+                "label": "CARSBERG ŞIŞE 50CL",
+                "price": "300"
+              }
+            ],
+            "label_size": "lg"
+          },
+          {
+            "id": "2b2d5706-055f-4f97-ac7f-7132e6b28492",
+            "x": 50,
+            "y": 36.7,
+            "listBlock": true,
+            "product_id": "",
+            "number": 2,
+            "label": "",
+            "size": "md",
+            "zIndex": 20,
+            "listItems": [
+              {
+                "id": "12ee5289-95cb-4f63-a744-5138b6118265",
+                "product_id": "1065",
+                "label": "TUBORG GOLD FIÇI 50 CL",
+                "price": "280"
+              },
+              {
+                "id": "6bd7422d-a691-4e20-87cc-7b2af5fd32d8",
+                "product_id": "1067",
+                "label": "TUBORG GOLD FIÇI  33 CL",
+                "price": "240"
+              }
+            ],
+            "label_size": "md"
+          }
+        ]
       }
     ]
   },

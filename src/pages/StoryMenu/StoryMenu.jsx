@@ -158,6 +158,46 @@ const ProductImageHotspot = ({ layout, product, lang, onClick }) => {
   );
 };
 
+/* ─────────────────────────────────────────────
+   LIST BLOCK DISPLAY (frontend rendering)
+───────────────────────────────────────────── */
+const ListBlockDisplay = ({ layout, allProducts, lang, onClick }) => {
+  const items = layout.listItems || [];
+  if (items.length === 0) return null;
+
+  return (
+    <div
+      className="absolute z-10"
+      style={{ left: '4%', right: '4%', top: `${layout.y}%`, transform: 'translateY(-50%)' }}
+    >
+      <div className="flex flex-col gap-[10px] px-1 py-1 w-full">
+        {items.map((item) => {
+          const prod = allProducts?.find(p => p.id === item.product_id);
+          const name = prod ? getVal(prod.name, lang) : item.label;
+          const price = prod ? prod.price : item.price;
+          const isClickable = !!prod;
+          return (
+            <div
+              key={item.id}
+              className={`flex items-baseline gap-3 w-full ${isClickable ? 'cursor-pointer group' : ''}`}
+              onClick={() => isClickable && onClick({ product_id: item.product_id })}
+            >
+              <span className="text-white font-bold text-[clamp(12px,3.5vw,18px)] leading-tight whitespace-nowrap shrink-0 group-hover:text-amber-200 transition-colors">
+                {name || 'Ürün Adı'}
+              </span>
+              <span className="flex-1 border-b border-dotted border-white/40 mb-[4px]" style={{ minWidth: '8px' }} />
+              <span className="text-white font-bold text-[clamp(11px,3vw,16px)] whitespace-nowrap shrink-0 group-hover:text-amber-200 transition-colors">
+                {price ? `${price} TL` : ''}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+
 const MenuStoryPage = ({ page, onHotspotClick, allProducts, lang }) => {
   return (
     <div className="relative w-full min-h-[100dvh] overflow-hidden bg-[#0a0a0a] flex flex-col items-center justify-start">
@@ -186,6 +226,19 @@ const MenuStoryPage = ({ page, onHotspotClick, allProducts, lang }) => {
           {(page.layouts || []).map(layout => {
             const product = allProducts.find(p => p.id === layout.product_id);
             const hasLabel = layout.product_id || layout.label;
+
+            // List block layout
+            if (layout.listBlock) {
+              return (
+                <ListBlockDisplay
+                  key={layout.id}
+                  layout={layout}
+                  allProducts={allProducts}
+                  lang={lang}
+                  onClick={onHotspotClick}
+                />
+              );
+            }
             
             if (layout.image_url) {
               return (
@@ -206,6 +259,7 @@ const MenuStoryPage = ({ page, onHotspotClick, allProducts, lang }) => {
     </div>
   );
 };
+
 
 const WelcomeStoryPage = ({ config, lang, setLang, onScrollNext }) => {
   const ws = config || {};
