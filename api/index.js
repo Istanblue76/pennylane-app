@@ -17,7 +17,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 
-const DATA_PATH = path.join(process.cwd(), 'src/utils/mockData.json');
+const DATA_PATH = path.resolve(__dirname, '../src/utils/mockData.json');
 
 // Supabase
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;

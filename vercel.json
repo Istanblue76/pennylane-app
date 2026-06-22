@@ -5,5 +5,11 @@
     { "src": "/assets/(.*)", "dest": "/assets/$1" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  ],
+  "functions": {
+    "api/**/*": {
+      "includeFiles": "src/utils/mockData.json",
+      "excludeFiles": "public/assets/img/**"
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Plus, Trash2, Edit2, ImageIcon, Upload, Loader2, Move, Smartphone } from 'lucide-react';
+import { Plus, Trash2, Edit2, ImageIcon, Upload, Loader2, Move, Smartphone, Search, ChevronDown, Check, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 
@@ -46,7 +46,7 @@ const DraggableProductImage = ({ layout, isSelected, onSelect, onDragEnd, allPro
   };
 
   const sizeMap = { sm: '16%', md: '26%', lg: '40%', xl: '56%' };
-  const w = sizeMap[layout.size || 'md'];
+  const w = layout.custom_scale ? `${layout.custom_scale}%` : sizeMap[layout.size || 'md'];
 
   const product = allProducts?.find(p => p.id === layout.product_id);
   const name = product ? (product.name?.tr || product.name) : layout.label;
@@ -117,14 +117,17 @@ const DraggableMarker = ({ layout, isSelected, onSelect, onDragEnd, allProducts,
   const price = product ? product.price : null;
   const isSpicy = product?.tags?.includes('spicy');
 
+  const labelScaleMap = { sm: 0.8, md: 1, lg: 1.25, xl: 1.6 };
+  const scale = labelScaleMap[layout.label_size || 'md'];
+
   return (
     <div
       ref={ref}
       onMouseDown={handleMouseDown}
       className={`absolute z-20 cursor-grab active:cursor-grabbing p-1 ${isSelected ? 'ring-2 ring-secondary rounded-lg ring-offset-2 ring-offset-[#111]' : ''}`}
-      style={{ left: `${posX}%`, top: `${posY}%`, transform: 'translate(-50%, -50%)' }}
+      style={{ left: `${posX}%`, top: `${posY}%`, transform: `translate(-50%, -50%) scale(${scale})` }}
     >
-      <div className="flex flex-col items-center bg-black/85 backdrop-blur-sm px-3 py-2 rounded shadow-2xl min-w-max border border-white/5 pointer-events-auto transition-transform hover:scale-105">
+      <div className="flex flex-col items-center bg-black/50 backdrop-blur-md px-3 py-2 rounded shadow-2xl min-w-max border border-white/10 pointer-events-auto transition-transform hover:scale-105">
         {isSpicy && (
           <span className="text-red-500 text-[10px] mb-0.5">🌶️</span>
         )}
@@ -137,6 +140,111 @@ const DraggableMarker = ({ layout, isSelected, onSelect, onDragEnd, allProducts,
           </span>
         )}
       </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   PRODUCT SEARCH DROPDOWN
+───────────────────────────────────────────── */
+const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "— Ürün Seçin —" }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const dropdownRef = useRef(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredProducts = allProducts.filter(p => {
+    const name = p.name?.tr || p.name || '';
+    return name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  const selectedProduct = allProducts.find(p => p.id === value);
+  const selectedName = selectedProduct ? (selectedProduct.name?.tr || selectedProduct.name) : placeholder;
+
+  return (
+    <div className="relative w-full" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between bg-dark/50 border border-white/10 rounded p-2 text-white text-sm outline-none focus:border-secondary hover:bg-white/5 transition-colors"
+      >
+        <span className="truncate pr-2">{selectedName}</span>
+        <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 w-full mt-1 bg-[#1a1a1a] border border-white/10 rounded shadow-xl overflow-hidden"
+          >
+            <div className="p-2 border-b border-white/10 flex items-center gap-2">
+              <Search className="w-4 h-4 text-white/40" />
+              <input
+                type="text"
+                placeholder="Ürün ara..."
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+                autoFocus
+              />
+              {searchTerm && (
+                <button type="button" onClick={() => setSearchTerm('')}>
+                  <X className="w-4 h-4 text-white/40 hover:text-white transition-colors" />
+                </button>
+              )}
+            </div>
+            <div className="max-h-48 overflow-y-auto custom-scrollbar">
+              <button
+                type="button"
+                onClick={() => {
+                  onChange('');
+                  setIsOpen(false);
+                  setSearchTerm('');
+                }}
+                className={`w-full text-left px-3 py-2 text-sm transition-colors ${!value ? 'bg-secondary/20 text-secondary' : 'text-white/70 hover:bg-white/5'}`}
+              >
+                {placeholder}
+              </button>
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map(prod => {
+                  const pName = prod.name?.tr || prod.name;
+                  const isSelected = prod.id === value;
+                  return (
+                    <button
+                      key={prod.id}
+                      type="button"
+                      onClick={() => {
+                        onChange(prod.id);
+                        setIsOpen(false);
+                        setSearchTerm('');
+                      }}
+                      className={`w-full flex items-center justify-between px-3 py-2 text-sm transition-colors ${isSelected ? 'bg-secondary/20 text-secondary' : 'text-white hover:bg-white/5'}`}
+                    >
+                      <span className="truncate pr-2">{pName}</span>
+                      {isSelected && <Check className="w-4 h-4 shrink-0" />}
+                    </button>
+                  );
+                })
+              ) : (
+                <div className="px-3 py-3 text-sm text-white/40 text-center">Sonuç bulunamadı</div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -428,31 +536,53 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                   {/* Step 3: Link product */}
                   <div>
                     <label className="text-[10px] text-textSecondary uppercase mb-1 block">🔗 Veritabanından Ürün Seç</label>
-                    <select
+                    <ProductSearchDropdown
+                      allProducts={allProducts}
                       value={selectedLayout.product_id || ''}
-                      onChange={e => {
-                        const prod = allProducts.find(p => p.id === e.target.value);
+                      onChange={val => {
+                        const prod = allProducts.find(p => p.id === val);
                         handleUpdateHotspot(page.id, selectedLayout.id, {
-                          product_id: e.target.value,
+                          product_id: val,
                           label: prod ? (prod.name?.tr || prod.name) : selectedLayout.label,
                         });
                       }}
-                      className="w-full bg-dark/50 border border-white/10 rounded p-2 text-white text-sm outline-none focus:border-secondary"
-                    >
-                      <option value="">-- Ürün Seçin --</option>
-                      {allProducts.map(prod => (
-                        <option key={prod.id} value={prod.id}>{prod.name?.tr || prod.name}</option>
-                      ))}
-                    </select>
+                      placeholder="-- Ürün Seçin --"
+                    />
                   </div>
 
                   {/* Size (only for images) */}
                   {selectedLayout.image_url && (
+                    <div className="space-y-3">
+                      <div>
+                        <label className="text-[10px] text-textSecondary uppercase mb-1 block">📐 Görsel Boyutu</label>
+                        <div className="grid grid-cols-4 gap-1">
+                          {[{ v: 'sm', l: 'Küçük' }, { v: 'md', l: 'Orta' }, { v: 'lg', l: 'Büyük' }, { v: 'xl', l: 'XL' }].map(s => (
+                            <button key={s.v} onClick={() => handleUpdateHotspot(page.id, selectedLayout.id, { size: s.v, custom_scale: null })} className={`py-1.5 rounded text-xs font-medium transition-all ${((selectedLayout.size || 'md') === s.v && !selectedLayout.custom_scale) ? 'bg-secondary text-primary' : 'bg-dark/50 border border-white/10 text-textSecondary hover:border-secondary/40'}`}>
+                              {s.l}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-textSecondary uppercase mb-1 flex items-center justify-between">
+                          <span>Manuel Görsel Boyutu (Özel)</span>
+                          {selectedLayout.custom_scale && <span className="text-secondary">{selectedLayout.custom_scale}%</span>}
+                        </label>
+                        <input type="range" min="10" max="150" step="1" 
+                          value={selectedLayout.custom_scale || parseInt({ sm: '16', md: '26', lg: '40', xl: '56' }[selectedLayout.size || 'md']) || 26} 
+                          onChange={e => handleUpdateHotspot(page.id, selectedLayout.id, { custom_scale: parseInt(e.target.value) })} 
+                          className="w-full accent-secondary" />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Label size (for both image labels and markers) */}
+                  {(selectedLayout.label || selectedLayout.product_id || !selectedLayout.image_url) && (
                     <div>
-                      <label className="text-[10px] text-textSecondary uppercase mb-1 block">📐 Görsel Boyutu</label>
+                      <label className="text-[10px] text-textSecondary uppercase mb-1 block">🏷️ Etiket / Fiyat Boyutu</label>
                       <div className="grid grid-cols-4 gap-1">
                         {[{ v: 'sm', l: 'Küçük' }, { v: 'md', l: 'Orta' }, { v: 'lg', l: 'Büyük' }, { v: 'xl', l: 'XL' }].map(s => (
-                          <button key={s.v} onClick={() => handleUpdateHotspot(page.id, selectedLayout.id, { size: s.v })} className={`py-1.5 rounded text-xs font-medium transition-all ${(selectedLayout.size || 'md') === s.v ? 'bg-secondary text-primary' : 'bg-dark/50 border border-white/10 text-textSecondary hover:border-secondary/40'}`}>
+                          <button key={s.v} onClick={() => handleUpdateHotspot(page.id, selectedLayout.id, { label_size: s.v })} className={`py-1.5 rounded text-xs font-medium transition-all ${(selectedLayout.label_size || 'md') === s.v ? 'bg-secondary text-primary' : 'bg-dark/50 border border-white/10 text-textSecondary hover:border-secondary/40'}`}>
                             {s.l}
                           </button>
                         ))}
@@ -506,12 +636,14 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
             </p>
             <div
               data-canvas="true"
-              className="relative w-full max-w-[360px] aspect-[9/16] bg-[#111] rounded-xl overflow-hidden border border-white/10 mx-auto"
+              className={`relative w-full max-w-[360px] ${hasBackground ? 'h-auto' : 'aspect-[9/16]'} bg-[#111] rounded-xl overflow-hidden border border-white/10 mx-auto`}
             >
               {hasBackground ? (
                 <>
-                  <img src={page.hero_image_url} alt="BG" className="w-full h-full object-cover pointer-events-none select-none opacity-90" draggable={false} />
-                  <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                  <div className="relative w-full">
+                    <img src={page.hero_image_url} alt="BG" className="w-full h-auto object-cover pointer-events-none select-none block opacity-90" draggable={false} />
+                    <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                  </div>
 
                   {/* Title overlay - Right aligned (matches frontend) */}
                   <div className="absolute top-6 left-6 right-6 z-10 pointer-events-none text-right">
@@ -601,7 +733,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Görseller */}
           <div className="space-y-4">
             <div>
@@ -646,6 +778,42 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
             <div>
               <label className="text-[10px] text-textSecondary uppercase mb-1 block">Buton Yazısı</label>
               <input type="text" value={ws.cta_text !== undefined ? ws.cta_text : "LET'S START"} onChange={e => handleWelcomeFieldChange('cta_text', e.target.value)} placeholder="örn. Let's Start" className="w-full bg-dark border border-white/10 rounded p-2 text-white text-sm" />
+            </div>
+            <div>
+              <label className="text-[10px] text-textSecondary uppercase mb-1 block">Fiyat Güncelleme Yazısı</label>
+              <input type="text" value={ws.price_update_date || ''} onChange={e => handleWelcomeFieldChange('price_update_date', e.target.value)} placeholder="örn. Fiyat Güncelleme Tarihi: 06/05/2026" className="w-full bg-dark border border-white/10 rounded p-2 text-white text-sm" />
+            </div>
+          </div>
+
+          {/* Arka Plan Görünüm Ayarları */}
+          <div className="space-y-4">
+            <div>
+              <label className="text-[10px] text-textSecondary uppercase mb-1 block">Video Görünürlüğü (Saydamlık)</label>
+              <div className="flex items-center gap-2">
+                <input type="range" min="0" max="1" step="0.1" value={ws.bg_opacity !== undefined ? ws.bg_opacity : 0.6} onChange={e => handleWelcomeFieldChange('bg_opacity', parseFloat(e.target.value))} className="w-full accent-secondary" />
+                <span className="text-white text-xs w-6 text-right">{ws.bg_opacity !== undefined ? ws.bg_opacity : 0.6}</span>
+              </div>
+            </div>
+            <div>
+              <label className="text-[10px] text-textSecondary uppercase mb-1 block">Video Bulanıklığı (Blur)</label>
+              <div className="flex items-center gap-2">
+                <input type="range" min="0" max="20" step="1" value={ws.bg_blur !== undefined ? ws.bg_blur : 0} onChange={e => handleWelcomeFieldChange('bg_blur', parseInt(e.target.value))} className="w-full accent-secondary" />
+                <span className="text-white text-xs w-6 text-right">{ws.bg_blur !== undefined ? ws.bg_blur : 0}px</span>
+              </div>
+            </div>
+            <div>
+              <label className="text-[10px] text-textSecondary uppercase mb-1 block">Örtü Rengi (Filtre Rengi)</label>
+              <div className="flex items-center gap-2">
+                <input type="color" value={ws.overlay_color || '#000000'} onChange={e => handleWelcomeFieldChange('overlay_color', e.target.value)} className="w-8 h-8 rounded cursor-pointer bg-dark border border-white/10 p-0" />
+                <span className="text-white text-xs uppercase">{ws.overlay_color || '#000000'}</span>
+              </div>
+            </div>
+            <div>
+              <label className="text-[10px] text-textSecondary uppercase mb-1 block">Örtü Yoğunluğu</label>
+              <div className="flex items-center gap-2">
+                <input type="range" min="0" max="1" step="0.1" value={ws.overlay_opacity !== undefined ? ws.overlay_opacity : 0.4} onChange={e => handleWelcomeFieldChange('overlay_opacity', parseFloat(e.target.value))} className="w-full accent-secondary" />
+                <span className="text-white text-xs w-6 text-right">{ws.overlay_opacity !== undefined ? ws.overlay_opacity : 0.4}</span>
+              </div>
             </div>
           </div>
         </div>
