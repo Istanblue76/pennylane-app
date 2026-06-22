@@ -26,10 +26,7 @@ const supabase = (process.env.SUPABASE_URL && supabaseKey)
   : null;
 
 async function readCMSData() {
-  if (supabase) {
-    const { data } = await supabase.from('pennylane_cms').select('content').eq('id', 'main').single();
-    if (data && data.content) return data.content;
-  }
+  // Always use mockData.json on Vercel because local admin panel writes to mockData.json
   try {
     return JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
   } catch (e) {
