@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Plus, Trash2, Edit2, ImageIcon, Upload, Loader2, Move, Smartphone, Search, ChevronDown, Check, X } from 'lucide-react';
+import { Plus, Trash2, Edit2, ImageIcon, Upload, Loader2, Move, Smartphone, Search, ChevronDown, Check, X, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 
@@ -323,6 +323,461 @@ const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "�
 /* ─────────────────────────────────────────────
    MAIN COMPONENT
 ───────────────────────────────────────────── */
+const getImageBase64 = async (url) => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = url.startsWith('/') 
+      ? window.location.origin + url 
+      : url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+      
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 512;
+      canvas.height = 512;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, 512, 512);
+      try {
+        const dataURL = canvas.toDataURL('image/jpeg', 0.8);
+        const base64 = dataURL.split(',')[1];
+        resolve(base64);
+      } catch (err) {
+        reject(err);
+      }
+    };
+    img.onerror = () => reject(new Error('Görsel yüklenemedi. CORS engeline takılmış olabilir.'));
+  });
+};
+
+const AutoLayoutWizardModal = ({ isOpen, onClose, allProducts, onApply, backgroundImageUrl }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedProductIds, setSelectedProductIds] = useState([]);
+  const [layoutStyle, setLayoutStyle] = useState('ai-vision'); // 'ai-vision', 'classic-zigzag', 'classic-list', 'classic-list-block'
+  const [geminiKey, setGeminiKey] = useState(() => localStorage.getItem('gemini_api_key') || '');
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [loadingStep, setLoadingStep] = useState('');
+
+  if (!isOpen) return null;
+
+  const filtered = allProducts.filter(p => {
+    const name = p.name?.tr || p.name || '';
+    return name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  const handleToggleProduct = (id) => {
+    setSelectedProductIds(prev => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
+
+  const handleSelectAll = () => {
+    const visibleIds = filtered.map(p => p.id);
+    const allSelected = visibleIds.every(id => selectedProductIds.includes(id));
+    if (allSelected) {
+      setSelectedProductIds(prev => prev.filter(id => !visibleIds.includes(id)));
+    } else {
+      setSelectedProductIds(prev => [...new Set([...prev, ...visibleIds])]);
+    }
+  };
+
+  const handleApply = async () => {
+    if (selectedProductIds.length === 0) {
+      setErrorMsg('Lütfen en az bir ürün seçin.');
+      return;
+    }
+
+    const selectedProducts = allProducts.filter(p => selectedProductIds.includes(p.id));
+
+    if (layoutStyle === 'ai-vision') {
+      if (!geminiKey.trim()) {
+        setErrorMsg('Lütfen Google Gemini API Anahtarınızı girin.');
+        return;
+      }
+      if (!backgroundImageUrl) {
+        setErrorMsg('Arka plan görseli bulunamadı. Lütfen önce bir arka plan yükleyin.');
+        return;
+      }
+
+      localStorage.setItem('gemini_api_key', geminiKey.trim());
+      setIsLoading(true);
+      setErrorMsg('');
+      
+      try {
+        setLoadingStep('Görsel analiz için optimize ediliyor...');
+        const base64Image = await getImageBase64(backgroundImageUrl);
+        
+        setLoadingStep('Yapay zeka görseli ve boş alanları analiz ediyor...');
+        
+        const promptText = `Aşağıdaki görseli incele. Bu görsel bir telefon ekranına uygun menü arka planıdır.
+
+Bu sayfaya ${selectedProducts.length} adet tabak/ürün görseli (PNG) ve bunların yazı etiketleri (isim + fiyat) yerleştirilecektir. Sen usta bir sanat yönetmeni ve profesyonel UI tasarımcısısın. Sıradanlığın dışına çık ve mükemmel, asimetrik, yaratıcı bir kompozisyon planla:
+
+ÇOK ÖNEMLİ KURALLAR (GRID VE SIKICI HİZALAMALARI YIK):
+1. ASLA TEK TİP DİZME: Ürünleri ızgara (grid) şeklinde veya hizalı iki sütun halinde DİZME. Dümdüz alt alta veya yan yana dizilmiş sıkıcı bir görünüm İSTEMİYORUZ.
+2. ORGANİK VE DAĞINIK YERLEŞİM: Sanki ürünler masanın üzerine doğal ve rastgele bırakılmış gibi organik bir kompozisyon oluştur. X ekseninde (sağ-sol) birbirini tekrar eden hizalamalardan kaçın. Kimi ürün %15, kimi %50 (ortada), kimi %85 gibi birbirinden tamamen bağımsız ve rastgele X koordinatlarında olsun.
+3. BOŞLUKLARI HİSSET: Görselin karanlık veya uygun boşluklarına ürünleri serpiştir. Y ekseninde (yukarıdan aşağıya) %20 ile %95 arasını tamamen kullan ama aralarında asimetrik, birbirinden farklı dikey boşluklar bırak.
+4. ETİKET KONUMU: Her bir ürün görselinin (x, y) etrafında (altında, üstünde veya çaprazında) kendi etiketini (labelX, labelY) yerleştir. Görsel ile etiketi birbiriyle bütünleşik durmalı ancak ASLA başka bir ürünle üst üste binmemelidir.
+5. Sadece SAĞ ÜST KÖŞEYİ tamamen boş bırak (oraya büyük bir kategori başlığı gelecek).
+
+Yerleştirilecek ürünler:
+${selectedProducts.map((p, idx) => `${idx + 1}. ${p.name?.tr || p.name || ''} (${p.price || 0} TL) - product_id: ${p.id}`).join('\n')}
+
+Her ürün için görselin merkez konumu (x, y) ve etiketinin merkez konumu (labelX, labelY) için 0-100 arasında yüzdesel koordinatlar belirle.
+Çıktıyı SADECE ve SADECE aşağıdaki gibi geçerli bir JSON array formatında ver, başka hiçbir metin ekleme:
+
+[
+  {
+    "product_id": "seçilen_ürün_id",
+    "label": "ürün_adı",
+    "x": 25,
+    "y": 25,
+    "labelX": 25,
+    "labelY": 40
+  }
+]`;
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey.trim()}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [
+                  { text: promptText },
+                  {
+                    inlineData: {
+                      mimeType: 'image/jpeg',
+                      data: base64Image
+                    }
+                  }
+                ]
+              }
+            ],
+            generationConfig: {
+              responseMimeType: "application/json"
+            }
+          })
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          console.error("Gemini Error:", errText);
+          let errMsg = response.statusText;
+          try {
+            const errJson = JSON.parse(errText);
+            if (errJson.error && errJson.error.message) {
+              errMsg = errJson.error.message;
+            }
+          } catch(e) {}
+          throw new Error(errMsg);
+        }
+
+        const result = await response.json();
+        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!text) {
+          throw new Error('Yapay zekadan geçerli bir yanıt alınamadı.');
+        }
+
+        let parsedLayouts = [];
+        try {
+          parsedLayouts = JSON.parse(text);
+        } catch (e) {
+          const cleanedText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+          parsedLayouts = JSON.parse(cleanedText);
+        }
+
+        if (!Array.isArray(parsedLayouts)) {
+          throw new Error('Yapay zeka yanıtı liste formatında değil.');
+        }
+
+        const generatedLayouts = parsedLayouts.map((l, idx) => {
+          const product = selectedProducts.find(p => p.id === l.product_id);
+          return {
+            id: crypto.randomUUID(),
+            x: typeof l.x === 'number' ? l.x : 50,
+            y: typeof l.y === 'number' ? l.y : 30 + idx * 15,
+            product_id: l.product_id || '',
+            label: l.label || '',
+            image_url: product?.image_url || null,
+            size: 'md',
+            zIndex: 10,
+            labelX: typeof l.labelX === 'number' ? l.labelX : (typeof l.x === 'number' ? l.x : 50),
+            labelY: typeof l.labelY === 'number' ? l.labelY : (typeof l.y === 'number' ? l.y + 12 : 42 + idx * 15)
+          };
+        });
+
+        onApply(generatedLayouts);
+        onClose();
+      } catch (err) {
+        console.error(err);
+        setErrorMsg('Yapay zeka analizi başarısız oldu: ' + err.message + '\\nLütfen API anahtarınızı kontrol edin veya Klasik şablonları deneyin.');
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      let generatedLayouts = [];
+      if (layoutStyle === 'classic-list-block') {
+        generatedLayouts = [{
+          id: crypto.randomUUID(),
+          x: 50,
+          y: 50,
+          listBlock: true,
+          product_id: '',
+          label: '',
+          size: 'md',
+          zIndex: 20,
+          listItems: selectedProducts.map(p => ({
+            id: crypto.randomUUID(),
+            product_id: p.id,
+            label: p.name?.tr || p.name || '',
+            price: p.price
+          }))
+        }];
+      } else if (layoutStyle === 'classic-list') {
+        const startY = 25;
+        const endY = 85;
+        const stepY = selectedProducts.length > 1 ? (endY - startY) / (selectedProducts.length - 1) : 0;
+        generatedLayouts = selectedProducts.map((p, idx) => {
+          const y = startY + idx * stepY;
+          return {
+            id: crypto.randomUUID(),
+            x: 50,
+            y: parseFloat(y.toFixed(2)),
+            product_id: p.id,
+            label: p.name?.tr || p.name || '',
+            image_url: p.image_url || null,
+            size: 'md',
+            zIndex: 20
+          };
+        });
+      } else if (layoutStyle === 'classic-zigzag') {
+        const startY = 30;
+        const endY = 80;
+        const stepY = selectedProducts.length > 1 ? (endY - startY) / (selectedProducts.length - 1) : 0;
+        generatedLayouts = selectedProducts.map((p, idx) => {
+          const y = startY + idx * stepY;
+          const isLeft = idx % 2 === 0;
+          const x = isLeft ? 30 : 70;
+          return {
+            id: crypto.randomUUID(),
+            x: x,
+            y: parseFloat(y.toFixed(2)),
+            product_id: p.id,
+            label: p.name?.tr || p.name || '',
+            image_url: p.image_url || null,
+            size: 'md',
+            zIndex: 20,
+            labelX: x,
+            labelY: parseFloat((y + 14).toFixed(2))
+          };
+        });
+      }
+
+      onApply(generatedLayouts);
+      onClose();
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[150] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+      <div className="bg-[#121212] border border-white/10 rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl flex flex-col max-h-[85vh]">
+        
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-white/10 p-4 shrink-0">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-indigo-400" />
+            <h3 className="font-bold text-white text-base">Otomatik Ürün Yerleştirme Sihirbazı</h3>
+          </div>
+          <button onClick={onClose} className="p-1 text-white/50 hover:text-white rounded hover:bg-white/5 transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Content Body */}
+        {isLoading ? (
+          <div className="p-12 flex flex-col items-center justify-center gap-4 flex-1">
+            <Loader2 className="w-12 h-12 text-indigo-400 animate-spin" />
+            <div className="text-center space-y-1">
+              <p className="text-white font-medium text-sm">Yapay Zeka Sihirbazı Çalışıyor</p>
+              <p className="text-indigo-400/80 text-xs animate-pulse">{loadingStep}</p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-white/10 overflow-hidden flex-1">
+            
+            {/* Left Column: Product Selection */}
+            <div className="flex-1 p-4 flex flex-col overflow-hidden max-h-[45vh] md:max-h-none">
+              <div className="flex items-center justify-between mb-3 gap-2">
+                <span className="text-xs font-bold text-white/60 uppercase tracking-wider">1. Ürün Seçimi ({selectedProductIds.length} Seçili)</span>
+                <button type="button" onClick={handleSelectAll} className="text-[10px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors uppercase">
+                  {filtered.every(id => selectedProductIds.includes(id.id)) ? 'Seçimi Kaldır' : 'Tümünü Seç'}
+                </button>
+              </div>
+
+              {/* Search Bar */}
+              <div className="relative mb-3 shrink-0">
+                <Search className="absolute left-2.5 top-2.5 w-4 h-4 text-white/30" />
+                <input
+                  type="text"
+                  placeholder="Ürün ismi ile ara..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full bg-dark/50 border border-white/10 rounded-lg py-2 pl-9 pr-4 text-white text-sm outline-none focus:border-indigo-500 transition-colors"
+                />
+              </div>
+
+              {/* Products List Scroll */}
+              <div className="flex-1 overflow-y-auto pr-1 space-y-1.5 min-h-0">
+                {filtered.map(p => {
+                  const isChecked = selectedProductIds.includes(p.id);
+                  const pName = p.name?.tr || p.name || '';
+                  return (
+                    <label key={p.id} className={`flex items-center justify-between p-2.5 rounded-lg border cursor-pointer select-none transition-colors ${isChecked ? 'bg-indigo-500/10 border-indigo-500/30 text-white' : 'bg-dark/20 border-white/5 text-white/70 hover:bg-white/5'}`}>
+                      <div className="flex items-center gap-2 truncate pr-2">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => handleToggleProduct(p.id)}
+                          className="rounded border-white/20 bg-dark text-indigo-600 focus:ring-indigo-500"
+                        />
+                        <span className="text-xs truncate">{pName}</span>
+                      </div>
+                      <span className="text-[10px] font-bold text-white/50 shrink-0">{p.price} TL</span>
+                    </label>
+                  );
+                })}
+                {filtered.length === 0 && (
+                  <div className="text-center py-8 text-white/40 text-xs">Aradığınız kriterde ürün bulunamadı.</div>
+                )}
+              </div>
+            </div>
+
+            {/* Right Column: Settings & Templates */}
+            <div className="w-full md:w-80 p-4 space-y-4 overflow-y-auto shrink-0 bg-black/10">
+              
+              {/* Placement Method Selection */}
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-white/60 uppercase tracking-wider block">2. Yerleşim Modu</span>
+                
+                <div className="space-y-2">
+                  <label className={`flex items-start gap-2.5 p-3 rounded-xl border cursor-pointer transition-colors ${layoutStyle === 'ai-vision' ? 'bg-indigo-500/10 border-indigo-500/40' : 'bg-dark/30 border-white/5 hover:bg-white/5'}`}>
+                    <input
+                      type="radio"
+                      name="layoutStyle"
+                      checked={layoutStyle === 'ai-vision'}
+                      onChange={() => setLayoutStyle('ai-vision')}
+                      className="mt-0.5 text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <div className="space-y-0.5">
+                      <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                        Yapay Zeka (AI Vision)
+                      </span>
+                      <p className="text-[10px] text-white/50 leading-relaxed">
+                        Arka planı analiz eder, süslemeleri ve yazıları kapatmadan akıllı yerleşim planı yapar.
+                      </p>
+                    </div>
+                  </label>
+
+                  <label className={`flex items-start gap-2.5 p-3 rounded-xl border cursor-pointer transition-colors ${layoutStyle === 'classic-zigzag' ? 'bg-indigo-500/10 border-indigo-500/40' : 'bg-dark/30 border-white/5 hover:bg-white/5'}`}>
+                    <input
+                      type="radio"
+                      name="layoutStyle"
+                      checked={layoutStyle === 'classic-zigzag'}
+                      onChange={() => setLayoutStyle('classic-zigzag')}
+                      className="mt-0.5 text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <div className="space-y-0.5">
+                      <span className="text-xs font-bold text-white">Çapraz Grid (Zikzak)</span>
+                      <p className="text-[10px] text-white/50 leading-relaxed">
+                        Ürünleri dikeyde simetrik, yatayda bir sağa bir sola zikzak çizerek hizalar (Klasik).
+                      </p>
+                    </div>
+                  </label>
+
+                  <label className={`flex items-start gap-2.5 p-3 rounded-xl border cursor-pointer transition-colors ${layoutStyle === 'classic-list' ? 'bg-indigo-500/10 border-indigo-500/40' : 'bg-dark/30 border-white/5 hover:bg-white/5'}`}>
+                    <input
+                      type="radio"
+                      name="layoutStyle"
+                      checked={layoutStyle === 'classic-list'}
+                      onChange={() => setLayoutStyle('classic-list')}
+                      className="mt-0.5 text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <div className="space-y-0.5">
+                      <span className="text-xs font-bold text-white">Tek Sütun / Dikey Liste</span>
+                      <p className="text-[10px] text-white/50 leading-relaxed">
+                        Etiketleri tek bir dikey hizada, yukarıdan aşağıya eşit boşluklarla yerleştirir (Klasik).
+                      </p>
+                    </div>
+                  </label>
+
+                  <label className={`flex items-start gap-2.5 p-3 rounded-xl border cursor-pointer transition-colors ${layoutStyle === 'classic-list-block' ? 'bg-indigo-500/10 border-indigo-500/40' : 'bg-dark/30 border-white/5 hover:bg-white/5'}`}>
+                    <input
+                      type="radio"
+                      name="layoutStyle"
+                      checked={layoutStyle === 'classic-list-block'}
+                      onChange={() => setLayoutStyle('classic-list-block')}
+                      className="mt-0.5 text-indigo-600 focus:ring-indigo-500"
+                    />
+                    <div className="space-y-0.5">
+                      <span className="text-xs font-bold text-white">Fiyat Çizgili Birleşik Liste</span>
+                      <p className="text-[10px] text-white/50 leading-relaxed">
+                        Tüm ürünleri tek bir kapsayıcı blok içinde (Adı ..... Fiyat şeklinde) birleştirir (Klasik).
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              {/* Gemini API Key input */}
+              {layoutStyle === 'ai-vision' && (
+                <div className="space-y-2 border-t border-white/10 pt-3">
+                  <span className="text-xs font-bold text-white/60 uppercase tracking-wider block">3. Gemini API Anahtarı</span>
+                  <input
+                    type="password"
+                    placeholder="AI API Anahtarınızı girin..."
+                    value={geminiKey}
+                    onChange={(e) => setGeminiKey(e.target.value)}
+                    className="w-full bg-dark/50 border border-white/10 rounded-lg p-2 text-white text-xs outline-none focus:border-indigo-500 transition-colors"
+                  />
+                  <p className="text-[9px] text-white/40 leading-relaxed">
+                    API anahtarınız yerel tarayıcınızda güvenle saklanır, sunucuya aktarılmaz. Google AI Studio'dan edinebilirsiniz.
+                  </p>
+                </div>
+              )}
+
+              {/* Error Box */}
+              {errorMsg && (
+                <div className="p-2.5 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-xs leading-relaxed whitespace-pre-line">
+                  {errorMsg}
+                </div>
+              )}
+            </div>
+
+          </div>
+        )}
+
+        {/* Footer Buttons */}
+        {!isLoading && (
+          <div className="flex items-center justify-end gap-2 border-t border-white/10 p-4 shrink-0 bg-dark/30">
+            <button onClick={onClose} className="px-4 py-2 border border-white/10 rounded-lg text-xs font-bold text-white hover:bg-white/5 transition-colors">
+              İptal
+            </button>
+            <button onClick={handleApply} className="px-5 py-2 bg-indigo-500 text-white rounded-lg text-xs font-bold hover:bg-indigo-600 shadow-lg shadow-indigo-500/20 transition-all flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              Sihirbazı Çalıştır
+            </button>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+};
+
 const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
   const storyMenu = data.storyMenu || { pages: [] };
   const pages = storyMenu.pages || [];
@@ -332,6 +787,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
   const [isBgUploading, setIsBgUploading] = useState(false);
   const [isProductUploading, setIsProductUploading] = useState(false);
   const [showGridLines, setShowGridLines] = useState(false);
+  const [isWizardOpen, setIsWizardOpen] = useState(false);
 
   /* ── upload helper ── */
   const uploadFile = async (file, category) => {
@@ -490,6 +946,24 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
     setSelectedLayoutId(newLayout.id);
   };
 
+  const handleApplyAutoLayout = (newLayouts) => {
+    if (!editingPageId) return;
+    const page = pages.find(p => p.id === editingPageId);
+    if (!page) return;
+    const currentLayouts = page.layouts || [];
+    
+    // Assign proper numbers to the new layouts
+    const numberedLayouts = newLayouts.map((l, idx) => ({
+      ...l,
+      number: currentLayouts.length + idx + 1
+    }));
+
+    handleUpdatePage(editingPageId, { layouts: [...currentLayouts, ...numberedLayouts] });
+    if (numberedLayouts.length > 0) {
+      setSelectedLayoutId(numberedLayouts[0].id);
+    }
+  };
+
   /* ── page actions ── */
   const handleAddPage = () => {
     const newPage = {
@@ -570,14 +1044,14 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
 
             {/* 2. Add Elements */}
             {/* Add Hotspot tools */}
-            <div className={`mb-6 flex gap-2 ${!hasBackground ? 'opacity-40 pointer-events-none' : ''}`}>
-              <button onClick={() => handleAddMarker(page.id)} disabled={!hasBackground} className="flex-1 py-2 rounded-lg bg-dark/50 border border-secondary/20 hover:border-secondary/50 text-textSecondary hover:text-white transition-all flex flex-col items-center justify-center gap-1 group">
+            <div className={`mb-6 grid grid-cols-2 gap-2 ${!hasBackground ? 'opacity-40 pointer-events-none' : ''}`}>
+              <button onClick={() => handleAddMarker(page.id)} disabled={!hasBackground} className="py-2.5 rounded-lg bg-dark/50 border border-secondary/20 hover:border-secondary/50 text-textSecondary hover:text-white transition-all flex flex-col items-center justify-center gap-1 group">
                 <div className="w-6 h-6 rounded bg-black/50 border border-white/20 flex flex-col items-center justify-center shadow-md">
                   <span className="text-white text-[6px] font-bold">FİYAT</span>
                 </div>
                 <span className="text-[10px] font-medium">Serbest Etiket</span>
               </button>
-              <button onClick={() => handleAddListBlock(page.id)} disabled={!hasBackground} className="flex-1 py-2 rounded-lg bg-dark/50 border border-blue-400/20 hover:border-blue-400/50 text-textSecondary hover:text-blue-300 transition-all flex flex-col items-center justify-center gap-1 group">
+              <button onClick={() => handleAddListBlock(page.id)} disabled={!hasBackground} className="py-2.5 rounded-lg bg-dark/50 border border-blue-400/20 hover:border-blue-400/50 text-textSecondary hover:text-blue-300 transition-all flex flex-col items-center justify-center gap-1 group">
                 <div className="w-6 h-6 rounded bg-black/50 border border-white/20 flex flex-col items-center justify-center shadow-md gap-[2px]">
                   <div className="w-4 h-[2px] bg-white/60 rounded" />
                   <div className="w-4 h-[2px] bg-white/40 rounded" />
@@ -585,7 +1059,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                 </div>
                 <span className="text-[10px] font-medium">Liste Düz.</span>
               </button>
-              <label className="flex-1 py-2 rounded-lg bg-secondary/10 border border-secondary/30 hover:bg-secondary/20 hover:border-secondary/60 text-secondary transition-all flex flex-col items-center justify-center gap-1 cursor-pointer group">
+              <label className="py-2.5 rounded-lg bg-secondary/10 border border-secondary/30 hover:bg-secondary/20 hover:border-secondary/60 text-secondary transition-all flex flex-col items-center justify-center gap-1 cursor-pointer group">
                 <input type="file" accept="image/*" className="hidden" onChange={e => handleNewProductImageUpload(e, page.id)} disabled={isProductUploading || !hasBackground} />
                 {isProductUploading ? (
                   <Loader2 className="w-6 h-6 animate-spin text-secondary" />
@@ -596,6 +1070,12 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                 )}
                 <span className="text-[10px] font-bold">Ürün Görseli Seç</span>
               </label>
+              <button onClick={() => setIsWizardOpen(true)} disabled={!hasBackground} className="py-2.5 rounded-lg bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:border-indigo-500/60 text-indigo-400 hover:text-indigo-300 transition-all flex flex-col items-center justify-center gap-1 group">
+                <div className="w-6 h-6 rounded bg-black/50 border border-indigo-500/30 flex flex-col items-center justify-center shadow-md">
+                  <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
+                </div>
+                <span className="text-[10px] font-bold">Oto Yerleşim</span>
+              </button>
             </div>
 
             {/* 3. Selected hotspot settings */}
@@ -633,38 +1113,40 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
 
                   {/* Step 3: Link product OR list block management */}
                   {selectedLayout.listBlock ? (
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       <label className="text-[10px] text-textSecondary uppercase mb-1 block">📋 Liste Öğeleri</label>
-                      {(selectedLayout.listItems || []).map((item, idx) => {
-                        const prod = allProducts.find(p => p.id === item.product_id);
-                        const itemName = prod ? (prod.name?.tr || prod.name) : item.label;
-                        const itemPrice = prod ? prod.price : item.price;
-                        return (
-                          <div key={item.id} className="flex items-center gap-2 bg-white/5 rounded-lg p-2">
-                            <span className="text-[10px] text-white/40 w-4 shrink-0">{idx + 1}.</span>
-                            <div className="flex-1 min-w-0">
-                              <ProductSearchDropdown
-                                allProducts={allProducts}
-                                value={item.product_id || ''}
-                                onChange={val => {
-                                  const p2 = allProducts.find(p => p.id === val);
-                                  const newItems = (selectedLayout.listItems || []).map((it, i) =>
-                                    i === idx ? { ...it, product_id: val, label: p2 ? (p2.name?.tr || p2.name) : it.label, price: p2 ? p2.price : it.price } : it
-                                  );
-                                  handleUpdateHotspot(page.id, selectedLayout.id, { listItems: newItems });
-                                }}
-                                placeholder={`Öğe ${idx + 1}`}
-                              />
+                      <div className="max-h-[250px] overflow-y-auto space-y-2 pr-1">
+                        {(selectedLayout.listItems || []).map((item, idx) => {
+                          const prod = allProducts.find(p => p.id === item.product_id);
+                          const itemName = prod ? (prod.name?.tr || prod.name) : item.label;
+                          const itemPrice = prod ? prod.price : item.price;
+                          return (
+                            <div key={item.id} className="flex items-center gap-2 bg-white/5 rounded-lg p-2">
+                              <span className="text-[10px] text-white/40 w-4 shrink-0">{idx + 1}.</span>
+                              <div className="flex-1 min-w-0">
+                                <ProductSearchDropdown
+                                  allProducts={allProducts}
+                                  value={item.product_id || ''}
+                                  onChange={val => {
+                                    const p2 = allProducts.find(p => p.id === val);
+                                    const newItems = (selectedLayout.listItems || []).map((it, i) =>
+                                      i === idx ? { ...it, product_id: val, label: p2 ? (p2.name?.tr || p2.name) : it.label, price: p2 ? p2.price : it.price } : it
+                                    );
+                                    handleUpdateHotspot(page.id, selectedLayout.id, { listItems: newItems });
+                                  }}
+                                  placeholder={`Öğe ${idx + 1}`}
+                                />
+                              </div>
+                              <button onClick={() => {
+                                const newItems = (selectedLayout.listItems || []).filter((_, i) => i !== idx);
+                                handleUpdateHotspot(page.id, selectedLayout.id, { listItems: newItems });
+                              }} className="p-1 text-red-400 hover:text-red-300 shrink-0">
+                                <X className="w-3 h-3" />
+                              </button>
                             </div>
-                            <button onClick={() => {
-                              const newItems = (selectedLayout.listItems || []).filter((_, i) => i !== idx);
-                              handleUpdateHotspot(page.id, selectedLayout.id, { listItems: newItems });
-                            }} className="p-1 text-red-400 hover:text-red-300 shrink-0">
-                              <X className="w-3 h-3" />
-                            </button>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                       <button
                         onClick={() => {
                           const newItem = { id: crypto.randomUUID(), product_id: '', label: '', price: '' };
@@ -891,6 +1373,14 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
             )}
           </div>
         </div>
+
+        <AutoLayoutWizardModal
+          isOpen={isWizardOpen}
+          onClose={() => setIsWizardOpen(false)}
+          allProducts={allProducts}
+          onApply={handleApplyAutoLayout}
+          backgroundImageUrl={page.hero_image_url}
+        />
       </div>
     );
   }

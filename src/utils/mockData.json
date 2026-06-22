@@ -16063,21 +16063,21 @@
         "layouts": [
           {
             "id": "f8deec6d-0502-4eda-9bdd-56e5df695a7f",
-            "x": 25.55,
-            "y": 22.82,
+            "x": 18.33,
+            "y": 22.04,
             "product_id": "03383",
             "number": 1,
             "label": "PEYNIR TABAĞI",
             "image_url": "/assets/img/menu/story-menu-products/1781892752411-BaÅlÄ±ksÄ±z-1.jpg.png",
             "size": "lg",
             "zIndex": 10,
-            "labelX": 40.28,
-            "labelY": 34.38
+            "labelX": 34.45,
+            "labelY": 32.82
           },
           {
             "id": "d28c961c-a630-4ed5-86a2-aef4178c2c26",
-            "x": 76.67,
-            "y": 24.85,
+            "x": 71.11,
+            "y": 25.16,
             "product_id": "03545",
             "number": 2,
             "label": "BABY PATATES TABAĞI",
@@ -16085,7 +16085,7 @@
             "size": "lg",
             "zIndex": 10,
             "labelX": 81.4,
-            "labelY": 40.32
+            "labelY": 38.44
           },
           {
             "id": "38c0e288-af08-4ff3-865d-d51530f0ed74",
@@ -16102,16 +16102,16 @@
           },
           {
             "id": "7fb092b5-6831-4384-8b6d-c1d8aaf5a212",
-            "x": 59.16,
-            "y": 54.06,
+            "x": 66.66,
+            "y": 55,
             "product_id": "1853",
             "number": 4,
             "label": "DÖRT PEYNIRLI PIZZETTA",
             "image_url": "/assets/img/menu/story-menu-products/1781893075138-BaÅlÄ±ksÄ±z-4.png",
             "size": "lg",
             "zIndex": 10,
-            "labelX": 80.83,
-            "labelY": 66.4
+            "labelX": 82.77,
+            "labelY": 68.9
           },
           {
             "id": "b716b6f2-bee4-45d1-8900-4cf613ea7370",
@@ -16128,7 +16128,7 @@
           },
           {
             "id": "9593094e-3cb0-406f-abf2-05bf1b8ee49d",
-            "x": 73.06,
+            "x": 85.56,
             "y": 82.97,
             "product_id": "1854",
             "number": 6,
@@ -16153,8 +16153,8 @@
         "layouts": [
           {
             "id": "547dcdaa-3214-48c2-a138-a60a9cb96583",
-            "x": 18.61,
-            "y": 12.45,
+            "x": 18.05,
+            "y": 12.26,
             "product_id": "03951",
             "number": 1,
             "label": "TAVUK SCHINITZEL",
@@ -16497,6 +16497,269 @@
                 "price": "240"
               }
             ],
+            "label_size": "md"
+          }
+        ]
+      },
+      {
+        "id": "4988f0c6-1810-4b07-a981-14a27216ebaf",
+        "title": {
+          "tr": "",
+          "en": ""
+        },
+        "hero_image_url": "/assets/img/menu/story-menu-bg/1782150985228-Gemini_Generated_Image_da7awvda7awvda7a.png",
+        "sort_order": 5,
+        "active": true,
+        "layouts": [
+          {
+            "id": "9e8b701e-0890-46b6-b149-84e7a3fb0a7d",
+            "x": 20,
+            "y": 25,
+            "product_id": "03929",
+            "label": "BREAKFAST BURRITO 450 TL",
+            "image_url": "/assets/img/menu/breakfast/1780832266349-_CEF9068.jpg",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 20,
+            "labelY": 35,
+            "number": 1
+          },
+          {
+            "id": "ffb765a1-2303-46a8-851c-038150eda4e0",
+            "x": 55,
+            "y": 30,
+            "product_id": "03930",
+            "label": "PRETZEL BRUNCH 700 TL",
+            "image_url": "/assets/img/menu/breakfast/1780832162557-_CEF9120.jpg",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 55,
+            "labelY": 40,
+            "number": 2
+          },
+          {
+            "id": "2b4c6992-d956-4298-8b0b-dca00a9266b7",
+            "x": 30,
+            "y": 45,
+            "product_id": "03383",
+            "label": "PEYNIR TABAĞI 890 TL",
+            "image_url": "/assets/img/menu/starters-sauces/1781600791175-_CEF9010.jpg",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 30,
+            "labelY": 55,
+            "number": 3
+          },
+          {
+            "id": "bd4df0a1-6a70-4d36-94c5-2b8b563d6eb2",
+            "x": 70,
+            "y": 50,
+            "product_id": "03545",
+            "label": "BABY PATATES TABAĞI 300 TL",
+            "image_url": "/assets/img/menu/starters-sauces/1781602327350-_CEF8972.jpg",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 70,
+            "labelY": 60,
+            "number": 4
+          },
+          {
+            "id": "a6bd58ac-a3a9-47d8-a595-9b6bedc87b06",
+            "x": 40,
+            "y": 65,
+            "product_id": "03061",
+            "label": "KOKOREÇ PIZETTA 750 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 40,
+            "labelY": 75,
+            "number": 5
+          },
+          {
+            "id": "a836a731-cd26-4052-bad8-e4d43d4e7881",
+            "x": 60,
+            "y": 70,
+            "product_id": "1853",
+            "label": "DÖRT PEYNIRLI PIZZETTA 450 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 60,
+            "labelY": 80,
+            "number": 6
+          },
+          {
+            "id": "b266bfc8-c179-4399-a10f-8e7a78141615",
+            "x": 15,
+            "y": 80,
+            "product_id": "03977",
+            "label": "CHICKEN LOLIPOP 400 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 15,
+            "labelY": 90,
+            "number": 7
+          },
+          {
+            "id": "0e2830ec-8dce-47fd-9469-043f0bbe18f8",
+            "x": 45,
+            "y": 85,
+            "product_id": "1854",
+            "label": "FÜME SUCUKLU PIZZETTA 490 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 45,
+            "labelY": 95,
+            "number": 8
+          },
+          {
+            "id": "9b7bbc61-ad2f-4832-9821-7bb5c4c03cff",
+            "x": 80,
+            "y": 85,
+            "product_id": "03062",
+            "label": "IZGARA SEBZE PIZZETTA 400 TL",
+            "image_url": "/assets/img/pennylane-default.png",
+            "size": "md",
+            "zIndex": 10,
+            "labelX": 80,
+            "labelY": 95,
+            "number": 9
+          }
+        ]
+      },
+      {
+        "id": "b675f9bc-da50-46e5-8282-5a22ef35bcc3",
+        "title": {
+          "tr": "Denemeleeer",
+          "en": ""
+        },
+        "hero_image_url": "/assets/img/menu/story-menu-bg/1782154413940-bg-alt-yok.webp",
+        "sort_order": 6,
+        "active": true,
+        "layouts": [
+          {
+            "id": "746bb508-05b5-4e08-9337-f0d7d83dd83c",
+            "x": 50,
+            "y": 40.92,
+            "listBlock": true,
+            "product_id": "",
+            "label": "",
+            "size": "md",
+            "zIndex": 20,
+            "listItems": [
+              {
+                "id": "6d0f0f5f-22c8-4ce6-b6aa-c18ada8e499a",
+                "product_id": "03929",
+                "label": "BREAKFAST BURRITO",
+                "price": "450"
+              },
+              {
+                "id": "5a5cbdf3-e199-4a5d-a8dd-4a0dec8e3fb6",
+                "product_id": "03930",
+                "label": "PRETZEL BRUNCH",
+                "price": "700"
+              },
+              {
+                "id": "1d34b06e-b56f-4b8d-8b25-adfa8f5dbe14",
+                "product_id": "03383",
+                "label": "PEYNIR TABAĞI",
+                "price": "890"
+              },
+              {
+                "id": "bb48467d-1bfa-4fa3-8e42-a5a7874fb0f2",
+                "product_id": "03545",
+                "label": "BABY PATATES TABAĞI",
+                "price": "300"
+              },
+              {
+                "id": "0b0d8da9-cfbf-4db9-93b2-d68def001526",
+                "product_id": "03061",
+                "label": "KOKOREÇ PIZETTA",
+                "price": "750"
+              },
+              {
+                "id": "b2fd2fab-7feb-498f-8067-6e28b3c22e00",
+                "product_id": "1853",
+                "label": "DÖRT PEYNIRLI PIZZETTA",
+                "price": "450"
+              },
+              {
+                "id": "031e2ad8-62f4-4355-896c-4bffc2d260fa",
+                "product_id": "03977",
+                "label": "CHICKEN LOLIPOP",
+                "price": "400"
+              },
+              {
+                "id": "ba4ad9ba-feb2-46d9-8ec6-a00580e5657c",
+                "product_id": "1854",
+                "label": "FÜME SUCUKLU PIZZETTA",
+                "price": "490"
+              },
+              {
+                "id": "fc706750-a6d6-4783-9bbd-919b72fae850",
+                "product_id": "03062",
+                "label": "IZGARA SEBZE PIZZETTA",
+                "price": "400"
+              },
+              {
+                "id": "42494cb1-8aa6-407a-a692-3b2e65d6ba42",
+                "product_id": "03627",
+                "label": "PARMESAN",
+                "price": "30"
+              },
+              {
+                "id": "70f3bbef-c1f6-42da-bfd0-c80aebb94d86",
+                "product_id": "03972",
+                "label": "PASTRAMI BALL",
+                "price": "560"
+              },
+              {
+                "id": "d1cd2513-f975-46a7-a66a-a3df7932afec",
+                "product_id": "1850",
+                "label": "PATATES KIZARTMASI",
+                "price": "300"
+              },
+              {
+                "id": "a8b3540e-ad44-415f-a32b-2d11e458597e",
+                "product_id": "1846",
+                "label": "POPCORN KARIDES",
+                "price": "490"
+              },
+              {
+                "id": "37bbdabe-895f-4d15-ae67-49ab189d35bf",
+                "product_id": "03554",
+                "label": "POPCORN MIDYE",
+                "price": "350"
+              },
+              {
+                "id": "22d0be3d-dd21-42a3-9f23-08635e104d9c",
+                "product_id": "1845",
+                "label": "POPCORN TAVUK",
+                "price": "450"
+              },
+              {
+                "id": "812903bf-6f3e-4467-a731-e544a91c9c55",
+                "product_id": "03974",
+                "label": "RAREBIT TAPAS",
+                "price": "490"
+              },
+              {
+                "id": "a49e21ce-93e3-4080-ae02-52220df35f4d",
+                "product_id": "03937",
+                "label": "SARIMSAKLI EKMEK",
+                "price": "240"
+              },
+              {
+                "id": "0e89aa2d-b379-498d-b69e-208aab1576be",
+                "product_id": "03546",
+                "label": "SEZAR SALATA",
+                "price": "490"
+              }
+            ],
+            "number": 1,
             "label_size": "md"
           }
         ]
