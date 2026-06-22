@@ -392,6 +392,19 @@ export default function App() {
     );
   }
 
+  // Simple loading spinner for bypass paths while API is loading
+  if (!cmsData && loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-dark" style={{ backgroundColor: '#0c0c0c' }}>
+        <div className="relative w-12 h-12 mb-4">
+          <div className="absolute inset-0 rounded-full border-2 border-[#d4af37]/10 animate-pulse" />
+          <div className="w-12 h-12 rounded-full border-2 border-transparent border-t-[#d4af37] animate-spin" />
+        </div>
+        <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-[#d4af37]/60">SİSTEM YÜKLENİYOR...</span>
+      </div>
+    );
+  }
+
   // Error durumunda bile siteyi kapatmıyoruz (Hook artık fallback veriyor)
   if (error && !cmsData) {
     return (
