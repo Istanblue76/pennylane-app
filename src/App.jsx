@@ -248,7 +248,7 @@ export default function App() {
   const [activePolicy, setActivePolicy] = React.useState(null);
   const [progress, setProgress] = React.useState(0);
   
-  const isBypassPath = window.location.pathname.startsWith('/menu') || window.location.pathname.startsWith('/story');
+  const isBypassPath = window.location.pathname !== '/';
   const [showLoader, setShowLoader] = React.useState(!isBypassPath);
 
   // 1. Progress animation (runs once on mount, takes exactly 2.5 seconds to go 0 -> 100)
