@@ -1906,43 +1906,95 @@ const AdminPanel = ({ initialData }) => {
                           </div>
                           
                           <div className="flex space-x-4">
-                            <div className="w-20 h-20 flex-shrink-0 relative">
-                               <img src={item.image_url} alt="" className="w-full h-full object-cover rounded-lg border border-secondary/20" />
-                               <label className="absolute inset-0 bg-dark/60 opacity-0 hover:opacity-100 flex items-center justify-center cursor-pointer transition-opacity rounded-lg">
-                                  <Upload className="w-4 h-4 text-white" />
-                                  <input type="file" className="hidden" onChange={async (e) => {
-                                     const rawFile = e.target.files[0];
-                                     if (!rawFile) return;
-
-                                     let file = rawFile;
-                                     const isImage = rawFile.type.startsWith('image/') || /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(rawFile.name);
-                                     if (isImage) {
+                            <div className="flex flex-col gap-2 flex-shrink-0">
+                              {/* Normal Image */}
+                              <div className="w-20 h-20 relative group" title="Ana Görsel">
+                                 <img src={item.image_url} alt="" className="w-full h-full object-cover rounded-lg border border-secondary/20" />
+                                 <label className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center cursor-pointer transition-opacity rounded-lg">
+                                    <Upload className="w-4 h-4 text-white mb-1" />
+                                    <span className="text-[8px] text-white font-bold uppercase tracking-wider">Görsel</span>
+                                    <input type="file" className="hidden" onChange={async (e) => {
+                                       const rawFile = e.target.files[0];
+                                       if (!rawFile) return;
+                                       let file = rawFile;
+                                       const isImage = rawFile.type.startsWith('image/') || /\.(jpg|jpeg|png|webp|gif|bmp)$/i.test(rawFile.name);
+                                       if (isImage) {
+                                         try { file = await compressImage(rawFile); } catch (err) { console.error("Sıkıştırma hatası:", err); }
+                                       }
+                                       const formData = new FormData();
+                                       formData.append('image', file);
+                                       formData.append('category', selectedCategoryAdmin);
                                        try {
-                                         file = await compressImage(rawFile);
-                                       } catch (err) {
-                                         console.error("Sıkıştırma hatası:", err);
-                                       }
-                                     }
-
-                                     const formData = new FormData();
-                                     formData.append('image', file);
-                                     formData.append('category', selectedCategoryAdmin);
-                                     try {
-                                       const resp = await axios.post('/api/upload', formData, {
-                                         headers: { 'Content-Type': 'multipart/form-data' }
-                                       });
-                                       if (resp.data.status === 'success') {
-                                         const newCats = [...(data?.menu?.categories || [])];
-                                         const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
-                                         if (catIdx !== -1) {
-                                           newCats[catIdx].items[idx].image_url = resp.data.url;
-                                           setData({ ...data, menu: { ...data.menu, categories: newCats } });
-                                           setHasChanges(true);
+                                         const resp = await axios.post('/api/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+                                         if (resp.data.status === 'success') {
+                                           const newCats = [...(data?.menu?.categories || [])];
+                                           const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                           if (catIdx !== -1) {
+                                             newCats[catIdx].items[idx].image_url = resp.data.url;
+                                             setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                             setHasChanges(true);
+                                           }
                                          }
-                                       }
-                                     } catch (err) { alert('Görsel yüklenemedi.'); }
-                                   }} />
-                               </label>
+                                       } catch (err) { alert('Görsel yüklenemedi.'); }
+                                     }} />
+                                 </label>
+                              </div>
+
+                              {/* Story Image (PNG) */}
+                              <div className="w-20 h-20 relative group border-2 border-dashed border-secondary/30 rounded-lg overflow-hidden flex items-center justify-center" title="Story Görseli (Arka plansız PNG)">
+                                 {item.story_image_url ? (
+                                    <>
+                                      <div className="absolute inset-0 bg-dark/80 pattern-grid-lg"></div>
+                                      <img src={item.story_image_url} alt="" className="w-full h-full object-contain relative z-10" />
+                                    </>
+                                 ) : (
+                                    <div className="text-center p-1 text-secondary/50">
+                                      <span className="text-[8px] font-bold uppercase tracking-wider block">Story</span>
+                                      <span className="text-[8px] font-bold uppercase tracking-wider block">Görseli</span>
+                                    </div>
+                                 )}
+                                 <label className="absolute inset-0 z-20 bg-dark/80 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center cursor-pointer transition-opacity rounded-lg">
+                                    <Upload className="w-4 h-4 text-white mb-1" />
+                                    <span className="text-[8px] text-white font-bold uppercase tracking-wider">PNG Yükle</span>
+                                    <input type="file" accept="image/png" className="hidden" onChange={async (e) => {
+                                       const file = e.target.files[0];
+                                       if (!file) return;
+                                       const formData = new FormData();
+                                       formData.append('image', file);
+                                       formData.append('category', selectedCategoryAdmin + '_story');
+                                       try {
+                                         const resp = await axios.post('/api/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+                                         if (resp.data.status === 'success') {
+                                           const newCats = [...(data?.menu?.categories || [])];
+                                           const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                           if (catIdx !== -1) {
+                                             newCats[catIdx].items[idx].story_image_url = resp.data.url;
+                                             setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                             setHasChanges(true);
+                                           }
+                                         }
+                                       } catch (err) { alert('Story görseli yüklenemedi.'); }
+                                     }} />
+                                 </label>
+                                 {item.story_image_url && (
+                                    <button
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        const newCats = [...(data?.menu?.categories || [])];
+                                        const catIdx = newCats.findIndex(c => c.id === selectedCategoryAdmin);
+                                        if (catIdx !== -1) {
+                                          newCats[catIdx].items[idx].story_image_url = '';
+                                          setData({ ...data, menu: { ...data.menu, categories: newCats } });
+                                          setHasChanges(true);
+                                        }
+                                      }}
+                                      className="absolute top-1 right-1 z-30 p-1 bg-red-500/80 hover:bg-red-500 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                                      title="Story Görselini Sil"
+                                    >
+                                      <X className="w-3 h-3" />
+                                    </button>
+                                 )}
+                              </div>
                             </div>
                             <div className="flex-grow space-y-2">
                               <input

@@ -77,7 +77,8 @@
             "description": {
               "tr": "2 Adet Frankfurter Sosis, 1 yumurta,  Guinness - Hardal Mayonez, Pretzel",
               "en": ""
-            }
+            },
+            "story_image_url": "/assets/img/menu/breakfast-story/1782201121892-pretzel.png"
           }
         ],
         "title": {
@@ -108,7 +109,8 @@
               "en": ""
             },
             "isNew": true,
-            "isSpicy": true
+            "isSpicy": true,
+            "story_image_url": "/assets/img/menu/starters-sauces-story/1782200737734-BaÅlÄ±ksÄ±z-1.jpg.png"
           },
           {
             "id": "03545",
@@ -123,7 +125,8 @@
             "description": {
               "tr": "",
               "en": ""
-            }
+            },
+            "story_image_url": "/assets/img/menu/starters-sauces-story/1782200686456-4.png"
           },
           {
             "id": "03061",
@@ -344,11 +347,12 @@
             "price": "240",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/starters-sauces/1782201052303-_CEF8967.jpg",
             "description": {
               "tr": "",
               "en": ""
-            }
+            },
+            "story_image_url": "/assets/img/menu/starters-sauces-story/1782201055644-_CEF8964-removebg-preview.png"
           },
           {
             "id": "1847",
@@ -548,7 +552,8 @@
             "description": {
               "tr": "",
               "en": ""
-            }
+            },
+            "story_image_url": "/assets/img/menu/main-story/1782200800162-_CEF9082-removebg-preview.png"
           },
           {
             "id": "03971",
@@ -664,11 +669,12 @@
             "price": "570",
             "passive": false,
             "allergens": [],
-            "image_url": "/assets/img/pennylane-default.png",
+            "image_url": "/assets/img/menu/main/1782200892583-_CEF8937.jpg",
             "description": {
               "tr": "",
               "en": ""
-            }
+            },
+            "story_image_url": "/assets/img/menu/main-story/1782200868715-_CEF8934-removebg-preview.png"
           }
         ],
         "title": {
@@ -16512,121 +16518,88 @@
         "active": true,
         "layouts": [
           {
-            "id": "9e8b701e-0890-46b6-b149-84e7a3fb0a7d",
-            "x": 20,
-            "y": 25,
-            "product_id": "03929",
-            "label": "BREAKFAST BURRITO 450 TL",
-            "image_url": "/assets/img/menu/breakfast/1780832266349-_CEF9068.jpg",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 20,
-            "labelY": 35,
-            "number": 1
-          },
-          {
-            "id": "ffb765a1-2303-46a8-851c-038150eda4e0",
-            "x": 55,
-            "y": 30,
+            "id": "c52beb04-da24-405e-be1e-ab8383e2ccf3",
+            "x": 24.45,
+            "y": 17.4,
             "product_id": "03930",
-            "label": "PRETZEL BRUNCH 700 TL",
-            "image_url": "/assets/img/menu/breakfast/1780832162557-_CEF9120.jpg",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 55,
-            "labelY": 40,
-            "number": 2
+            "label": "PRETZEL BRUNCH",
+            "image_url": "/assets/img/menu/breakfast-story/1782201121892-pretzel.png",
+            "size": "xl",
+            "label_size": "md",
+            "zIndex": 20,
+            "custom_scale": null,
+            "labelX": 33.89,
+            "labelY": 26.68
           },
           {
-            "id": "2b4c6992-d956-4298-8b0b-dca00a9266b7",
-            "x": 30,
-            "y": 45,
+            "id": "62d515d0-58ec-4eed-8fda-1e412bccc2f9",
+            "x": 77.5,
+            "y": 27.39,
             "product_id": "03383",
-            "label": "PEYNIR TABAĞI 890 TL",
-            "image_url": "/assets/img/menu/starters-sauces/1781600791175-_CEF9010.jpg",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 30,
-            "labelY": 55,
-            "number": 3
+            "label": "PEYNIR TABAĞI",
+            "image_url": "/assets/img/menu/starters-sauces-story/1782200737734-BaÅlÄ±ksÄ±z-1.jpg.png",
+            "size": "xl",
+            "label_size": "md",
+            "zIndex": 20,
+            "custom_scale": null,
+            "labelX": 68.88,
+            "labelY": 37.64
           },
           {
-            "id": "bd4df0a1-6a70-4d36-94c5-2b8b563d6eb2",
-            "x": 70,
-            "y": 50,
+            "id": "4c924127-06de-46ff-88af-d9bbc2324f87",
+            "x": 25,
+            "y": 41.07,
             "product_id": "03545",
-            "label": "BABY PATATES TABAĞI 300 TL",
-            "image_url": "/assets/img/menu/starters-sauces/1781602327350-_CEF8972.jpg",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 70,
-            "labelY": 60,
-            "number": 4
+            "label": "BABY PATATES TABAĞI",
+            "image_url": "/assets/img/menu/starters-sauces-story/1782200686456-4.png",
+            "size": "xl",
+            "label_size": "md",
+            "zIndex": 20,
+            "custom_scale": null,
+            "labelX": 19.72,
+            "labelY": 50.73
           },
           {
-            "id": "a6bd58ac-a3a9-47d8-a595-9b6bedc87b06",
-            "x": 40,
-            "y": 65,
-            "product_id": "03061",
-            "label": "KOKOREÇ PIZETTA 750 TL",
-            "image_url": "/assets/img/pennylane-default.png",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 40,
-            "labelY": 75,
-            "number": 5
+            "id": "6242fddf-29d6-466c-bea4-02cffc90323b",
+            "x": 77.78,
+            "y": 48.64,
+            "product_id": "03937",
+            "label": "SARIMSAKLI EKMEK",
+            "image_url": "/assets/img/menu/starters-sauces-story/1782201055644-_CEF8964-removebg-preview.png",
+            "size": "xl",
+            "label_size": "md",
+            "zIndex": 20,
+            "custom_scale": null,
+            "labelX": 71.39,
+            "labelY": 59.27
           },
           {
-            "id": "a836a731-cd26-4052-bad8-e4d43d4e7881",
-            "x": 60,
-            "y": 70,
-            "product_id": "1853",
-            "label": "DÖRT PEYNIRLI PIZZETTA 450 TL",
-            "image_url": "/assets/img/pennylane-default.png",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 60,
-            "labelY": 80,
-            "number": 6
+            "id": "fc8e070a-adbe-4760-b64c-68644caf7828",
+            "x": 32.77,
+            "y": 64.07,
+            "product_id": "03953",
+            "label": "YAKITORI BEEF",
+            "image_url": "/assets/img/menu/main-story/1782200800162-_CEF9082-removebg-preview.png",
+            "size": "xl",
+            "label_size": "md",
+            "zIndex": 20,
+            "custom_scale": null,
+            "labelX": 31.39,
+            "labelY": 75.09
           },
           {
-            "id": "b266bfc8-c179-4399-a10f-8e7a78141615",
-            "x": 15,
-            "y": 80,
-            "product_id": "03977",
-            "label": "CHICKEN LOLIPOP 400 TL",
-            "image_url": "/assets/img/pennylane-default.png",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 15,
-            "labelY": 90,
-            "number": 7
-          },
-          {
-            "id": "0e2830ec-8dce-47fd-9469-043f0bbe18f8",
-            "x": 45,
-            "y": 85,
-            "product_id": "1854",
-            "label": "FÜME SUCUKLU PIZZETTA 490 TL",
-            "image_url": "/assets/img/pennylane-default.png",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 45,
-            "labelY": 95,
-            "number": 8
-          },
-          {
-            "id": "9b7bbc61-ad2f-4832-9821-7bb5c4c03cff",
-            "x": 80,
-            "y": 85,
-            "product_id": "03062",
-            "label": "IZGARA SEBZE PIZZETTA 400 TL",
-            "image_url": "/assets/img/pennylane-default.png",
-            "size": "md",
-            "zIndex": 10,
-            "labelX": 80,
-            "labelY": 95,
-            "number": 9
+            "id": "f90b225d-4b23-4db7-8ea2-6eaa4d7ee0e2",
+            "x": 54.72,
+            "y": 83.47,
+            "product_id": "03951",
+            "label": "TAVUK SCHINITZEL",
+            "image_url": "/assets/img/menu/main-story/1782200868715-_CEF8934-removebg-preview.png",
+            "size": "xl",
+            "label_size": "md",
+            "zIndex": 20,
+            "custom_scale": null,
+            "labelX": 79.45,
+            "labelY": 93.82
           }
         ]
       },

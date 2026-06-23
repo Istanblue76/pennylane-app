@@ -252,6 +252,7 @@ const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "�
         <ChevronDown className={`w-4 h-4 text-white/50 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -411,13 +412,13 @@ const AutoLayoutWizardModal = ({ isOpen, onClose, allProducts, onApply, backgrou
         
         const promptText = `Aşağıdaki görseli incele. Bu görsel bir telefon ekranına uygun menü arka planıdır.
 
-Bu sayfaya ${selectedProducts.length} adet tabak/ürün görseli (PNG) ve bunların yazı etiketleri (isim + fiyat) yerleştirilecektir. Sen usta bir sanat yönetmeni ve profesyonel UI tasarımcısısın. Sıradanlığın dışına çık ve mükemmel, asimetrik, yaratıcı bir kompozisyon planla:
+Bu sayfaya ${selectedProducts.length} adet tabak/ürün görseli (PNG) ve bunların yazı etiketleri (isim + fiyat) yerleştirilecektir. En büyük sorunumuz ürünlerin BİRBİRİNİN ÜSTÜNE BİNMESİDİR (Overlap). Bunu kesin olarak engellemek için şu "Hücre (Cell)" mantığını kullan:
 
-ÇOK ÖNEMLİ KURALLAR (GRID VE SIKICI HİZALAMALARI YIK):
-1. ASLA TEK TİP DİZME: Ürünleri ızgara (grid) şeklinde veya hizalı iki sütun halinde DİZME. Dümdüz alt alta veya yan yana dizilmiş sıkıcı bir görünüm İSTEMİYORUZ.
-2. ORGANİK VE DAĞINIK YERLEŞİM: Sanki ürünler masanın üzerine doğal ve rastgele bırakılmış gibi organik bir kompozisyon oluştur. X ekseninde (sağ-sol) birbirini tekrar eden hizalamalardan kaçın. Kimi ürün %15, kimi %50 (ortada), kimi %85 gibi birbirinden tamamen bağımsız ve rastgele X koordinatlarında olsun.
-3. BOŞLUKLARI HİSSET: Görselin karanlık veya uygun boşluklarına ürünleri serpiştir. Y ekseninde (yukarıdan aşağıya) %20 ile %95 arasını tamamen kullan ama aralarında asimetrik, birbirinden farklı dikey boşluklar bırak.
-4. ETİKET KONUMU: Her bir ürün görselinin (x, y) etrafında (altında, üstünde veya çaprazında) kendi etiketini (labelX, labelY) yerleştir. Görsel ile etiketi birbiriyle bütünleşik durmalı ancak ASLA başka bir ürünle üst üste binmemelidir.
+ÇOK ÖNEMLİ KURALLAR (ÜST ÜSTE BİNMEYİ ENGELLE):
+1. HAYALİ IZGARA (VIRTUAL GRID): Ekranı görünmez bir ızgaraya (örneğin 3 sütun x 4 satır) böldüğünü hayal et.
+2. HER ÜRÜNE FARKLI HÜCRE: Her bir ürünü KESİNLİKLE farklı bir hücrenin (bölgenin) içine yerleştir. İki ürün asla aynı veya komşu X,Y koordinatlarına sahip olmasın.
+3. HÜCRE İÇİNDE RASTGELELİK (ORGANİK GÖRÜNÜM): Ürünleri dümdüz hizalamak yerine, seçtiğin hücrenin içinde X ve Y ekseninde ufak rastgele sapmalar yap. Kimi biraz sağda, kimi biraz solda dursun ama asla kendi hücresinin dışına taşıp diğer ürünle çakışmasın.
+4. ETİKET KONUMU: Her bir ürün görselinin (x, y) hemen altında (y + 10) kendi etiketini (labelX, labelY) yerleştir. Görsel ile etiketi birbiriyle bütünleşik dursun.
 5. Sadece SAĞ ÜST KÖŞEYİ tamamen boş bırak (oraya büyük bir kategori başlığı gelecek).
 
 Yerleştirilecek ürünler:
@@ -493,19 +494,26 @@ Her ürün için görselin merkez konumu (x, y) ve etiketinin merkez konumu (lab
           throw new Error('Yapay zeka yanıtı liste formatında değil.');
         }
 
+        const dynamicSize = selectedProducts.length <= 3 ? 'xl' : (selectedProducts.length <= 6 ? 'lg' : 'md');
+        const dynamicLabelSize = selectedProducts.length <= 4 ? 'md' : 'sm';
+        const labelYOffset = dynamicSize === 'xl' ? 18 : (dynamicSize === 'lg' ? 14 : 10);
+
         const generatedLayouts = parsedLayouts.map((l, idx) => {
           const product = selectedProducts.find(p => p.id === l.product_id);
+          const xPos = typeof l.x === 'number' ? l.x : 50;
+          const yPos = typeof l.y === 'number' ? l.y : 30 + idx * 15;
           return {
             id: crypto.randomUUID(),
-            x: typeof l.x === 'number' ? l.x : 50,
-            y: typeof l.y === 'number' ? l.y : 30 + idx * 15,
+            x: xPos,
+            y: yPos,
             product_id: l.product_id || '',
             label: l.label || '',
-            image_url: product?.image_url || null,
-            size: 'md',
+            image_url: product?.story_image_url || product?.image_url || null,
+            size: dynamicSize,
+            label_size: dynamicLabelSize,
             zIndex: 10,
-            labelX: typeof l.labelX === 'number' ? l.labelX : (typeof l.x === 'number' ? l.x : 50),
-            labelY: typeof l.labelY === 'number' ? l.labelY : (typeof l.y === 'number' ? l.y + 12 : 42 + idx * 15)
+            labelX: xPos,
+            labelY: Math.min(yPos + labelYOffset, 98)
           };
         });
 
@@ -537,6 +545,8 @@ Her ürün için görselin merkez konumu (x, y) ve etiketinin merkez konumu (lab
           }))
         }];
       } else if (layoutStyle === 'classic-list') {
+        const dynamicSize = selectedProducts.length <= 3 ? 'xl' : (selectedProducts.length <= 6 ? 'lg' : 'md');
+        const dynamicLabelSize = selectedProducts.length <= 4 ? 'md' : 'sm';
         const startY = 25;
         const endY = 85;
         const stepY = selectedProducts.length > 1 ? (endY - startY) / (selectedProducts.length - 1) : 0;
@@ -548,12 +558,16 @@ Her ürün için görselin merkez konumu (x, y) ve etiketinin merkez konumu (lab
             y: parseFloat(y.toFixed(2)),
             product_id: p.id,
             label: p.name?.tr || p.name || '',
-            image_url: p.image_url || null,
-            size: 'md',
+            image_url: p.story_image_url || p.image_url || null,
+            size: dynamicSize,
+            label_size: dynamicLabelSize,
             zIndex: 20
           };
         });
       } else if (layoutStyle === 'classic-zigzag') {
+        const dynamicSize = selectedProducts.length <= 3 ? 'xl' : (selectedProducts.length <= 6 ? 'lg' : 'md');
+        const dynamicLabelSize = selectedProducts.length <= 4 ? 'md' : 'sm';
+        const labelYOffset = dynamicSize === 'xl' ? 18 : (dynamicSize === 'lg' ? 14 : 10);
         const startY = 30;
         const endY = 80;
         const stepY = selectedProducts.length > 1 ? (endY - startY) / (selectedProducts.length - 1) : 0;
@@ -567,11 +581,12 @@ Her ürün için görselin merkez konumu (x, y) ve etiketinin merkez konumu (lab
             y: parseFloat(y.toFixed(2)),
             product_id: p.id,
             label: p.name?.tr || p.name || '',
-            image_url: p.image_url || null,
-            size: 'md',
+            image_url: p.story_image_url || p.image_url || null,
+            size: dynamicSize,
+            label_size: dynamicLabelSize,
             zIndex: 20,
             labelX: x,
-            labelY: parseFloat((y + 14).toFixed(2))
+            labelY: parseFloat((Math.min(y + labelYOffset, 98)).toFixed(2))
           };
         });
       }
@@ -788,6 +803,8 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
   const [isProductUploading, setIsProductUploading] = useState(false);
   const [showGridLines, setShowGridLines] = useState(false);
   const [isWizardOpen, setIsWizardOpen] = useState(false);
+  const [targetPageForProductSelect, setTargetPageForProductSelect] = useState(null);
+  const [productSelectSearchTerm, setProductSelectSearchTerm] = useState('');
 
   /* ── upload helper ── */
   const uploadFile = async (file, category) => {
@@ -1059,17 +1076,12 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                 </div>
                 <span className="text-[10px] font-medium">Liste Düz.</span>
               </button>
-              <label className="py-2.5 rounded-lg bg-secondary/10 border border-secondary/30 hover:bg-secondary/20 hover:border-secondary/60 text-secondary transition-all flex flex-col items-center justify-center gap-1 cursor-pointer group">
-                <input type="file" accept="image/*" className="hidden" onChange={e => handleNewProductImageUpload(e, page.id)} disabled={isProductUploading || !hasBackground} />
-                {isProductUploading ? (
-                  <Loader2 className="w-6 h-6 animate-spin text-secondary" />
-                ) : (
-                  <div className="w-6 h-6 rounded border-2 border-dashed border-secondary/50 flex items-center justify-center group-hover:border-secondary transition-colors">
-                    <ImageIcon className="w-3 h-3 text-secondary" />
-                  </div>
-                )}
+              <button onClick={() => setTargetPageForProductSelect(page.id)} disabled={!hasBackground} className="py-2.5 rounded-lg bg-secondary/10 border border-secondary/30 hover:bg-secondary/20 hover:border-secondary/60 text-secondary transition-all flex flex-col items-center justify-center gap-1 group">
+                <div className="w-6 h-6 rounded border-2 border-dashed border-secondary/50 flex items-center justify-center group-hover:border-secondary transition-colors">
+                  <ImageIcon className="w-3 h-3 text-secondary" />
+                </div>
                 <span className="text-[10px] font-bold">Ürün Görseli Seç</span>
-              </label>
+              </button>
               <button onClick={() => setIsWizardOpen(true)} disabled={!hasBackground} className="py-2.5 rounded-lg bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:border-indigo-500/60 text-indigo-400 hover:text-indigo-300 transition-all flex flex-col items-center justify-center gap-1 group">
                 <div className="w-6 h-6 rounded bg-black/50 border border-indigo-500/30 flex flex-col items-center justify-center shadow-md">
                   <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
@@ -1168,6 +1180,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                         handleUpdateHotspot(page.id, selectedLayout.id, {
                           product_id: val,
                           label: prod ? (prod.name?.tr || prod.name) : selectedLayout.label,
+                          image_url: prod ? (prod.story_image_url || prod.image_url) : selectedLayout.image_url
                         });
                       }}
                       placeholder="-- Ürün Seçin --"
@@ -1381,6 +1394,95 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
           onApply={handleApplyAutoLayout}
           backgroundImageUrl={page.hero_image_url}
         />
+
+        {/* PRODUCT IMAGE SELECT MODAL */}
+        <AnimatePresence>
+          {targetPageForProductSelect && (
+            <div className="fixed inset-0 z-[160] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="bg-dark border border-white/10 rounded-xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col"
+              >
+                <div className="p-4 border-b border-white/10 flex items-center justify-between bg-white/5">
+                  <h3 className="text-white font-bold text-lg flex items-center gap-2">
+                    <ImageIcon className="w-5 h-5 text-secondary" />
+                    Veritabanından Ürün Seç
+                  </h3>
+                  <button onClick={() => setTargetPageForProductSelect(null)} className="text-textSecondary hover:text-white transition-colors">
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="p-4 flex-1 flex flex-col min-h-0">
+                  <p className="text-sm text-textSecondary mb-4 shrink-0">Tuvale eklenecek ürünün görselini seçmek için aşağıdaki listeden ürün arayın.</p>
+                  
+                  <div className="mb-4 relative shrink-0">
+                    <Search className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <input
+                      type="text"
+                      placeholder="Ürün ara..."
+                      value={productSelectSearchTerm}
+                      onChange={e => setProductSelectSearchTerm(e.target.value)}
+                      className="w-full bg-[#111] border border-white/10 rounded-lg pl-9 pr-3 py-2 text-sm text-white focus:border-secondary outline-none transition-colors"
+                    />
+                  </div>
+                  
+                  <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-1 max-h-[300px]">
+                    {allProducts
+                      .filter(p => (p.name?.tr || p.name || '').toLowerCase().includes(productSelectSearchTerm.toLowerCase()))
+                      .map(p => (
+                        <button
+                          key={p.id}
+                          onClick={() => {
+                            const page = pages.find(pg => pg.id === targetPageForProductSelect);
+                            if (page) {
+                              const newLayout = {
+                                id: crypto.randomUUID(),
+                                x: 50, y: 50,
+                                product_id: p.id,
+                                label: p.name?.tr || p.name || '',
+                                image_url: p.story_image_url || p.image_url || null,
+                                size: 'md',
+                                label_size: 'md',
+                                zIndex: 20
+                              };
+                              handleUpdatePage(targetPageForProductSelect, { layouts: [...(page.layouts || []), newLayout] });
+                              setSelectedLayoutId(newLayout.id);
+                            }
+                            setTargetPageForProductSelect(null);
+                            setProductSelectSearchTerm('');
+                          }}
+                          className="w-full flex items-center justify-between p-2 hover:bg-white/5 rounded transition-colors text-left group border border-transparent hover:border-white/5"
+                        >
+                          <div className="flex items-center gap-3">
+                            {p.story_image_url || p.image_url ? (
+                              <img src={p.story_image_url || p.image_url} alt="" className="w-8 h-8 rounded object-cover" />
+                            ) : (
+                              <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center">
+                                <ImageIcon className="w-4 h-4 text-white/20" />
+                              </div>
+                            )}
+                            <span className="text-sm text-white/80 group-hover:text-white transition-colors truncate max-w-[200px]">
+                              {p.name?.tr || p.name}
+                            </span>
+                          </div>
+                          <span className="text-xs text-secondary opacity-0 group-hover:opacity-100 transition-opacity">
+                            Seç
+                          </span>
+                        </button>
+                      ))}
+                    {allProducts.filter(p => (p.name?.tr || p.name || '').toLowerCase().includes(productSelectSearchTerm.toLowerCase())).length === 0 && (
+                      <div className="text-center py-4 text-textSecondary text-sm">
+                        Eşleşen ürün bulunamadı.
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
@@ -1489,6 +1591,9 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
             </div>
           </div>
         </div>
+
+
+
       </div>
 
       <div className="flex items-center justify-between mb-4 mt-8 pt-4 border-t border-white/5">
