@@ -315,11 +315,11 @@ const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "�
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -5 }}
+            initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
+            exit={{ opacity: 0, y: 5 }}
             transition={{ duration: 0.15 }}
-            className="absolute z-50 w-full mt-1 bg-[#1a1a1a] border border-white/10 rounded shadow-xl overflow-hidden"
+            className="absolute bottom-full mb-1 z-50 w-full bg-[#1a1a1a] border border-white/10 rounded shadow-xl overflow-hidden"
           >
             <div className="p-2 border-b border-white/10 flex items-center gap-2">
               <Search className="w-4 h-4 text-white/40" />
@@ -1208,7 +1208,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                   {selectedLayout.listBlock ? (
                     <div className="space-y-2">
                       <label className="text-[10px] text-textSecondary uppercase mb-1 block">📋 Liste Öğeleri</label>
-                      <div className="max-h-[250px] overflow-y-auto space-y-2 pr-1">
+                      <div className="space-y-2 pr-1">
                         {(selectedLayout.listItems || []).map((item, idx) => {
                           const prod = allProducts.find(p => p.id === item.product_id);
                           const itemName = prod ? (prod.name?.tr || prod.name) : item.label;
