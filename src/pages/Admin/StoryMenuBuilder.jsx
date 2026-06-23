@@ -1202,7 +1202,15 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
   };
 
   const allProducts = [];
-  (data.menu?.categories || []).forEach(cat => (cat.items || []).forEach(item => allProducts.push({...item, category_name: cat.title?.tr || cat.title})));
+  (data.menu?.categories || []).forEach(cat => {
+    const catName = cat.title?.tr || cat.title || '';
+    (cat.items || []).forEach(item => {
+      const subCat = cat.subcategories?.find(s => s.id === item.subcategory);
+      const subCatName = subCat?.title?.tr || subCat?.title || '';
+      const fullCategoryName = subCatName ? `${catName} / ${subCatName}` : catName;
+      allProducts.push({ ...item, category_name: fullCategoryName });
+    });
+  });
 
   /* ════════════════════════════════════════
      EDITOR VIEW
