@@ -294,7 +294,9 @@ const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "�
 
   const filteredProducts = allProducts.filter(p => {
     const name = p.name?.tr || p.name || '';
-    return name.toLowerCase().includes(searchTerm.toLowerCase());
+    const catName = p.category_name || '';
+    const term = searchTerm.toLowerCase();
+    return name.toLowerCase().includes(term) || catName.toLowerCase().includes(term);
   });
 
   const selectedProduct = allProducts.find(p => p.id === value);
@@ -371,6 +373,122 @@ const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "�
                 })
               ) : (
                 <div className="px-3 py-3 text-sm text-white/40 text-center">Sonuç bulunamadı</div>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
+   MULTI PRODUCT SEARCH DROPDOWN (For List Block)
+───────────────────────────────────────────── */
+const MultiProductSearchDropdown = ({ allProducts, onSelectProducts, placeholder = "Toplu Ekle" }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedIds, setSelectedIds] = useState([]);
+  const dropdownRef = useRef(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredProducts = allProducts.filter(p => {
+    const name = p.name?.tr || p.name || '';
+    const catName = p.category_name || '';
+    const term = searchTerm.toLowerCase();
+    return name.toLowerCase().includes(term) || catName.toLowerCase().includes(term);
+  });
+
+  const handleToggleProduct = (productId) => {
+    if (selectedIds.includes(productId)) {
+      setSelectedIds(selectedIds.filter(id => id !== productId));
+    } else {
+      setSelectedIds([...selectedIds, productId]);
+    }
+  };
+
+  const handleApply = () => {
+    const products = allProducts.filter(p => selectedIds.includes(p.id));
+    onSelectProducts(products);
+    setSelectedIds([]);
+    setIsOpen(false);
+    setSearchTerm('');
+  };
+
+  return (
+    <div className="relative w-full" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full py-1.5 rounded-lg border border-dashed border-blue-500/50 text-blue-400 text-[10px] hover:bg-blue-500/10 transition-colors flex items-center justify-center gap-1"
+      >
+        <Plus className="w-3 h-3" /> {placeholder}
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 5 }}
+            transition={{ duration: 0.15 }}
+            className="absolute bottom-full mb-1 right-0 z-[60] w-[260px] bg-[#1a1a1a] border border-white/10 rounded shadow-xl overflow-hidden"
+          >
+            <div className="p-2 border-b border-white/10 flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <Search className="w-4 h-4 text-white/40" />
+                <input
+                  type="text"
+                  placeholder="Kategori / Ürün ara..."
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/30"
+                  autoFocus
+                />
+                {searchTerm && (
+                  <button type="button" onClick={() => setSearchTerm('')}>
+                    <X className="w-4 h-4 text-white/40 hover:text-white transition-colors" />
+                  </button>
+                )}
+              </div>
+              <div className="flex justify-between items-center px-1">
+                <span className="text-[10px] text-white/40">{selectedIds.length} seçildi</span>
+                {selectedIds.length > 0 && (
+                  <button onClick={handleApply} className="bg-blue-500 text-white hover:bg-blue-600 text-[10px] px-2 py-0.5 rounded font-bold transition-colors">
+                    EKLE
+                  </button>
+                )}
+              </div>
+            </div>
+            <div className="max-h-[300px] overflow-y-auto custom-scrollbar p-1">
+              {filteredProducts.map(p => {
+                const isSelected = selectedIds.includes(p.id);
+                return (
+                  <label key={p.id} className="flex items-center gap-2 w-full text-left p-2 hover:bg-white/5 rounded cursor-pointer transition-colors group">
+                    <input 
+                      type="checkbox" 
+                      checked={isSelected}
+                      onChange={() => handleToggleProduct(p.id)}
+                      className="w-3 h-3 rounded border-white/20 text-blue-500 bg-black/50"
+                    />
+                    <div className="flex flex-col min-w-0">
+                      <span className="text-white text-xs truncate group-hover:text-blue-400 transition-colors">{p.name?.tr || p.name}</span>
+                      <span className="text-white/30 text-[9px] truncate">{p.category_name}</span>
+                    </div>
+                  </label>
+                );
+              })}
+              {filteredProducts.length === 0 && (
+                <div className="p-4 text-center text-white/40 text-xs">Sonuç bulunamadı</div>
               )}
             </div>
           </motion.div>
@@ -1084,7 +1202,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
   };
 
   const allProducts = [];
-  (data.menu?.categories || []).forEach(cat => (cat.items || []).forEach(item => allProducts.push(item)));
+  (data.menu?.categories || []).forEach(cat => (cat.items || []).forEach(item => allProducts.push({...item, category_name: cat.name?.tr || cat.name})));
 
   /* ════════════════════════════════════════
      EDITOR VIEW
@@ -1240,15 +1358,31 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                           );
                         })}
                       </div>
-                      <button
-                        onClick={() => {
-                          const newItem = { id: crypto.randomUUID(), product_id: '', label: '', price: '' };
-                          handleUpdateHotspot(page.id, selectedLayout.id, { listItems: [...(selectedLayout.listItems || []), newItem] });
-                        }}
-                        className="w-full py-1.5 rounded-lg border border-dashed border-blue-400/30 text-blue-400 text-[10px] hover:bg-blue-400/10 transition-colors flex items-center justify-center gap-1"
-                      >
-                        <Plus className="w-3 h-3" /> Öğe Ekle
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            const newItem = { id: crypto.randomUUID(), product_id: '', label: '', price: '' };
+                            handleUpdateHotspot(page.id, selectedLayout.id, { listItems: [...(selectedLayout.listItems || []), newItem] });
+                          }}
+                          className="flex-1 py-1.5 rounded-lg border border-dashed border-blue-400/30 text-blue-400 text-[10px] hover:bg-blue-400/10 transition-colors flex items-center justify-center gap-1"
+                        >
+                          <Plus className="w-3 h-3" /> 1 Öğe Ekle
+                        </button>
+                        <div className="flex-1">
+                          <MultiProductSearchDropdown 
+                            allProducts={allProducts}
+                            onSelectProducts={(products) => {
+                              const newItems = products.map(p => ({
+                                id: crypto.randomUUID(),
+                                product_id: p.id,
+                                label: p.name?.tr || p.name,
+                                price: p.price
+                              }));
+                              handleUpdateHotspot(page.id, selectedLayout.id, { listItems: [...(selectedLayout.listItems || []), ...newItems] });
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
                   ) : selectedLayout.isTextOnly ? null : (
                   <div>
