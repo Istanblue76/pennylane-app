@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Plus, Trash2, Edit2, ImageIcon, Upload, Loader2, Move, Smartphone, Search, ChevronDown, Check, X, Sparkles } from 'lucide-react';
+import { Plus, Trash2, Edit2, ImageIcon, Upload, Loader2, Move, Smartphone, Search, ChevronDown, Check, X, Sparkles, Type } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 
@@ -945,6 +945,22 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
     setSelectedLayoutId(newLayout.id);
   };
 
+  /* ── NEW: Add a free text block ── */
+  const handleAddText = (pageId) => {
+    const page = pages.find(p => p.id === pageId);
+    const newLayout = {
+      id: crypto.randomUUID(),
+      x: 50, y: 50,
+      isTextOnly: true,
+      number: (page.layouts?.length || 0) + 1,
+      label: 'YENİ YAZI',
+      label_size: 'lg',
+      zIndex: 20,
+    };
+    handleUpdatePage(pageId, { layouts: [...(page.layouts || []), newLayout] });
+    setSelectedLayoutId(newLayout.id);
+  };
+
   /* ── NEW: Add a list block (menu list layout) ── */
   const handleAddListBlock = (pageId) => {
     const page = pages.find(p => p.id === pageId);
@@ -1082,6 +1098,12 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                 </div>
                 <span className="text-[10px] font-bold">Ürün Görseli Seç</span>
               </button>
+              <button onClick={() => handleAddText(page.id)} disabled={!hasBackground} className="py-2.5 rounded-lg bg-dark/50 border border-green-400/20 hover:border-green-400/50 text-textSecondary hover:text-green-300 transition-all flex flex-col items-center justify-center gap-1 group">
+                <div className="w-6 h-6 rounded bg-black/50 border border-green-400/20 flex flex-col items-center justify-center shadow-md">
+                  <Type className="w-3.5 h-3.5 text-green-400" />
+                </div>
+                <span className="text-[10px] font-medium">Serbest Yazı</span>
+              </button>
               <button onClick={() => setIsWizardOpen(true)} disabled={!hasBackground} className="py-2.5 rounded-lg bg-indigo-500/10 border border-indigo-500/30 hover:bg-indigo-500/20 hover:border-indigo-500/60 text-indigo-400 hover:text-indigo-300 transition-all flex flex-col items-center justify-center gap-1 group">
                 <div className="w-6 h-6 rounded bg-black/50 border border-indigo-500/30 flex flex-col items-center justify-center shadow-md">
                   <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
@@ -1169,7 +1191,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                         <Plus className="w-3 h-3" /> Öğe Ekle
                       </button>
                     </div>
-                  ) : (
+                  ) : selectedLayout.isTextOnly ? null : (
                   <div>
                     <label className="text-[10px] text-textSecondary uppercase mb-1 block">🔗 Veritabanından Ürün Seç</label>
                     <ProductSearchDropdown
@@ -1215,23 +1237,28 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                   )}
 
                   {/* Label size (for both image labels and markers) */}
-                  {(selectedLayout.label || selectedLayout.product_id || !selectedLayout.image_url) && (
+                  {(selectedLayout.label !== undefined || selectedLayout.product_id || !selectedLayout.image_url) && (
                     <div>
-                      <label className="text-[10px] text-textSecondary uppercase mb-1 block">🏷️ Etiket / Fiyat Boyutu</label>
-                      <div className="grid grid-cols-4 gap-1">
-                        {[{ v: 'sm', l: 'Küçük' }, { v: 'md', l: 'Orta' }, { v: 'lg', l: 'Büyük' }, { v: 'xl', l: 'XL' }].map(s => (
-                          <button key={s.v} onClick={() => handleUpdateHotspot(page.id, selectedLayout.id, { label_size: s.v })} className={`py-1.5 rounded text-xs font-medium transition-all ${(selectedLayout.label_size || 'md') === s.v ? 'bg-secondary text-primary' : 'bg-dark/50 border border-white/10 text-textSecondary hover:border-secondary/40'}`}>
-                            {s.l}
-                          </button>
-                        ))}
+                      <label className="text-[10px] text-textSecondary uppercase mb-1 block">🏷️ {selectedLayout.isTextOnly ? 'Yazı Boyutu' : 'Etiket / Fiyat Boyutu'}</label>
+                      <div className={`grid ${selectedLayout.isTextOnly ? 'grid-cols-6' : 'grid-cols-4'} gap-1`}>
+                        {(() => {
+                          const sizes = selectedLayout.isTextOnly
+                            ? [{ v: 'sm', l: 'Küçük' }, { v: 'md', l: 'Orta' }, { v: 'lg', l: 'Büyük' }, { v: 'xl', l: 'XL' }, { v: '2xl', l: '2XL' }, { v: '3xl', l: '3XL' }]
+                            : [{ v: 'sm', l: 'Küçük' }, { v: 'md', l: 'Orta' }, { v: 'lg', l: 'Büyük' }, { v: 'xl', l: 'XL' }];
+                          return sizes.map(s => (
+                            <button key={s.v} onClick={() => handleUpdateHotspot(page.id, selectedLayout.id, { label_size: s.v })} className={`py-1.5 rounded text-xs font-medium transition-all ${(selectedLayout.label_size || 'md') === s.v ? 'bg-secondary text-primary' : 'bg-dark/50 border border-white/10 text-textSecondary hover:border-secondary/40'}`}>
+                              {s.l}
+                            </button>
+                          ));
+                        })()}
                       </div>
                     </div>
                   )}
 
                   {/* Label override */}
                   <div>
-                    <label className="text-[10px] text-textSecondary uppercase mb-1 block">Etikette Görünecek İsim (Opsiyonel)</label>
-                    <input type="text" value={selectedLayout.label || ''} onChange={e => handleUpdateHotspot(page.id, selectedLayout.id, { label: e.target.value })} placeholder="Otomatik isim gelsin" className="w-full bg-dark/50 border border-white/10 rounded p-2 text-white text-sm outline-none focus:border-secondary" />
+                    <label className="text-[10px] text-textSecondary uppercase mb-1 block">{selectedLayout.isTextOnly ? 'Yazı İçeriği' : 'Etikette Görünecek İsim (Opsiyonel)'}</label>
+                    <input type="text" value={selectedLayout.label || ''} onChange={e => handleUpdateHotspot(page.id, selectedLayout.id, { label: e.target.value })} placeholder={selectedLayout.isTextOnly ? 'Bir metin yazın' : 'Otomatik isim gelsin'} className="w-full bg-dark/50 border border-white/10 rounded p-2 text-white text-sm outline-none focus:border-secondary" />
                   </div>
                 </motion.div>
               ) : (
@@ -1340,8 +1367,19 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
                     </React.Fragment>
                   ))}
                   
-                  {/* Markers (no image, no listBlock) */}
-                  {(page.layouts || []).filter(l => !l.image_url && !l.listBlock).map(layout => (
+                  {/* Free Text Blocks */}
+                  {(page.layouts || []).filter(l => l.isTextOnly).map(layout => (
+                    <DraggableText
+                      key={layout.id}
+                      layout={layout}
+                      isSelected={selectedLayoutId === layout.id}
+                      onSelect={() => setSelectedLayoutId(layout.id)}
+                      onDragEnd={(x, y) => handleUpdateHotspot(page.id, layout.id, { x, y })}
+                    />
+                  ))}
+
+                  {/* Markers (no image, no listBlock, no textOnly) */}
+                  {(page.layouts || []).filter(l => !l.image_url && !l.listBlock && !l.isTextOnly).map(layout => (
                     <DraggableMarker
                       key={layout.id}
                       layout={layout}
