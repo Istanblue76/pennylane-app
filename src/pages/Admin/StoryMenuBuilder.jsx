@@ -145,6 +145,65 @@ const DraggableMarker = ({ layout, isSelected, onSelect, onDragEnd, allProducts,
 };
 
 /* ─────────────────────────────────────────────
+   DRAGGABLE TEXT (Free Text without background)
+───────────────────────────────────────────── */
+const DraggableText = ({ layout, isSelected, onSelect, onDragEnd }) => {
+  const ref = useRef(null);
+  const dragStartPos = useRef(null);
+  const hasDragged = useRef(false);
+
+  const handleMouseDown = (e) => {
+    e.stopPropagation();
+    hasDragged.current = false;
+    const parent = ref.current?.closest('[data-canvas]');
+    if (!parent) return;
+    const rect = parent.getBoundingClientRect();
+    dragStartPos.current = {
+      startMouseX: e.clientX,
+      startMouseY: e.clientY,
+      startX: layout.x,
+      startY: layout.y,
+      rectW: rect.width,
+      rectH: rect.height,
+    };
+    const onMouseMove = (ev) => {
+      if (!dragStartPos.current) return;
+      const { startMouseX, startMouseY, startX, startY, rectW, rectH } = dragStartPos.current;
+      const dx = ((ev.clientX - startMouseX) / rectW) * 100;
+      const dy = ((ev.clientY - startMouseY) / rectH) * 100;
+      if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) hasDragged.current = true;
+      const newX = Math.max(2, Math.min(98, startX + dx));
+      const newY = Math.max(2, Math.min(98, startY + dy));
+      onDragEnd(parseFloat(newX.toFixed(2)), parseFloat(newY.toFixed(2)));
+    };
+    const onMouseUp = () => {
+      if (!hasDragged.current) onSelect();
+      dragStartPos.current = null;
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+  };
+
+  const labelScaleMap = { sm: 0.8, md: 1, lg: 1.5, xl: 2, '2xl': 2.5, '3xl': 3 };
+  const scale = labelScaleMap[layout.label_size || 'md'];
+
+  return (
+    <div
+      ref={ref}
+      onMouseDown={handleMouseDown}
+      className={`absolute z-20 cursor-grab active:cursor-grabbing p-1 ${isSelected ? 'ring-2 ring-secondary rounded-lg ring-offset-2 ring-offset-[#111]' : ''}`}
+      style={{ left: `${layout.x}%`, top: `${layout.y}%`, transform: `translate(-50%, -50%) scale(${scale})` }}
+    >
+      <div className="font-serif font-black text-white tracking-widest uppercase drop-shadow-lg leading-tight pointer-events-auto whitespace-nowrap">
+        {layout.label || 'YENİ YAZI'}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────
    DRAGGABLE LIST BLOCK (Menu-style list layout)
 ───────────────────────────────────────────── */
 const DraggableListBlock = ({ layout, isSelected, onSelect, onDragEnd, allProducts }) => {
