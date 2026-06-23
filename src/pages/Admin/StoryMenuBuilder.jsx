@@ -337,7 +337,7 @@ const ProductSearchDropdown = ({ allProducts, value, onChange, placeholder = "â€
                 </button>
               )}
             </div>
-            <div className="max-h-48 overflow-y-auto custom-scrollbar">
+            <div className="max-h-[450px] overflow-y-auto custom-scrollbar">
               <button
                 type="button"
                 onClick={() => {
