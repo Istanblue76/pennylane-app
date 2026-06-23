@@ -1202,7 +1202,7 @@ const StoryMenuBuilder = ({ data, setData, setHasChanges }) => {
   };
 
   const allProducts = [];
-  (data.menu?.categories || []).forEach(cat => (cat.items || []).forEach(item => allProducts.push({...item, category_name: cat.name?.tr || cat.name})));
+  (data.menu?.categories || []).forEach(cat => (cat.items || []).forEach(item => allProducts.push({...item, category_name: cat.title?.tr || cat.title})));
 
   /* ════════════════════════════════════════
      EDITOR VIEW
