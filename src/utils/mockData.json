@@ -16018,46 +16018,6 @@
   "storyMenu": {
     "pages": [
       {
-        "id": "2b145404-901c-4863-b521-2a684dbf86c2",
-        "title": {
-          "tr": "Breakfast",
-          "en": "New Page"
-        },
-        "hero_image_url": "/assets/img/menu/story-menu-bg/1781892294327-download.png",
-        "sort_order": 0,
-        "active": true,
-        "layouts": [
-          {
-            "id": "8b025e58-f92a-4465-bf03-c0caed81f1e2",
-            "x": 57.22,
-            "y": 28.59,
-            "product_id": "03929",
-            "number": 1,
-            "label": "BREAKFAST BURRITO",
-            "image_url": "/assets/img/menu/story-menu-products/1781892329206-buritto.png",
-            "size": "xl",
-            "zIndex": 10,
-            "labelX": 78.33,
-            "labelY": 49.38,
-            "custom_scale": 84
-          },
-          {
-            "id": "c3698d81-448c-48aa-92f6-2eb5461f3914",
-            "x": 40.28,
-            "y": 73.6,
-            "product_id": "03930",
-            "number": 2,
-            "label": "PRETZEL BRUNCH",
-            "image_url": "/assets/img/menu/story-menu-products/1781892350427-pretzel.png",
-            "size": "xl",
-            "zIndex": 10,
-            "labelX": 73.05,
-            "labelY": 92.19,
-            "custom_scale": 78
-          }
-        ]
-      },
-      {
         "id": "da4ed69f-d732-4e93-a256-40c8cdfc7c3e",
         "title": {
           "tr": "STARTERS & SAUCES",
@@ -16438,7 +16398,7 @@
           {
             "id": "ed8f8883-d552-42cc-9bdd-e7bf1482abe2",
             "x": 50,
-            "y": 19.18,
+            "y": 27.16,
             "listBlock": true,
             "product_id": "",
             "number": 1,
@@ -16482,7 +16442,7 @@
           {
             "id": "2b2d5706-055f-4f97-ac7f-7132e6b28492",
             "x": 50,
-            "y": 36.7,
+            "y": 46.4,
             "listBlock": true,
             "product_id": "",
             "number": 2,
@@ -16504,6 +16464,26 @@
               }
             ],
             "label_size": "md"
+          },
+          {
+            "id": "28fb693e-6983-4b39-b1d5-99c9bcf6d6ae",
+            "x": 85.84,
+            "y": 39.51,
+            "isTextOnly": true,
+            "number": 3,
+            "label": "Bottle",
+            "label_size": "sm",
+            "zIndex": 20
+          },
+          {
+            "id": "dab0beb8-4505-4879-b29a-1276b6a69169",
+            "x": 85.56,
+            "y": 14.47,
+            "isTextOnly": true,
+            "number": 4,
+            "label": "Draft",
+            "label_size": "sm",
+            "zIndex": 20
           }
         ]
       },
@@ -16604,136 +16584,168 @@
         ]
       },
       {
-        "id": "b675f9bc-da50-46e5-8282-5a22ef35bcc3",
+        "id": "268fefff-ffef-402d-a4c6-2952c0dd6de6",
         "title": {
-          "tr": "Denemeleeer",
+          "tr": "Beer's",
           "en": ""
         },
-        "hero_image_url": "/assets/img/menu/story-menu-bg/1782154413940-bg-alt-yok.webp",
+        "hero_image_url": "/assets/img/menu/story-menu-bg/1782214467380-Table.jpg",
         "sort_order": 6,
         "active": true,
         "layouts": [
           {
-            "id": "746bb508-05b5-4e08-9337-f0d7d83dd83c",
+            "id": "198fb3a2-fb43-4178-b607-2708fa765497",
+            "x": 85.56,
+            "y": 11.03,
+            "isTextOnly": true,
+            "number": 1,
+            "label": "Bottle",
+            "label_size": "sm",
+            "zIndex": 20
+          },
+          {
+            "id": "856e5c11-88da-43bd-9422-60085f243b84",
             "x": 50,
-            "y": 40.92,
+            "y": 36.7,
             "listBlock": true,
             "product_id": "",
+            "number": 2,
             "label": "",
             "size": "md",
             "zIndex": 20,
             "listItems": [
               {
-                "id": "6d0f0f5f-22c8-4ce6-b6aa-c18ada8e499a",
-                "product_id": "03929",
-                "label": "BREAKFAST BURRITO",
-                "price": "450"
-              },
-              {
-                "id": "5a5cbdf3-e199-4a5d-a8dd-4a0dec8e3fb6",
-                "product_id": "03930",
-                "label": "PRETZEL BRUNCH",
-                "price": "700"
-              },
-              {
-                "id": "1d34b06e-b56f-4b8d-8b25-adfa8f5dbe14",
-                "product_id": "03383",
-                "label": "PEYNIR TABAĞI",
-                "price": "890"
-              },
-              {
-                "id": "bb48467d-1bfa-4fa3-8e42-a5a7874fb0f2",
-                "product_id": "03545",
-                "label": "BABY PATATES TABAĞI",
-                "price": "300"
-              },
-              {
-                "id": "0b0d8da9-cfbf-4db9-93b2-d68def001526",
-                "product_id": "03061",
-                "label": "KOKOREÇ PIZETTA",
-                "price": "750"
-              },
-              {
-                "id": "b2fd2fab-7feb-498f-8067-6e28b3c22e00",
-                "product_id": "1853",
-                "label": "DÖRT PEYNIRLI PIZZETTA",
-                "price": "450"
-              },
-              {
-                "id": "031e2ad8-62f4-4355-896c-4bffc2d260fa",
-                "product_id": "03977",
-                "label": "CHICKEN LOLIPOP",
+                "id": "cfabb788-534a-4868-adec-2e325021e7c2",
+                "product_id": "03070",
+                "label": "3 KAFADAR AŞNA VIŞNE",
                 "price": "400"
               },
               {
-                "id": "ba4ad9ba-feb2-46d9-8ec6-a00580e5657c",
-                "product_id": "1854",
-                "label": "FÜME SUCUKLU PIZZETTA",
-                "price": "490"
-              },
-              {
-                "id": "fc706750-a6d6-4783-9bbd-919b72fae850",
-                "product_id": "03062",
-                "label": "IZGARA SEBZE PIZZETTA",
+                "id": "1400392f-c5e8-4437-a447-9bc82ed0de49",
+                "product_id": "03649",
+                "label": "3 KAFADAR ENGLISH GOLD 33 CL",
                 "price": "400"
               },
               {
-                "id": "42494cb1-8aa6-407a-a692-3b2e65d6ba42",
-                "product_id": "03627",
-                "label": "PARMESAN",
-                "price": "30"
+                "id": "c881262b-a544-4da6-83a9-f5e50e94b360",
+                "product_id": "03744",
+                "label": "3 KAFADAR KÖLSCH 33 CL",
+                "price": "400"
               },
               {
-                "id": "70f3bbef-c1f6-42da-bfd0-c80aebb94d86",
-                "product_id": "03972",
-                "label": "PASTRAMI BALL",
-                "price": "560"
+                "id": "cd939f8c-24dc-4953-8744-110e10174d80",
+                "product_id": "02578",
+                "label": "3 KAFADAR MOSAIC IPA 33 CL",
+                "price": "400"
               },
               {
-                "id": "d1cd2513-f975-46a7-a66a-a3df7932afec",
-                "product_id": "1850",
-                "label": "PATATES KIZARTMASI",
-                "price": "300"
+                "id": "9444c650-5bbd-4769-88b4-58f9e4c645f8",
+                "product_id": "1036",
+                "label": "3 KAFADAR AMERIKAN PALE ALE 33CL",
+                "price": "400"
               },
               {
-                "id": "a8b3540e-ad44-415f-a32b-2d11e458597e",
-                "product_id": "1846",
-                "label": "POPCORN KARIDES",
-                "price": "490"
+                "id": "f7b0ec24-d638-4b04-92c5-e905afed6d8a",
+                "product_id": "1029",
+                "label": "BLANC 33 NBR CL.",
+                "price": "320"
               },
               {
-                "id": "37bbdabe-895f-4d15-ae67-49ab189d35bf",
-                "product_id": "03554",
-                "label": "POPCORN MIDYE",
+                "id": "96ff4cb5-9dfd-4932-8f65-5fa049d862cd",
+                "product_id": "1001",
+                "label": "BUDWEISER BUDVAR 33 CL.",
                 "price": "350"
               },
               {
-                "id": "22d0be3d-dd21-42a3-9f23-08635e104d9c",
-                "product_id": "1845",
-                "label": "POPCORN TAVUK",
-                "price": "450"
+                "id": "39777c07-82e8-4df8-b3f6-0420686fc688",
+                "product_id": "02244",
+                "label": "CARSBERG LUNA 50CL ŞİŞE",
+                "price": "360"
               },
               {
-                "id": "812903bf-6f3e-4467-a731-e544a91c9c55",
-                "product_id": "03974",
-                "label": "RAREBIT TAPAS",
-                "price": "490"
+                "id": "134f7ae7-0e6a-4ab1-b234-6eaa9ce1eeb5",
+                "product_id": "02247",
+                "label": "CARSBERG ŞIŞE 50CL",
+                "price": "300"
               },
               {
-                "id": "a49e21ce-93e3-4080-ae02-52220df35f4d",
-                "product_id": "03937",
-                "label": "SARIMSAKLI EKMEK",
-                "price": "240"
+                "id": "ff320fc6-9712-48c1-a789-1054b50c6cfc",
+                "product_id": "1058",
+                "label": "DAS DIES ALE",
+                "price": "460"
               },
               {
-                "id": "0e89aa2d-b379-498d-b69e-208aab1576be",
-                "product_id": "03546",
-                "label": "SEZAR SALATA",
-                "price": "490"
+                "id": "af603f5d-ea6d-4402-8734-b6b0cfb4489f",
+                "product_id": "03179",
+                "label": "DAURA DAMM GLUTENSIZ 33 CL",
+                "price": "360"
               }
-            ],
-            "number": 1,
-            "label_size": "md"
+            ]
+          },
+          {
+            "id": "30d014bd-7cbe-47b3-98d4-1a0aa88ef2c7",
+            "x": 87.22,
+            "y": 62.84,
+            "isTextOnly": true,
+            "number": 3,
+            "label": "Draft",
+            "label_size": "sm",
+            "zIndex": 20
+          },
+          {
+            "id": "a98256d9-a626-498d-b9ba-59421b967cd9",
+            "x": 50,
+            "y": 79.57,
+            "listBlock": true,
+            "product_id": "",
+            "number": 4,
+            "label": "",
+            "size": "md",
+            "zIndex": 20,
+            "listItems": [
+              {
+                "id": "ddd8d5ae-007e-43a9-a727-2b2650538093",
+                "product_id": "1075",
+                "label": "BLANC FIÇI 33 CL.",
+                "price": "310"
+              },
+              {
+                "id": "57cd7574-52e5-4d31-8cb0-5ad43fa0808f",
+                "product_id": "1073",
+                "label": "BLANC FIÇI 50 CL.",
+                "price": "360"
+              },
+              {
+                "id": "ffe2e828-3b2c-4b3f-9b90-cfcbac13cfbc",
+                "product_id": "1063",
+                "label": "CARLSBERG FIÇI 33 CL",
+                "price": "250"
+              },
+              {
+                "id": "0907ec5d-038d-4ef1-bc3f-3242a6df3a85",
+                "product_id": "1061",
+                "label": "CARLSBERG FIÇI 50 CL",
+                "price": "290"
+              },
+              {
+                "id": "1ea6bdec-1f16-417f-ada0-9863a104e608",
+                "product_id": "1078",
+                "label": "CARLSBERG LUNA FIÇI 33 CL",
+                "price": "290"
+              },
+              {
+                "id": "028f89d4-bc87-4c3b-b9d0-161e64048871",
+                "product_id": "1077",
+                "label": "CARLSBERG LUNA FIÇI 50 CL",
+                "price": "330"
+              },
+              {
+                "id": "3707e8ad-983f-41ae-8801-b67ca08f2d8d",
+                "product_id": "1072",
+                "label": "GUINNESS FIÇI HALF PINT 25 CL.",
+                "price": "390"
+              }
+            ]
           }
         ]
       }

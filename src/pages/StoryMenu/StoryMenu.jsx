@@ -127,6 +127,25 @@ const HotspotMarker = ({ layout, product, lang, onClick, isImageLabel }) => {
   );
 };
 
+/* ─────────────────────────────────────────────
+   FREE TEXT MARKER
+───────────────────────────────────────────── */
+const FreeTextMarker = ({ layout }) => {
+  const labelScaleMap = { sm: 0.8, md: 1, lg: 1.25, xl: 1.6, '2xl': 2.0, '3xl': 2.5 };
+  const scale = labelScaleMap[layout.label_size || 'md'];
+
+  return (
+    <div
+      className="absolute z-20 pointer-events-none"
+      style={{ left: `${layout.x}%`, top: `${layout.y}%`, transform: `translate(-50%, -50%) scale(${scale})` }}
+    >
+      <div className="font-serif font-black text-white tracking-widest uppercase drop-shadow-lg leading-tight pointer-events-auto whitespace-nowrap">
+        {layout.label || ''}
+      </div>
+    </div>
+  );
+};
+
 const sizeMap = { sm: '16%', md: '26%', lg: '40%', xl: '56%' };
 
 const ProductImageHotspot = ({ layout, product, lang, onClick }) => {
@@ -200,9 +219,9 @@ const ListBlockDisplay = ({ layout, allProducts, lang, onClick }) => {
 
 const MenuStoryPage = ({ page, onHotspotClick, allProducts, lang }) => {
   return (
-    <div className="relative w-full min-h-[100dvh] overflow-hidden bg-[#0a0a0a] flex flex-col items-center justify-start">
+    <div className="relative w-full min-h-[100dvh] bg-[#0a0a0a] flex flex-col items-center justify-start">
       {/* Container that takes the height of the image */}
-      <div className="relative w-full h-auto bg-[#111] overflow-hidden flex flex-col mx-auto">
+      <div className="relative w-full h-auto bg-[#111] flex flex-col mx-auto">
         
         <div className="relative inset-0 w-full">
           <img 
@@ -250,6 +269,11 @@ const MenuStoryPage = ({ page, onHotspotClick, allProducts, lang }) => {
                 </React.Fragment>
               );
             }
+            
+            if (layout.isTextOnly) {
+              return <FreeTextMarker key={layout.id} layout={layout} />;
+            }
+            
             return (
               <HotspotMarker key={layout.id} layout={layout} product={product} lang={lang} onClick={onHotspotClick} isImageLabel={false} />
             );

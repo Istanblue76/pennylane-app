@@ -255,16 +255,16 @@ const DraggableListBlock = ({ layout, isSelected, onSelect, onDragEnd, allProduc
           <span className="text-white/40 text-[9px]">Liste Boş — Sol panelden Öğe Ekle</span>
         </div>
       ) : (
-        <div className="flex flex-col gap-[6px] px-2 py-2 w-full">
+        <div className="flex flex-col gap-[10px] px-1 py-1 w-full">
           {items.map((item) => {
             const prod = allProducts?.find(p => p.id === item.product_id);
             const name = prod ? (prod.name?.tr || prod.name) : item.label;
             const price = prod ? prod.price : item.price;
             return (
-              <div key={item.id} className="flex items-baseline gap-2 w-full">
-                <span className="text-white font-bold text-[11px] leading-tight whitespace-nowrap shrink-0">{name || 'Ürün Adı'}</span>
-                <span className="flex-1 border-b border-dotted border-white/30 mb-[3px]" />
-                <span className="text-white font-bold text-[10px] whitespace-nowrap shrink-0">{price ? `${price} TL` : '— TL'}</span>
+              <div key={item.id} className="flex items-baseline gap-3 w-full">
+                <span className="text-white font-bold text-[13px] leading-tight whitespace-nowrap shrink-0">{name || 'Ürün Adı'}</span>
+                <span className="flex-1 border-b border-dotted border-white/40 mb-[4px]" style={{ minWidth: '8px' }} />
+                <span className="text-white font-bold text-[11px] whitespace-nowrap shrink-0">{price ? `${price} TL` : '— TL'}</span>
               </div>
             );
           })}
